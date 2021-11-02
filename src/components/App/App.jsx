@@ -43,46 +43,46 @@ function App() {
             <Route exact path="/">
               <Main/>
             </Route>
-            <Route path="/whitepaper">
+            <Route exact path="/whitepaper">
               <WhitePaper />
             </Route>
-            <Route path="/roadmap">
+            <Route exact path="/roadmap">
               <RoadMap />
             </Route>
-            <Route path="/marketing">
+            <Route exact path="/marketing">
               <Marketing />
             </Route>
-            <Route path="/privacy">
+            <Route exact path="/privacy">
               <Privacy />
             </Route>
-            <Route path="/policy">
+            <Route exact path="/policy">
               <Policy />
             </Route>
-            <Route path="/status">
+            <Route exact path="/status">
               <Status />
             </Route>
-            <Route path="/tarif">
+            <Route exact path="/tarif">
               <Tarif />
             </Route>
-            <Route path="/profile">
+            <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route path="/team">
+            <Route exact path="/team">
               <Team />
             </Route>
-            <Route path="/wallet">
+            <Route exact path="/wallet">
               <Wallet />
             </Route>
-            <Route path="/error">
+            <Route exact path="/error">
               <Error />
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
             </Route>
-            <Route path="/registration">
+            <Route exact path="/registration">
               <Registration />
             </Route>
-            <Route path="/support">
+            <Route exact path="/support">
               <Support />
             </Route>
           </Switch>
