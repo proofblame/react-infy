@@ -52,5 +52,16 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.3",
     "tsparticles": "^1.37.1"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proofblame/react-infy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/proofblame/react-infy/issues"
+  },
+  "description": ""
 }
