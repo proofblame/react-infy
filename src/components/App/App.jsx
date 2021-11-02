@@ -18,7 +18,6 @@ import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import Support from '../Support/Support';
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -36,59 +35,58 @@ function App() {
   
 
   return (
-      <Router>
+
         <div className={themeMode}>
           <Header themeToggler={themeToggler} check={check}/>
           <Switch>
             <Route exact path="/">
               <Main/>
             </Route>
-            <Route exact path="/whitepaper">
+            <Route  path="/whitepaper">
               <WhitePaper />
             </Route>
-            <Route exact path="/roadmap">
+            <Route  path="/roadmap">
               <RoadMap />
             </Route>
-            <Route exact path="/marketing">
+            <Route  path="/marketing">
               <Marketing />
             </Route>
-            <Route exact path="/privacy">
+            <Route  path="/privacy">
               <Privacy />
             </Route>
-            <Route exact path="/policy">
+            <Route  path="/policy">
               <Policy />
             </Route>
-            <Route exact path="/status">
+            <Route  path="/status">
               <Status />
             </Route>
-            <Route exact path="/tarif">
+            <Route  path="/tarif">
               <Tarif />
             </Route>
-            <Route exact path="/profile">
+            <Route  path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/team">
+            <Route  path="/team">
               <Team />
             </Route>
-            <Route exact path="/wallet">
+            <Route  path="/wallet">
               <Wallet />
             </Route>
-            <Route exact path="/error">
+            <Route  path="/error">
               <Error />
             </Route>
-            <Route exact path="/login">
+            <Route  path="/login">
               <Login />
             </Route>
-            <Route exact path="/registration">
+            <Route  path="/registration">
               <Registration />
             </Route>
-            <Route exact path="/support">
+            <Route  path="/support">
               <Support />
             </Route>
           </Switch>
           <Footer />
         </div>
-      </Router>
 
   );
 }

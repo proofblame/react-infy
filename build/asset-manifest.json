@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-infy/static/css/main.afb42128.chunk.css",
-    "main.js": "/react-infy/static/js/main.3da9a344.chunk.js",
-    "main.js.map": "/react-infy/static/js/main.3da9a344.chunk.js.map",
+    "main.js": "/react-infy/static/js/main.d0c7f346.chunk.js",
+    "main.js.map": "/react-infy/static/js/main.d0c7f346.chunk.js.map",
     "runtime-main.js": "/react-infy/static/js/runtime-main.abf3b73a.js",
     "runtime-main.js.map": "/react-infy/static/js/runtime-main.abf3b73a.js.map",
     "static/js/2.c082949a.chunk.js": "/react-infy/static/js/2.c082949a.chunk.js",
@@ -26,6 +26,6 @@
     "static/js/runtime-main.abf3b73a.js",
     "static/js/2.c082949a.chunk.js",
     "static/css/main.afb42128.chunk.css",
-    "static/js/main.3da9a344.chunk.js"
+    "static/js/main.d0c7f346.chunk.js"
   ]
 }
