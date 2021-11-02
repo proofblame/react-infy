@@ -33,7 +33,9 @@ function Header({themeToggler, check}) {
                 <li className="header__item"> <Link to="/whitepaper" className="header__menu-link ">White Paper</Link></li>
                 <li className="header__item"> <Link to="/support" className="header__menu-link ">Поддержка</Link></li>
               </ul>
-              <div className="header__profile"> <a href="/profile" className="header__profile-link">Профиль</a> <select
+              <div className="header__profile"> 
+              <Link to="/profile" className="header__profile-link">Профиль</Link> 
+              <select
                 className="header__lang" style={{ display: 'none' }}>
                 <option defaultValue="RU">RU</option>
                 <option value="EN">EN</option>
