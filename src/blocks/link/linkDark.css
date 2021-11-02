@@ -1,0 +1,24 @@
+
+.dark .link {  
+  background: #0E0E0E;
+  border: 2px solid #a3a3a3;
+  color: #fff;
+}
+
+
+.dark .link_active {
+  color: #fff;
+  border: none;
+  background: -o-linear-gradient(top, #441e78 0, #633d8d 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #441e78),
+    to(#633d8d)
+  );
+  background: linear-gradient(180deg, #441e78 0, #633d8d 100%);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+

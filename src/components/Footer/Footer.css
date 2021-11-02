@@ -1,0 +1,192 @@
+@import url('./FooterDark.css');
+
+.footer {
+  position: relative;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+  max-width: 1628px;
+  margin: 0 auto;
+  background: #fff;
+}
+.footer__body {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #fff;
+  padding-top: 66px;
+  padding-bottom: 66px;
+  -webkit-column-gap: 17px;
+  -moz-column-gap: 17px;
+  column-gap: 17px;
+}
+.footer__logo {
+  margin-bottom: 40px;
+}
+.footer__politics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-column-gap: 17px;
+  -moz-column-gap: 17px;
+  column-gap: 17px;
+  font-size: 14px;
+  line-height: 17px;
+}
+.footer__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-column-gap: 51px;
+  -moz-column-gap: 51px;
+  column-gap: 51px;
+}
+.footer__item {
+  margin-bottom: 25px;
+}
+.footer__item:last-of-type {
+  margin-bottom: 0;
+}
+.footer__link {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.footer__link:hover {
+  opacity: 0.8;
+}
+.footer__contacts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.footer__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.footer__button {
+  margin-bottom: 20px;
+}
+.footer__button:last-of-type {
+  margin-bottom: 0;
+}
+.footer__status {
+  color: rgba(14, 14, 14, 0.4);
+  line-height: 18px;
+}
+.footer__status_active {
+  display: inline-block;
+  position: relative;
+  padding-left: 17px;
+}
+.footer__status_active::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #00ff19;
+  width: 10px;
+  height: 10px;
+  width: 11px;
+  height: 11px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+}
+.footer-button-exit {
+  border: none;
+  background: 0 0;
+}
+.footer-button-exit input {
+  border: none;
+  background: 0 0;
+  color: #fff;
+}
+
+@media screen and (max-width: 1627.98px) {
+  .footer__body {
+    padding-top: calc(14px + 52 * ((100vw - 320px) / 1308));
+  }
+  .footer__body {
+    padding-bottom: calc(14px + 52 * ((100vw - 320px) / 1308));
+  }
+  .footer__body {
+    -webkit-column-gap: calc(0px + 17 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(0px + 17 * ((100vw - 320px) / 1308));
+    column-gap: calc(0px + 17 * ((100vw - 320px) / 1308));
+  }
+  .footer__logo {
+    margin-bottom: calc(10px + 30 * ((100vw - 320px) / 1308));
+  }
+  .footer__nav {
+    -webkit-column-gap: calc(0px + 51 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(0px + 51 * ((100vw - 320px) / 1308));
+    column-gap: calc(0px + 51 * ((100vw - 320px) / 1308));
+  }
+  .footer__status {
+    line-height: calc(10px + 8 * ((100vw - 320px) / 1308));
+  }
+  .footer__status_active {
+    padding-left: calc(9px + 8 * ((100vw - 320px) / 1308));
+  }
+  .footer__status_active::before {
+    width: calc(6px + 5 * ((100vw - 320px) / 1308));
+  }
+  .footer__status_active::before {
+    height: calc(6px + 5 * ((100vw - 320px) / 1308));
+  }
+}
+
+@media screen and (max-width: 1070px) {
+  .footer__wrapper {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 100%;
+    flex: 0 1 100%;
+  }
+  .footer__nav {
+    display: none;
+  }
+  .footer__buttons {
+    display: none;
+  }
+}

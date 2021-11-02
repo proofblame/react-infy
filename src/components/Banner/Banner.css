@@ -1,0 +1,101 @@
+.banner {
+  padding-top: 125px;
+}
+.banner__wrapper_type_two-columns {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(270px, 800px) 24px minmax(280px, 584px);
+  grid-template-columns: minmax(270px, 800px) minmax(280px, 584px);
+  -webkit-box-pack: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  -webkit-column-gap: 24px;
+  -moz-column-gap: 24px;
+  column-gap: 24px;
+}
+.banner__title {
+  margin-bottom: 45px;
+}
+.banner__subscribe {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 50px;
+  -moz-column-gap: 50px;
+  column-gap: 50px;
+  margin-bottom: 15px;
+}
+.banner__subtext {
+}
+.banner__button {
+  cursor: pointer;
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.banner__button:hover {
+  opacity: 0.8;
+}
+.banner__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  margin-bottom: 48px;
+  -webkit-column-gap: 45px;
+  -moz-column-gap: 45px;
+  column-gap: 45px;
+}
+
+@media screen and (max-width: 1627.98px) {
+  .banner {
+    padding-top: calc(45px + 80 * ((100vw - 320px) / 1308));
+  }
+  .banner__title {
+    margin-bottom: calc(26px + 19 * ((100vw - 320px) / 1308));
+  }
+  .banner__subscribe {
+    -webkit-column-gap: calc(18px + 32 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(18px + 32 * ((100vw - 320px) / 1308));
+    column-gap: calc(18px + 32 * ((100vw - 320px) / 1308));
+  }
+  .banner__buttons {
+    margin-bottom: calc(16px + 32 * ((100vw - 320px) / 1308));
+  }
+  .banner__buttons {
+    -webkit-column-gap: calc(0px + 45 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(0px + 45 * ((100vw - 320px) / 1308));
+    column-gap: calc(0px + 45 * ((100vw - 320px) / 1308));
+  }
+
+}
+@media screen and (max-width: 767.98px) {
+  .banner__wrapper_type_two-columns {
+    -ms-grid-columns: minmax(270px, 1fr);
+    grid-template-columns: minmax(270px, 1fr);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .banner__title {
+    text-align: center;
+  }
+  .banner__button {
+    width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}

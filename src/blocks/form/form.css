@@ -1,0 +1,241 @@
+@import url('./formDark.css');
+.form {
+  width: 568px;
+  font-family: HelveticaNeueCyr, sans-serif;
+  font-style: normal;
+  position: relative;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 60px 40px 50px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-right: 40px;
+  padding-left: 40px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 10px;
+  max-width: 588px;
+}
+.form_type_support {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-width: 487px;
+  row-gap: 41px;
+}
+.form__fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  row-gap: 13px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.form__fieldset_type_politics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+
+.form__title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 152.51%;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+  color: #444;
+  margin: 0 0 50px 0;
+  text-align: center;
+}
+.form__text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  color: rgba(14, 14, 14, 0.7);
+  margin: 0 0 16px 0;
+}
+
+.form__subtitle {
+  color: #333e66;
+  text-align: center;
+}
+.form__input {
+  width: 100%;
+  border: none;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #0e0e0e;
+  padding: 30px 24px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #f2f2f2;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.form__input_textarea {
+  resize: vertical;
+}
+.form__input_type_politics {
+  width: 33px;
+  height: 33px;
+}
+.form__text-subtitle {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  color: rgba(14, 14, 14, 0.7);
+  margin: 0 0 40px 0;
+}
+.form__button {
+  cursor: pointer;
+  -webkit-transition: opacity ease-in-out 0.2s;
+  -o-transition: opacity ease-in-out 0.2s;
+  transition: opacity ease-in-out 0.2s;
+  background: #fdfdfd;
+  border-radius: 20px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+  color: #5f3a8b;
+  border: 2px solid #a3a3a3;
+  margin-bottom: 19px;
+}
+.form__button:last-of-type {
+  margin-bottom: 0;
+}
+.form__button_active {
+  background: -o-linear-gradient(
+    top,
+    rgba(68, 30, 120, 0.7) 0,
+    rgba(99, 61, 141, 0.7) 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, rgba(68, 30, 120, 0.7)),
+    to(rgba(99, 61, 141, 0.7))
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(68, 30, 120, 0.7) 0,
+    rgba(99, 61, 141, 0.7) 100%
+  );
+  -webkit-box-shadow: 20px 20px 200px rgba(240, 240, 240, 0.48);
+  box-shadow: 20px 20px 200px rgba(240, 240, 240, 0.48);
+  color: #fdfdfd;
+  border: none;
+}
+.form__button:hover {
+  opacity: 0.7;
+}
+._no-webp .form__button_type_close {
+  background-image: url(./images/close-button.png);
+}
+.form__button_type_close {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  top: 10px;
+  right: 10px;
+  padding: 0;
+  border-radius: 50%;
+
+}
+._webp .form__button_type_close {
+  background-image: url(./images/close-button.webp);
+}
+@media screen and (max-width: 1627.98px) {
+  .form {
+    width: calc(280px + 288 * ((100vw - 320px) / 1308));
+    padding-top: calc(20px + 40 * ((100vw - 320px) / 1308));
+    padding-bottom: calc(20px + 40 * ((100vw - 320px) / 1308));
+    padding-right: calc(20px + 20 * ((100vw - 320px) / 1308));
+    padding-left: calc(20px + 20 * ((100vw - 320px) / 1308));
+  }
+  .form_type_support {
+    row-gap: calc(26px + 15 * ((100vw - 320px) / 1308));
+  }
+  .form__fieldset {
+    row-gap: calc(10px + 3 * ((100vw - 320px) / 1308));
+  }
+
+  .form__input_type_politics {
+    width: calc(18px + 15 * ((100vw - 320px) / 1308));
+  }
+  .form__input_type_politics {
+    height: calc(18px + 15 * ((100vw - 320px) / 1308));
+  }
+  .form__button_type_close {
+    width: calc(20px + 12 * ((100vw - 320px) / 1308));
+    height: calc(20px + 12 * ((100vw - 320px) / 1308));
+    top: calc(2px + 8 * ((100vw - 320px) / 1308));
+    right: calc(1px + 9 * ((100vw - 320px) / 1308));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form__title {
+    font-size: calc(20px + 34 * (100vw - 320px) / 1628);
+  }
+  .form__text {
+    font-size: calc(14px + 6.8 * (100vw - 320px) / 1628);
+    line-height: calc(14px + 6.8 * (100vw - 320px) / 1628);
+  }
+  .form__text-subtitle {
+    font-size: calc(14px + 6.8 * (100vw - 320px) / 1628);
+    line-height: calc(14px + 6.8 * (100vw - 320px) / 1628);
+  }
+  .form__input {
+    font-size: calc(20px + 34 * (100vw - 320px) / 1628);
+    padding: calc(15px + 15 * (100vw - 320px) / 1308)
+      calc(12px + 12 * (100vw - 320px) / 1308);
+  }
+  .form__button {
+    font-size: calc(20px + 34 * (100vw - 320px) / 1628);
+  }
+
+}

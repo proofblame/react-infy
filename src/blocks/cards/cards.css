@@ -1,0 +1,23 @@
+.cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: auto;
+  -webkit-column-gap: 24px;
+  -moz-column-gap: 24px;
+  column-gap: 24px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 76px;
+}
+@media screen and (max-width: 1627.98px) {
+  .cards {
+    -webkit-column-gap: calc(12px + 12 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(12px + 12 * ((100vw - 320px) / 1308));
+    column-gap: calc(12px + 12 * ((100vw - 320px) / 1308));
+  }
+  .cards {
+    margin-bottom: calc(33px + 43 * ((100vw - 320px) / 1308));
+  }
+}

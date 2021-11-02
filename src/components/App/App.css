@@ -1,0 +1,9 @@
+.app {
+  background-color: rgba(240, 240, 240, 0.1);
+  font-family: HelveticaNeueCyr, sans-serif;
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+.dark.app {
+  /* background-color: #0E0E0E; */
+}

@@ -1,0 +1,7 @@
+.dark .roadmap__title {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .roadmap__subitem {
+  color: rgba(255, 255, 255, 0.8);
+}

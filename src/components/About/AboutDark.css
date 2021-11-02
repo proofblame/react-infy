@@ -1,0 +1,42 @@
+.dark .about__description {
+  color: #fff;
+}
+
+.dark .about__text {
+  color: #fff;
+}
+
+.dark .about__text_black {
+  color: #6A6A6A;
+}
+
+.dark .about__text_black-2 {
+  color: #fff;
+}
+
+.dark .about__text-footer {
+  color: #fff;
+}
+
+.dark .about__graph-text {
+  color: #2d2d2d;
+}
+
+.dark .about__table-text {
+  color: #fff;
+}
+
+.dark .about__table-body {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .about__table-body thead {
+  color: #fff;
+}
+.dark .about__article-footer {
+  background: #0E0E0E;
+}
+.dark .about__body-wrapper {
+  background: #1E1E1E;
+  border-radius: 15px;
+}

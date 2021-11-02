@@ -1,0 +1,7 @@
+.dark .main {
+  background-color: #0E0E0E;
+}
+
+.dark .main__roadmap::before {
+  background-image: url(./images/combDark.png);
+}

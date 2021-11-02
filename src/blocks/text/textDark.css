@@ -1,0 +1,19 @@
+.dark .text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .text_size_small {
+  color: rgba(255, 255, 255, 0.8);
+
+}
+
+.dark .text_color_lighter {
+  color: rgba(255, 255, 255, 0.7);
+
+}
+.dark .text_color_normal {
+  color: #fff;
+}
+.dark .text_color_dark {
+  color: rgba(255, 255, 255, 0.8);
+}

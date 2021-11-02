@@ -1,0 +1,115 @@
+@import url('./linkDark.css');
+.link {
+  font-weight: 700;
+  text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 100%;
+  background: #fdfdfd;
+  border: 2px solid #a3a3a3;
+  color: #0e0e0e;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 20px;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.link_lock {
+  color: #565656;
+  padding-left: 55px;
+  position: relative;
+}
+.link_lock::before {
+  content: '';
+  position: absolute;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  top: 50%;
+  left: 20px;
+  background: url(./images/locked.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+}
+.link_active {
+  color: #fff;
+  border: none;
+  background: -o-linear-gradient(top, #441e78 0, #633d8d 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #441e78),
+    to(#633d8d)
+  );
+  background: linear-gradient(180deg, #441e78 0, #633d8d 100%);
+  -webkit-box-shadow: 20px 20px 200px rgba(240, 240, 240, 0.48);
+  box-shadow: 20px 20px 200px rgba(240, 240, 240, 0.48);
+}
+.link_type_youtube {
+  font-weight: 700;
+  color: #444;
+  text-transform: capitalize;
+}
+.link_type_telegram {
+  font-weight: 500;
+  text-transform: capitalize;
+  color: rgba(68, 68, 68, 0.8);
+}
+.link_type_github {
+  font-weight: 900;
+  text-transform: capitalize;
+  color: #444;
+}
+
+.link {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 1627.98px) {
+
+  .link {
+    border-radius: calc(5px + 10 * ((100vw - 320px) / 1308));
+  }
+  .link {
+    font-size: calc(12px + 8 * ((100vw - 320px) / 1308));
+  }
+  .link {
+    padding-top: calc(14px + 6 * ((100vw - 320px) / 1308));
+  }
+  .link {
+    padding-bottom: calc(14px + 6 * ((100vw - 320px) / 1308));
+  }
+  .link {
+    padding-left: calc(16px + 14 * ((100vw - 320px) / 1308));
+  }
+  .link {
+    padding-right: calc(16px + 14 * ((100vw - 320px) / 1308));
+  }
+  .link_lock::before {
+    width: calc(10px + 10 * ((100vw - 320px) / 1308));
+  }
+  .link_lock::before {
+    height: calc(10px + 10 * ((100vw - 320px) / 1308));
+  }
+  .link_lock::before {
+    left: calc(7px + 10 * ((100vw - 320px) / 1308));
+  }
+}

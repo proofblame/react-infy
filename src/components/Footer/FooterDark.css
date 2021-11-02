@@ -1,0 +1,23 @@
+.dark .footer {
+  background: #0e0e0e;
+}
+
+.dark .footer::before {
+  background: #0e0e0e;
+}
+
+.dark .footer__body {
+  background: #0e0e0e;
+}
+
+.dark .footer__status {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.dark .footer__status_active::before {
+  background: #00ff19;
+}
+
+.dark .footer-button-exit input {
+  color: #fff;
+}

@@ -1,0 +1,42 @@
+.dark .header {
+  background-color: #0E0E0E;
+}
+
+.dark .header__body::before {
+  background: #0E0E0E;
+}
+
+
+.dark .header__menu-link {
+  background: rgba(120, 86, 171, 0.39);
+  color: #fff;
+}
+
+.dark .header__profile-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .header__profile-link::before {
+  background-image: url(./images/profileButtonDark.png);
+}
+
+@media screen and (max-width: 1070px) {
+  .dark .header__nav {
+    color: #fff;
+    background: #0E0E0E;
+  }
+
+  .dark .header__menu-link {
+    color: #fff;
+    background: none;
+  }
+
+  .dark .header__profile-link {
+    color: #fff;
+  }
+
+  .dark .header__contacts-item {
+    color: #fff;
+  }
+}
+

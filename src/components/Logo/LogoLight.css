@@ -1,0 +1,41 @@
+.logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 52px;
+  -moz-column-gap: 52px;
+  column-gap: 52px;
+}
+.logo__img {
+  width: 100px;
+  height: 56px;
+}
+.logo__text {
+  font-family: Gadugi, sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+  color: #0e0e0e;
+  font-size: 36px;
+  line-height: 48px;
+}
+@media screen and (max-width: 1627.98px) {
+  .logo {
+    -webkit-column-gap: calc(5px + 47 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(5px + 47 * ((100vw - 320px) / 1308));
+    column-gap: calc(5px + 47 * ((100vw - 320px) / 1308));
+  }
+  .logo__img {
+    width: calc(50px + 50 * ((100vw - 320px) / 1308));
+    height: calc(28px + 28 * ((100vw - 320px) / 1308));
+  }
+  .logo__text {
+    font-size: calc(13px + 23 * ((100vw - 320px) / 1308));
+  }
+  .logo__text {
+    line-height: calc(17px + 31 * ((100vw - 320px) / 1308));
+  }
+}

@@ -1,0 +1,29 @@
+@import url('./titleDark.css');
+
+.title {
+  font-weight: 700;
+  text-align: left;
+  color: #0e0e0e;
+  font-size: 64px;
+  line-height: 69px;
+  margin-bottom: 40px;
+}
+.title_color_white {
+  color: #fff;
+}
+.title_color_violet {
+  color: #633d8d;
+}
+
+@media screen and (max-width: 1627.98px) {
+  .title {
+    font-size: calc(22px + 42 * ((100vw - 320px) / 1308));
+  }
+  .title {
+    line-height: calc(24px + 45 * ((100vw - 320px) / 1308));
+  }
+  .title {
+    margin-bottom: calc(16px + 24 * ((100vw - 320px) / 1308));
+  }
+
+}

@@ -1,0 +1,70 @@
+@import url('./MainDark.css');
+
+.main {
+  /* background-color: rgba(240, 240, 240, 0.1); */
+  overflow: hidden;
+  padding-bottom: 200px;
+}
+.main__banner {
+  margin-bottom: 390px;
+}
+.main__slider {
+  margin-bottom: 390px;
+}
+.main__list {
+  padding-top: 74px;
+}
+.main__apps {
+  margin-bottom: 200px;
+}
+.main__roadmap {
+  position: relative;
+  z-index: 2;
+}
+.main__roadmap::before {
+  content: '';
+  background-image: url(../../images/icons/icons.svg#comb);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  bottom: 0;
+  right: -216px;
+  width: 862px;
+  height: 605px;
+  z-index: -1;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+.main__profile {
+  margin-bottom: 42px;
+}
+
+
+@media screen and (max-width: 1627.98px) {
+  .main {
+    padding-bottom: calc(33px + 167 * ((100vw - 320px) / 1308));
+  }
+  .main__banner {
+    margin-bottom: calc(35px + 355 * ((100vw - 320px) / 1308));
+  }
+  .main__slider {
+    margin-bottom: calc(108px + 282 * ((100vw - 320px) / 1308));
+  }
+  .main__list {
+    padding-top: calc(16px + 58 * ((100vw - 320px) / 1308));
+  }
+  .main__apps {
+    margin-bottom: calc(33px + 167 * ((100vw - 320px) / 1308));
+  }
+  .main__roadmap::before {
+    bottom: calc(-100px + 100 * ((100vw - 320px) / 1308));
+    right: calc(-20px + -196 * ((100vw - 320px) / 1308));
+    width: calc(273px + 589 * ((100vw - 320px) / 1308));
+    height: calc(191px + 414 * ((100vw - 320px) / 1308));
+  }
+  .main__profile {
+    margin-bottom: calc(37px + 5 * ((100vw - 320px) / 1308));
+  }
+
+}

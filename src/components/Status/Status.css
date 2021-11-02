@@ -1,0 +1,90 @@
+@import url('./StatusDark.css');
+.grid {
+  width: 100%;
+}
+.grid__list {
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-column-gap: 193px;
+  -moz-column-gap: 193px;
+  column-gap: 193px;
+}
+.grid__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-column-gap: 37px;
+  -moz-column-gap: 37px;
+  column-gap: 37px;
+  margin-bottom: 53px;
+}
+.grid__title {
+  font-size: 24px;
+  line-height: 37px;
+  margin-bottom: 9px;
+}
+.grid__subtitle {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(14, 14, 14, 0.7);
+}
+.grid__text-list {
+  margin: 0;
+  padding: 0;
+  list-style: disc;
+}
+.grid__text-item {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(14, 14, 14, 0.7);
+  list-style-type: disc;
+}
+
+@media screen and (max-width: 1627.98px) {
+  .grid__list {
+    -webkit-column-gap: calc(0px + 193 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(0px + 193 * ((100vw - 320px) / 1308));
+    column-gap: calc(0px + 193 * ((100vw - 320px) / 1308));
+  }
+  .grid__item {
+    -webkit-column-gap: calc(12px + 25 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(12px + 25 * ((100vw - 320px) / 1308));
+    column-gap: calc(12px + 25 * ((100vw - 320px) / 1308));
+  }
+  .grid__item {
+    margin-bottom: calc(20px + 33 * ((100vw - 320px) / 1308));
+  }
+  .grid__title {
+    font-size: calc(16px + 8 * ((100vw - 320px) / 1308));
+  }
+  .grid__title {
+    line-height: calc(24px + 13 * ((100vw - 320px) / 1308));
+  }
+  .grid__title {
+    margin-bottom: calc(5px + 4 * ((100vw - 320px) / 1308));
+  }
+  .grid__subtitle {
+    font-size: calc(12px + 6 * ((100vw - 320px) / 1308));
+  }
+  .grid__subtitle {
+    line-height: calc(18px + 9 * ((100vw - 320px) / 1308));
+  }
+  .grid__text-item {
+    font-size: calc(12px + 6 * ((100vw - 320px) / 1308));
+  }
+  .grid__text-item {
+    line-height: calc(18px + 9 * ((100vw - 320px) / 1308));
+  }
+
+}

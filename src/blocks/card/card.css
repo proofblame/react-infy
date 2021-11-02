@@ -1,0 +1,252 @@
+.card {
+  overflow: hidden;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 480px;
+  height: 304px;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-left: 24px;
+  padding-bottom: 34px;
+  z-index: 2;
+}
+._no-webp .card_one {
+  background-image: url(./images/wallet-1.png);
+}
+.card_one {
+  background-image: url(./images/wallet-1.png);
+}
+.card_one {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+._no-webp .card_two {
+  background-image: url(./images/wallet-2.png);
+}
+.card_two {
+  background-image: url(./images/wallet-2.png);
+}
+.card_two {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+._no-webp .card_three {
+  background-image: url(./images/wallet-3.png);
+}
+.card_three {
+  background-image: url(./images/wallet-3.png);
+}
+.card_three {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.card__body {
+  position: relative;
+  margin-bottom: 10px;
+}
+.card__title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  -webkit-column-gap: 6px;
+  -moz-column-gap: 6px;
+  column-gap: 6px;
+}
+.card__title {
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 21px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.card__ref {
+  background: rgba(196, 196, 196, 0.4);
+  border-radius: 100%;
+  border: 0;
+  color: rgba(255, 255, 255, 0.1);
+  padding: 4px;
+  font-weight: 400;
+  width: 18px;
+  height: 18px;
+  font-size: 13px;
+  line-height: 13px;
+}
+.card__coins {
+  white-space: nowrap;
+  font-size: 48px;
+  line-height: 48px;
+  margin-bottom: 4px;
+  color: #fff;
+  font-weight: 700;
+}
+.card__coins_cents {
+  font-size: 24px;
+  line-height: 24px;
+}
+.card__coins_curse {
+  font-size: 24px;
+  line-height: 24px;
+}
+.card__rub {
+  position: absolute;
+  bottom: -48px;
+  right: 70px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #000;
+}
+.card__footer {
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-column-gap: 5px;
+  -moz-column-gap: 5px;
+  column-gap: 5px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 100%;
+  flex: 0 1 100%;
+  width: 257px;
+}
+.card__profits {
+  font-size: 14px;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.card__subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  line-height: 14px;
+}
+._webp .card_one {
+  background-image: url(./images/wallet-1.webp);
+}
+._webp .card_two {
+  background-image: url(./images/wallet-2.webp);
+}
+._webp .card_three {
+  background-image: url(./images/wallet-3.webp);
+}
+
+@media screen and (max-width: 1627.98px) {
+  .card {
+    width: calc(278px + 202 * ((100vw - 320px) / 1308));
+  }
+  .card {
+    height: calc(175px + 129 * ((100vw - 320px) / 1308));
+  }
+  .card {
+    padding-top: calc(18px + 12 * ((100vw - 320px) / 1308));
+  }
+  .card {
+    padding-right: calc(12px + 18 * ((100vw - 320px) / 1308));
+  }
+  .card {
+    padding-left: calc(14px + 10 * ((100vw - 320px) / 1308));
+  }
+  .card {
+    padding-bottom: calc(20px + 14 * ((100vw - 320px) / 1308));
+  }
+  .card__body {
+    margin-bottom: calc(5px + 5 * ((100vw - 320px) / 1308));
+  }
+  .card__title-wrapper {
+    -webkit-column-gap: calc(5px + 1 * ((100vw - 320px) / 1308));
+    -moz-column-gap: calc(5px + 1 * ((100vw - 320px) / 1308));
+    column-gap: calc(5px + 1 * ((100vw - 320px) / 1308));
+  }
+  .card__title {
+    font-size: calc(10px + 8 * ((100vw - 320px) / 1308));
+  }
+  .card__title {
+    line-height: calc(10px + 8 * ((100vw - 320px) / 1308));
+  }
+  .card__title {
+    margin-bottom: calc(13px + 8 * ((100vw - 320px) / 1308));
+  }
+  .card__ref {
+    padding: calc(2px + 2 * ((100vw - 320px) / 1308));
+  }
+  .card__ref {
+    width: calc(10px + 8 * ((100vw - 320px) / 1308));
+  }
+  .card__ref {
+    height: calc(10px + 8 * ((100vw - 320px) / 1308));
+  }
+  .card__ref {
+    font-size: calc(9px + 4 * ((100vw - 320px) / 1308));
+  }
+  .card__ref {
+    line-height: calc(9px + 4 * ((100vw - 320px) / 1308));
+  }
+  .card__coins {
+    font-size: calc(24px + 24 * ((100vw - 320px) / 1308));
+  }
+  .card__coins {
+    line-height: calc(24px + 24 * ((100vw - 320px) / 1308));
+  }
+  .card__coins {
+    margin-bottom: calc(9px + -5 * ((100vw - 320px) / 1308));
+  }
+  .card__coins_cents {
+    font-size: calc(12px + 12 * ((100vw - 320px) / 1308));
+  }
+  .card__coins_cents {
+    line-height: calc(12px + 12 * ((100vw - 320px) / 1308));
+  }
+  .card__coins_curse {
+    font-size: calc(12px + 12 * ((100vw - 320px) / 1308));
+  }
+  .card__coins_curse {
+    line-height: calc(12px + 12 * ((100vw - 320px) / 1308));
+  }
+  .card__rub {
+    bottom: calc(-19px + -29 * ((100vw - 320px) / 1308));
+  }
+  .card__rub {
+    right: calc(44px + 26 * ((100vw - 320px) / 1308));
+  }
+  .card__rub {
+    font-size: calc(9px + 5 * ((100vw - 320px) / 1308));
+  }
+  .card__rub {
+    line-height: calc(9px + 5 * ((100vw - 320px) / 1308));
+  }
+  .card__footer {
+    width: calc(152px + 105 * ((100vw - 320px) / 1308));
+  }
+  .card__profits {
+    font-size: calc(10px + 4 * ((100vw - 320px) / 1308));
+  }
+  .card__profits {
+    line-height: calc(10px + 4 * ((100vw - 320px) / 1308));
+  }
+  .card__subtitle {
+    font-size: calc(10px + 4 * ((100vw - 320px) / 1308));
+  }
+  .card__subtitle {
+    line-height: calc(10px + 4 * ((100vw - 320px) / 1308));
+  }
+
+}

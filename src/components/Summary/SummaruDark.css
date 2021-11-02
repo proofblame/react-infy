@@ -1,0 +1,10 @@
+
+.dark .summary__wrapper {
+  background: #0E0E0E;
+}
+.dark .summary__title {
+  color: rgba(255, 255, 255, 0.7);
+}
+.dark .summary__statistics {
+  color: #fff;
+}

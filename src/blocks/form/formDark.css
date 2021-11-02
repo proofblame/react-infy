@@ -1,0 +1,44 @@
+.dark .form__title {
+  color: #fff;
+}
+
+.dark .form__text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .form__subtitle {
+  color: #333e66;
+}
+
+.dark .form__input {
+  color: #0e0e0e;
+  background: #1e1e1e;
+}
+
+.dark .form__text-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .form__button {
+  background: linear-gradient(180deg,
+      rgba(68, 30, 120, 0.7) 0%,
+      rgba(99, 61, 141, 0.7) 100%);
+  color: #5f3a8b;
+}
+
+.dark .form__button_active {
+  color: #fdfdfd;
+  box-shadow: none;
+}
+
+._no-webp .dark .form__button_type_close {
+  background-image: url(./images/closeButtonDark.png);
+}
+
+.dark .form__button_type_close {
+  background-color: #000;
+}
+
+._webp .dark .form__button_type_close {
+  background-image: url(./images/closeButtonDark.png);
+}

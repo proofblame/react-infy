@@ -1,0 +1,21 @@
+
+.dark .wallet__body {
+  background-color: #fdfdfd;
+}
+
+.dark .wallet__slider-body {
+  background-color: #0E0E0E;
+  box-shadow: 50px 50px 200px rgb(0 0 0 / 48%);
+
+}
+.dark .wallet__slider-title {
+  color: #fff;
+}
+.dark .wallet__slider-date {
+  color: rgba(255, 255, 255, 0.7);
+
+}
+.dark .wallet__slider-count {
+  color: rgba(255, 255, 255, 0.7);
+}
+

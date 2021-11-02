@@ -1,0 +1,72 @@
+@font-face {
+  font-family: Gadugi-700;
+  font-display: swap;
+  src: url(./fonts/Gadugi-700.woff) format('woff'),
+    url(./fonts/Gadugi-700.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: BerlinSansFB;
+  font-display: swap;
+  src: url(./fonts/BerlinSansFB-400.woff) format('woff'),
+    url(./fonts/BerlinSansFB-400.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeueCyr;
+  font-display: swap;
+  src: url(./fonts/HelveticaNeueCyr-300.woff) format('woff'),
+    url(./fonts/HelveticaNeueCyr-300.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeueCyr;
+  font-display: swap;
+  src: url(./fonts/HelveticaNeueCyr-400.woff) format('woff'),
+    url(./fonts/HelveticaNeueCyr-400.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeueCyr;
+  font-display: swap;
+  src: url(./fonts/HelveticaNeueCyr-500.woff) format('woff'),
+    url(./fonts/HelveticaNeueCyr-500.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeueCyr;
+  font-display: swap;
+  src: url(./fonts/HelveticaNeueCyr-700.woff) format('woff'),
+    url(./fonts/HelveticaNeueCyr-700.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeueCyr;
+  font-display: swap;
+  src: url(./fonts/HelveticaNeueCyr-900.woff) format('woff'),
+    url(./fonts/HelveticaNeueCyr-900.woff2) format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: Humnst777BlkBT;
+  font-display: swap;
+  src: url(./fonts/Humnst777BlkBT-900.woff) format('woff'),
+    url(./fonts/Humnst777BlkBT-900.woff2) format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: YouTubeSansDark;
+  font-display: swap;
+  src: url(./fonts/YouTubeSansDark-700.woff) format('woff'),
+    url(./fonts/YouTubeSansDark-700.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
