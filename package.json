@@ -52,9 +52,5 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.3",
     "tsparticles": "^1.37.1"
-  },
-  "main": "index.js",
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
