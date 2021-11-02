@@ -1,6 +1,6 @@
 {
-  "homepage": "http://github.com/proofblame/react-infy",
-  "name": "infy-react",
+  "homepage": "http://proofblame.github.io/react-infy",
+  "name": "react-infy",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
