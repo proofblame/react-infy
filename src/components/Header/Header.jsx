@@ -27,7 +27,7 @@ function Header({themeToggler, check}) {
               <li className="header__item">
               <Switcher themeToggler={themeToggler} check={check}/>
               </li>
-                <li className="header__item"> <Link to="/" className="header__menu-link ">О компании</Link></li>
+                <li className="header__item"> <Link exact to="/" className="header__menu-link ">О компании</Link></li>
                 <li className="header__item"> <Link to="/marketing" className="header__menu-link ">Маркетинг план</Link></li>
                 <li className="header__item"> <Link to="/roadmap" className="header__menu-link ">Дорожная карта</Link></li>
                 <li className="header__item"> <Link to="/whitepaper" className="header__menu-link ">White Paper</Link></li>
