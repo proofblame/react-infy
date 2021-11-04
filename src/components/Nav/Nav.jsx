@@ -15,32 +15,32 @@ function Nav() {
           <span className="hamburger hamburger-3"></span>
         </label>
         <NavLink to="/profile" className="menu-item" activeClassName="menu-item_active">
-        <svg className="menu-img">
+          <svg className="menu-img">
             <use href={menuIcons + "#menu-profile"}></use>
           </svg>
         </NavLink>
         <NavLink to="/team" className="menu-item" activeClassName="menu-item_active">
-        <svg className="menu-img icon">
+          <svg className="menu-img icon">
             <use href={menuIcons + "#menu-team"}></use>
           </svg>
         </NavLink>
         <NavLink exact to="/" className="menu-item" activeClassName="menu-item_active">
-        <svg className="menu-img icon">
+          <svg className="menu-img icon">
             <use href={menuIcons + "#menu-about"}></use>
           </svg>
         </NavLink>
         <NavLink to="/status" className="menu-item" activeClassName="menu-item_active">
-        <svg className="menu-img icon">
+          <svg className="menu-img icon">
             <use href={menuIcons + "#menu-status"}></use>
           </svg>
         </NavLink>
         <NavLink to="/wallet" className="menu-item" activeClassName="menu-item_active">
-        <svg className="menu-img icon">
+          <svg className="menu-img icon">
             <use href={menuIcons + "#menu-wallet"}></use>
           </svg>
         </NavLink>
-        <NavLink  to="/tarif" className="menu-item" activeClassName="menu-item_active">
-        <svg className="menu-img icon">
+        <NavLink to="/tarif" className="menu-item" activeClassName="menu-item_active">
+          <svg className="menu-img icon">
             <use href={menuIcons + "#menu-tarif"}></use>
           </svg>
         </NavLink>

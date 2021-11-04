@@ -13,8 +13,8 @@ function Footer() {
         <div className="footer__body">
           <div className="footer__wrapper">
             <div className="footer__logo wrapper">
-            <Link to="/" className="header__logo logo">
-            <Logo/>
+              <Link to="/react-infy" className="header__logo logo">
+                <Logo />
               </Link>
             </div>
             <div className="footer__politics">
@@ -28,7 +28,7 @@ function Footer() {
           </div>
           <nav className="footer__nav">
             <ul className="menu">
-              <li className="footer__item"><Link to="/" className="footer__link text text_size_normal">О компании</Link></li>
+              <li className="footer__item"><Link to="/react-infy" className="footer__link text text_size_normal">О компании</Link></li>
               <li className="footer__item text text_size_normal"><Link to="/marketing" className="footer__link text text_size_normal">Маркетинг план</Link></li>
               <li className="footer__item text text_size_normal"><Link to="/roadmap" className="footer__link text text_size_normal">Дорожная карта</Link></li>
               <li className="footer__item text text_size_normal"><Link to="/whitepaper" className="footer__link text text_size_normal">White Paper</Link></li>
@@ -45,7 +45,7 @@ function Footer() {
             <div className="footer__buttons">
               <Link to="/profile" className="footer__button link link_active">Профиль</Link>
               <Link to="/login" className="footer__button link">Выход</Link>
-              </div>
+            </div>
             <p className="footer__status text text_size_small">Статус mainnet: <span
               className="footer__status footer__status_active">активен</span></p>
           </div>
