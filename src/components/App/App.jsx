@@ -1,5 +1,10 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import auth from '../../utils/auth';
+import config from '../../base/base';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
@@ -21,73 +26,77 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import {useDarkMode} from "../UseDarkMode/UseDarkMode"
+import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({ _id: null });
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
+
   useEffect(() => {
 
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
-  
+
+  function handleRegister(nicknameInviter, nicknameOwner, email, password, telegram) {
+    // return auth.register(nicknameInviter, nicknameOwner, email, password, telegram);
+    setCurrentUser({
+      _id: 123,
+      nicknameInviter, 
+      nicknameOwner, 
+      email, 
+      password, 
+      telegram
+    })
+    localStorage.setItem('user', JSON.stringify(currentUser))
+  }
+
+  function handleLogin(email, password) {
+    return auth.login(email, password).then(res => {
+      localStorage.setItem('jwt', res.jwt);
+    });
+  }
+
+  function handleSignout() {
+    setLoggedIn(false);
+    setCurrentUser({ _id: null });
+    localStorage.removeItem('jwt');
+  }
+
+
+
+
+
 
   return (
-
-        <div className={themeMode}>
-          <Header themeToggler={themeToggler} check={check}/>
-          <Switch>
-            <Route exact path="/">
-              <Main/>
-            </Route>
-            <Route  path="/whitepaper">
-              <WhitePaper />
-            </Route>
-            <Route  path="/roadmap">
-              <RoadMap />
-            </Route>
-            <Route  path="/marketing">
-              <Marketing />
-            </Route>
-            <Route  path="/privacy">
-              <Privacy />
-            </Route>
-            <Route  path="/policy">
-              <Policy />
-            </Route>
-            <Route  path="/status">
-              <Status />
-            </Route>
-            <Route  path="/tarif">
-              <Tarif />
-            </Route>
-            <Route  path="/profile">
-              <Profile />
-            </Route>
-            <Route  path="/team">
-              <Team />
-            </Route>
-            <Route  path="/wallet">
-              <Wallet />
-            </Route>
-            <Route  path="/error">
-              <Error />
-            </Route>
-            <Route  path="/login">
-              <Login />
-            </Route>
-            <Route  path="/registration">
-              <Registration />
-            </Route>
-            <Route  path="/support">
-              <Support />
-            </Route>
-          </Switch>
-          <Footer />
-        </div>
-
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className={themeMode}>
+        <Header themeToggler={themeToggler} check={check} />
+        <Switch>
+          <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
+          <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
+          <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
+          <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
+          <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
+          <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
+          <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
+          <ProtectedRoute loggedIn={loggedIn} component={Tarif} path="/tarif" />
+          <ProtectedRoute loggedIn={loggedIn} component={Profile} path="/profile" />
+          <ProtectedRoute loggedIn={loggedIn} component={Team} path="/team" />
+          <ProtectedRoute loggedIn={loggedIn} component={Wallet} path="/wallet" />
+          <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
+          <Route component={Login} onLogin={handleLogin} path="/login" />
+          <Route path="/registration">
+          <Registration onRegister={handleRegister}/>
+          </Route>
+          <Route component={Error}path="*" />
+        </Switch>
+        <Footer loggedIn={loggedIn} />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
