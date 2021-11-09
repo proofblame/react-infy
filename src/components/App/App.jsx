@@ -24,11 +24,13 @@ import Registration from '../Registration/Registration';
 import Support from '../Support/Support';
 import {
   Switch,
-  Route
+  Route,
+  useHistory 
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 
 function App() {
+  let history = useHistory();
   const [currentUser, setCurrentUser] = useState({ _id: null });
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
@@ -47,11 +49,14 @@ function App() {
       _id: 123,
       nicknameInviter, 
       nicknameOwner, 
-      email, 
+      email,
       password, 
       telegram
     })
     localStorage.setItem('user', JSON.stringify(currentUser))
+    setLoggedIn(true)
+    history.push("/");
+    
   }
 
   function handleLogin(email, password) {

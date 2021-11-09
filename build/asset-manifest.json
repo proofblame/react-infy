@@ -1,31 +1,31 @@
 {
   "files": {
-    "main.css": "/react-infy/static/css/main.afb42128.chunk.css",
-    "main.js": "/react-infy/static/js/main.704cbeb3.chunk.js",
-    "main.js.map": "/react-infy/static/js/main.704cbeb3.chunk.js.map",
+    "main.css": "/react-infy/static/css/main.70c264d4.chunk.css",
+    "main.js": "/react-infy/static/js/main.143a432e.chunk.js",
+    "main.js.map": "/react-infy/static/js/main.143a432e.chunk.js.map",
     "runtime-main.js": "/react-infy/static/js/runtime-main.abf3b73a.js",
     "runtime-main.js.map": "/react-infy/static/js/runtime-main.abf3b73a.js.map",
-    "static/js/2.d3492028.chunk.js": "/react-infy/static/js/2.d3492028.chunk.js",
-    "static/js/2.d3492028.chunk.js.map": "/react-infy/static/js/2.d3492028.chunk.js.map",
+    "static/js/2.44b31a2d.chunk.js": "/react-infy/static/js/2.44b31a2d.chunk.js",
+    "static/js/2.44b31a2d.chunk.js.map": "/react-infy/static/js/2.44b31a2d.chunk.js.map",
     "index.html": "/react-infy/index.html",
-    "static/css/main.afb42128.chunk.css.map": "/react-infy/static/css/main.afb42128.chunk.css.map",
-    "static/js/2.d3492028.chunk.js.LICENSE.txt": "/react-infy/static/js/2.d3492028.chunk.js.LICENSE.txt",
+    "static/css/main.70c264d4.chunk.css.map": "/react-infy/static/css/main.70c264d4.chunk.css.map",
+    "static/js/2.44b31a2d.chunk.js.LICENSE.txt": "/react-infy/static/js/2.44b31a2d.chunk.js.LICENSE.txt",
     "static/media/index.css": "/react-infy/static/media/wallet-3.febacf75.png",
     "static/media/Main.css": "/react-infy/static/media/combDark.05444c24.png",
     "static/media/grad.54cd8fd3.svg": "/react-infy/static/media/grad.54cd8fd3.svg",
     "static/media/graph.b1d3c289.svg": "/react-infy/static/media/graph.b1d3c289.svg",
-    "static/media/icons-menu.6f8c1194.svg": "/react-infy/static/media/icons-menu.6f8c1194.svg",
-    "static/media/About.css": "/react-infy/static/media/icons.40e7c9a4.svg",
+    "static/media/icons-menu.5ffbb71e.svg": "/react-infy/static/media/icons-menu.5ffbb71e.svg",
+    "static/media/About.css": "/react-infy/static/media/icons.30d33e1c.svg",
+    "static/media/Profile.css": "/react-infy/static/media/icons.65f629ff.svg",
     "static/media/icons.81811334.svg": "/react-infy/static/media/icons.81811334.svg",
-    "static/media/Profile.css": "/react-infy/static/media/icons.a8af9767.svg",
     "static/media/Team.css": "/react-infy/static/media/icons.d293b598.svg",
     "static/media/nlo.9da1e6f2.png": "/react-infy/static/media/nlo.9da1e6f2.png",
-    "static/media/telegramIcon.e8a599be.svg": "/react-infy/static/media/telegramIcon.e8a599be.svg"
+    "static/media/telegramIcon.3003a1a9.svg": "/react-infy/static/media/telegramIcon.3003a1a9.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.abf3b73a.js",
-    "static/js/2.d3492028.chunk.js",
-    "static/css/main.afb42128.chunk.css",
-    "static/js/main.704cbeb3.chunk.js"
+    "static/js/2.44b31a2d.chunk.js",
+    "static/css/main.70c264d4.chunk.css",
+    "static/js/main.143a432e.chunk.js"
   ]
 }

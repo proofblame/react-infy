@@ -5,12 +5,13 @@ import { NavLink } from "react-router-dom";
 function Login() {
   return (
     <main className="main">
-      <div className="container">
-        <section className="registration login">
-          <Particle
+                <Particle
             params={particlesConfig}
             className="App-particles__container"
           />
+      <div className="container">
+        <section className="registration login">
+
           <form
             method="post"
             className="form form_type_support form_type_login"

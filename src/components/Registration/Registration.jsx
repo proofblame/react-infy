@@ -28,12 +28,12 @@ function Registration(props) {
 
   return (
     <main className='main'>
+      <Particle
+        params={particlesConfig}
+        className='App-particles__container'
+      />
       <div className='container'>
         <section className='registration'>
-          <Particle
-            params={particlesConfig}
-            className='App-particles__container'
-          />
           <form
             onSubmit={onSubmit}
             className='form form_type_support form_type_login'>
@@ -51,7 +51,7 @@ function Registration(props) {
                 Регистрация
               </NavLink>
             </section>
-
+          
             <fieldset className='form__fieldset'>
               <label
                 className='form__label text text_size_normal'
