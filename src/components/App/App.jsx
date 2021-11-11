@@ -30,44 +30,77 @@ import {
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 
 function App() {
-  let history = useHistory();
-  const [currentUser, setCurrentUser] = useState({ _id: null });
+  const history = useHistory();
+  const [currentUser, setCurrentUser] = useState({});
+  const [currentWallet, setCurentWallet] = useState({});
+  const [currentTeam, setCurentTeam] = useState({});
+
+
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
   useEffect(() => {
-
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
 
-  function handleRegister(nicknameInviter, nicknameOwner, email, password, telegram) {
-    // return auth.register(nicknameInviter, nicknameOwner, email, password, telegram);
-    setCurrentUser({
-      _id: 123,
-      nicknameInviter, 
-      nicknameOwner, 
-      email,
-      password, 
-      telegram
-    })
-    localStorage.setItem('user', JSON.stringify(currentUser))
-    setLoggedIn(true)
-    history.push("/");
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  function checkToken() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .getUserInfo(jwt)
+        .then(user => {
+          setLoggedIn(true);
+          setCurrentUser(user);
+        })
+        .catch(e => console.error(e.message));
+        auth
+        .getWalletInfo(jwt)
+        .then(wallet => {
+          setCurentWallet(wallet);
+        })
+        .catch(e => console.error(e.message));
+        auth
+        .getTeamInfo(jwt)
+        .then(team => {
+          setCurentTeam(team);
+        })
+        .catch(e => console.error(e.message));
+
+    } else {
+      
+    }
+  }
+
+
+
+
+
+
+
+
+  function handleRegister(username, joinedBy, email, password, telegram) {
+    return auth.register(username, joinedBy, email, password, telegram)
     
   }
 
-  function handleLogin(email, password) {
-    return auth.login(email, password).then(res => {
-      localStorage.setItem('jwt', res.jwt);
+  function handleLogin(username, password) {
+    return auth.login(username, password).then(res => {
+      localStorage.setItem('jwt', res.access_token);
     });
   }
 
   function handleSignout() {
     setLoggedIn(false);
-    setCurrentUser({ _id: null });
+    setCurrentUser({});
+    setCurentWallet({});
+    setCurentTeam({});
     localStorage.removeItem('jwt');
   }
 
@@ -89,17 +122,19 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
           <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
           <ProtectedRoute loggedIn={loggedIn} component={Tarif} path="/tarif" />
-          <ProtectedRoute loggedIn={loggedIn} component={Profile} path="/profile" />
-          <ProtectedRoute loggedIn={loggedIn} component={Team} path="/team" />
-          <ProtectedRoute loggedIn={loggedIn} component={Wallet} path="/wallet" />
+          <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
+          <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} path="/team" />
+          <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
-          <Route component={Login} onLogin={handleLogin} path="/login" />
+          <Route path="/login">
+            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken}/>
+          </Route>
           <Route path="/registration">
-          <Registration onRegister={handleRegister}/>
+          <Registration loggedIn={loggedIn} onRegister={handleRegister}/>
           </Route>
           <Route component={Error}path="*" />
         </Switch>
-        <Footer loggedIn={loggedIn} />
+        <Footer loggedIn={loggedIn} onSignOut={handleSignout}/>
       </div>
     </CurrentUserContext.Provider>
   );

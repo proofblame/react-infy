@@ -4,7 +4,7 @@ import sprite from '../../images/icons/icons.svg'
 import './Team.css'
 import Summary from '../Summary/Summary'
 import Tree from '../Tree/Tree'
-function Team() {
+function Team({currentUser, currentTeam}) {
   return (
 
     <main className="main">
@@ -25,19 +25,19 @@ function Team() {
                 <div className="data__contacts">
                   <div className="data__contacts-body">
                     <div className="data__contacts-block">
-                      <p className="data__nickname text text_size_large text_color_normal">nickname</p>
+                      <p className="data__nickname text text_size_large text_color_normal">{currentUser.nickname}</p>
                     </div>
                     <div className="data__contacts-block">
-                      <p className="data__status text text_color_normal">status</p>
+                      <p className="data__status text text_color_normal">{currentUser.status}</p>
                     </div>
                     <div className="data__contacts-block">
-                      <p className="data__progress-status text text_size_x-small text_color_lighter">status выполнен на <span
+                      <p className="data__progress-status text text_size_x-small text_color_lighter">{currentUser.status} выполнен на <span
                         className="data__progress-count">0%</span> </p> <progress className="data__progress-scale" max="100"
                           value="0"> Загружено на <span id="value">25</span>% </progress>
                     </div>
                     <div className="data__contacts-block">
                       <p className="data__status-active text text_size_x-small text_color_lighter">Активен</p>
-                      <p className="data__status-active text text_size_x-small text_color_lighter">Вас пригласил: joiner
+                      <p className="data__status-active text text_size_x-small text_color_lighter">Вас пригласил: {currentUser.joinedBy}
                       </p>
                     </div>
                   </div>
@@ -47,7 +47,7 @@ function Team() {
             </div>
           </div>
         </section>
-        <Summary />
+        <Summary currentTeam={currentTeam}/>
     <Tree/>
       </div>
     </main>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import Particle from 'react-particles-js';
 import particlesConfig from '../../vendor/particlesConfig.json';
 import { NavLink } from 'react-router-dom';
 
 function Registration(props) {
+  const history = useHistory();
   const [data, setData] = useState({
-    nicknameInviter: '',
-    nicknameOwner: '',
+    username: '',
+    joinedBy: '',
     password: '',
     email: '',
     telegram: '',
@@ -23,7 +25,11 @@ function Registration(props) {
   function onSubmit(e) {
     e.preventDefault();
     props
-      .onRegister(data.nicknameInviter, data.nicknameOwner, data.email, data.password, data.telegram)
+      .onRegister(data.username, data.joinedBy, data.email, data.password, data.telegram)
+      .then(() => {
+        history.push("/login")
+    })
+    .catch(e => console.error(e.message))
   }
 
   return (
@@ -55,14 +61,14 @@ function Registration(props) {
             <fieldset className='form__fieldset'>
               <label
                 className='form__label text text_size_normal'
-                htmlFor='nicknameInviter'>
+                htmlFor='joinedBy'>
                 Никнейм пригласившего
               </label>
               <input
                 className='form__input text text_size_normal'
                 type='text'
-                name='nicknameInviter'
-                value={data.nicknameInviter}
+                name='joinedBy'
+                value={data.joinedBy}
                 onChange={onChange}
               />
             </fieldset>
@@ -70,15 +76,15 @@ function Registration(props) {
             <fieldset className='form__fieldset'>
               <label
                 className='form__label text text_size_normal'
-                htmlFor='nicknameOwner'>
+                htmlFor='username'>
                 Ваш никнейм
               </label>
               <input
                 className='form__input text text_size_normal'
                 type='text'
-                name='nicknameOwner'
+                name='username'
                 required
-                value={data.nicknameOwner}
+                value={data.username}
                 onChange={onChange}
               />
             </fieldset>

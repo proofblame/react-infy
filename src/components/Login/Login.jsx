@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Particle from "react-particles-js";
 import particlesConfig from "../../vendor/particlesConfig.json";
 import { NavLink } from "react-router-dom";
-function Login() {
+
+function Login(props) {
+  const history = useHistory();
+  const [data, setData] = useState({
+    username: "",
+    password: ""
+  });
+
+  useEffect(() => {
+    if (props.loggedIn) history.push("/profile");
+}, [props.loggedIn, history]);
+
+  function onChange(e) {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value
+    });
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    props.onLogin(data.username, data.password)
+      .then(() => {
+        props.checkToken();
+      })
+
+  }
+
+
   return (
     <main className="main">
-                <Particle
-            params={particlesConfig}
-            className="App-particles__container"
-          />
+      <Particle
+        params={particlesConfig}
+        className="App-particles__container"
+      />
       <div className="container">
         <section className="registration login">
 
           <form
-            method="post"
+            onSubmit={onSubmit}
             className="form form_type_support form_type_login"
           >
             <section className="banner__buttons wallet__buttons registration__buttons">
@@ -44,16 +74,18 @@ function Login() {
             <fieldset className="form__fieldset">
               <label
                 className="form__label text text_size_normal"
-                htmlFor="nickname"
+                htmlFor="username"
               >
                 Введите номер кошелька или Никнейм
               </label>
               <input
                 className="form__input text text_size_normal"
                 type="text"
-                name="nickname"
+                name="username"
                 required
                 autoComplete='off'
+                value={data.username}
+                onChange={onChange}
               />
             </fieldset>
             <fieldset className="form__fieldset">
@@ -69,6 +101,8 @@ function Login() {
                 name="password"
                 required
                 autoComplete='off'
+                value={data.password}
+                onChange={onChange}
               />
             </fieldset>
             <input type="submit" className="link link_active" value="Войти" />

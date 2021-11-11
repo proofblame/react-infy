@@ -6,7 +6,7 @@ import {
 import './Footer.css'
 import Logo from '../Logo/Logo';
 
-function Footer() {
+function Footer({onSignOut}) {
   return (
     <footer className="footer">
       <div className="container">
@@ -44,7 +44,7 @@ function Footer() {
           <div className="wrapper">
             <div className="footer__buttons">
               <Link to="/profile" className="footer__button link link_active">Профиль</Link>
-              <Link to="/login" className="footer__button link">Выход</Link>
+              <Link to="/login" className="footer__button link" onClick={onSignOut}>Выход</Link>
             </div>
             <p className="footer__status text text_size_small">Статус mainnet: <span
               className="footer__status footer__status_active">активен</span></p>

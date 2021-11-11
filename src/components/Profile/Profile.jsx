@@ -7,12 +7,12 @@ import Modal from "../Modal/Modal";
 import "./Profile.css";
 import telegramIcon from "./images/telegramIcon.svg";
 
-function Profile() {
+function Profile({currentUser}) {
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState(false);
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText("nickname");
+    navigator.clipboard.writeText(`https://infinity-network.io/j/${currentUser.nickname}`);
     setTextCopy("text-copy text-copy-active");
 
     setTimeout(() => {
@@ -46,7 +46,7 @@ function Profile() {
                           Аплайнер
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                          Аплайнер
+                          {currentUser.joinedBy}
                         </p>
                       </div>
                       <div className="data__contacts-block">
@@ -54,7 +54,7 @@ function Profile() {
                           Никнейм
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                          Никнейм
+                          {currentUser.nickname}
                         </p>
                       </div>
                       <div className="data__contacts-block">
@@ -62,7 +62,7 @@ function Profile() {
                           Статус
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                          Статус
+                        {currentUser.status}
                         </p>
                       </div>
                       <div
@@ -73,7 +73,7 @@ function Profile() {
                           Следующий статус
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                          sonya
+                        {currentUser.status}
                         </p>
                       </div>
                       <div className="data__contacts-block">
@@ -81,7 +81,7 @@ function Profile() {
                           Электронная почта
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                          почта
+                        {currentUser.email}
                         </p>
                       </div>
                       <div className="data__contacts-block">
@@ -89,7 +89,7 @@ function Profile() {
                           Telegram
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                          t.me/Telegram
+                          t.me/{currentUser.telegram}
                         </p>
                       </div>
                       <div className="data__contacts-block data__contacts-block_desktop">
@@ -226,13 +226,13 @@ function Profile() {
                       id="guest-link"
                       className="data__text text text_size_medium text_color_normal"
                     >
-                      https://infinity-network.io/j/nickname
+                      https://infinity-network.io/j/{currentUser.nickname}
                     </p>
                   </div>
                   <div className="profile__buttons">
-                    <span className="profile__button link link_active">
+                    {/* <span className="profile__button link link_active">
                       Редактировать
-                    </span>
+                    </span> */}
                     <span
                       className="profile__button link link_active"
                       onClick={() => {

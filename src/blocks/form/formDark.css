@@ -20,10 +20,10 @@
 }
 
 .dark .form__button {
-  background: linear-gradient(180deg,
+  /* background: linear-gradient(180deg,
       rgba(68, 30, 120, 0.7) 0%,
       rgba(99, 61, 141, 0.7) 100%);
-  color: #5f3a8b;
+  color: #5f3a8b; */
 }
 
 .dark .form__button_active {

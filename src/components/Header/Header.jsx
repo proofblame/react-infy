@@ -37,7 +37,7 @@ function Header({ themeToggler, check }) {
                 <li className="header__item"> <Link to="/support" className="header__menu-link ">Поддержка</Link></li>
               </ul>
               <div className="header__profile">
-                <Link to="/profile" className="header__profile-link">Профиль</Link>
+                <Link to="/profile" className=" header__profile-link">Профиль</Link>
                 <select
                   className="header__lang" style={{ display: 'none' }}>
                   <option defaultValue="RU">RU</option>

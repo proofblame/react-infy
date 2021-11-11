@@ -2,9 +2,26 @@ import React, {useState} from "react";
 import "./Tree.css";
 import Modal from '../Modal/Modal'
 import TreePopup from '../TreePopup/TreePopup'
+import auth from '../../utils/auth';
 
 const Tree = () => {
   const [modalActive, setModalActive] = useState(false)
+  const [currentTree, setCurentTree] = useState({});
+
+const openTreePopup = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .getTreeInfo(jwt)
+        .then(tree => {
+
+        })
+        .catch(e => console.error(e.message));
+    } else {
+      
+    }
+  }
+
   return (
     <>
     <section className="tree">
