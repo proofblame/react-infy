@@ -14,24 +14,28 @@
   color: #fff;
 }
 .dark .tree__popup {
-  background: #fcfcfc;
+  background: #0E0E0E;
 }
 
 .dark .tree__popup-card {
-  background: #fcfcfc;
+  background: #0E0E0E;
+  box-shadow: 20px 20px 200px rgba(0, 0, 0, 0.48);
 }
 .dark .tree__popup-title {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 .dark .tree__popup-name {
-  color: #000;
+  color: #FFFFFF;
 }
 .dark .tree__popup-status {
   color: rgba(235, 0, 0, 0.7);
 }
 .dark .tree__popup-user {
-  color: rgba(14, 14, 14, 0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 .dark .tree__popup-partner {
-  color: rgba(14, 14, 14, 0.7);
+  color: rgba(255, 255, 255, 0.7);
+}
+.dark .tree__popup-img {
+  background: #1E1E1E;
 }

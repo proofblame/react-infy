@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Nav from '../Nav/Nav'
-import copyIcon from '../../images/copy-icon.png'
+import copyIcon from './images/copy-icon.svg';
 import TransferPopup from '../TransferPopup/TransferPopup'
 import DelegationPopup from '../DelegationPopup/DelegationPopup'
 import UndelegationPopup from '../UndelegationPopup/UndelegationPopup'
@@ -10,7 +10,7 @@ import './Wallet.css'
 
 
 function Wallet() {
-  const [textCopy, setTextCopy] = useState('')
+  const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
     delegationPopup: false,
@@ -42,9 +42,10 @@ function Wallet() {
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText("nickname");
-    setTextCopy('Текст скопирован')
+    setTextCopy("text-copy text-copy-active");
+
     setTimeout(() => {
-      setTextCopy('')
+      setTextCopy("text-copy");
     }, 2000);
   }
   return (
@@ -65,8 +66,12 @@ function Wallet() {
               <p className="text text_size_small text_color_lighter">Адрес кошелька</p>
               <div className="data__contacts-wrapper">
                 <p className="data__text text text_size_medium text_color_normal" id="number-wallet">wallet</p>
+                <div className="data__copy-button">
                 <img src={copyIcon} alt="Копировать адрес кошелька" className="data__copy" onClick={handleCopyClick} />
-                <span className="text text_size_small text_color_lighter data__copy-result">{textCopy}</span>
+                <span className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}>
+                    Скопировано
+                </span>
+                </div>
               </div>
             </div>
           </div>
@@ -117,10 +122,10 @@ function Wallet() {
               </div>
             </div>
           </section>
-          <section className="banner__buttons wallet__buttons"> 
-          <span className="wallet__button link link_active open-transferPopup open" onClick={() => setModalActive({...modalActive, transferPopup: true})}>Перевести</span> <span
-              className="wallet__button link link_active open-delegationsPopup open" onClick={() => setModalActive({...modalActive, delegationPopup: true})}>Отправить в стейкинг</span> <span
-                className="wallet__button link link_active open-undelegatePopup open" onClick={() => setModalActive({...modalActive, undelegationPopup: true})}>Вывод из стейкинга</span>
+          <section className="banner__buttons wallet__buttons">
+            <span className="wallet__button link link_active open-transferPopup open" onClick={() => setModalActive({ ...modalActive, transferPopup: true })}>Перевести</span> <span
+              className="wallet__button link link_active open-delegationsPopup open" onClick={() => setModalActive({ ...modalActive, delegationPopup: true })}>Отправить в стейкинг</span> <span
+                className="wallet__button link link_active open-undelegatePopup open" onClick={() => setModalActive({ ...modalActive, undelegationPopup: true })}>Вывод из стейкинга</span>
           </section>
           <section className="transactions">
             <section className="main-profile profile section">
@@ -132,69 +137,69 @@ function Wallet() {
             <div className="wrapper">
               <div className="slider">
                 <div className="slider__item">
-                  <div className="wallet__slider-item"> 
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                  <div className="wallet__slider-item">
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
-                  </div>
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
                   </div>
-                  </div>
-                  <div className="wallet__slider-item"> 
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                  <div className="wallet__slider-item">
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
-                  </div>
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
                   </div>
-                  </div>
-                  <div className="wallet__slider-item"> 
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                  <div className="wallet__slider-item">
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
-                  </div>
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
                   </div>
-                  </div>
-                  <div className="wallet__slider-item"> 
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                  <div className="wallet__slider-item">
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
-                  </div>
-                  <div className="wallet__slider-body">
-                    <div className="wallet__slider-wrapper">
-                      <p className="wallet__slider-title">type</p>
-                      <p className="wallet__slider-date">date</p>
+                    <div className="wallet__slider-body">
+                      <div className="wallet__slider-wrapper">
+                        <p className="wallet__slider-title">type</p>
+                        <p className="wallet__slider-date">date</p>
+                      </div>
+                      <p className="wallet__slider-count">amount</p>
                     </div>
-                    <p className="wallet__slider-count">amount</p>
-                  </div>
                   </div>
 
                 </div>
@@ -211,14 +216,14 @@ function Wallet() {
         </div >
       </main >
       <Modal active={modalActive.transferPopup}>
-    <TransferPopup onClose={() => {setModalActive({...modalActive, transferPopup: false})}}/>
-    </Modal>
-    <Modal active={modalActive.delegationPopup}>
-    <DelegationPopup onClose={() => {setModalActive({...modalActive, delegationPopup: false})}}/>
-    </Modal>
-    <Modal active={modalActive.undelegationPopup}>
-    <UndelegationPopup onClose={() => {setModalActive({...modalActive, undelegationPopup: false})}}/>
-    </Modal>
+        <TransferPopup onClose={() => { setModalActive({ ...modalActive, transferPopup: false }) }} />
+      </Modal>
+      <Modal active={modalActive.delegationPopup}>
+        <DelegationPopup onClose={() => { setModalActive({ ...modalActive, delegationPopup: false }) }} />
+      </Modal>
+      <Modal active={modalActive.undelegationPopup}>
+        <UndelegationPopup onClose={() => { setModalActive({ ...modalActive, undelegationPopup: false }) }} />
+      </Modal>
     </>
   )
 }

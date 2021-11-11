@@ -102,7 +102,13 @@ function Main() {
 
           </section>
           <Apps />
-          <About />
+        </div>
+      </div>
+      <About />
+      
+      <div className="container">
+        <div className="wrapper">         
+          
           <RoadMapBlock />
         </div>
       </div>

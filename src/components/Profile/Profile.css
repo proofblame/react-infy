@@ -60,13 +60,17 @@
 .data__copy:hover {
   opacity: 0.8;
 }
+.data__copy-button {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
 .data__copy-result {
-  position: absolute;
-  top: 50%;
-
-  left: 320px;
-
-  transform: translateY(-50%);
+  /* position: relative;
+  top: 50%; 
+  left: 0;
+   transform: translateY(-50%); */
 }
 .data {
   display: -ms-grid;

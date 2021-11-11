@@ -7,7 +7,7 @@
   -webkit-column-gap: 60px;
   -moz-column-gap: 60px;
   column-gap: 60px;
-  margin-bottom: 209px;
+  margin-bottom: 88px;
 }
 
 .about__link {
@@ -187,7 +187,7 @@
   }
 
   .about__links {
-    margin-bottom: calc(51px + 158 * ((100vw - 320px) / 1308));
+    margin-bottom: calc(22px + 66 * ((100vw - 320px) / 1308));
   }
 
   .about__link {

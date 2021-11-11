@@ -34,7 +34,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ _id: null });
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 

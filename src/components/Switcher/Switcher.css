@@ -51,6 +51,7 @@ input[type='checkbox'].switcher__input + label:before {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+  cursor: pointer;
 }
 input[type='checkbox'].switcher__input + label:after {
   content: '';
@@ -66,6 +67,7 @@ input[type='checkbox'].switcher__input + label:after {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+  cursor: pointer;
 }
 input[type='checkbox'].switcher__input + label:hover:after {
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);

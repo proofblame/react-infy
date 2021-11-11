@@ -113,7 +113,7 @@
   margin: 0 auto;
   background: #fcfcfc;
   border-radius: calc(10px + 10 * ((100vw - 320px) / 1308));
-  /* width: calc(278px + 1063 * ((100vw - 320px) / 1308)); */
+  width: calc(278px + 1063 * ((100vw - 320px) / 1308));
   padding-top: calc(40px + 30 * ((100vw - 320px) / 1308));
   padding-left: calc(19px + 65 * ((100vw - 320px) / 1308));
   padding-bottom: calc(40px + 30 * ((100vw - 320px) / 1308));
@@ -127,11 +127,18 @@
   justify-content: space-between;
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  /* grid-template-columns: repeat(2, minmax(240px, 1fr)); */
+  grid-template-columns: repeat(1, minmax(240px, 1fr));
   -webkit-column-gap: calc(1px + 27 * ((100vw - 320px) / 1308));
   -moz-column-gap: calc(1px + 27 * ((100vw - 320px) / 1308));
   column-gap: calc(1px + 27 * ((100vw - 320px) / 1308));
   row-gap: calc(1px + 27 * ((100vw - 320px) / 1308));
+}
+@media screen and (max-width: 768px) {
+  .tree__popup-list {
+    /* grid-template-columns: 1fr; */
+  }
+
 }
 .tree__popup-card {
   background: #fcfcfc;
@@ -161,6 +168,8 @@
 .tree__popup-img {
   width: calc(45px + 29 * ((100vw - 320px) / 1308));
   height: calc(45px + 29 * ((100vw - 320px) / 1308));
+  background: #ebebeb;
+  border-radius: 10px;
 }
 .tree__popup-name {
   font-size: calc(10px + 14 * ((100vw - 320px) / 1308));

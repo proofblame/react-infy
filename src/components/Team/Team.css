@@ -60,14 +60,14 @@
 .data__copy:hover {
   opacity: 0.8;
 }
-.data__copy-result {
+/* .data__copy-result {
   position: absolute;
   top: 50%;
 
   left: 320px;
 
   transform: translateY(-50%);
-}
+} */
 .data {
   display: -ms-grid;
   display: grid;
