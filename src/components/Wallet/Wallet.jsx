@@ -12,7 +12,8 @@ import WalletSlider from './Slider/Slider';
 
 
 
-function Wallet({ currentUser, currentWallet }) {
+
+function Wallet({ currentUser, currentWallet, checkToken }) {
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
@@ -21,6 +22,45 @@ function Wallet({ currentUser, currentWallet }) {
   })
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [page, setPage] = useState(0);
+
+  const handleUndelegateInfy = (amountUndel) => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .undelegateInfy(jwt, amountUndel)
+        .then(() => {
+          setModalActive({ ...modalActive, undelegationPopup: false })
+          checkToken();
+        })
+        .catch(e => console.error(e.message));
+    }
+  }
+
+  const handleDelegateInfy = (amountDel) => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .delegateInfy(jwt, amountDel)
+        .then(() => {
+          setModalActive({ ...modalActive, delegationPopup: false })
+          checkToken();
+        })
+        .catch(e => console.error(e.message));
+    }
+  }
+
+  const handleSendInfy = (amount, walletTo,) => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .sendInfy(jwt, walletTo, amount)
+        .then(() => {
+          setModalActive({ ...modalActive, transferPopup: false })
+          checkToken();
+        })
+        .catch(e => console.error(e.message));
+    }
+  }
 
   const nextPage = () => {
     if (page >= 0) {
@@ -193,13 +233,24 @@ function Wallet({ currentUser, currentWallet }) {
         </div >
       </main >
       <Modal active={modalActive.transferPopup}>
-        <TransferPopup onClose={() => { setModalActive({ ...modalActive, transferPopup: false }) }} />
+        <TransferPopup
+          onClose={() => { setModalActive({ ...modalActive, transferPopup: false }) }}
+          currentWallet={currentWallet}
+          handleSendInfy={handleSendInfy}
+        />
       </Modal>
       <Modal active={modalActive.delegationPopup}>
-        <DelegationPopup onClose={() => { setModalActive({ ...modalActive, delegationPopup: false }) }} />
+        <DelegationPopup 
+        onClose={() => { setModalActive({ ...modalActive, delegationPopup: false }) }} 
+        currentWallet={currentWallet}
+        handleDelegateInfy={handleDelegateInfy}
+        />
       </Modal>
       <Modal active={modalActive.undelegationPopup}>
-        <UndelegationPopup onClose={() => { setModalActive({ ...modalActive, undelegationPopup: false }) }} />
+        <UndelegationPopup onClose={() => { setModalActive({ ...modalActive, undelegationPopup: false }) }} 
+        handleUndelegateInfy={handleUndelegateInfy}
+        currentWallet={currentWallet}
+        />
       </Modal>
     </>
   )

@@ -123,8 +123,8 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
           <ProtectedRoute loggedIn={loggedIn} component={Tarif} path="/tarif" />
           <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
-          <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} path="/team" />
-          <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} path="/wallet" />
+          <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
+          <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
           <Route path="/login">
             <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken}/>

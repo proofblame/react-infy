@@ -73,34 +73,76 @@ class Auth {
     })
       .then(this._getResponseData);
   }
-    // Получить данные дерева
-    getTreeInfo(jwt, user, line, page, size) {
-      return fetch(`${this.baseURL}/team/tree/get`, {
+  // Получить данные дерева
+  getTreeInfo(jwt, line, page, size) {
+    return fetch(`${this.baseURL}/team/tree/get`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      },
+      body: new URLSearchParams({
+        'line': `${line}`,
+        'page': `${page}`,
+        'size': `${size}`,
+      }),
+    })
+      .then(this._getResponseData);
+  }
+  // Получить данные транзакций
+  getTransactionsInfo(jwt, page, size) {
+    return fetch(`${this.baseURL}/history/get`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      },
+      body: new URLSearchParams({
+        'page': `${page}`,
+        'size': `${size}`,
+      }),
+    })
+      .then(this._getResponseData);
+  }
+  // Перевести на другой кошелек
+  sendInfy(jwt, walletTo, amount) {
+    return fetch(`${this.baseURL}/wallet/send`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      },
+      body: new URLSearchParams({
+        'walletTo': `${walletTo}`,
+        'amount': `${amount}`,
+      }),
+    })
+      .then(this._getResponseData);
+  }
+    // Отправить в стейкинг
+    delegateInfy(jwt, amountDel) {
+      return fetch(`${this.baseURL}/wallet/delegate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': `Bearer ${jwt}`,
         },
         body: new URLSearchParams({
-          'user': `${user}`,
-          'line': `${line}`,
-          'page': `${page}`,
-          'size': `${size}`,
+          'amountDel': `${amountDel}`,
         }),
       })
         .then(this._getResponseData);
     }
-        // Получить данные транзакций
-        getTransactionsInfo(jwt, page, size) {
-          return fetch(`${this.baseURL}/history/get`, {
+        // Вывод из стейкинга
+        undelegateInfy(jwt, amountUndel) {
+          return fetch(`${this.baseURL}/wallet/undelegate`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
               'Authorization': `Bearer ${jwt}`,
             },
             body: new URLSearchParams({
-              'page': `${page}`,
-              'size': `${size}`,
+              'amountUndel': `${amountUndel}`,
             }),
           })
             .then(this._getResponseData);

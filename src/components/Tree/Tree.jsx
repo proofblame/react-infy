@@ -3,24 +3,51 @@ import "./Tree.css";
 import Modal from '../Modal/Modal'
 import TreePopup from '../TreePopup/TreePopup'
 import auth from '../../utils/auth';
+import TreeItem from '../TreeItem/TreeItem';
 
-const Tree = () => {
+const Tree = ({checkToken}) => {
   const [modalActive, setModalActive] = useState(false)
-  const [currentTree, setCurentTree] = useState({});
+  const [currentTree, setCurrentTree] = useState([]);
+  const [page, setPage] = useState(0);
 
-const openTreePopup = () => {
+  const nextPage = () => {
+    if (page >= 0) {
+      setPage(page + 1)
+      // getTansactions()
+    } else {
+      return
+    }
+  }
+
+  const prevPage = () => {
+    if (page > 0) {
+      setPage(page - 1)
+      // getTansactions()
+    } else {
+      return
+    }
+  }
+
+  const handleGetTreeInfo = (line, size) => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth
-        .getTreeInfo(jwt)
-        .then(tree => {
-
+        .getTreeInfo(jwt, line, page, size)
+        .then((tree) => {
+          setModalActive(true)
+          setCurrentTree(tree.lines)
+          console.log(currentTree)
         })
         .catch(e => console.error(e.message));
-    } else {
-      
     }
   }
+
+  const treeList = currentTree.map((treeItem, index) => (
+    <TreeItem
+      key={index}
+      treeItem={treeItem}
+    />
+  ))
 
   return (
     <>
@@ -32,7 +59,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Вы пригласили</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open" onClick={() => { setModalActive(true) }}>
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(1, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -42,7 +69,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(2, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -52,7 +79,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(3, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -62,7 +89,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(4, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -72,7 +99,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(5, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -82,7 +109,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(6, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -92,7 +119,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(7, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -102,7 +129,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(8, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -112,7 +139,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(9, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -122,7 +149,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(10, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -132,7 +159,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(11, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -142,7 +169,7 @@ const openTreePopup = () => {
             <span className="tree__title_category">Пригашённые командой</span>
           </p>
           <p className="tree__subtitle"></p>
-          <button className="tree__button wallet__button link link_active open">
+          <button className="tree__button wallet__button link link_active open" onClick={() => { handleGetTreeInfo(12, 4) }}>
             Смотреть список
           </button>
         </div>
@@ -150,7 +177,7 @@ const openTreePopup = () => {
     </section>
     <Modal active={modalActive}>
       <TreePopup onClose={() => { setModalActive(false) }}>
-
+          {treeList}
       </TreePopup>
     </Modal>
     </>

@@ -4,7 +4,8 @@ import sprite from '../../images/icons/icons.svg'
 import './Team.css'
 import Summary from '../Summary/Summary'
 import Tree from '../Tree/Tree'
-function Team({currentUser, currentTeam}) {
+
+function Team({currentUser, currentTeam, checkToken}) {
   return (
 
     <main className="main">
@@ -48,7 +49,7 @@ function Team({currentUser, currentTeam}) {
           </div>
         </section>
         <Summary currentTeam={currentTeam}/>
-    <Tree/>
+    <Tree checkToken={checkToken}/>
       </div>
     </main>
 
