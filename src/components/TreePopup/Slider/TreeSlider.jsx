@@ -32,11 +32,17 @@ export default class PreviousNextMethods extends Component {
         <div className="slider__header">
           <button
             className="slider__button button"
-            onClick={this.previous}
+            onClick={() => {
+this.previous()
+this.props.prevPage()
+            }}
           ></button>
           <button
             className="slider__button slider__button_next button"
-            onClick={this.next}
+            onClick={() => {
+              this.next()
+              this.props.nextPage()
+            }}
           ></button>
         </div>
       </>

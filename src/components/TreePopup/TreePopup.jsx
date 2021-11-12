@@ -1,21 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import sprite from "../../images/icons/icons.svg";
 import SimpleSlider from './Slider/TreeSlider';
 
-function TreePopup({ onClose, children }) {
+function TreePopup({ onClose, children, line, nextPage, prevPage}) {
+
   return (
     <section className="popup popup_type_tree">
       <div className="tree__popup">
         <p className="tree__title tree__title_popup">
-          Линия 7 /
+          Линия {line}
           <span className="tree__title_category tree__title_category_popup">
-            Пригласил RUFUS
+            
           </span>
         </p>
         <p className="tree__subtitle tree__subtitle_popup">Линия закрыта</p>
 
 
-        <SimpleSlider>
+        <SimpleSlider nextPage={nextPage} prevPage={prevPage}>
           <li className="slider__item">
             <ul className="slider__tree-sublist">
                 {children}

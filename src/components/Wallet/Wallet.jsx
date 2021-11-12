@@ -22,6 +22,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   })
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [page, setPage] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
 
   const handleUndelegateInfy = (amountUndel) => {
     const jwt = localStorage.getItem('jwt');
@@ -63,20 +64,20 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   }
 
   const nextPage = () => {
-    if (page >= 0) {
+    if (page >= 0 && page < pageCount -1) {
       setPage(page + 1)
-      getTansactions()
+      // getTansactions()
     } else {
-      return
+      setPage(page)
     }
   }
 
   const prevPage = () => {
-    if (page > 0) {
+    if (page > 0 && page <= pageCount -1 ) {
       setPage(page - 1)
-      getTansactions()
+      // getTansactions()
     } else {
-      return
+      setPage(page)
     }
   }
 
@@ -91,6 +92,8 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
         .getTransactionsInfo(jwt, page, 8)
         .then(transactions => {
           setCurentTransactions(transactions.histories);
+          setPageCount(transactions.pageCount)
+          console.log(pageCount)
         })
         .catch(e => console.error(e.message));
     }
