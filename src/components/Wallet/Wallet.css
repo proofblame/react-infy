@@ -19,6 +19,14 @@
 .wallet__transactions-wrapper {
   padding: 0 !important;
 }
+.wallet__wrapper {
+  padding-top: 50px;
+}
+@media screen and (max-width: 1627px) {
+  .wallet__wrapper {
+    padding-top: calc(10px + 40 * ((100vw - 320px) / 1308));
+  }
+}
 .wallet__slider-item {
   width: 100%;
   display: -ms-grid;
@@ -51,6 +59,7 @@
   padding: 17px 19px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
 }
 .wallet__slider-title {
   font-weight: 400;

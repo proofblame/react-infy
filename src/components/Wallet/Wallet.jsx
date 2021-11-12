@@ -7,33 +7,55 @@ import UndelegationPopup from '../UndelegationPopup/UndelegationPopup'
 import Modal from '../Modal/Modal'
 import './Wallet.css'
 import auth from '../../utils/auth';
+import Transaction from '../Transaction/Transaction';
+import WalletSlider from './Slider/Slider';
 
 
 
-function Wallet({currentUser, currentWallet}) {
+function Wallet({ currentUser, currentWallet }) {
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
     delegationPopup: false,
     undelegationPopup: false
   })
-  const [currentTransactions, setCurentTransactions] = useState({});
+  const [currentTransactions, setCurentTransactions] = useState([]);
+  const [page, setPage] = useState(0);
+
+  const nextPage = () => {
+    if (page >= 0) {
+      setPage(page + 1)
+      getTansactions()
+    } else {
+      return
+    }
+  }
+
+  const prevPage = () => {
+    if (page > 0) {
+      setPage(page - 1)
+      getTansactions()
+    } else {
+      return
+    }
+  }
 
   useEffect(() => {
     getTansactions();
-  }, []);
+  }, [page])
 
-const getTansactions = () => {
-  const jwt = localStorage.getItem('jwt');
+  const getTansactions = () => {
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
-  auth
-  .getTransactionsInfo(jwt, currentUser.user, 0, 10)
-  .then(transactions => {
-    setCurentTransactions(transactions);
-  })
-  .catch(e => console.error(e.message));
+      auth
+        .getTransactionsInfo(jwt, page, 8)
+        .then(transactions => {
+          setCurentTransactions(transactions.histories);
+        })
+        .catch(e => console.error(e.message));
     }
-}
+  }
+
 
 
   const handleCopyClick = () => {
@@ -44,6 +66,15 @@ const getTansactions = () => {
       setTextCopy("text-copy");
     }, 2000);
   }
+
+  const transactionList = currentTransactions.map((transaction, index) => (
+    <Transaction
+      key={index}
+      transaction={transaction}
+    />
+  ))
+
+
   return (
     <>
       <main className="main">
@@ -63,10 +94,10 @@ const getTansactions = () => {
               <div className="data__contacts-wrapper">
                 <p className="data__text text text_size_medium text_color_normal" id="number-wallet">{currentUser.wallet}</p>
                 <div className="data__copy-button">
-                <img src={copyIcon} alt="Копировать адрес кошелька" className="data__copy" onClick={handleCopyClick} />
-                <span className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}>
+                  <img src={copyIcon} alt="Копировать адрес кошелька" className="data__copy" onClick={handleCopyClick} />
+                  <span className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}>
                     Скопировано
-                </span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -79,7 +110,7 @@ const getTansactions = () => {
                   <p className="card__title">Основной кошелёк</p> <button className="card__ref">?</button>
                 </div>
                 <p className="card__coins">{currentWallet.balance}
-                {/* <span className="card__coins_cents">.balanceAfter</span> */}
+                  <span className="card__coins_cents">.{currentWallet.balanceAfter}</span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.balanceRu} ₽`}</p>
                 <p className="card__rub">20₽</p>
@@ -95,14 +126,14 @@ const getTansactions = () => {
                   <p className="card__title">Кошелёк стейкинга</p> <button className="card__ref">?</button>
                 </div>
                 <p className="card__coins">{currentWallet.delegateBalance}
-                {/* <span className="card__coins_cents">.balanceDelAfter</span> */}
+                  <span className="card__coins_cents">.{currentWallet.delegateBalanceAfter}</span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.delegateBalanceRu} ₽`}</p>
                 <p className="card__coins card__coins_curse"></p>
               </div>
               <div className="card__footer">
                 <p className="card__profits">В выводе:
-                {currentWallet.sumUndelegate}</p>
+                  {currentWallet.sumUndelegate}</p>
                 <p className="card__profits">Вознагражд.: {currentWallet.delegateInMonth}/мес ({currentWallet.delegateInDay}/день)</p>
                 <p className="card__subtitle">Монеты автоматически переводятся на основной кошелек 1 раз в сутки</p>
               </div>
@@ -113,7 +144,7 @@ const getTansactions = () => {
                   <p className="card__title">Весь портфель </p> <button className="card__ref">?</button>
                 </div>
                 <p className="card__coins">{currentWallet.sumBalance}
-                {/* <span className="card__coins_cents">000000</span> */}
+                  <span className="card__coins_cents">.{currentWallet.sumBalanceAfter}</span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.sumBalanceRu} ₽`}</p>
                 <p className="card__coins card__coins_curse"></p>
@@ -135,77 +166,20 @@ const getTansactions = () => {
               </div>
             </section>
 
+
+
+
+
+
             <div className="wrapper">
               <div className="slider">
-                <div className="slider__item">
-                  <div className="wallet__slider-item">
-
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                    
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
+                <WalletSlider nextPage={nextPage} prevPage={prevPage}>
+                  <div className="slider__item">
+                    <div className="wallet__slider-item wallet__wrapper">
+                      {transactionList}
                     </div>
                   </div>
-                  <div className="wallet__slider-item">
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                  </div>
-                  <div className="wallet__slider-item">
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                  </div>
-                  <div className="wallet__slider-item">
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                    <div className="wallet__slider-body">
-                      <div className="wallet__slider-wrapper">
-                        <p className="wallet__slider-title">type</p>
-                        <p className="wallet__slider-date">date</p>
-                      </div>
-                      <p className="wallet__slider-count">amount</p>
-                    </div>
-                  </div>
-
-                </div>
+                </WalletSlider>
                 {/* <div className="page-count">
                   <div className="page-count__wrapper"> <span className="page-count__current">1</span><span> страница из
                   </span><span className="page-count__all">1</span> </div>

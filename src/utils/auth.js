@@ -91,7 +91,7 @@ class Auth {
         .then(this._getResponseData);
     }
         // Получить данные транзакций
-        getTransactionsInfo(jwt, user, page, size) {
+        getTransactionsInfo(jwt, page, size) {
           return fetch(`${this.baseURL}/history/get`, {
             method: 'POST',
             headers: {
@@ -99,7 +99,6 @@ class Auth {
               'Authorization': `Bearer ${jwt}`,
             },
             body: new URLSearchParams({
-              'user': `${user}`,
               'page': `${page}`,
               'size': `${size}`,
             }),
