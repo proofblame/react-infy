@@ -79,6 +79,7 @@
   -webkit-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
   transition: 0.3s all ease;
+  
 }
 .link:hover {
   opacity: 0.8;

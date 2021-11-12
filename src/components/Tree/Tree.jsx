@@ -4,19 +4,24 @@ import Modal from '../Modal/Modal'
 import TreePopup from '../TreePopup/TreePopup'
 import auth from '../../utils/auth';
 import TreeItem from '../TreeItem/TreeItem';
+import Card from '../Card/Card';
 
 const Tree = () => {
-  const [modalActive, setModalActive] = useState(false)
+  const [modalActive, setModalActive] = useState({
+    treePopup: false,
+    cardPopup: false,
+  })
   const [currentTree, setCurrentTree] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [line, setLine] = useState(null);
+  const [cardItem, setCardItem ]= useState({});
 
 
 
 
   const nextPage = () => {
-    if (page >= 0 && page < pageCount -1 ) {
+    if (page >= 0 && page < pageCount - 1) {
       setPage(page + 1)
     } else {
       setPage(page)
@@ -24,7 +29,7 @@ const Tree = () => {
   }
 
   const prevPage = () => {
-    if (page > 0 && page <= pageCount -1 ) {
+    if (page > 0 && page <= pageCount - 1) {
       setPage(page - 1)
 
     } else {
@@ -42,10 +47,9 @@ const Tree = () => {
       auth
         .getTreeInfo(jwt, line, page, 4)
         .then((tree) => {
-          setModalActive(true)
+          setModalActive({ ...modalActive, treePopup: true })
           setCurrentTree(tree.lines)
           setPageCount(tree.pagesCount)
-          console.log(pageCount)
         })
         .catch(e => console.error(e.message));
     }
@@ -56,19 +60,27 @@ const Tree = () => {
   }
 
   const handleClosePopup = () => {
-    setModalActive(false)
+    setModalActive({ ...modalActive, treePopup: false })
     setLine(null)
     setPage(0)
     setPageCount(0)
   }
 
+  const handleCardPopup = (treeItem) => {
+    setModalActive({ ...modalActive, cardPopup: true })
+    setCardItem(treeItem.teamInfo)
+  }
 
+  const handleCloseCardPopup = () => {
+    setModalActive({ ...modalActive, cardPopup: false })
+  }
 
   const treeList = currentTree.map((treeItem, index) => (
-    <TreeItem
-      key={index}
-      treeItem={treeItem}
-    />
+      <TreeItem
+        key={index}
+        treeItem={treeItem}
+        onClick={() => handleCardPopup(treeItem)}
+      />
   ))
 
   return (
@@ -81,7 +93,7 @@ const Tree = () => {
               <span className="tree__title_category"> Вы пригласили</span>
             </p>
             <p className="tree__subtitle"></p>
-            <button className="tree__button wallet__button link link_active open" onClick={() => {handleOpenPopup(1); }}>
+            <button className="tree__button wallet__button link link_active open" onClick={() => { handleOpenPopup(1); }}>
               Смотреть список
             </button>
           </div>
@@ -197,17 +209,25 @@ const Tree = () => {
           </div>
         </div>
       </section>
-      <Modal active={modalActive}>
-        <TreePopup 
-        onClose={handleClosePopup}
-        line={line}
-        page={page}
-        prevPage={prevPage}
-        nextPage={nextPage}
-        handleGetTreeInfo={handleGetTreeInfo}
+      <Modal active={modalActive.treePopup}>
+        <TreePopup
+          onClose={handleClosePopup}
+          line={line}
+          page={page}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          handleGetTreeInfo={handleGetTreeInfo}
         >
           {treeList}
         </TreePopup>
+      </Modal>
+      <Modal active={modalActive.cardPopup} className="card__modal">
+        <Card
+        onClose={handleCloseCardPopup}
+        cardItem={cardItem}
+        line={line}
+    
+        />
       </Modal>
     </>
   );

@@ -1,0 +1,49 @@
+@import './CardDark.scss';
+
+@mixin adaptiv($value, $pcSize, $mobSize) {
+  #{$value}: #{$pcSize + px};
+  @media screen and (max-width: 1627.98px) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    #{$value}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+}
+$maxWidth: 1628;
+
+.card__tree {
+  &__link {
+    @include adaptiv(padding-top, 7, 4);
+    @include adaptiv(padding-right, 14, 8);
+    @include adaptiv(padding-bottom, 7, 4);
+    @include adaptiv(padding-left, 14, 8);
+    &_active {
+      border: 2px solid #633D8D;
+    }
+  }
+
+  &__popup {
+
+    @include adaptiv(padding, 50, 10);
+  }
+
+  &__head {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__main {
+    
+
+  }
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 6px;
+  }
+
+}
