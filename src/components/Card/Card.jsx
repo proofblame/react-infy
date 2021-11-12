@@ -16,7 +16,7 @@ const Card = ({ onClose, line, cardItem }) => {
 
           </span>
         </p>
-        <p className="tree__subtitle tree__subtitle_popup">Линия закрыта</p>
+        <p className="tree__subtitle tree__subtitle_popup"></p>
         <div className="card__tree">
           <div className="card__tree__head">
             <div className="tree__popup-img">
@@ -40,13 +40,17 @@ const Card = ({ onClose, line, cardItem }) => {
               <p  className="text text_size_small">
                 Монет в команде
               </p>
-              <Link to="/wallet" className="link link_active card__tree__link card__tree__link_active">показать</Link>
+              <p  className="text text_size_small">
+              {cardItem.commandBalance}
+              </p>
             </div>
             <div className="card__tree__row">
               <p  className="text text_size_small">
               Делегировано командой
               </p>
-              <Link to="/wallet" className="link card__tree__link">показать</Link>
+              <p  className="text text_size_small">
+              {cardItem.commandDelegateBalance}
+              </p>
             </div>
             <div className="card__tree__row">
               <p  className="text text_size_small">

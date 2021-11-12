@@ -13,7 +13,7 @@ function TreePopup({ onClose, children, line, nextPage, prevPage }) {
 
           </span>
         </p>
-        <p className="tree__subtitle tree__subtitle_popup">Линия закрыта</p>
+        <p className="tree__subtitle tree__subtitle_popup"></p>
 
 
         <SimpleSlider nextPage={nextPage} prevPage={prevPage}>
