@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import Nav from "../Nav/Nav";
-import SeedPopup from "../SeedPopup/SeedPopup";
 import sprite from "../../images/icons/icons.svg";
 import copyIcon from './images/copy-icon.svg';
-import Modal from "../Modal/Modal";
 import "./Profile.css";
 import telegramIcon from "./images/telegramIcon.svg";
 
-function Profile({currentUser}) {
+
+function Profile({ currentUser }) {
   const [textCopy, setTextCopy] = useState("text-copy");
-  const [modalActive, setModalActive] = useState(false);
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(`https://infinity-network.io/j/${currentUser.nickname}`);
+    navigator.clipboard.writeText(`https://infy-corp.com/j/${currentUser.nickname}`);
     setTextCopy("text-copy text-copy-active");
+    console.log(window.location)
 
     setTimeout(() => {
       setTextCopy("text-copy");
@@ -62,7 +61,7 @@ function Profile({currentUser}) {
                           Статус
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                        {currentUser.status}
+                          {currentUser.status}
                         </p>
                       </div>
                       <div
@@ -73,7 +72,7 @@ function Profile({currentUser}) {
                           Следующий статус
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                        {currentUser.status}
+                          {currentUser.status}
                         </p>
                       </div>
                       <div className="data__contacts-block">
@@ -81,7 +80,7 @@ function Profile({currentUser}) {
                           Электронная почта
                         </p>
                         <p className="data__text text text_size_medium text_color_normal">
-                        {currentUser.email}
+                          {currentUser.email}
                         </p>
                       </div>
                       <div className="data__contacts-block">
@@ -97,7 +96,7 @@ function Profile({currentUser}) {
                           Отправка уведомлений
                         </p>
                         <div className="switch">
-                          
+
                           <input
                             type="checkbox"
                             className="ios8-switch"
@@ -107,7 +106,7 @@ function Profile({currentUser}) {
                             htmlFor="checkbox-1"
                             className="text text_size_x-small"
                           >
-                            
+
                             Разрешить отправку уведомлений на E-Mail
                           </label>
                         </div>
@@ -120,7 +119,7 @@ function Profile({currentUser}) {
                     Отправка уведомлений
                   </p>
                   <div className="switch">
-                    
+
                     <input
                       type="checkbox"
                       className="ios8-switch"
@@ -130,7 +129,7 @@ function Profile({currentUser}) {
                       htmlFor="checkbox-1"
                       className="text text_size_x-small"
                     >
-                      
+
                       Разрешить отправку уведомлений на E-Mail
                     </label>
                   </div>
@@ -184,7 +183,7 @@ function Profile({currentUser}) {
                       </a>
                       <a href="https://t.me/infinitynetworkchannel">
                         <p className="banner__subtext text text_size_small">
-                          
+
                           Наш новостной Telegram-канал Infinity Corporation
                         </p>
                       </a>
@@ -200,7 +199,7 @@ function Profile({currentUser}) {
                       </a>
                       <a href="https://t.me/infy_official_exchange_bot">
                         <p className="banner__subtext text text_size_small">
-                          
+
                           Наш официальный чат-бот обменник
                         </p>
                       </a>
@@ -226,21 +225,10 @@ function Profile({currentUser}) {
                       id="guest-link"
                       className="data__text text text_size_medium text_color_normal"
                     >
-                      https://infinity-network.io/j/{currentUser.nickname}
+                      https://infy-corp.com/j/{currentUser.nickname}
                     </p>
                   </div>
                   <div className="profile__buttons">
-                    {/* <span className="profile__button link link_active">
-                      Редактировать
-                    </span> */}
-                    <span
-                      className="profile__button link link_active"
-                      onClick={() => {
-                        setModalActive(true);
-                      }}
-                    >
-                      Получить Seed фразу
-                    </span>
                   </div>
                 </div>
               </div>
@@ -248,13 +236,6 @@ function Profile({currentUser}) {
           </section>
         </div>
       </main>
-      <Modal active={modalActive}>
-        <SeedPopup
-          onClose={() => {
-            setModalActive(false);
-          }}
-        />
-      </Modal>
     </>
   );
 }

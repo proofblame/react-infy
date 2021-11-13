@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import SimpleSlider from './Slider/TestSlider';
+import React from "react";
 
 function TestPopup({ onClose, children }) {
 

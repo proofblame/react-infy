@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import sprite from "../../images/icons/icons.svg";
+import React from "react";
 import SimpleSlider from './Slider/TreeSlider';
 
 function TreePopup({ onClose, children, line, nextPage, prevPage }) {

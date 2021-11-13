@@ -64,7 +64,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   }
 
   const nextPage = () => {
-    if (page >= 0 && page < pageCount -1) {
+    if (page >= 0 && page < pageCount - 1) {
       setPage(page + 1)
       // getTansactions()
     } else {
@@ -73,7 +73,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   }
 
   const prevPage = () => {
-    if (page > 0 && page <= pageCount -1 ) {
+    if (page > 0 && page <= pageCount - 1) {
       setPage(page - 1)
       // getTansactions()
     } else {
@@ -83,7 +83,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
 
   useEffect(() => {
     getTansactions();
-  }, [page])
+  }, [page, modalActive])
 
   const getTansactions = () => {
     const jwt = localStorage.getItem('jwt');
@@ -93,7 +93,6 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
         .then(transactions => {
           setCurentTransactions(transactions.histories);
           setPageCount(transactions.pageCount)
-          console.log(pageCount)
         })
         .catch(e => console.error(e.message));
     }
@@ -114,6 +113,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     <Transaction
       key={index}
       transaction={transaction}
+      modalActive={modalActive}
     />
   ))
 
@@ -243,16 +243,16 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
         />
       </Modal>
       <Modal active={modalActive.delegationPopup}>
-        <DelegationPopup 
-        onClose={() => { setModalActive({ ...modalActive, delegationPopup: false }) }} 
-        currentWallet={currentWallet}
-        handleDelegateInfy={handleDelegateInfy}
+        <DelegationPopup
+          onClose={() => { setModalActive({ ...modalActive, delegationPopup: false }) }}
+          currentWallet={currentWallet}
+          handleDelegateInfy={handleDelegateInfy}
         />
       </Modal>
       <Modal active={modalActive.undelegationPopup}>
-        <UndelegationPopup onClose={() => { setModalActive({ ...modalActive, undelegationPopup: false }) }} 
-        handleUndelegateInfy={handleUndelegateInfy}
-        currentWallet={currentWallet}
+        <UndelegationPopup onClose={() => { setModalActive({ ...modalActive, undelegationPopup: false }) }}
+          handleUndelegateInfy={handleUndelegateInfy}
+          currentWallet={currentWallet}
         />
       </Modal>
     </>

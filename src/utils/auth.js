@@ -147,6 +147,11 @@ class Auth {
     })
       .then(this._getResponseData);
   }
+
+
+
+
+
 }
 
 const auth = new Auth('http://84.38.185.10:8080/react-api');

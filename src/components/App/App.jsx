@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import auth from '../../utils/auth';
-import config from '../../base/base';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -24,15 +23,13 @@ import Registration from '../Registration/Registration';
 import Support from '../Support/Support';
 import {
   Switch,
-  Route,
-  useHistory 
+  Route
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 import Learn from '../Learn/Learn';
 
 
 function App() {
-  const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [currentWallet, setCurentWallet] = useState({});
   const [currentTeam, setCurentTeam] = useState({});
@@ -40,7 +37,7 @@ function App() {
 
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
@@ -62,13 +59,13 @@ function App() {
           setCurrentUser(user);
         })
         .catch(e => console.error(e.message));
-        auth
+      auth
         .getWalletInfo(jwt)
         .then(wallet => {
           setCurentWallet(wallet);
         })
         .catch(e => console.error(e.message));
-        auth
+      auth
         .getTeamInfo(jwt)
         .then(team => {
           setCurentTeam(team);
@@ -76,7 +73,7 @@ function App() {
         .catch(e => console.error(e.message));
 
     } else {
-      
+
     }
   }
 
@@ -89,7 +86,7 @@ function App() {
 
   function handleRegister(username, joinedBy, email, password, telegram) {
     return auth.register(username, joinedBy, email, password, telegram)
-    
+
   }
 
   function handleLogin(username, password) {
@@ -129,17 +126,21 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
           <Route path="/login">
-            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken}/>
+            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} />
           </Route>
           <Route path="/registration">
-          <Registration loggedIn={loggedIn} onRegister={handleRegister}/>
+            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
           <Route path="/study">
             <Learn></Learn>
           </Route>
-          <Route component={Error}path="*" />
+          <Route path="/j/:joinedBy">
+            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
+          </Route>
+
+          <Route component={Error} path="*" />
         </Switch>
-        <Footer loggedIn={loggedIn} onSignOut={handleSignout}/>
+        <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
       </div>
     </CurrentUserContext.Provider>
   );

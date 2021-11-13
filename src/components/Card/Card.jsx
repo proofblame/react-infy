@@ -1,9 +1,7 @@
 import React from 'react'
 import sprite from "../../images/icons/icons.svg";
 import './Card.scss'
-import {
-  Link
-} from "react-router-dom";
+
 
 const Card = ({ onClose, line, cardItem }) => {
   return (
@@ -22,44 +20,44 @@ const Card = ({ onClose, line, cardItem }) => {
             <div className="tree__popup-img">
               <img src={sprite + "#profile-bot"} alt="" />
             </div>
-          <div className="tree__popup-wrapper">
-            <p className="tree__popup-name">{cardItem.username}</p>
-            <p className="tree__popup-status">{cardItem.isTariffPaid ? "Активирован" : "Не активирован"}</p>
-          </div>
+            <div className="tree__popup-wrapper">
+              <p className="tree__popup-name">{cardItem.username}</p>
+              <p className="tree__popup-status">{cardItem.isTariffPaid ? "Активирован" : "Не активирован"}</p>
+            </div>
           </div>
           <div className="card__tree__main">
             <div className="card__tree__row">
               <p className="text text_size_small">
                 Команда
               </p>
-              <p  className="text text_size_small">
-              {cardItem.teamCount} (акт. {cardItem.teamCountActive})
+              <p className="text text_size_small">
+                {cardItem.teamCount} (акт. {cardItem.teamCountActive})
               </p>
             </div>
             <div className="card__tree__row">
-              <p  className="text text_size_small">
+              <p className="text text_size_small">
                 Монет в команде
               </p>
-              <p  className="text text_size_small">
-              {cardItem.commandBalance}
+              <p className="text text_size_small">
+                {cardItem.commandBalance}
               </p>
             </div>
             <div className="card__tree__row">
-              <p  className="text text_size_small">
-              Делегировано командой
+              <p className="text text_size_small">
+                Делегировано командой
               </p>
-              <p  className="text text_size_small">
-              {cardItem.commandDelegateBalance}
+              <p className="text text_size_small">
+                {cardItem.commandDelegateBalance}
               </p>
             </div>
             <div className="card__tree__row">
-              <p  className="text text_size_small">
-              Текущий статус
+              <p className="text text_size_small">
+                Текущий статус
               </p>
-              <p  className="text text_size_small">{cardItem.status}</p>
+              <p className="text text_size_small">{cardItem.status}</p>
             </div>
           </div>
-         </div>
+        </div>
 
 
         <button

@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Transaction = ({transaction}) => {
+const Transaction = ({ transaction }) => {
+
+
   return (
     <div className="wallet__slider-body">
       <div className="wallet__slider-wrapper">
