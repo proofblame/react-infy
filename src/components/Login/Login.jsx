@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Particle from "react-particles-js";
 import particlesConfig from "../../vendor/particlesConfig.json";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Login(props) {
+  let location = useLocation();
   const history = useHistory();
   const [data, setData] = useState({
     username: "",
@@ -16,7 +17,7 @@ function Login(props) {
   }, []);
 
   useEffect(() => {
-    if (props.loggedIn) history.push("/profile");
+    if (props.loggedIn) history.push(location.pathname);
   }, [props.loggedIn, history]);
 
   useEffect(() => {
