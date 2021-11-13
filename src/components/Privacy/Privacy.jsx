@@ -6,7 +6,7 @@ function Privacy() {
       <div className="container">
         <section className="main__profile profile">
           <h1 className="profile__title title">Пользовательское соглашение</h1>
-          <p className="text terms terms__text" style={{ textAlign: "right;" }}>от&nbsp;30.06.2021 <br /> обновление от&nbsp;20.10.2021
+          <p className="text terms terms__text" style={{ textAlign: "right" }}>от&nbsp;30.06.2021 <br /> обновление от&nbsp;20.10.2021
           </p>
           <p className="text terms terms__text">Настоящее Пользовательское Соглашение далее &laquo;Соглашение&raquo;,
             заключенное между

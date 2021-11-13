@@ -199,6 +199,9 @@ function Registration(props) {
                   Политика конфиденциальности
                 </NavLink>
               </div>
+              <p className='text text_size_x-small'>
+                Формы для ввода чувствительны к регистру!
+              </p>
               <button
                 type='submit'
                 className='link link_active'>

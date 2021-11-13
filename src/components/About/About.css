@@ -1,4 +1,4 @@
-@import url('./AboutDark.css');
+@import url("./AboutDark.css");
 
 .about__links {
   display: -webkit-box;
@@ -36,7 +36,7 @@
 }
 
 .about__body::after {
-  content: '';
+  content: "";
   background-image: url(./images/icons.svg#about-title-bg);
   background-repeat: no-repeat;
   background-position: center;
@@ -177,6 +177,19 @@
 
 .about__table-image {
   margin-bottom: 5px;
+}
+
+.about__body-wrapper {
+  padding-top: 125px;
+  max-width: 1628px;
+  /* background: #1E1E1E; */
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 1627px) {
+  .about__body-wrapper {
+    padding-top: calc(15px + 110 * ((100vw - 320px) / 1308));
+  }
 }
 
 @media screen and (max-width: 1627.98px) {

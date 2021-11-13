@@ -25,40 +25,72 @@ const Banner = () => {
               нацеленные на защиту персональных данных пользователей в сети интернет.</p>
           </div>
           <div className="banner__subscribe">
+            <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link">
+              <div className="image image_type_telegram">
+                <picture>
+                  <source
+                    srcSet={sprite + "#instagram-icon"}
+                    type="image/webp"
+                  />
+                  <img
+                    src={sprite + "#instagram-icon"}
+                    alt="Instagram icon"
+                  />
+                </picture>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link">
+              <p className="banner__subtext text text_size_small">
+                Наш официальный instagram
+              </p>
+            </a>
+          </div>
+          <div className="banner__subscribe">
+            <a href="https://t.me/joinchat/wwwWBc4QguIzMGUy">
+              <div className="image image_type_telegram">
+                <picture>
+                  <source srcSet={telegramIcon} type="image/webp" />
+                  <img src={telegramIcon} alt="Telegram icon" />
+                </picture>
+              </div>
+            </a>
+            <a href="https://t.me/joinchat/wwwWBc4QguIzMGUy">
+              <p className="banner__subtext text text_size_small">
+                Наш общий чат в Telegram Infinity Corporation
+              </p>
+            </a>
+          </div>
+          <div className="banner__subscribe">
             <a href="https://t.me/infinitynetworkchannel">
               <div className="image image_type_telegram">
                 <picture>
-                  <source srcSet={telegramIcon} type="image/webp" /><img
-                    src={telegramIcon} alt="Telegram icon" />
+                  <source srcSet={telegramIcon} type="image/webp" />
+                  <img src={telegramIcon} alt="Telegram icon" />
                 </picture>
               </div>
-
             </a>
-            <p className="banner__subtext text text_size_small"> Наш новостной Telegram-канал
-              Infinity Corporation </p>
+            <a href="https://t.me/infinitynetworkchannel">
+              <p className="banner__subtext text text_size_small">
+
+                Наш новостной Telegram-канал Infinity Corporation
+              </p>
+            </a>
           </div>
           <div className="banner__subscribe">
             <a href="https://t.me/infy_official_exchange_bot">
               <div className="image image_type_telegram">
                 <picture>
-                  <source srcSet={telegramIcon} type="image/webp" /><img
-                    src={telegramIcon} alt="Telegram icon" />
+                  <source srcSet={telegramIcon} type="image/webp" />
+                  <img src={telegramIcon} alt="Telegram icon" />
                 </picture>
               </div>
             </a>
-            <p className="banner__subtext text text_size_small"> Наш официальный чат-бот обменник </p>
-          </div>
-          <div className="banner__subscribe">
-            <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link">
-              <div className="image image_type_telegram">
-                <picture>
-                  <source srcSet={sprite + "#instagram-icon"} type="image/webp" /><img
-                    src={sprite + "#instagram-icon"} alt="Instagram icon" />
-                </picture>
-              </div>
-            </a>
+            <a href="https://t.me/infy_official_exchange_bot">
+              <p className="banner__subtext text text_size_small">
 
-            <p className="banner__subtext text text_size_small"> Наш официальный instagram </p>
+                Наш официальный чат-бот обменник
+              </p>
+            </a>
           </div>
         </div>
         <div className="wrapper">

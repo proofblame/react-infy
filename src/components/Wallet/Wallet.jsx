@@ -156,7 +156,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
                   <span className="card__coins_cents">.{currentWallet.balanceAfter}</span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.balanceRu} ₽`}</p>
-                <p className="card__rub">20₽</p>
+                <p className="card__rub">26₽</p>
               </div>
               <div className="card__footer">
                 <p className="card__profits"></p>

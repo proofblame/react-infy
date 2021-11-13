@@ -1,0 +1,14 @@
+.terms__text {
+  margin-bottom: 15px;
+}
+
+.terms__subtitle {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.terms__subtitle_center {
+  margin-bottom: 25px;
+  font-weight: bold;
+  text-align: center;
+}

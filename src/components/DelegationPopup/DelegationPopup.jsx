@@ -43,11 +43,23 @@ function DelegationPopup({ onClose, currentWallet, handleDelegateInfy }) {
             </span>
           </p>
         </fieldset>
+
+        <fieldset className="form__fieldset">
+          <p className="text text_size_x-small">
+            Ваше вознаграждение зависит от размера делегированного стейка: <br />
+            Делегируете 1 – 1999 INFY, вознаграждение + 23%/мес.<br />
+            Делегируете 2 000 – 19 999 INFY, вознаграждение + 25%/мес.<br />
+            Делегируете 20 000 – 149 999 INFY, вознаграждение + 27%/мес.<br />
+            Делегируете 150 000 и выше INFY, вознаграждение + 29%/мес <br /> <br />
+          </p>
+
+        </fieldset>
+
         <input
           type="submit"
           className="form__input form__button form__button_active"
           value="Пополнить"
-          
+
         />
         <button
           type="button"

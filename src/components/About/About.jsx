@@ -38,7 +38,7 @@ const About = () => {
             </div>
             <div className="wrapper">
               <p className="about__text about__text_black text">Курс INFY</p>
-              <p className="about__text about__text_black-2 text">20 рублей</p>
+              <p className="about__text about__text_black-2 text">26 рублей</p>
             </div>
           </div>
           <div className="about__article-footer">
@@ -80,19 +80,19 @@ const About = () => {
                     <td><s className="crossed-out">18 рублей</s></td>
                   </tr>
                   <tr>
-                    <td>№4</td>
-                    <td>22.10 - 28.10</td>
-                    <td>20 рублей</td>
+                    <td><s className="crossed-out">№4</s></td>
+                    <td><s className="crossed-out">22.10 - 28.10</s></td>
+                    <td><s className="crossed-out">20 рублей</s></td>
                   </tr>
                   <tr>
-                    <td>№5</td>
-                    <td>29.10 - 04.11</td>
-                    <td>22 рубля</td>
+                    <td><s className="crossed-out">№5</s></td>
+                    <td><s className="crossed-out">29.10 - 04.11</s></td>
+                    <td><s className="crossed-out">22 рубля</s></td>
                   </tr>
                   <tr>
-                    <td>№6</td>
-                    <td>05.11 - 11.11</td>
-                    <td>24 рубля</td>
+                    <td><s className="crossed-out">№6</s></td>
+                    <td><s className="crossed-out">05.11 - 11.11</s></td>
+                    <td><s className="crossed-out">24 рубля</s></td>
                   </tr>
                   <tr>
                     <td>№7</td>
@@ -111,7 +111,7 @@ const About = () => {
                   <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
                 </picture>
               </div>
-              <p className="about__table-text text">3 014 831 INFY(30.14%) / 10 000 000 INFY</p>
+              <p className="about__table-text text">3 986 454 (39.86%) / 10 000 000 INFY</p>
             </div>
           </div>
           <div className="about__link">

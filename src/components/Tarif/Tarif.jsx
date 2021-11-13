@@ -8,6 +8,8 @@ import Popup from '../Popup/Popup';
 function Tarif() {
   const [tarif, setTarif] = useState({});
   const [pay, setPay] = useState(null);
+  const [statusMessage, setStatusMessage] = useState('');
+
 
   const [modalActive, setModalActive] = useState(false);
 
@@ -35,20 +37,28 @@ function Tarif() {
       auth
         .payTarif(jwt)
         .then((pay) => {
-          setPay(pay)
+          setTarif(pay)
+          setPay(true)
+          setStatusMessage('Тариф оплачен')
           setTimeout(() => {
             setModalActive(false);
-            setTarif(true)
+            setStatusMessage('')
+            setPay(null)
           }, 2000)
 
         })
-        .catch(e => console.error(e.message));
+        .catch(() => {
+          setPay(false)
+          setStatusMessage('Недостаточно монет')
+        });
     }
   }
 
 
   const handleClosePopup = () => {
     setModalActive(false);
+    setPay(null)
+    setStatusMessage('')
   }
   const handleOpenPopup = () => {
     setModalActive(true);
@@ -66,7 +76,7 @@ function Tarif() {
                 !tarif.isPaid ?
                   (<button className='link link_active' style={{ marginBottom: '15px' }} onClick={handleOpenPopup}>Оплатить тариф</button>)
                   :
-                  (<p className="text text_size_normal tarif__subtitle" style={{ color: 'green' }}>Тариф оплачен</p>)
+                  (<p className="text text_size_normal tarif__subtitle" style={{ color: 'green' }}>Тариф оплачен до {tarif.nextPayTime}</p>)
               }
 
 
@@ -75,16 +85,16 @@ function Tarif() {
                 монетах INFY.</p>
               <section className="banner__buttons wallet__buttons">
                 <div className="tarif__card">
-                  <p className="text text_size_normal tarif__text tarif__text_type_email"> Безопасная электронная почта </p> <a
-                    className="wallet__button link link_active" href="/tarif">Скачать</a>
+                  <p className="text text_size_normal tarif__text tarif__text_type_email"> Безопасная электронная почта </p> <button
+                    className="wallet__button link link_active" href="/tarif" disabled>Скачать</button>
                 </div>
                 <div className="tarif__card">
-                  <p className="text text_size_normal tarif__text tarif__text_type_browser"> Защищённый браузер </p> <a
-                    className="wallet__button link link_active" href="/tarif">Скачать</a>
+                  <p className="text text_size_normal tarif__text tarif__text_type_browser"> Защищённый браузер </p> <button
+                    className="wallet__button link link_active" href="/tarif" disabled>Скачать</button>
                 </div>
                 <div className="tarif__card">
-                  <p className="text text_size_normal tarif__text tarif__text_type_messager"> Инкогнито мессенджер </p> <a
-                    className="wallet__button link link_active" href="/tarif">Скачать</a>
+                  <p className="text text_size_normal tarif__text tarif__text_type_messager"> Инкогнито мессенджер </p> <button
+                    className="wallet__button link link_active" href="/tarif" disabled>Скачать</button>
                 </div>
               </section>
             </div>
@@ -109,16 +119,9 @@ function Tarif() {
           <p className="form__text-subtitle">
             <b>Хотите оплатить тариф?</b>
           </p>
-          {
-            pay === null ?
-              ('') :
-              (
-
-                <p className="form__text-subtitle" style={pay.isPaid ? { color: 'green' } : { color: 'red' }}>
-                  <b>{pay.isPaid ? 'Тариф оплачен' : 'Недостаточно монет'}</b>
-                </p>
-              )
-          }
+          <p className="form__text-subtitle" style={pay ? { color: 'green' } : { color: 'red' }}>
+            <b>{statusMessage}</b>
+          </p>
 
 
 

@@ -22,7 +22,7 @@ const Card = ({ onClose, line, cardItem }) => {
             </div>
             <div className="tree__popup-wrapper">
               <p className="tree__popup-name">{cardItem.username}</p>
-              <p className="tree__popup-status">{cardItem.isTariffPaid ? "Активирован" : "Не активирован"}</p>
+              <p className="tree__popup-status" style={cardItem.isTariffPaid ? { color: 'green' } : { color: 'red' }}>{cardItem.isTariffPaid ? "Активирован" : "Не активирован"}</p>
             </div>
           </div>
           <div className="card__tree__main">
