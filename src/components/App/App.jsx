@@ -23,13 +23,15 @@ import Registration from '../Registration/Registration';
 import Support from '../Support/Support';
 import {
   Switch,
-  Route
+  Route,
+  useLocation
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 // import Learn from '../Learn/Learn';
 
 
 function App() {
+  const { pathname } = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [currentWallet, setCurentWallet] = useState({});
   const [currentTeam, setCurentTeam] = useState({});
@@ -37,17 +39,18 @@ function App() {
 
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(pathname);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
-  useEffect(() => {
-    theme === "light" ? setCheck(false) : setCheck(true);
-  }, [theme]);
+
 
   useEffect(() => {
     checkToken();
   }, []);
+  useEffect(() => {
+    theme === "light" ? setCheck(false) : setCheck(true);
+  }, [theme]);
 
   function checkToken() {
     const jwt = localStorage.getItem('jwt');

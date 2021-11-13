@@ -15,7 +15,7 @@ const About = () => {
           <div className="about__links">
             <a href="https://www.youtube.com/channel/UCCPjoKqynKjBYnHlmXDkZhg" className="about__link link_type_telegram">You Tube</a>
             <a href="https://t.me/infinitynetworkchannel" className="about__link link_type_youtube">Telegram</a>
-            <Link to="/react-infy" className="about__link link_type_github">GitHub</Link>
+            <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link" className="about__link link_type_github">Instagram</a>
           </div>
         </div>
       </div>

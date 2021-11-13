@@ -17,11 +17,11 @@ function Login(props) {
   }, []);
 
   useEffect(() => {
-    if (props.loggedIn) history.push(location.pathname);
+    if (props.loggedIn) history.push("/profile");
   }, [props.loggedIn, history]);
 
   useEffect(() => {
-
+    console.log(props.loggedIn)
   }, []);
 
   function onChange(e) {
