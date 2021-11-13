@@ -15,6 +15,10 @@ function Login(props) {
     if (props.loggedIn) history.push("/profile");
 }, [props.loggedIn, history]);
 
+useEffect(() => {
+
+}, []);
+
   function onChange(e) {
     const { name, value } = e.target;
     setData({
@@ -34,10 +38,13 @@ function Login(props) {
 
 
   return (
+    <>
+
     <main className="main">
-      <Particle
+    <Particle
         params={particlesConfig}
         className="App-particles__container"
+
       />
       <div className="container">
         <section className="registration login">
@@ -109,7 +116,10 @@ function Login(props) {
           </form>
         </section>
       </div>
+
     </main>
+
+    </>
   );
 }
 

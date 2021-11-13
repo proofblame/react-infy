@@ -149,7 +149,7 @@ class Auth {
         }
 }
 
-const auth = new Auth('http://84.38.185.10:8080/react-api');
-// const auth = new Auth('http://localhost:3000');
+// const auth = new Auth('http://84.38.185.10:8080/react-api');
+const auth = new Auth('http://localhost:3000');
 
 export default auth;

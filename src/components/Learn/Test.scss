@@ -1,0 +1,17 @@
+.test {
+  &__block {
+    margin-bottom: 45px !important;
+  }
+  &__row {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  &__count {
+  }
+
+  &__question {
+  }
+}

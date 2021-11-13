@@ -1,0 +1,78 @@
+/* autoprefixer grid: autoplace */
+@import './LearnDark.scss';
+
+@mixin adaptiv($value, $pcSize, $mobSize) {
+  #{$value}: #{$pcSize + px};
+  @media screen and (max-width: 1627.98px) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    #{$value}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+}
+$maxWidth: 1628;
+
+.learn {
+  &__data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-content: space-between;
+    @include adaptiv(column-gap, 70, 0);
+    @include adaptiv(row-gap, 15, 15);
+    @include adaptiv(padding-top, 105, 0);
+  }
+  &__body {
+  }
+
+  &__video {
+    background: #ebebeb;
+    border-radius: 10px;
+    position: relative;
+    @include adaptiv(width, 808, 280);
+    @include adaptiv(height, 464, 175);
+  }
+
+  &__title {
+    @include adaptiv(padding-top, 105, 0);
+  }
+
+  &__video-frame {
+  }
+
+  &__test-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__lessons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  &__lesson-count {
+  }
+
+  &__lessons-body {
+    @include adaptiv(padding-top, 30, 2);
+  }
+
+  &__lesson-title {
+    color: #8960e2;
+    @include adaptiv(margin-bottom, 20, 7);
+  }
+
+  &__lesson-subtitle {
+    @include adaptiv(margin-bottom, 15, 7);
+  }
+
+  &__lesson-progress {
+    @include adaptiv(margin-bottom, 35, 15);
+  }
+
+  &__slider {
+    justify-content: start;
+  }
+}

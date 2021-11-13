@@ -28,6 +28,8 @@ import {
   useHistory 
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
+import Learn from '../Learn/Learn';
+
 
 function App() {
   const history = useHistory();
@@ -38,7 +40,7 @@ function App() {
 
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
@@ -131,6 +133,9 @@ function App() {
           </Route>
           <Route path="/registration">
           <Registration loggedIn={loggedIn} onRegister={handleRegister}/>
+          </Route>
+          <Route path="/study">
+            <Learn></Learn>
           </Route>
           <Route component={Error}path="*" />
         </Switch>
