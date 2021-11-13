@@ -147,10 +147,29 @@ class Auth {
     })
       .then(this._getResponseData);
   }
+  // Получить данные о тарифе
+  getTarif(jwt) {
+    return fetch(`${this.baseURL}/tariff/get`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      }
+    })
+      .then(this._getResponseData);
+  }
 
-
-
-
+  // Оплатить тариф
+  payTarif(jwt) {
+    return fetch(`${this.baseURL}/tariff/pay`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      }
+    })
+      .then(this._getResponseData);
+  }
 
 }
 
