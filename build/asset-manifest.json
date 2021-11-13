@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-infy/static/css/main.9bec0f3c.chunk.css",
-    "main.js": "/react-infy/static/js/main.365597ff.chunk.js",
-    "main.js.map": "/react-infy/static/js/main.365597ff.chunk.js.map",
+    "main.css": "/react-infy/static/css/main.aa819a23.chunk.css",
+    "main.js": "/react-infy/static/js/main.6881c023.chunk.js",
+    "main.js.map": "/react-infy/static/js/main.6881c023.chunk.js.map",
     "runtime-main.js": "/react-infy/static/js/runtime-main.abf3b73a.js",
     "runtime-main.js.map": "/react-infy/static/js/runtime-main.abf3b73a.js.map",
-    "static/js/2.1acbf14e.chunk.js": "/react-infy/static/js/2.1acbf14e.chunk.js",
-    "static/js/2.1acbf14e.chunk.js.map": "/react-infy/static/js/2.1acbf14e.chunk.js.map",
+    "static/js/2.e77d06fe.chunk.js": "/react-infy/static/js/2.e77d06fe.chunk.js",
+    "static/js/2.e77d06fe.chunk.js.map": "/react-infy/static/js/2.e77d06fe.chunk.js.map",
     "index.html": "/react-infy/index.html",
-    "static/css/main.9bec0f3c.chunk.css.map": "/react-infy/static/css/main.9bec0f3c.chunk.css.map",
-    "static/js/2.1acbf14e.chunk.js.LICENSE.txt": "/react-infy/static/js/2.1acbf14e.chunk.js.LICENSE.txt",
+    "static/css/main.aa819a23.chunk.css.map": "/react-infy/static/css/main.aa819a23.chunk.css.map",
+    "static/js/2.e77d06fe.chunk.js.LICENSE.txt": "/react-infy/static/js/2.e77d06fe.chunk.js.LICENSE.txt",
     "static/media/index.css": "/react-infy/static/media/wallet-3.febacf75.png",
     "static/media/Main.css": "/react-infy/static/media/combDark.05444c24.png",
     "static/media/complete-study-icon.1938451b.png": "/react-infy/static/media/complete-study-icon.1938451b.png",
@@ -26,8 +26,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.abf3b73a.js",
-    "static/js/2.1acbf14e.chunk.js",
-    "static/css/main.9bec0f3c.chunk.css",
-    "static/js/main.365597ff.chunk.js"
+    "static/js/2.e77d06fe.chunk.js",
+    "static/css/main.aa819a23.chunk.css",
+    "static/js/main.6881c023.chunk.js"
   ]
 }
