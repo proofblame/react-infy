@@ -119,37 +119,37 @@ class Auth {
     })
       .then(this._getResponseData);
   }
-    // Отправить в стейкинг
-    delegateInfy(jwt, amountDel) {
-      return fetch(`${this.baseURL}/wallet/delegate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${jwt}`,
-        },
-        body: new URLSearchParams({
-          'amountDel': `${amountDel}`,
-        }),
-      })
-        .then(this._getResponseData);
-    }
-        // Вывод из стейкинга
-        undelegateInfy(jwt, amountUndel) {
-          return fetch(`${this.baseURL}/wallet/undelegate`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': `Bearer ${jwt}`,
-            },
-            body: new URLSearchParams({
-              'amountUndel': `${amountUndel}`,
-            }),
-          })
-            .then(this._getResponseData);
-        }
+  // Отправить в стейкинг
+  delegateInfy(jwt, amountDel) {
+    return fetch(`${this.baseURL}/wallet/delegate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      },
+      body: new URLSearchParams({
+        'amountDel': `${amountDel}`,
+      }),
+    })
+      .then(this._getResponseData);
+  }
+  // Вывод из стейкинга
+  undelegateInfy(jwt, amountUndel) {
+    return fetch(`${this.baseURL}/wallet/undelegate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      },
+      body: new URLSearchParams({
+        'amountUndel': `${amountUndel}`,
+      }),
+    })
+      .then(this._getResponseData);
+  }
 }
 
-// const auth = new Auth('http://84.38.185.10:8080/react-api');
-const auth = new Auth('http://localhost:3000');
+const auth = new Auth('http://84.38.185.10:8080/react-api');
+// const auth = new Auth('http://localhost:3000');
 
 export default auth;
