@@ -173,7 +173,7 @@ class Auth {
 
 }
 
-const auth = new Auth('http://api.infy-corp.com/react-api/');
+const auth = new Auth('http://api.infy-corp.com/react-api');
 // const auth = new Auth('http://localhost:3000');
 // const auth = new Auth('http://localhost:8080/react-api');
 
