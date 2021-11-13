@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npm run build&&gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/ www@84.38.185.10:/home/www/dev/test_env/react-infy-main"
   },
   "eslintConfig": {
     "extends": [
