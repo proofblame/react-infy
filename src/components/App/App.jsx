@@ -26,7 +26,7 @@ import {
   Route
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
-import Learn from '../Learn/Learn';
+// import Learn from '../Learn/Learn';
 
 
 function App() {
@@ -131,9 +131,9 @@ function App() {
           <Route path="/registration">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
-          <Route path="/study">
+          {/* <Route path="/study">
             <Learn></Learn>
-          </Route>
+          </Route> */}
           <Route path="/j/:joinedBy">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>

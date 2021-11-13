@@ -12,6 +12,10 @@ function Login(props) {
   });
 
   useEffect(() => {
+    document.title = "Login"
+  }, []);
+
+  useEffect(() => {
     if (props.loggedIn) history.push("/profile");
   }, [props.loggedIn, history]);
 

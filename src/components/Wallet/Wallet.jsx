@@ -14,6 +14,9 @@ import WalletSlider from './Slider/Slider';
 
 
 function Wallet({ currentUser, currentWallet, checkToken }) {
+  useEffect(() => {
+    document.title = "Wallet"
+  }, []);
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,

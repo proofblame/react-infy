@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function WhitePaper() {
+  useEffect(() => {
+    document.title = "Wallet"
+  }, []);
   return (
     <main className="main">
       <div className="container">

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Privacy() {
+  useEffect(() => {
+    document.title = "Privacy"
+  }, []);
   return (
     <main className="main">
       <div className="container">

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function RoadMap() {
+  useEffect(() => {
+    document.title = "RoadMap"
+  }, []);
   return (
     <main className="main">
       <div className="container">

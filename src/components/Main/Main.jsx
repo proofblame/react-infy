@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Main.css';
 import SimpleSlider from '../Slider/Slider';
 import Banner from '../Banner/Banner';
@@ -7,11 +7,14 @@ import About from '../About/About';
 import RoadMapBlock from '../RoadMapBlock/RoadMapBlock';
 
 function Main() {
+  useEffect(() => {
+    document.title = "О компании"
+  }, []);
   return (
     <main className="main">
       <div className="container">
         <div className="wrapper">
-          <Banner/>
+          <Banner />
           <section className="main__slider slider">
             <SimpleSlider>
               <li className="slider__item">
@@ -105,10 +108,10 @@ function Main() {
         </div>
       </div>
       <About />
-      
+
       <div className="container">
-        <div className="wrapper">         
-          
+        <div className="wrapper">
+
           <RoadMapBlock />
         </div>
       </div>

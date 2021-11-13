@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './term.css'
 
 function Marketing() {
+  useEffect(() => {
+    document.title = "Marketing"
+  }, []);
   return (
     <main className="main">
       <div className="container">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import sprite from "../../images/icons/icons.svg";
 import copyIcon from './images/copy-icon.svg';
@@ -7,6 +7,9 @@ import telegramIcon from "./images/telegramIcon.svg";
 
 
 function Profile({ currentUser }) {
+  useEffect(() => {
+    document.title = "Profile"
+  }, []);
   const [textCopy, setTextCopy] = useState("text-copy");
 
   const handleCopyClick = () => {

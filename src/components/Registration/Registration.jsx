@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Particle from 'react-particles-js';
 import particlesConfig from '../../vendor/particlesConfig.json';
 import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
@@ -6,6 +6,9 @@ import Modal from '../Modal/Modal';
 import SeedPopup from '../SeedPopup/SeedPopup';
 
 function Registration(props) {
+  useEffect(() => {
+    document.title = "Registration"
+  }, []);
   const match = useRouteMatch('/j/*');
   const history = useHistory();
   const joinedBy = match ? match.params[0] : '';

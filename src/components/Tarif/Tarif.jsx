@@ -6,6 +6,9 @@ import Popup from '../Popup/Popup';
 
 
 function Tarif() {
+  useEffect(() => {
+    document.title = "Tarif"
+  }, []);
   const [tarif, setTarif] = useState({});
   const [pay, setPay] = useState(null);
   const [statusMessage, setStatusMessage] = useState('');

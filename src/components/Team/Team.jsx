@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Nav from '../Nav/Nav'
 import sprite from '../../images/icons/icons.svg'
 import './Team.css'
 import Summary from '../Summary/Summary'
 import Tree from '../Tree/Tree'
 
-function Team({currentUser, currentTeam, checkToken}) {
+function Team({ currentUser, currentTeam, checkToken }) {
+  useEffect(() => {
+    document.title = "Team"
+  }, []);
   return (
 
     <main className="main">
@@ -48,8 +51,8 @@ function Team({currentUser, currentTeam, checkToken}) {
             </div>
           </div>
         </section>
-        <Summary currentTeam={currentTeam}/>
-    <Tree checkToken={checkToken}/>
+        <Summary currentTeam={currentTeam} />
+        <Tree checkToken={checkToken} />
       </div>
     </main>
 

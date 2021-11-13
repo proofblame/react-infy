@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Policy() {
+  useEffect(() => {
+    document.title = "Policy"
+  }, []);
   return (
     <main className="main">
       <div className="container">
