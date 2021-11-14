@@ -9,7 +9,7 @@ import Logo from '../Logo/Logo';
 import Switcher from '../Switcher/Switcher';
 
 
-function Header({ themeToggler, check }) {
+function Header({ themeToggler, check, onSignOut }) {
   return (
     <>
       <header className="header">
@@ -24,8 +24,8 @@ function Header({ themeToggler, check }) {
             <nav className="header__nav">
 
               <ul className="header__menu menu">
-                { 
-                  
+                {
+
                 }
                 <li className="header__item">
                   <Switcher themeToggler={themeToggler} check={check} />
@@ -48,9 +48,7 @@ function Header({ themeToggler, check }) {
                 <li className="header__contacts-item">Партнерство/листинг <br /> partnership @infinity.network</li>
                 <li className="header__contacts-item">PR & Маркетинг <br /> pr @infinity.network</li>
                 <li className="header__item">
-                  <form action="/logout" method="post">
-                    <input
-                      className="header__button__exit set__color_purple link link_active" type="submit" defaultValue="Выход" /></form>
+                  <Link to="/login" className="link link_active" onClick={onSignOut}>Выход</Link>
                 </li>
               </ul>
             </nav>

@@ -76,7 +76,7 @@ function App() {
         .catch(e => console.error(e.message));
 
     } else {
-
+      setLoggedIn(false);
     }
   }
 
@@ -114,7 +114,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className={themeMode}>
-        <Header themeToggler={themeToggler} check={check} />
+        <Header themeToggler={themeToggler} check={check} onSignOut={handleSignout} />
         <Switch>
           <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
           <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
