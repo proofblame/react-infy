@@ -48,7 +48,7 @@ function Header({ themeToggler, check, onSignOut }) {
                 <li className="header__contacts-item">Партнерство/листинг <br /> partnership @infinity.network</li>
                 <li className="header__contacts-item">PR & Маркетинг <br /> pr @infinity.network</li>
                 <li className="header__item">
-                  <Link to="/login" className="link link_active" onClick={onSignOut}>Выход</Link>
+                  <Link to="/login" className="link link_active rollup" onClick={onSignOut}>Выход</Link>
                 </li>
               </ul>
             </nav>
