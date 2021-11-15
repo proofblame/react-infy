@@ -10,7 +10,10 @@ function RoadMap() {
 
 
         <section className="main__profile profile">
-          <h1 className="profile__title title">ДОРОЖНАЯ КАРТА INFINITY Corporation</h1>
+          <h1 className="profile__title title"
+            style={{ marginTop: '35px' }}
+          >
+            ДОРОЖНАЯ КАРТА INFINITY Corporation</h1>
           <p className="text text_color_dark text_size_large" style={{ textAlign: 'center' }}>В данном документе описан путь развития компании и производственный выход продуктов до 2023 года</p>
           <p className="text"><b>01.08.2021 – 30.09.2021</b> закрытый Token Sales монеты INFY (внутренняя утилитарная монета проекта). Резервируя INFY в количестве до 50 тысяч – стоимость 12 рублей за монету, резервируя INFY от 50 тысяч – стоимость 10 рублей за монету.</p>
           <p className="text"><b>20.09.2021</b> - международная версия сайта и веб-интерфейса на русском и английском языках. Станет доступен официальный сайт Infinity Corporation, регистрация в личном кабинете, реферальная ссылка (партнерская программа), видео обучение для партнеров, монета INFY с рабочим кошельком (транзакции перевода 5 – 30 секунд), чат бот обменник (Telegram).</p>

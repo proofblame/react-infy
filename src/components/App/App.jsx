@@ -27,7 +27,8 @@ import {
   useLocation
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
-// import Learn from '../Learn/Learn';
+import Learn from '../Learn/Learn';
+
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
+  // const [loggedIn, setLoggedIn] = useState(true);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
@@ -128,17 +130,16 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
           <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
+
           <Route path="/login">
             <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} />
           </Route>
           <Route path="/registration">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
-          {/* <Route path="/study">
+
+          <Route path="/learn">
             <Learn></Learn>
-          </Route> */}
-          <Route path="/j/:joinedBy">
-            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
 
           <Route component={Error} path="*" />

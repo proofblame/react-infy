@@ -1,5 +1,4 @@
 {
-  "homepage": "./",
   "name": "react-infy",
   "version": "0.1.0",
   "private": true,
@@ -48,12 +47,10 @@
     "gh-pages": "^3.2.3",
     "node-sass": "^6.0.1",
     "prop-types": "^15.7.2",
-    "react-particle-line": "^0.1.9",
-    "react-particles-js": "^3.5.3",
     "react-slick": "^0.28.1",
+    "react-tsparticles": "^1.37.3",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^5.3.3",
-    "tsparticles": "^1.37.1"
+    "styled-components": "^5.3.3"
   },
   "main": "index.js",
   "repository": {

@@ -86,6 +86,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
 
   useEffect(() => {
     getTansactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, modalActive])
 
   const getTansactions = () => {

@@ -44,4 +44,5 @@ $(document).ready(function () {
       $('.header__burger').removeClass('header__burger_animate-2')
     }
   })
+
 });

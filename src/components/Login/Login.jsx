@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Particle from "react-particles-js";
-import particlesConfig from "../../vendor/particlesConfig.json";
-import { NavLink, useLocation } from "react-router-dom";
+import Particles from '../Particles/Particles';
+import { NavLink } from "react-router-dom";
 
 function Login(props) {
-  let location = useLocation();
   const history = useHistory();
   const [data, setData] = useState({
     username: "",
@@ -20,9 +18,6 @@ function Login(props) {
     if (props.loggedIn) history.push("/profile");
   }, [props.loggedIn, history]);
 
-  useEffect(() => {
-    console.log(props.loggedIn)
-  }, []);
 
   function onChange(e) {
     const { name, value } = e.target;
@@ -46,14 +41,10 @@ function Login(props) {
     <>
 
       <main className="main">
-        <Particle
-          params={particlesConfig}
-          className="App-particles__container"
 
-        />
         <div className="container">
           <section className="registration login">
-
+            <Particles />
             <form
               onSubmit={onSubmit}
               className="form form_type_support form_type_login"
@@ -126,7 +117,6 @@ function Login(props) {
         </div>
 
       </main>
-
     </>
   );
 }

@@ -44,6 +44,11 @@ function Nav() {
             <use href={menuIcons + "#menu-tarif"}></use>
           </svg>
         </NavLink>
+        <NavLink to="/learn" className="menu-item" activeClassName="menu-item_active">
+          <svg className="menu-img icon">
+            <use href={menuIcons + "#menu-learn"}></use>
+          </svg>
+        </NavLink>
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" >
           <defs>
             <filter id="shadowed-goo">

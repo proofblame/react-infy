@@ -58,14 +58,14 @@ export default class PreviousNextMethods extends Component {
           <button className="link link_active">Сохранить</button>
           <div style={buttonGroup}>
             <button
-              className="slider__button button"
+              className="slider__button button learn__button"
               onClick={() => {
                 this.previous();
                 this.props.prevPage();
               }}
             ></button>
             <button
-              className="slider__button slider__button_next button"
+              className="slider__button slider__button_next button learn__button"
               onClick={() => {
                 this.next();
                 this.props.nextPage();

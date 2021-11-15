@@ -173,8 +173,13 @@ class Auth {
 
 }
 
-const auth = new Auth('http://api.infy-corp.com/react-api');
+// Сервер на продакшн
+// const auth = new Auth('https://server.infy-corp.com/react-api');
+
+// Для теста
+const auth = new Auth('http://84.38.185.10/react-api');
+
+// Для локального теста
 // const auth = new Auth('http://localhost:3000');
-// const auth = new Auth('http://localhost:8080/react-api');
 
 export default auth;

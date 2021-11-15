@@ -1,7 +1,4 @@
 import React from 'react'
-import {
-  Link
-} from "react-router-dom";
 import './About.css'
 import graph from '../../images/graph.svg';
 import grad from '../../images/grad.svg';

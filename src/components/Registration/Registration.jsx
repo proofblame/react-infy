@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Particle from 'react-particles-js';
-import particlesConfig from '../../vendor/particlesConfig.json';
-import { NavLink, useRouteMatch, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import SeedPopup from '../SeedPopup/SeedPopup';
+import Particles from '../Particles/Particles';
 
 function Registration(props) {
   useEffect(() => {
     document.title = "Registration"
   }, []);
-  const match = useRouteMatch('/j/*');
+
+
+
+  const location = useLocation();
+  const joinedBy = location.search.slice(10)
+
   const history = useHistory();
-  const joinedBy = match ? match.params[0] : '';
+  ;
+
   const [data, setData] = useState({
     username: '',
     joinedBy: '' || joinedBy,
@@ -34,9 +39,8 @@ function Registration(props) {
 
   const handleClosePopup = () => {
     setModalActive(false);
-    // if (submitStatus) {
     history.push("/login");
-    // }
+
   }
 
   function onSubmit(e) {
@@ -49,18 +53,16 @@ function Registration(props) {
 
       })
       .catch(e => console.error(e.message))
-    // setModalActive(true)
+
   }
 
   return (
     <>
       <main className='main'>
-        <Particle
-          params={particlesConfig}
-          className='App-particles__container'
-        />
+
         <div className='container'>
           <section className='registration'>
+            <Particles />
             <form
               onSubmit={onSubmit}
               className='form form_type_support form_type_login'>
@@ -73,8 +75,8 @@ function Registration(props) {
                 </NavLink>
                 <NavLink
                   to='/registration'
-                  className='wallet__button link'
-                  activeClassName='link_active'>
+                  className='wallet__button link link_active' activeClassName='link_active'>
+
                   Регистрация
                 </NavLink>
               </section>
@@ -91,6 +93,7 @@ function Registration(props) {
                   name='joinedBy'
                   value={joinedBy || data.joinedBy}
                   onChange={onChange}
+                  autoComplete="true"
                 />
               </fieldset>
 
@@ -104,9 +107,10 @@ function Registration(props) {
                   className='form__input text text_size_normal'
                   type='text'
                   name='username'
-                  // required
+                  required
                   value={data.username}
                   onChange={onChange}
+                  autoComplete="username"
                 />
               </fieldset>
               <fieldset className='form__fieldset'>
@@ -119,7 +123,8 @@ function Registration(props) {
                   className='form__input text text_size_normal'
                   type='email'
                   name='email'
-                  // required
+                  required
+                  autoComplete="email"
                   value={data.email}
                   onChange={onChange}
                 />
@@ -135,7 +140,7 @@ function Registration(props) {
                   type='password'
                   name='password'
                   autoComplete="new-password"
-                  // required
+                  required
                   value={data.password}
                   onChange={onChange}
                 />
@@ -156,7 +161,8 @@ function Registration(props) {
                   className='form__input text text_size_normal'
                   type='password'
                   name='secondpassword'
-                // required
+                  autoComplete="new-password"
+
                 />
               </fieldset>
               <fieldset className='form__fieldset'>
@@ -170,7 +176,7 @@ function Registration(props) {
                   type='text'
                   name='telegram'
                   id='text'
-                  // required
+                  required
                   value={data.telegram}
                   onChange={onChange}
                 />
@@ -187,7 +193,7 @@ function Registration(props) {
                   type='checkbox'
                   name='politics'
                   id='politics'
-                // required
+                  required
                 />
               </fieldset>
               <div className='footer__politics'>

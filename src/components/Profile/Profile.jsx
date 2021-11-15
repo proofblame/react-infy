@@ -13,7 +13,7 @@ function Profile({ currentUser }) {
   const [textCopy, setTextCopy] = useState("text-copy");
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(`https://infy-corp.com/j/${currentUser.nickname}`);
+    navigator.clipboard.writeText(`${window.location.origin}/registration?joinedBy=${currentUser.nickname}`);
     setTextCopy("text-copy text-copy-active");
     console.log(window.location)
 
@@ -228,7 +228,7 @@ function Profile({ currentUser }) {
                       id="guest-link"
                       className="data__text text text_size_medium text_color_normal"
                     >
-                      https://infy-corp.com/j/{currentUser.nickname}
+                      https://infy-corp.com/registration?joinedBy={currentUser.nickname}
                     </p>
                   </div>
                   <div className="profile__buttons">

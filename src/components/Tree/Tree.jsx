@@ -15,7 +15,7 @@ const Tree = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [line, setLine] = useState(null);
-  const [cardItem, setCardItem ]= useState({});
+  const [cardItem, setCardItem] = useState({});
 
 
 
@@ -39,6 +39,7 @@ const Tree = () => {
 
   useEffect(() => {
     handleGetTreeInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [line, page])
 
   const handleGetTreeInfo = () => {
@@ -76,11 +77,11 @@ const Tree = () => {
   }
 
   const treeList = currentTree.map((treeItem, index) => (
-      <TreeItem
-        key={index}
-        treeItem={treeItem}
-        onClick={() => handleCardPopup(treeItem)}
-      />
+    <TreeItem
+      key={index}
+      treeItem={treeItem}
+      onClick={() => handleCardPopup(treeItem)}
+    />
   ))
 
   return (
@@ -223,10 +224,10 @@ const Tree = () => {
       </Modal>
       <Modal active={modalActive.cardPopup} className="card__modal">
         <Card
-        onClose={handleCloseCardPopup}
-        cardItem={cardItem}
-        line={line}
-    
+          onClose={handleCloseCardPopup}
+          cardItem={cardItem}
+          line={line}
+
         />
       </Modal>
     </>

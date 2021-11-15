@@ -30,8 +30,9 @@ input[type="checkbox"].learn__switcher__input + label:before {
   content: "";
   position: absolute;
   display: block;
-  left: 0;
-  top: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 45px;
   height: 24px;
   border-radius: 16px;
@@ -46,8 +47,11 @@ input[type="checkbox"].learn__switcher__input + label:after {
   content: "";
   position: absolute;
   display: block;
-  left: 4px;
-  top: 4px;
+  /* left: 4px;
+  top: 4px; */
+  left: 11px;
+  top: -8px;
+  /* transform: translate(-50%, -50%); */
   width: 16px;
   height: 16px;
   border-radius: 16px;
@@ -65,8 +69,8 @@ input[type="checkbox"].learn__switcher__input + label:hover:after {
 input[type="checkbox"].learn__switcher__input:checked + label:after {
   margin-left: 21px;
   border: none;
-  left: 5px;
-  top: 5px;
+  left: 15px;
+  top: -8px;
 }
 input[type="checkbox"].learn__switcher__input:checked + label:before {
   background: #8960e2;

@@ -12,6 +12,15 @@
 $maxWidth: 1628;
 
 .learn {
+  &__button {
+    height: 64px;
+    @media screen and (min-width: 1628px) {
+      height: 64px;
+    }
+    @media screen and (max-width: 1627.98px) {
+      @include adaptiv(height, 64, 40);
+    }
+  }
   &__data {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -73,6 +82,6 @@ $maxWidth: 1628;
   }
 
   &__slider {
-    justify-content: start;
+    justify-content: space-between;
   }
 }
