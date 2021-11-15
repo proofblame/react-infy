@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Particle from "react-tsparticles";
 
 
 
 const Particles = () => {
+  useEffect(() => {
+
+  }, [])
 
   return (
 
@@ -67,15 +70,15 @@ const Particles = () => {
               enable: true,
               outMode: "bounce",
               random: false,
-              speed: 1,
+              speed: 2,
               straight: false
             },
             number: {
               density: {
                 enable: true,
-                value_area: 20
+                value_area: 600
               },
-              value: 1
+              value: 30
             },
             opacity: {
               value: 0.5

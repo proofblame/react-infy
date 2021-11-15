@@ -28,6 +28,7 @@ import {
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 import Learn from '../Learn/Learn';
+import Particles from '../Particles/Particles';
 
 
 
@@ -132,6 +133,7 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
 
           <Route path="/login">
+            <Particles />
             <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} />
           </Route>
           <Route path="/registration">

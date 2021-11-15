@@ -39,12 +39,10 @@ function Login(props) {
 
   return (
     <>
-
+      {/* <Particles /> */}
       <main className="main">
-
         <div className="container">
           <section className="registration login">
-            <Particles />
             <form
               onSubmit={onSubmit}
               className="form form_type_support form_type_login"
