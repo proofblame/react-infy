@@ -16,11 +16,11 @@ const Particles = () => {
         style={{ position: `absolute`, zIndex: `-1` }}
         id="tsparticles"
         options={{
-          background: {
-            color: {
-              value: "none"
-            }
-          },
+          // background: {
+          //   color: {
+          //     value: "none"
+          //   }
+          // },
           fpsLimit: 60,
           interactivity: {
             detectsOn: "canvas",
