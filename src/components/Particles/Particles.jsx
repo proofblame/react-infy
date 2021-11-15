@@ -7,91 +7,93 @@ const Particles = () => {
 
   return (
 
-    <Particle
-      style={{ position: `absolute`, zIndex: `-1` }}
-      id="tsparticles"
-      options={{
-        background: {
-          color: {
-            value: "none"
-          }
-        },
-        fpsLimit: 60,
-        interactivity: {
-          detectsOn: "canvas",
-          events: {
-            onClick: {
-              enable: true,
-              mode: "push"
-            },
-            onHover: {
-              enable: true,
-              mode: "repulse"
-            },
-            resize: true
-          },
-          modes: {
-            bubble: {
-              distance: 800,
-              duration: 2,
-              opacity: 0.8,
-              size: 2
-            },
-            push: {
-              quantity: 2
-            },
-            repulse: {
-              distance: 200,
-              duration: 0.4
-            }
-          }
-        },
-        particles: {
-          color: {
-            value: "#441E78"
-          },
-          links: {
-            color: "#633D8D",
-            distance: 150,
-            // Исправлено
-            enable: true,
-            opacity: 0.5,
-            width: 1
-          },
-          collisions: {
-            enable: true
-          },
-          move: {
-            direction: "none",
-            enable: true,
-            outMode: "bounce",
-            random: false,
-            speed: 3,
-            straight: false
-          },
-          number: {
-            density: {
-              enable: true,
-              value_area: 15
-            },
-            value: 2
-          },
-          opacity: {
-            value: 0.5
-          },
-          shape: {
-            type: "circle"
-          },
-          size: {
-            random: true,
-            value: 5
-          }
-        },
-        detectRetina: true
-      }}
-    >
 
-    </Particle>
+    <div>
+      <Particle
+        style={{ position: `absolute`, zIndex: `-1` }}
+        id="tsparticles"
+        options={{
+          background: {
+            color: {
+              value: "none"
+            }
+          },
+          fpsLimit: 60,
+          interactivity: {
+            detectsOn: "canvas",
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push"
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse"
+              },
+              resize: true
+            },
+            modes: {
+              bubble: {
+                distance: 400,
+                duration: 8,
+                opacity: 0.8,
+                size: 4
+              },
+              push: {
+                quantity: 4
+              },
+              repulse: {
+                distance: 100,
+                duration: 0.4
+              }
+            }
+          },
+          particles: {
+            color: {
+              value: "#441E78"
+            },
+            links: {
+              color: "#633D8D",
+              distance: 200,
+              enable: true,
+              opacity: 0.5,
+              width: 1
+            },
+            collisions: {
+              enable: true
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outMode: "bounce",
+              random: false,
+              speed: 1,
+              straight: false
+            },
+            number: {
+              density: {
+                enable: true,
+                value_area: 20
+              },
+              value: 1
+            },
+            opacity: {
+              value: 0.5
+            },
+            shape: {
+              type: "circle"
+            },
+            size: {
+              random: true,
+              value: 5
+            }
+          },
+          detectRetina: true
+        }}
+      >
+
+      </Particle>
+    </div>
 
 
   )
