@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "./Switcher.css";
 
-const Switcher = () => {
-  const [checkedItems, setCheckedItems] = useState({});
+const Switcher = ({ questionNumber, answerNumber, handleClickAnswer, isCheked, handleChecked }) => {
+  // const [checkedItems, setCheckedItems] = useState({});
+  // const [isChecked, setIsChecked] = useState(false);
 
-  const handleChange = (event) => {
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.name]: event.target.checked,
-    });
-  };
+  // const handleChange = (event) => {
+  //   setCheckedItems({
+  //     ...checkedItems,
+  //     [event.target.name]: event.target.checked,
+  //   });
+  //   if (isChecked) {
+  //     setIsChecked(false)
 
-  useEffect(() => {
-    console.log("checkedItems: ", checkedItems);
-  }, [checkedItems]);
+  //   } else {
+  //     setIsChecked(true)
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   console.log("checkedItem: ", `${questionNumber}-${answerNumber}`);
+  // }, [isCheked]);
 
   return (
     <>
@@ -21,25 +28,19 @@ const Switcher = () => {
         <input
           type="checkbox"
           className="learn__switcher__input"
-          id="checkbox-2"
-          onClick={() => {
-            console.log(123);
+          name={`${questionNumber}-${answerNumber}`}
+          id={`${questionNumber}-${answerNumber}`}
+          checked={isCheked}
+          onChange={() => {
+            handleClickAnswer();
+            handleChecked()
           }}
-        />
-        <label htmlFor="checkbox-2" className="text text_size_x-small"></label>
-      </div>
+          value={answerNumber + 1}
 
-      {/* <div>
-        <lable>Checked item name : {checkedItems["check-box-1"]} </lable> <br />
-        {
-          checkboxes.map(item => (
-            <label key={item.key}>
-              {item.name}
-              <Checkbox name={item.name} checked={checkedItems[item.name]} onChange={handleChange} />
-            </label>
-          ))
-        }
-      </div> */}
+
+        />
+        <label htmlFor={`${questionNumber}-${answerNumber}`} className="text text_size_x-small"></label>
+      </div>
     </>
   );
 };

@@ -14,12 +14,18 @@ function Registration(props) {
   const location = useLocation();
   const joinedBy = location.search.slice(10)
 
+  function urldecode(str) {
+    return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+  }
+
+  urldecode(joinedBy)
+
   const history = useHistory();
   ;
 
   const [data, setData] = useState({
     username: '',
-    joinedBy: '' || joinedBy,
+    joinedBy: '' || urldecode(joinedBy),
     password: '',
     email: '',
     telegram: '',
@@ -42,6 +48,8 @@ function Registration(props) {
     history.push("/login");
 
   }
+
+
 
   function onSubmit(e) {
     e.preventDefault();
@@ -92,7 +100,7 @@ function Registration(props) {
                   className='form__input text text_size_normal'
                   type='text'
                   name='joinedBy'
-                  value={joinedBy || data.joinedBy}
+                  value={urldecode(joinedBy) || data.joinedBy}
                   onChange={onChange}
                   autoComplete="true"
                 />

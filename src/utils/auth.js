@@ -172,7 +172,7 @@ class Auth {
   }
 
   // Получить вопросы
-  getQuestion(jwt) {
+  getLessions(jwt) {
     return fetch(`${this.baseURL}/learn/get-question`, {
       method: 'GET',
       headers: {

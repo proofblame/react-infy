@@ -25,9 +25,11 @@ $maxWidth: 1628;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     justify-content: space-between;
+    margin-right: 15px;
     @include adaptiv(column-gap, 70, 0);
     @include adaptiv(row-gap, 15, 15);
     @include adaptiv(padding-top, 105, 0);
+    @include adaptiv(margin-bottom, 25, 10);
   }
   &__body {
   }

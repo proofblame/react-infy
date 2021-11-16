@@ -17,7 +17,7 @@ function Error({ title }) {
               <div className="wrapper profile__body">
                 <h1 className="banner__title title">{title ? title : 'Oops...'}
                 </h1>
-                <h1 className="banner__title title " style={{ color: "rgba(36, 36, 36, 0.58);" }}>{title ? title : 'Oops...'}</h1>
+                <h1 className="banner__title title " style={{ color: "rgba(36, 36, 36, 0.58)" }}>{title ? title : 'Oops...'}</h1>
 
                 <div className="wrapper">
                   <div className="image image_type_mobile">
