@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import nlo from '../../images/nlo.png'
 
-function Error() {
+function Error({ title }) {
   useEffect(() => {
     document.title = "Error"
   }, []);
@@ -15,9 +15,9 @@ function Error() {
           <section className="banner">
             <div className="banner__wrapper banner__wrapper_type_two-columns">
               <div className="wrapper profile__body">
-                <h1 className="banner__title title">Oops...
+                <h1 className="banner__title title">{title ? title : 'Oops...'}
                 </h1>
-                <h1 className="banner__title title " style={{ color: "rgba(36, 36, 36, 0.58);" }}>Oops...</h1>
+                <h1 className="banner__title title " style={{ color: "rgba(36, 36, 36, 0.58);" }}>{title ? title : 'Oops...'}</h1>
 
                 <div className="wrapper">
                   <div className="image image_type_mobile">

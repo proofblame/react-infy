@@ -140,7 +140,8 @@ function App() {
           </Route>
 
           <Route path="/learn">
-            <Learn></Learn>
+            {/* <Learn></Learn> */}
+            <Error title={'Soon'}></Error>
           </Route>
 
           <Route component={Error} path="*" />
