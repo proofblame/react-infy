@@ -39,7 +39,7 @@ function Login(props) {
 
   return (
     <>
-      {/* <Particles /> */}
+      <Particles />
       <main className="main">
         <div className="container">
           <section className="registration login">

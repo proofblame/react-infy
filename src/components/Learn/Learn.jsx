@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Learn.scss";
 import Nav from '../Nav/Nav';
 import LearnSlider from './LearnSlider/LearnSlider'
@@ -6,15 +6,38 @@ import completeStudyIcon from './images/complete-study-icon.png'
 import Modal from '../Modal/Modal'
 import TestPopup from '../TestPopup/TestPopup';
 import './Test.scss';
-import LearnSwitcher from './LearnSwitcher/LearnSwitcher'
-import LearnPopupSlider from './LearnPopupSlider/LearnPopupSlider'
 
+import LearnPopupSlider from './LearnPopupSlider/LearnPopupSlider'
+import auth from '../../utils/auth';
+import Question from '../Question/Question';
 
 
 const Learn = () => {
   const [status, setStatus] = useState('process')
   const [button, setButton] = useState('Включить читы')
   const [modalActive, setModalActive] = useState(false)
+  const [lessons, setLessons] = useState([])
+  const [lesson, setLesson] = useState({})
+  const [questionList, setQuestionList] = useState([]);
+  const [isTested, setIsTested] = useState(false)
+  const [page, setPage] = useState(0)
+
+  const [pageCount, setPageCount] = useState(1);
+  const [questions, setQuestions] = useState([])
+  const videoList = [
+    "https://www.youtube.com/embed/lTUejHSdpYE",
+    "https://www.youtube.com/embed/lqvwu-_a5wo",
+    "https://www.youtube.com/embed/IcqE7YhTVWw",
+    "https://www.youtube.com/embed/3-a6c9w7m0c",
+    "https://www.youtube.com/embed/hN-B3-NcK04",
+    "https://www.youtube.com/watch?v=Na_SxDK12-s&ab_channel=InfinityC2",
+    "https://www.youtube.com/embed/tYZFwKUW6M4",
+    "https://www.youtube.com/embed/cvKcyjljIFM"
+  ]
+
+  useEffect(() => {
+    getQuestions()
+  }, [])
 
   const handleClick = () => {
     if (status === "process") {
@@ -28,27 +51,68 @@ const Learn = () => {
 
   const handleClosePopup = () => {
     setModalActive(false)
+    setQuestionList([])
   }
   const handleOpenPopup = () => {
-    setModalActive(true)
-  }
-  // const nextPage = () => {
-  //   if (page >= 0 && page < pageCount -1) {
-  //     setPage(page + 1)
-  //     // getTansactions()
-  //   } else {
-  //     setPage(page)
-  //   }
-  // }
+    setModalActive(true);
+    setQuestionList(lesson.questionList)
+    console.log(questionList)
 
-  // const prevPage = () => {
-  //   if (page > 0 && page <= pageCount -1 ) {
-  //     setPage(page - 1)
-  //     // getTansactions()
-  //   } else {
-  //     setPage(page)
-  //   }
-  // }
+  }
+
+  const getQuestions = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .getQuestion(jwt)
+        .then((res) => {
+          setLessons(res.questions)
+          setLesson(res.questions[0])
+          setQuestions(res.questions)
+          setIsTested(res.isTested)
+          // setPageCount(res.questions.testNumber)
+
+
+        })
+        .catch(e => console.error(e.message));
+    }
+  }
+
+  const questionsList = questionList.map((question, index) => (
+    <Question
+      key={index}
+      question={question}
+      modalActive={modalActive}
+    />
+
+  ))
+
+
+  const setVideo = (index) => {
+    return videoList[index]
+  }
+
+
+
+  const nextPage = () => {
+    if (lesson.testNumber >= 1 && lesson.testNumber < lessons.length) {
+      setPage(page + 1)
+      setLesson(lessons[page + 1])
+      console.log(lesson)
+    } else {
+      setLesson(lessons[page])
+    }
+  }
+
+  const prevPage = () => {
+    if (lesson.testNumber > 1 && lesson.testNumber <= lessons.length) {
+      setPage(page - 1)
+      setLesson(lessons[page - 1])
+      console.log(lesson)
+    } else {
+      setLesson(lessons[page])
+    }
+  }
 
 
   return (
@@ -70,12 +134,15 @@ const Learn = () => {
                     <img src={completeStudyIcon} className="learn__img" alt="Succes" />
                   }
                   {status === "process" &&
-                    <div className="learn__video">
-                      {/* <video srcSet="#" className="learn__video-frame"></video> */}
-                      <button className="learn__test-button link link_active">
-                        Play
-                      </button>
-                    </div>
+                    <>
+                      <div className="learn__video">
+                        <iframe width="100%" height="100%" src={videoList[lesson.testNumber - 1]}
+                          title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        {/* <button className="learn__test-button link link_active">
+                          Play
+                        </button> */}
+                      </div>
+                    </>
                   }
 
                 </div>
@@ -100,29 +167,26 @@ const Learn = () => {
                         <div className="learn__lesson-count">
                           <p className="text text_size_large">
                             <b>
-                              Урок №1 из 8
+                              Урок №{lesson.testNumber} из {questions.length}
                             </b>
                           </p>
                         </div>
-                        <LearnSlider>
-                          {/* <div className="slider__item">
-                      <div className="wallet__slider-item wallet__wrapper">
-
-                      </div>
-                    </div> */}
-                        </LearnSlider>
+                        <LearnSlider
+                          prevPage={prevPage}
+                          nextPage={nextPage}
+                        />
                       </div>
                       <div className="learn__lessons-body">
                         <p className="learn__lesson-title text text_size_normal">
                           <b>
-                            Название урока
+                            Перед прохождением теста ознакомтесь с информацией в видеоуроке.
                           </b>
                         </p>
                         <p className="learn__lesson-subtitle text text_size_x-small">
-                          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+
                         </p>
                         <p className="learn__lesson-progress text text_size_x-small">
-                          Тест выполнен на  0%
+
                         </p>
                       </div>
                       <button className="link link_active" onClick={handleOpenPopup}>
@@ -138,29 +202,21 @@ const Learn = () => {
         </div>
       </main>
       <Modal active={modalActive}>
-        <TestPopup onClose={handleClosePopup}>
+        <TestPopup
+          onClose={handleClosePopup}
+
+        >
           <LearnPopupSlider>
             <ul className="test__block">
               <li className="test__row">
-                <p className="test__count text text_size_normal">1/8</p>
-                <p className="test__question text text_size_normal"><b>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint?</b></p>
+                <p className="test__count text text_size_normal">{lesson.testNumber} / {lesson.questionCount}</p>
+                <p className="test__question text text_size_normal">
+                  <b>
+
+                  </b>
+                </p>
               </li>
-              <li className="test__row">
-                <LearnSwitcher />
-                <p className="test__question text text_size_small">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit?</p>
-              </li>
-              <li className="test__row">
-                <LearnSwitcher />
-                <p className="test__question text text_size_small">Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet?</p>
-              </li>
-              <li className="test__row">
-                <LearnSwitcher />
-                <p className="test__question text text_size_small">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet?</p>
-              </li>
-              <li className="test__row">
-                <LearnSwitcher />
-                <p className="test__question text text_size_small">Exercitation veniam consequat sunt nostrud amet?</p>
-              </li>
+              {questionsList}
             </ul>
           </LearnPopupSlider>
 

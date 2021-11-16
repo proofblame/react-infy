@@ -171,6 +171,18 @@ class Auth {
       .then(this._getResponseData);
   }
 
+  // Получить вопросы
+  getQuestion(jwt) {
+    return fetch(`${this.baseURL}/learn/get-question`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      }
+    })
+      .then(this._getResponseData);
+  }
+
 }
 
 // Сервер на продакшн
