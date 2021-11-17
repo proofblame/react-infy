@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import Answer from '../Answer/Answer'
+import auth from '../../utils/auth';
+
+const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list, lesson, setQuestion }) => {
+
+  const handkleSendAnswers = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      list.forEach((item) => {
+        auth
+          .sendAnswers(jwt, item.lessonNumber, item.questionNumber, item.answer)
+          .then((res) => {
+            console.log(res)
+          })
+          .catch(e => console.error(e.message));
+      })
+
+    }
+  }
 
 
-const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list }) => {
+
+  useEffect(() => {
+    // setQuestion(question)
+    console.log(question)
+  }, [])
 
   const answersList = answers.map((answer, index) => (
     <Answer
@@ -19,6 +41,7 @@ const Question = ({ answers, question, questions, handleClickAnswer, selectAnswe
       push={push}
       updateAt={updateAt}
       list={list}
+      lesson={lesson}
     />
 
   ))
@@ -28,10 +51,14 @@ const Question = ({ answers, question, questions, handleClickAnswer, selectAnswe
   return (
     <>
 
-      <p className="question__title tree__title tree__title_popup text_size_large" onClick={() => console.log(question)}>
-        Тест {question.questionNumber}
+      <p className="question__title tree__title tree__title_popup text_size_large" onClick={() => handkleSendAnswers}>
+        Тест {question.lessonNumber}
       </p>
+      <form onSubmit={handkleSendAnswers}>
 
+        <button type="sumbit" />
+
+      </form>
 
 
       <ul className="test__block">

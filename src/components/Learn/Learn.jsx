@@ -103,11 +103,14 @@ const Learn = () => {
   const linkRef = useRef();
   const [answerList, setAnswersList] = useState(list)
   const [filterArray, setFilterArray] = useState([])
-  console.log(list)
+  const [question, setQuestion] = useState()
+
+
 
   useEffect(() => {
     setAnswersList(list)
-  }, [])
+
+  }, [list])
 
 
 
@@ -148,6 +151,8 @@ const Learn = () => {
       push={push}
       updateAt={updateAt}
       list={list}
+      lesson={lesson}
+      setQuestion={setQuestion}
     />
   ))
 
@@ -247,6 +252,7 @@ const Learn = () => {
               <LearnSlider
                 prevPage={prevLesson}
                 nextPage={nextLesson}
+                lesson={lesson}
               >
                 {lessonList}
               </LearnSlider>
@@ -262,6 +268,7 @@ const Learn = () => {
             questions={questions}
             prevPage={prevQuestion}
             nextPage={nextQuestion}
+            question={question}
           >
             {questionsList}
           </LearnPopupSlider>

@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { useList } from 'react-use';
 import "./Switcher.css";
 
-const Switcher = ({ questionNumber, answerNumber, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list }) => {
+const Switcher = ({ questionNumber, answerNumber, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list, lesson }) => {
 
 
   // const [list, { set, push, updateAt, insertAt, update, updateFirst, upsert, sort, filter, removeAt, clear, reset }] = useList(answerList);
 
   const handleChange = (e) => {
 
-
+    const index = e.currentTarget.id - 1
     // debugger
-    updateAt(e.currentTarget.id, { questionNumber: questionNumber, answer: e.target.value })
+    updateAt(index, { lessonNumber: lesson.lessonNumber, questionNumber: questionNumber, answer: e.target.value })
 
 
     // setAnswersList(list)
