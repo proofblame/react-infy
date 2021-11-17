@@ -4,19 +4,22 @@ import auth from '../../utils/auth';
 
 const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list, lesson, setQuestion }) => {
 
-  const handkleSendAnswers = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      list.forEach((item) => {
-        auth
-          .sendAnswers(jwt, item.lessonNumber, item.questionNumber, item.answer)
-          .then((res) => {
-            console.log(res)
-          })
-          .catch(e => console.error(e.message));
-      })
+  const handkleSendAnswers = (e) => {
+    e.preventDefault()
+    // const jwt = localStorage.getItem('jwt');
+    // if (jwt) {
 
-    }
+    //   auth
+    //     .sendAnswers(jwt, list)
+    //     .then((res) => {
+    //       console.log(res)
+    //     })
+    //     .catch(e => console.error(e.message));
+
+
+    // }
+    let listng = JSON.stringify(list)
+    console.log(listng)
   }
 
 
