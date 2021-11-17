@@ -23,8 +23,9 @@ const Learn = () => {
   const [isTested, setIsTested] = useState(false)
   const [lesson, setLesson] = useState({})
 
+
   const [questions, setQuestions] = useState([])
-  const [question, setQuestion] = useState({})
+  // const [questionNumber, setQuestionNumber] = useState(0)
 
   const [page, setPage] = useState(0)
 
@@ -74,7 +75,6 @@ const Learn = () => {
   const handleOpenPopup = (lesson) => {
     setModalActive(true);
     setLesson(lesson)
-    console.log(questions)
     setQuestions(lesson.questionList)
   }
 
@@ -91,13 +91,46 @@ const Learn = () => {
     }
   }
 
+
+
+
+  const [selectAnswer, setSelectAnswer] = useState({})
+  const [groupAnswer, setAnswer] = useState({})
+  const [answerList, setAnswersList] = useState([])
+
+
+  function keyExist(value, array) {
+    for (var i in array) {
+      for (var k in array[i])
+        if (array[i][k] === value) {
+
+          console.log(array[2], value + ' is in array!');
+          return true;
+        }
+    }
+    return false;
+  }
+  keyExist(selectAnswer.questionNumber, answerList)
+
+  const handleClickAnswer = (event, name, nameCheck) => {
+
+
+
+  }
+
+
   const questionsList = questions.map((question, index) => (
     <Question
-      key={index}
+      key={question.questionNumber + index}
       question={question}
       answers={question.answers}
       questions={questions}
-
+      handleClickAnswer={handleClickAnswer}
+      setSelectAnswer={setSelectAnswer}
+      selectAnswer={selectAnswer}
+      setAnswersList={setAnswersList}
+      groupAnswer={groupAnswer}
+      answerList={answerList}
     />
   ))
 
@@ -117,6 +150,26 @@ const Learn = () => {
     } else {
     }
   }
+
+  const nextQuestion = () => {
+    if (lesson.testNumber >= 1 && lesson.testNumber < lessons.length) {
+      // setQuestionNumber(questionNumber + 1)
+    } else {
+      return
+    }
+  }
+
+  const prevQuestion = () => {
+    if (lesson.testNumber > 1 && lesson.testNumber <= lessons.length) {
+      // setQuestionNumber(questionNumber - 1)
+    } else {
+      return
+    }
+  }
+
+
+
+
 
   const lessonList = lessons.map((lesson, page) => (
     <>
@@ -189,6 +242,9 @@ const Learn = () => {
           onClose={handleClosePopup}
         >
           <LearnPopupSlider
+            questions={questions}
+            prevPage={prevQuestion}
+            nextPage={nextQuestion}
           >
             {questionsList}
           </LearnPopupSlider>

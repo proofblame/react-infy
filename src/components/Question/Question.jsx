@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Answer from '../Answer/Answer'
 
-const Question = ({ answers, question, questions, }) => {
 
-  const [checkedItems, setCheckedItems] = useState({});
-
-
-  const handleClickAnswer = (event) => {
-
-    // if (!isCheked) {
-    // setIsChecked(true)
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.name]: event.target.value,
-    });
-    // } else {
-    // setIsChecked(false)
-    setCheckedItems({});
-
-    // }
-  }
+const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList }) => {
 
   const answersList = answers.map((answer, index) => (
     <Answer
@@ -28,8 +11,11 @@ const Question = ({ answers, question, questions, }) => {
       answer={answer}
       answerNumber={index}
       handleClickAnswer={handleClickAnswer}
-    // isCheked={isCheked}
-
+      setSelectAnswer={setSelectAnswer}
+      selectAnswer={selectAnswer}
+      setAnswersList={setAnswersList}
+      groupAnswer={groupAnswer}
+      answerList={answerList}
     />
 
   ))
@@ -38,9 +24,13 @@ const Question = ({ answers, question, questions, }) => {
 
   return (
     <>
-      <p className="tree__title tree__title_popup text_size_large" onClick={() => console.log(question)}>
+
+      <p className="question__title tree__title tree__title_popup text_size_large" onClick={() => console.log(question)}>
         Тест {question.questionNumber}
       </p>
+
+
+
       <ul className="test__block">
         <li className="test__row">
           <p className="test__count text text_size_normal">{question.questionNumber} / {questions.length}</p>
@@ -54,6 +44,8 @@ const Question = ({ answers, question, questions, }) => {
         </li>
         {answersList}
       </ul>
+
+
     </>
   )
 }

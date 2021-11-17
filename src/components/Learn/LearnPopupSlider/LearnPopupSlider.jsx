@@ -55,7 +55,12 @@ export default class PreviousNextMethods extends Component {
           {this.props.children}
         </Slider>
         <div className="slider__header learn__slider">
-          <button className="link link_active">Сохранить</button>
+
+          <button className="link link_active" onClick={() => { console.log(this.slider) }}>Сохранить</button>
+
+
+
+
           <div style={buttonGroup}>
             <button
               className="slider__button button learn__button"
