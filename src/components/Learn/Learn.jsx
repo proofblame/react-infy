@@ -104,10 +104,17 @@ const Learn = () => {
 
 
   function keyExist(value, array) {
-    array.forEach((item, i) => {
+    var occurrences = {}
 
-      console.log(item[value] === 1)
-    });
+    return array.filter(function (x) {
+      var property = x[value]
+      if (occurrences[property]) {
+        // console.log(occurrences)
+      }
+      occurrences[property] = true;
+      console.log(occurrences[property])
+    })
+    console.log(occurrences)
   }
 
   // console.log(filterArray)

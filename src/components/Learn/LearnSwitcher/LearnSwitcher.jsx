@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { useList } from 'react-use';
 import "./Switcher.css";
 
 const Switcher = ({ questionNumber, answerNumber, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList }) => {
+  const [list,
+    { set, push, updateAt, insertAt, update, updateFirst, upsert, sort, filter, removeAt, clear, reset }] = useList(answerList);
+
 
   const handleChange = (e) => {
     setSelectAnswer({
       questionNumber: questionNumber,
       answer: e.target.value,
     })
-    setAnswersList([
-      ...answerList,
+    list.push(
       {
         questionNumber: questionNumber,
         answer: e.target.value,
       }
-    ])
+    );
+    // list.updateFirst((a: T, b: T) => true, questionNumber: e.target.value)
+
+
+    console.log(list)
+
+    // setAnswersList([
+    //   ...answerList,
+    //   {
+    //     questionNumber: questionNumber,
+    //     answer: e.target.value,
+    //   }
+    // ])
 
 
 
