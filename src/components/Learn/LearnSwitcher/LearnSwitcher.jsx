@@ -5,13 +5,16 @@ const Switcher = ({ questionNumber, answerNumber, handleClickAnswer, selectAnswe
 
   const handleChange = (e) => {
     setSelectAnswer({
-      // questionNumber: e.currentTarget.id,
+      questionNumber: questionNumber,
       answer: e.target.value,
     })
-    // setAnswersList([
-    //   ...answerList,
-    //   selectAnswer
-    // ])
+    setAnswersList([
+      ...answerList,
+      {
+        questionNumber: questionNumber,
+        answer: e.target.value,
+      }
+    ])
 
 
 
@@ -72,11 +75,11 @@ const Switcher = ({ questionNumber, answerNumber, handleClickAnswer, selectAnswe
         <input
           type="radio"
           className=""
-          // name={questionNumber}
+          name={questionNumber}
           id={answerNumber}
-          checked={setSelectAnswer === answerNumber}
+          checked={setSelectAnswer.answer}
           onChange={handleChange}
-          value={answerNumber}
+          value={answerNumber + 1}
 
         />
         <label htmlFor={questionNumber} className="text text_size_x-small"></label>

@@ -69,7 +69,8 @@ const Learn = () => {
   }
 
   const handleClosePopup = () => {
-    setModalActive(false)
+    // setModalActive(false)
+    keyExist('questionNumber', answerList)
 
   }
   const handleOpenPopup = (lesson) => {
@@ -98,20 +99,18 @@ const Learn = () => {
   const [groupAnswer, setAnswer] = useState({})
   const [answerList, setAnswersList] = useState([])
 
+  const [filterArray, setFilterArray] = useState([])
+
+
 
   function keyExist(value, array) {
-    for (var i in array) {
-      for (var k in array[i])
-        if (array[i][k] === value) {
+    array.forEach((item, i) => {
 
-          console.log(array[2], value + ' is in array!');
-          return true;
-        }
-    }
-    return false;
+      console.log(item[value] === 1)
+    });
   }
-  keyExist(selectAnswer.questionNumber, answerList)
 
+  // console.log(filterArray)
   const handleClickAnswer = (event, name, nameCheck) => {
 
 
