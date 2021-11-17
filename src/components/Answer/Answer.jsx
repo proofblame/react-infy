@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LearnSwitcher from '../Learn/LearnSwitcher/LearnSwitcher'
 
-const Answer = ({ question, answer, answerNumber, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList }) => {
+const Answer = ({ question, answer, answerNumber, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list }) => {
 
 
 
@@ -16,6 +16,9 @@ const Answer = ({ question, answer, answerNumber, handleClickAnswer, selectAnswe
         setAnswersList={setAnswersList}
         groupAnswer={groupAnswer}
         answerList={answerList}
+        push={push}
+        updateAt={updateAt}
+        list={list}
       />
       <p className="test__question text text_size_small" onClick={(() => console.log(answer))}>{answer}</p>
     </li>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Answer from '../Answer/Answer'
 
 
-const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList }) => {
+const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list }) => {
 
   const answersList = answers.map((answer, index) => (
     <Answer
@@ -16,6 +16,9 @@ const Question = ({ answers, question, questions, handleClickAnswer, selectAnswe
       setAnswersList={setAnswersList}
       groupAnswer={groupAnswer}
       answerList={answerList}
+      push={push}
+      updateAt={updateAt}
+      list={list}
     />
 
   ))

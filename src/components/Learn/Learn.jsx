@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Learn.scss";
 import Nav from '../Nav/Nav';
 import LearnSlider from './LearnSlider/LearnSlider'
@@ -12,7 +12,7 @@ import auth from '../../utils/auth';
 import Question from '../Question/Question';
 import Lesson from '../Lesson/Lesson';
 import LearnSwitcher from '../Learn/LearnSwitcher/LearnSwitcher'
-
+import { useList } from 'react-use';
 
 const Learn = () => {
   const [status, setStatus] = useState('process')
@@ -94,12 +94,20 @@ const Learn = () => {
 
 
 
+  const [isChecked, setIsChecked] = useState({
 
+  })
+  const [list, { set, push, updateAt, insertAt, update, updateFirst, upsert, sort, filter, removeAt, clear, reset }] = useList([]);
   const [selectAnswer, setSelectAnswer] = useState({})
   const [groupAnswer, setAnswer] = useState({})
-  const [answerList, setAnswersList] = useState([])
-
+  const linkRef = useRef();
+  const [answerList, setAnswersList] = useState(list)
   const [filterArray, setFilterArray] = useState([])
+  console.log(list)
+
+  useEffect(() => {
+    setAnswersList(list)
+  }, [])
 
 
 
@@ -137,6 +145,9 @@ const Learn = () => {
       setAnswersList={setAnswersList}
       groupAnswer={groupAnswer}
       answerList={answerList}
+      push={push}
+      updateAt={updateAt}
+      list={list}
     />
   ))
 
