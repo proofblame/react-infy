@@ -24,9 +24,10 @@ const Switcher = ({
         className=""
         name={questionNumber}
         id={questionNumber}
-        checked={setSelectAnswer.answer}
         onChange={handleChange}
         value={answerNumber + 1}
+
+
       />
       <label
         htmlFor={questionNumber}

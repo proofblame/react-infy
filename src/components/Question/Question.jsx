@@ -11,6 +11,9 @@ const Question = ({
   updateAt,
   list,
   lesson,
+  modalActive,
+  setModalActive,
+  setResult,
 }) => {
   const handkleSendAnswers = (e) => {
     e.preventDefault();
@@ -19,6 +22,8 @@ const Question = ({
       auth
         .sendAnswers(jwt, lesson.lessonNumber, list)
         .then((res) => {
+          setModalActive({ ...modalActive, testResult: true })
+          setResult(res)
           console.log(res);
         })
         .catch((e) => console.error(e.message));
@@ -60,8 +65,8 @@ const Question = ({
         </li>
         {answersList}
       </ul>
-      {question.questionNumber === lesson.questionList.length ? (
-        <button type="submit" className="link link_active question__button">
+      {question.questionNumber === lesson.questionList.length && list.length === lesson.questionList.length ? (
+        <button type="submit" className="link link_active question__button" onClick={(() => { console.log() })}>
           Сохранить
         </button>
       ) : (

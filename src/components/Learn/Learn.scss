@@ -71,6 +71,8 @@ $maxWidth: 1628;
   }
 
   &__lessons-body {
+    grid-column-start: 1;
+    grid-column-end: 3;
     @include adaptiv(padding-top, 30, 2);
   }
 

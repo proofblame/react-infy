@@ -182,22 +182,6 @@ class Auth {
     })
       .then(this._getResponseData);
   }
-  // Отправить вопросы
-  // sendAnswers(jwt, lessonNumber, questionNumber, answer) {
-  //   return fetch(`${this.baseURL}/learn/answer`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       'Authorization': `Bearer ${jwt}`,
-  //     },
-  //     body: new URLSearchParams({
-  //       'lessonNumber': `${lessonNumber}`,
-  //       'questionNumber': `${questionNumber}`,
-  //       'answer': `${answer}`,
-  //     }),
-  //   })
-  //     .then(this._getResponseData);
-  // }
 
   // Отправить вопросы
   sendAnswers(jwt, lessonNumber, list) {
