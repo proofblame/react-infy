@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import Answer from '../Answer/Answer'
-import auth from '../../utils/auth';
+import React from "react";
+import Answer from "../Answer/Answer";
+import auth from "../../utils/auth";
+import "./Question.css";
 
-const Question = ({ answers, question, questions, handleClickAnswer, selectAnswer, setSelectAnswer, setAnswersList, groupAnswer, answerList, push, updateAt, list, lesson, setQuestion }) => {
-
+const Question = ({
+  answers,
+  question,
+  questions,
+  setSelectAnswer,
+  updateAt,
+  list,
+  lesson,
+}) => {
   const handkleSendAnswers = (e) => {
-    e.preventDefault()
-    const jwt = localStorage.getItem('jwt');
+    e.preventDefault();
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
-
       auth
         .sendAnswers(jwt, lesson.lessonNumber, list)
         .then((res) => {
-          console.log(res)
+          console.log(res);
         })
-        .catch(e => console.error(e.message));
-
-
+        .catch((e) => console.error(e.message));
     }
-    // let listng = JSON.stringify(list)
-    // console.log(lesson)
-  }
-
-
-
-  useEffect(() => {
-    // setQuestion(question)
-    console.log(question)
-  }, [])
+  };
 
   const answersList = answers.map((answer, index) => (
     <Answer
@@ -35,52 +31,44 @@ const Question = ({ answers, question, questions, handleClickAnswer, selectAnswe
       question={question}
       answer={answer}
       answerNumber={index}
-      handleClickAnswer={handleClickAnswer}
       setSelectAnswer={setSelectAnswer}
-      selectAnswer={selectAnswer}
-      setAnswersList={setAnswersList}
-      groupAnswer={groupAnswer}
-      answerList={answerList}
-      push={push}
       updateAt={updateAt}
-      list={list}
       lesson={lesson}
     />
-
-  ))
-
-
+  ));
 
   return (
-    <>
-
-      <p className="question__title tree__title tree__title_popup text_size_large" onClick={() => handkleSendAnswers}>
+    <form onSubmit={handkleSendAnswers} className="question">
+      <p
+        className="question__title tree__title tree__title_popup text_size_large"
+        onClick={() => handkleSendAnswers}
+      >
         Тест {question.lessonNumber}
       </p>
-      <form onSubmit={handkleSendAnswers}>
-
-        <button type="sumbit" />
-
-      </form>
-
 
       <ul className="test__block">
         <li className="test__row">
-          <p className="test__count text text_size_normal">{question.questionNumber} / {questions.length}</p>
-          <p className="test__question text text_size_normal"
-            onClick={(() => console.log(question))}
+          <p className="test__count text text_size_normal">
+            {question.questionNumber} / {questions.length}
+          </p>
+          <p
+            className="test__question text text_size_normal"
+            onClick={() => console.log(question)}
           >
-            <b>
-              {question.question}
-            </b>
+            <b>{question.question}</b>
           </p>
         </li>
         {answersList}
       </ul>
+      {question.questionNumber === lesson.questionList.length ? (
+        <button type="submit" className="link link_active question__button">
+          Сохранить
+        </button>
+      ) : (
+        ""
+      )}
+    </form>
+  );
+};
 
-
-    </>
-  )
-}
-
-export default Question
+export default Question;

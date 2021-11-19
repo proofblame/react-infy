@@ -1,1 +1,7 @@
-
+.question {
+  display: flex;
+  flex-direction: column;
+}
+.question__button {
+  align-self: flex-end;
+}

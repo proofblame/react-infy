@@ -55,11 +55,9 @@ export default class PreviousNextMethods extends Component {
           {this.props.children}
         </Slider>
         <div className="slider__header learn__slider">
-          {/* {this.props.question.questionNumber === 8 ? ( */}
-          <button className="link link_active" onClick={() => { console.log(this.props.question) }}>Сохранить</button>
-          {/* ) : (
-            ''
-          )} */}
+
+
+
 
 
 

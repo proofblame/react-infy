@@ -11,25 +11,17 @@ import LearnPopupSlider from './LearnPopupSlider/LearnPopupSlider'
 import auth from '../../utils/auth';
 import Question from '../Question/Question';
 import Lesson from '../Lesson/Lesson';
-import LearnSwitcher from '../Learn/LearnSwitcher/LearnSwitcher'
 import { useList } from 'react-use';
 
 const Learn = () => {
   const [status, setStatus] = useState('process')
   const [button, setButton] = useState('Включить читы')
   const [modalActive, setModalActive] = useState(false)
-  // lessons
   const [lessons, setLessons] = useState([])
   const [isTested, setIsTested] = useState(false)
   const [lesson, setLesson] = useState({})
-
-
   const [questions, setQuestions] = useState([])
-  // const [questionNumber, setQuestionNumber] = useState(0)
-
   const [page, setPage] = useState(0)
-
-
   const videoList = [
     "https://www.youtube.com/embed/lTUejHSdpYE",
     "https://www.youtube.com/embed/lqvwu-_a5wo",
@@ -41,18 +33,9 @@ const Learn = () => {
     "https://www.youtube.com/embed/cvKcyjljIFM"
   ]
 
-
-
-
-
-
-
-
-
-
-
-
-
+  const [list, { updateAt }] = useList([]);
+  const [selectAnswer, setSelectAnswer] = useState({})
+  const [answerList, setAnswersList] = useState(list)
 
   useEffect(() => {
     getLessions()
@@ -69,9 +52,7 @@ const Learn = () => {
   }
 
   const handleClosePopup = () => {
-    // setModalActive(false)
-    keyExist('questionNumber', answerList)
-
+    setModalActive(false)
   }
   const handleOpenPopup = (lesson) => {
     setModalActive(true);
@@ -92,73 +73,9 @@ const Learn = () => {
     }
   }
 
-
-
-  const [isChecked, setIsChecked] = useState({
-
-  })
-  const [list, { set, push, updateAt, insertAt, update, updateFirst, upsert, sort, filter, removeAt, clear, reset }] = useList([]);
-  const [selectAnswer, setSelectAnswer] = useState({})
-  const [groupAnswer, setAnswer] = useState({})
-  const linkRef = useRef();
-  const [answerList, setAnswersList] = useState(list)
-  const [filterArray, setFilterArray] = useState([])
-  const [question, setQuestion] = useState()
-
-
-
   useEffect(() => {
     setAnswersList(list)
-
   }, [list])
-
-
-
-  function keyExist(value, array) {
-    var occurrences = {}
-
-    return array.filter(function (x) {
-      var property = x[value]
-      if (occurrences[property]) {
-        // console.log(occurrences)
-      }
-      occurrences[property] = true;
-      console.log(occurrences[property])
-    })
-    console.log(occurrences)
-  }
-
-  // console.log(filterArray)
-  const handleClickAnswer = (event, name, nameCheck) => {
-
-
-
-  }
-
-
-  const questionsList = questions.map((question, index) => (
-    <Question
-      key={question.questionNumber + index}
-      question={question}
-      answers={question.answers}
-      questions={questions}
-      handleClickAnswer={handleClickAnswer}
-      setSelectAnswer={setSelectAnswer}
-      selectAnswer={selectAnswer}
-      setAnswersList={setAnswersList}
-      groupAnswer={groupAnswer}
-      answerList={answerList}
-      push={push}
-      updateAt={updateAt}
-      list={list}
-      lesson={lesson}
-      setQuestion={setQuestion}
-    />
-  ))
-
-
-
-
 
   const nextLesson = () => {
     if (lesson.testNumber >= 1 && lesson.testNumber < lessons.length) {
@@ -188,10 +105,19 @@ const Learn = () => {
       return
     }
   }
-
-
-
-
+  const questionsList = questions.map((question, index) => (
+    <Question
+      key={question.questionNumber + index}
+      question={question}
+      answers={question.answers}
+      questions={questions}
+      setSelectAnswer={setSelectAnswer}
+      answerList={answerList}
+      updateAt={updateAt}
+      list={list}
+      lesson={lesson}
+    />
+  ))
 
   const lessonList = lessons.map((lesson, page) => (
     <>
@@ -239,7 +165,6 @@ const Learn = () => {
     </>
   ))
 
-
   return (
     <>
       <main className="main">
@@ -265,10 +190,8 @@ const Learn = () => {
           onClose={handleClosePopup}
         >
           <LearnPopupSlider
-            questions={questions}
             prevPage={prevQuestion}
             nextPage={nextQuestion}
-            question={question}
           >
             {questionsList}
           </LearnPopupSlider>
