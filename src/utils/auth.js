@@ -200,18 +200,14 @@ class Auth {
   // }
 
   // Отправить вопросы
-  sendAnswers(jwt, list) {
-    return fetch(`${this.baseURL}/learn/answer`, {
+  sendAnswers(jwt, lessonNumber, list) {
+    return fetch(`${this.baseURL}/learn/answer?lessonNumber=${lessonNumber}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${jwt}`,
       },
-      body: new URLSearchParams({
-        'lessonNumber': `${lessonNumber}`,
-        'questionNumber': `${questionNumber}`,
-        'answer': `${answer}`,
-      }),
+      body: JSON.stringify(list),
     })
       .then(this._getResponseData);
   }

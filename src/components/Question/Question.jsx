@@ -6,20 +6,20 @@ const Question = ({ answers, question, questions, handleClickAnswer, selectAnswe
 
   const handkleSendAnswers = (e) => {
     e.preventDefault()
-    // const jwt = localStorage.getItem('jwt');
-    // if (jwt) {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
 
-    //   auth
-    //     .sendAnswers(jwt, list)
-    //     .then((res) => {
-    //       console.log(res)
-    //     })
-    //     .catch(e => console.error(e.message));
+      auth
+        .sendAnswers(jwt, lesson.lessonNumber, list)
+        .then((res) => {
+          console.log(res)
+        })
+        .catch(e => console.error(e.message));
 
 
-    // }
-    let listng = JSON.stringify(list)
-    console.log(listng)
+    }
+    // let listng = JSON.stringify(list)
+    // console.log(lesson)
   }
 
 
