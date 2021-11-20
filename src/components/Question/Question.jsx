@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Answer from "../Answer/Answer";
 import auth from "../../utils/auth";
 import "./Question.css";
@@ -14,9 +14,23 @@ const Question = ({
   modalActive,
   setModalActive,
   setResult,
+  answerList,
+  setAnswersList,
+  // filteredAnswer
 }) => {
+  // const [filteredAnswer, setFilteredAnswer] = useState([]);
+  // useEffect(() => {
+
+  //   let filterred = list.filter(Boolean)
+  //   setFilteredAnswer(filterred)
+  //   console.log(filteredAnswer)
+  // }, [list])
+
+
   const handkleSendAnswers = (e) => {
     e.preventDefault();
+
+
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
@@ -65,7 +79,7 @@ const Question = ({
         </li>
         {answersList}
       </ul>
-      {question.questionNumber === lesson.questionList.length && list.length === lesson.questionList.length ? (
+      {question.questionNumber === lesson.questionList.length && answerList.length === lesson.questionList.length ? (
         <button type="submit" className="link link_active question__button" onClick={(() => { console.log() })}>
           Сохранить
         </button>

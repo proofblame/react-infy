@@ -39,6 +39,7 @@ const Learn = () => {
   const [list, { updateAt }] = useList([]);
   const [answerList, setAnswersList] = useState(list);
   const [result, setResult] = useState({});
+  const [filteredAnswer, setFilteredAnswer] = useState([]);
 
   useEffect(() => {
     getLessions();
@@ -82,7 +83,10 @@ const Learn = () => {
   };
 
   useEffect(() => {
-    setAnswersList(list);
+    let filtered = list.filter(Boolean)
+    setAnswersList(filtered);
+    // setFilteredAnswer(filtered)
+    // console.log(filteredAnswer)
   }, [list]);
 
   const nextLesson = () => {
@@ -125,6 +129,9 @@ const Learn = () => {
       setModalActive={setModalActive}
       setResult={setResult}
       modalActive={modalActive}
+      answerList={answerList}
+      setAnswersList={setAnswersList}
+    // filteredAnswer={filteredAnswer}
     />
   ));
 
