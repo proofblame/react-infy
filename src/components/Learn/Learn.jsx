@@ -40,9 +40,9 @@ const Learn = ({ refToken }) => {
   const [filteredAnswer, setFilteredAnswer] = useState([]);
 
   useEffect(() => {
+    document.title = "Study"
     getLessions();
   }, []);
-
 
 
   const handleClosePopup = () => {
