@@ -136,6 +136,7 @@ const Learn = ({ refToken }) => {
       answerList={answerList}
       setAnswersList={setAnswersList}
       refToken={refToken}
+      page={index}
     // filteredAnswer={filteredAnswer}
     />
   ));

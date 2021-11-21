@@ -16,7 +16,8 @@ const Question = ({
   setResult,
   answerList,
   setAnswersList,
-  refToken
+  refToken,
+  page
   // filteredAnswer
 }) => {
   // const [filteredAnswer, setFilteredAnswer] = useState([]);
@@ -69,6 +70,7 @@ const Question = ({
       setSelectAnswer={setSelectAnswer}
       updateAt={updateAt}
       lesson={lesson}
+
     />
   ));
 
@@ -84,7 +86,7 @@ const Question = ({
       <ul className="test__block">
         <li className="test__row">
           <p className="test__count text text_size_normal">
-            {question.questionNumber} / {questions.length}
+            {page + 1} / {questions.length}
           </p>
           <p
             className="test__question text text_size_normal"
