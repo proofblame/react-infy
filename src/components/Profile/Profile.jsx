@@ -13,7 +13,9 @@ function Profile({ currentUser }) {
   const [textCopy, setTextCopy] = useState("text-copy");
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/registration?joinedBy=${currentUser.nickname}`);
+    // navigator.clipboard.writeText(`${window.location.origin}/registration?joinedBy=${currentUser.nickname}`);
+    navigator.clipboard.writeText(`${window.location.origin}/registration?joinedBy=
+    ${encodeURIComponent((currentUser.nickname).replace(/%20/g, "+"))}`);
     setTextCopy("text-copy text-copy-active");
     console.log(window.location)
 
