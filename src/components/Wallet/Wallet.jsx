@@ -13,7 +13,7 @@ import WalletSlider from './Slider/Slider';
 
 
 
-function Wallet({ currentUser, currentWallet, checkToken }) {
+function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
   useEffect(() => {
     document.title = "Wallet"
   }, []);
@@ -28,42 +28,87 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   const [pageCount, setPageCount] = useState(0);
 
   const handleUndelegateInfy = (amountUndel) => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .undelegateInfy(jwt, amountUndel)
-        .then(() => {
-          setModalActive({ ...modalActive, undelegationPopup: false })
-          checkToken();
-        })
-        .catch(e => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .undelegateInfy(jwt, amountUndel)
+            .then(() => {
+              setModalActive({ ...modalActive, undelegationPopup: false })
+              checkToken();
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+
+                console.error(e)
+              }
+
+            });
+        }
+      })
   }
 
   const handleDelegateInfy = (amountDel) => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .delegateInfy(jwt, amountDel)
-        .then(() => {
-          setModalActive({ ...modalActive, delegationPopup: false })
-          checkToken();
-        })
-        .catch(e => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .delegateInfy(jwt, amountDel)
+            .then(() => {
+              setModalActive({ ...modalActive, delegationPopup: false })
+              checkToken();
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+
+                console.error(e)
+              }
+
+            });
+        }
+      })
   }
 
   const handleSendInfy = (amount, walletTo,) => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .sendInfy(jwt, walletTo, amount)
-        .then(() => {
-          setModalActive({ ...modalActive, transferPopup: false })
-          checkToken();
-        })
-        .catch(e => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .sendInfy(jwt, walletTo, amount)
+            .then(() => {
+              setModalActive({ ...modalActive, transferPopup: false })
+              checkToken();
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+
+                console.error(e)
+              }
+
+            });
+        }
+      })
   }
 
   const nextPage = () => {
@@ -90,16 +135,31 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   }, [page, modalActive])
 
   const getTansactions = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .getTransactionsInfo(jwt, page, 8)
-        .then(transactions => {
-          setCurentTransactions(transactions.histories);
-          setPageCount(transactions.pageCount)
-        })
-        .catch(e => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .getTransactionsInfo(jwt, page, 8)
+            .then(transactions => {
+              setCurentTransactions(transactions.histories);
+              setPageCount(transactions.pageCount)
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+
+                console.error(e)
+              }
+
+            });
+        }
+      })
   }
 
 

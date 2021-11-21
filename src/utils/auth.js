@@ -3,12 +3,7 @@ class Auth {
     this.baseURL = baseURL;
   }
 
-  _getResponseData(res) {
-    if (res.ok) return res.json();
-    return res
-      .json()
-      .then((res) => Promise.reject(new Error(res.message || res.error)));
-  }
+
 
   register(username, joinedBy, email, password, telegram) {
     return fetch(`${this.baseURL}/registration`, {
@@ -36,6 +31,16 @@ class Auth {
         'username': `${username}`,
         'password': `${password}`,
       })
+    })
+      .then(this._getResponseData);
+  }
+  refreshToken(jwt) {
+    return fetch(`${this.baseURL}/token/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${jwt}`,
+      }
     })
       .then(this._getResponseData);
   }
@@ -196,6 +201,13 @@ class Auth {
       .then(this._getResponseData);
   }
 
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res);
+
+  }
 }
 
 // Сервер на продакшн

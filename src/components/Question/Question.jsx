@@ -16,6 +16,7 @@ const Question = ({
   setResult,
   answerList,
   setAnswersList,
+  refToken
   // filteredAnswer
 }) => {
   // const [filteredAnswer, setFilteredAnswer] = useState([]);
@@ -29,19 +30,34 @@ const Question = ({
 
   const handkleSendAnswers = (e) => {
     e.preventDefault();
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+
+        const jwt = localStorage.getItem("jwt");
+        if (jwt) {
+          auth
+            .sendAnswers(jwt, lesson.lessonNumber, list)
+            .then((res) => {
+              setModalActive({ ...modalActive, testResult: true })
+              setResult(res)
+              console.log(res);
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+                console.error(e)
+              }
+
+            });
+        }
+      })
 
 
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .sendAnswers(jwt, lesson.lessonNumber, list)
-        .then((res) => {
-          setModalActive({ ...modalActive, testResult: true })
-          setResult(res)
-          console.log(res);
-        })
-        .catch((e) => console.error(e.message));
-    }
   };
 
   const answersList = answers.map((answer, index) => (

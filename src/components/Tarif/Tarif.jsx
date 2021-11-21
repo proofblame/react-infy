@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal';
 import Popup from '../Popup/Popup';
 
 
-function Tarif() {
+function Tarif({ refToken }) {
   useEffect(() => {
     document.title = "Tarif"
   }, []);
@@ -23,38 +23,65 @@ function Tarif() {
   }, [])
 
   const handleGetTarif = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .getTarif(jwt)
-        .then((tarif) => {
-          setTarif(tarif)
-        })
-        .catch(e => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .getTarif(jwt)
+            .then((tarif) => {
+              setTarif(tarif)
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+                console.error(e)
+              }
+
+            });
+        }
+      })
   }
 
   const handlePayTarif = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .payTarif(jwt)
-        .then((pay) => {
-          setTarif(pay)
-          setPay(true)
-          setStatusMessage('Тариф оплачен')
-          setTimeout(() => {
-            setModalActive(false);
-            setStatusMessage('')
-            setPay(null)
-          }, 2000)
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .payTarif(jwt)
+            .then((pay) => {
+              setTarif(pay)
+              setPay(true)
+              setStatusMessage('Тариф оплачен')
+              setTimeout(() => {
+                setModalActive(false);
+                setStatusMessage('')
+                setPay(null)
+              }, 2000)
 
-        })
-        .catch(() => {
-          setPay(false)
-          setStatusMessage('Недостаточно монет')
-        });
-    }
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+
+                console.error(e)
+              }
+              setPay(false)
+              setStatusMessage('Недостаточно монет')
+            });
+        }
+      })
   }
 
 

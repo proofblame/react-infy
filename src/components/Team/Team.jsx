@@ -5,7 +5,7 @@ import './Team.css'
 import Summary from '../Summary/Summary'
 import Tree from '../Tree/Tree'
 
-function Team({ currentUser, currentTeam, checkToken }) {
+function Team({ currentUser, currentTeam, checkToken, refToken }) {
   useEffect(() => {
     document.title = "Team"
   }, []);
@@ -52,7 +52,7 @@ function Team({ currentUser, currentTeam, checkToken }) {
           </div>
         </section>
         <Summary currentTeam={currentTeam} />
-        <Tree checkToken={checkToken} />
+        <Tree checkToken={checkToken} refToken={refToken} />
       </div>
     </main>
 

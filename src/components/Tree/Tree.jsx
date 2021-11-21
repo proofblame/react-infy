@@ -6,7 +6,7 @@ import auth from '../../utils/auth';
 import TreeItem from '../TreeItem/TreeItem';
 import Card from '../Card/Card';
 
-const Tree = () => {
+const Tree = ({ refToken }) => {
   const [modalActive, setModalActive] = useState({
     treePopup: false,
     cardPopup: false,
@@ -40,20 +40,34 @@ const Tree = () => {
   useEffect(() => {
     handleGetTreeInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [line, page])
+  }, [line, page, refToken])
 
   const handleGetTreeInfo = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .getTreeInfo(jwt, line, page, 4)
-        .then((tree) => {
-          setModalActive({ ...modalActive, treePopup: true })
-          setCurrentTree(tree.lines)
-          setPageCount(tree.pagesCount)
-        })
-        .catch(e => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .getTreeInfo(jwt, line, page, 4)
+            .then((tree) => {
+              setModalActive({ ...modalActive, treePopup: true })
+              setCurrentTree(tree.lines)
+              setPageCount(tree.pagesCount)
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+
+                console.error(e)
+              }
+            });
+        }
+      })
   }
 
   const handleOpenPopup = (line) => {

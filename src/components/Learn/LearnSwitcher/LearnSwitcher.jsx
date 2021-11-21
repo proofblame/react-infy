@@ -21,7 +21,7 @@ const Switcher = ({
     <div className="learn__radio">
       <input
         type="radio"
-        className=""
+        className="learn__radio-input"
         name={questionNumber}
         id={questionNumber}
         onChange={handleChange}
@@ -31,7 +31,7 @@ const Switcher = ({
       />
       <label
         htmlFor={questionNumber}
-        className="text text_size_x-small"
+        className="text text_size_x-small learn__label"
       ></label>
     </div>
   );

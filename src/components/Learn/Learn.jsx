@@ -12,8 +12,9 @@ import auth from "../../utils/auth";
 import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
+import token from 'jsonwebtoken'
 
-const Learn = () => {
+const Learn = ({ refToken }) => {
 
   const [modalActive, setModalActive] = useState({
     testPopup: false,
@@ -59,18 +60,31 @@ const Learn = () => {
   };
 
   const getLessions = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .getLessions(jwt)
-        .then((res) => {
-          setLessons(res.lessons);
-          setIsTested(res.isTested);
-          console.log(res);
-        })
-        .catch((e) => console.error(e.message));
-    }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem("jwt");
+        if (jwt) {
+          auth
+            .getLessions(jwt)
+            .then((res) => {
+              if (res.status === 403) {
+                refToken()
+              }
+              setLessons(res.lessons);
+              setIsTested(res.isTested);
+            })
+            .catch((res) => {
+              console.error(res)
+            });
+        }
+      })
+
   };
+
 
   useEffect(() => {
     let filtered = list.filter(Boolean)
@@ -121,6 +135,7 @@ const Learn = () => {
       modalActive={modalActive}
       answerList={answerList}
       setAnswersList={setAnswersList}
+      refToken={refToken}
     // filteredAnswer={filteredAnswer}
     />
   ));

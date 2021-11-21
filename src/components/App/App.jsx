@@ -24,15 +24,18 @@ import Support from '../Support/Support';
 import {
   Switch,
   Route,
-  useLocation
+  useLocation,
+  useHistory
 } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 import Learn from '../Learn/Learn';
+import jsonwebtoken from 'jsonwebtoken'
 
 
 
 
 function App() {
+  const history = useHistory();
   const { pathname } = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [currentWallet, setCurentWallet] = useState({});
@@ -64,19 +67,40 @@ function App() {
           setLoggedIn(true);
           setCurrentUser(user);
         })
-        .catch(e => console.error(e.message));
+        .catch((e) => {
+          if (e.status === 403) {
+            refToken()
+          } else {
+            console.error(e)
+          }
+
+        });
       auth
         .getWalletInfo(jwt)
         .then(wallet => {
           setCurentWallet(wallet);
         })
-        .catch(e => console.error(e.message));
+        .catch((e) => {
+          if (e.status === 403) {
+            refToken()
+          } else {
+            console.error(e)
+          }
+
+        });
       auth
         .getTeamInfo(jwt)
         .then(team => {
           setCurentTeam(team);
         })
-        .catch(e => console.error(e.message));
+        .catch((e) => {
+          if (e.status === 403) {
+            refToken()
+          } else {
+            console.error(e)
+          }
+
+        });
 
     } else {
       setLoggedIn(false);
@@ -98,7 +122,22 @@ function App() {
   function handleLogin(username, password) {
     return auth.login(username, password).then(res => {
       localStorage.setItem('jwt', res.access_token);
+      localStorage.setItem('refresh_token', res.refresh_token);
     });
+  }
+
+  function refToken() {
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      })
+      .catch((e) => {
+        if (e.status !== 200) {
+          history.push("/login");
+          console.error(e)
+        }
+      });
   }
 
   function handleSignout() {
@@ -107,6 +146,7 @@ function App() {
     setCurentWallet({});
     setCurentTeam({});
     localStorage.removeItem('jwt');
+    localStorage.removeItem('refresh_token');
   }
 
 
@@ -126,21 +166,21 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
           <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
           <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
-          <ProtectedRoute loggedIn={loggedIn} component={Tarif} path="/tarif" />
+          <ProtectedRoute loggedIn={loggedIn} component={Tarif} refToken={refToken} path="/tarif" />
           <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
-          <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
-          <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
+          <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
+          <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
 
           <Route path="/login">
-            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} />
+            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
           </Route>
           <Route path="/registration">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
 
           <Route path="/learn">
-            <Learn></Learn>
+            <Learn refToken={refToken}></Learn>
             {/* <Error title={'Soon'}></Error> */}
           </Route>
 
