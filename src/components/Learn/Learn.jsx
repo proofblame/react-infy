@@ -30,9 +30,7 @@ const Learn = () => {
     "https://www.youtube.com/embed/IcqE7YhTVWw",
     "https://www.youtube.com/embed/3-a6c9w7m0c",
     "https://www.youtube.com/embed/hN-B3-NcK04",
-    "https://www.youtube.com/watch?v=Na_SxDK12-s&ab_channel=InfinityC2",
-    "https://www.youtube.com/embed/tYZFwKUW6M4",
-    "https://www.youtube.com/embed/cvKcyjljIFM",
+
   ];
 
   const [list, { updateAt }] = useList([]);
@@ -220,28 +218,70 @@ const Learn = () => {
           <section className="main__profile profile">
             <div className="profile__body">
               {isTested ? (
-                <div className="learn__data learn__data_complete">
-                  <div className="data__user">
-                    <img src={completeStudyIcon} className="learn__img" alt="Succes" />
+                <>
+                  <div className="learn__data learn__data_complete">
+                    <div className="data__user">
+                      <img src={completeStudyIcon} className="learn__img" alt="Succes" />
 
-                  </ div>
-                  <div className="learn__body">
+                    </ div>
+                    <div className="learn__body">
 
-                    <h1 className="profile__title title">Обучение партнёров</h1>
-                    <p className="text text_size_large">
-                      <b>
-                        Поздравляем! Ты прошёл обучение!
-                      </b>
-                    </p>
-                    <br />
-                    <a className="link link_active" href='./pdf/certificate.pdf' target='_blank'>
-                      Скачать сертификат
-                    </a>
+                      <h1 className="profile__title title">Обучение партнёров</h1>
+                      <p className="text text_size_large">
+                        <b>
+                          Поздравляем! Ты прошёл обучение!
+                        </b>
+                      </p>
+                      <br />
+                      <a className="link link_active" href='./pdf/certificate.pdf' target='_blank'>
+                        Скачать сертификат
+                      </a>
 
 
+
+                    </div>
 
                   </div>
-                </div>
+                  <div className="learn__body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <p className="text text_size_large">
+                      <b>
+                        Дополнительные уроки
+                      </b>
+                    </p>
+                    <div className="learn__video">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={'https://www.youtube.com/embed/Na_SxDK12-s'}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div><div className="learn__video">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={'https://www.youtube.com/embed/tYZFwKUW6M4'}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div><div className="learn__video">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={'https://www.youtube.com/embed/cvKcyjljIFM'}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+
+                  </div>
+                </>
               ) : (
                 <>
                   <h1 className="profile__title title learn__title">
