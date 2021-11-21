@@ -47,7 +47,8 @@ export default class PreviousNextMethods extends Component {
 
     const buttonGroup = {
       display: 'flex',
-      columnGap: '5px'
+      columnGap: '5px',
+      paddingTop: '35px'
     }
     return (
       <div>
