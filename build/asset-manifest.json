@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "./static/css/main.9bdd9ffd.chunk.css",
+    "main.js": "./static/js/main.f587c84a.chunk.js",
+    "main.js.map": "./static/js/main.f587c84a.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.67a1c3aa.js",
+    "runtime-main.js.map": "./static/js/runtime-main.67a1c3aa.js.map",
+    "static/js/2.640d5dba.chunk.js": "./static/js/2.640d5dba.chunk.js",
+    "static/js/2.640d5dba.chunk.js.map": "./static/js/2.640d5dba.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.9bdd9ffd.chunk.css.map": "./static/css/main.9bdd9ffd.chunk.css.map",
+    "static/js/2.640d5dba.chunk.js.LICENSE.txt": "./static/js/2.640d5dba.chunk.js.LICENSE.txt",
+    "static/media/index.css": "./static/media/wallet-3.febacf75.png",
+    "static/media/Main.css": "./static/media/combDark.05444c24.png",
+    "static/media/complete-study-icon.1938451b.png": "./static/media/complete-study-icon.1938451b.png",
+    "static/media/copy-icon.449cdad2.svg": "./static/media/copy-icon.449cdad2.svg",
+    "static/media/grad.54cd8fd3.svg": "./static/media/grad.54cd8fd3.svg",
+    "static/media/graph.b1d3c289.svg": "./static/media/graph.b1d3c289.svg",
+    "static/media/icons-menu.5eacad61.svg": "./static/media/icons-menu.5eacad61.svg",
+    "static/media/About.css": "./static/media/icons.40e7c9a4.svg",
+    "static/media/icons.81811334.svg": "./static/media/icons.81811334.svg",
+    "static/media/Profile.css": "./static/media/icons.a8af9767.svg",
+    "static/media/Team.css": "./static/media/icons.d293b598.svg",
+    "static/media/nlo.9da1e6f2.png": "./static/media/nlo.9da1e6f2.png",
+    "static/media/telegramIcon.e8a599be.svg": "./static/media/telegramIcon.e8a599be.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.67a1c3aa.js",
+    "static/js/2.640d5dba.chunk.js",
+    "static/css/main.9bdd9ffd.chunk.css",
+    "static/js/main.f587c84a.chunk.js"
+  ]
+}
