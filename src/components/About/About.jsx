@@ -35,7 +35,7 @@ const About = () => {
             </div>
             <div className="wrapper">
               <p className="about__text about__text_black text">Курс INFY</p>
-              <p className="about__text about__text_black-2 text">26 рублей</p>
+              <p className="about__text about__text_black-2 text">28 рублей</p>
             </div>
           </div>
           <div className="about__article-footer">
@@ -92,9 +92,9 @@ const About = () => {
                     <td><s className="crossed-out">24 рубля</s></td>
                   </tr>
                   <tr>
-                    <td>№7</td>
-                    <td>12.11 - 18.11</td>
-                    <td>26 рублей</td>
+                    <td><s className="crossed-out">№7</s></td>
+                    <td><s className="crossed-out">12.11 - 18.11</s></td>
+                    <td><s className="crossed-out">26 рублей</s></td>
                   </tr>
                   <tr>
                     <td>№8</td>
@@ -108,8 +108,9 @@ const About = () => {
                   <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
                 </picture>
               </div>
-              <p className="about__table-text text">3 986 454 (39.86%) / 10 000 000 INFY</p>
+              <p className="about__table-text text">4 627 094 (46.27%) / 10 000 000 INFY</p>
             </div>
+
           </div>
           <div className="about__link">
             <a href="https://t.me/infy_official_exchange_bot" className="link link_active">Купить

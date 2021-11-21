@@ -32,8 +32,14 @@ $maxWidth: 1628;
     margin-right: 15px;
     @include adaptiv(column-gap, 70, 0);
     @include adaptiv(row-gap, 15, 15);
-    @include adaptiv(padding-top, 105, 0);
+
     @include adaptiv(margin-bottom, 25, 10);
+  }
+  &__data_complete {
+    @include adaptiv(padding-top, 105, 0);
+  }
+  &__img {
+    // @include adaptiv(margin-top, 50, 0);
   }
   &__body {
   }

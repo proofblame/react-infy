@@ -11,6 +11,7 @@ function TestPopup({ onClose, children }) {
           className="form__button form__button_type_close close"
           onClick={() => {
             onClose();
+
           }}
         ></button>
       </div>

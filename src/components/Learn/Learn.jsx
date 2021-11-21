@@ -14,8 +14,7 @@ import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
 
 const Learn = () => {
-  const [status, setStatus] = useState("process");
-  const [button, setButton] = useState("Включить читы");
+
   const [modalActive, setModalActive] = useState({
     testPopup: false,
     testResult: false
@@ -45,15 +44,7 @@ const Learn = () => {
     getLessions();
   }, []);
 
-  const handleClick = () => {
-    if (status === "process") {
-      setStatus("complete");
-      setButton("Выключить читы");
-    } else {
-      setStatus("process");
-      setButton("Включить читы");
-    }
-  };
+
 
   const handleClosePopup = () => {
     setAnswersList([])
@@ -66,6 +57,7 @@ const Learn = () => {
     setModalActive({ ...modalActive, testPopup: true });
     setLesson(lesson);
     setQuestions(lesson.questionList);
+
   };
 
   const getLessions = () => {
@@ -164,7 +156,21 @@ const Learn = () => {
                   </b>
                 </p>
               </div>
-              {lesson.isAvailable ? (
+
+              {
+                lesson.tested && (
+                  <div className="learn__lessons-body">
+                    <p className="learn__lesson-title text text_size_normal" style={{ color: 'green' }}>
+                      <b>
+                        Урок пройден.
+                      </b>
+                    </p>
+                    <p className="learn__lesson-subtitle text text_size_x-small"></p>
+                    <p className="learn__lesson-progress text text_size_x-small"></p>
+                  </div>
+                )
+              }
+              {lesson.isAvailable && !lesson.tested ? (
                 <>
                   <button
                     className="link link_active"
@@ -175,7 +181,7 @@ const Learn = () => {
                   <div className="learn__lessons-body">
                     <p className="learn__lesson-title text text_size_normal">
                       <b>
-                        Перед прохождением теста ознакомтесь с информацией в
+                        Перед прохождением теста ознакомьтесь с информацией в
                         видеоуроке.
                       </b>
                     </p>
@@ -183,21 +189,22 @@ const Learn = () => {
                     <p className="learn__lesson-progress text text_size_x-small"></p>
                   </div>
                 </>
-              ) : (
-                <>
-                  <span></span>
-                  <div className="learn__lessons-body">
-                    <p className="learn__lesson-title text text_size_normal">
-                      <b>
-                        Тест недоступен. <br /> <br /> Чтобы разблокировать
-                        тест, необходимо успешно сдать предыдущие.
-                      </b>
-                    </p>
-                    <p className="learn__lesson-subtitle text text_size_x-small"></p>
-                    <p className="learn__lesson-progress text text_size_x-small"></p>
-                  </div>
-                </>
-              )}
+              )
+                : !lesson.isAvailable && (
+                  <>
+                    <span></span>
+                    <div className="learn__lessons-body">
+                      <p className="learn__lesson-title text text_size_normal">
+                        <b>
+                          Тест недоступен. <br /> <br /> Чтобы разблокировать
+                          тест, необходимо успешно сдать предыдущие.
+                        </b>
+                      </p>
+                      <p className="learn__lesson-subtitle text text_size_x-small"></p>
+                      <p className="learn__lesson-progress text text_size_x-small"></p>
+                    </div>
+                  </>
+                )}
             </div>
           </div>
         </div>
@@ -208,13 +215,12 @@ const Learn = () => {
   return (
     <>
       <main className="main">
-        <button onClick={handleClick}>{button}</button>
         <div className="container">
           <Nav />
           <section className="main__profile profile">
             <div className="profile__body">
               {isTested ? (
-                <div className="learn__data">
+                <div className="learn__data learn__data_complete">
                   <div className="data__user">
                     <img src={completeStudyIcon} className="learn__img" alt="Succes" />
 
@@ -295,6 +301,7 @@ const Learn = () => {
             handleClosePopup();
             getLessions();
             nextLesson();
+            window.location.reload()
           }}
         ></button>
       </Modal>

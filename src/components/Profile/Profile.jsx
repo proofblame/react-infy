@@ -94,7 +94,7 @@ function Profile({ currentUser }) {
                           t.me/{currentUser.telegram}
                         </p>
                       </div>
-                      <div className="data__contacts-block data__contacts-block_desktop">
+                      {/* <div className="data__contacts-block data__contacts-block_desktop">
                         <p className="text text_size_small text_color_lighter">
                           Отправка уведомлений
                         </p>
@@ -113,7 +113,7 @@ function Profile({ currentUser }) {
                             Разрешить отправку уведомлений на E-Mail
                           </label>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
