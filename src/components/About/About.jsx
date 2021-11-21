@@ -51,7 +51,7 @@ const About = () => {
               </picture>
             </div>
             <div className="about__table">
-              <p className="about__table-text text">8 стадий продаж первой эмиссии</p>
+              <p className="about__table-text text">11 стадий продаж первой эмиссии</p>
               <table className="about__table-body">
                 <thead>
                   <tr>
@@ -100,6 +100,21 @@ const About = () => {
                     <td>№8</td>
                     <td>19.11 - 25.11</td>
                     <td>28 рублей</td>
+                  </tr>
+                  <tr>
+                    <td>№9</td>
+                    <td>26.11 - 02.12</td>
+                    <td>30 рублей</td>
+                  </tr>
+                  <tr>
+                    <td>№10</td>
+                    <td>03.12 - 09.12</td>
+                    <td>32 рубля</td>
+                  </tr>
+                  <tr>
+                    <td>№11</td>
+                    <td>10.12 - 16.12</td>
+                    <td>34 рубля</td>
                   </tr>
                 </tbody>
               </table>
