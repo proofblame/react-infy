@@ -59,52 +59,59 @@ function App() {
   }, [theme]);
 
   function checkToken() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .getUserInfo(jwt)
-        .then(user => {
-          setLoggedIn(true);
-          setCurrentUser(user);
-        })
-        .catch((e) => {
-          if (e.status === 403) {
-            refToken()
-          } else {
-            console.error(e)
-          }
+    refToken()
+    const refresh_token = localStorage.getItem('refresh_token');
+    return auth.refreshToken(refresh_token)
+      .then(res => {
+        localStorage.setItem('jwt', res.access_token);
+      }).then(() => {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+          auth
+            .getUserInfo(jwt)
+            .then(user => {
+              setLoggedIn(true);
+              setCurrentUser(user);
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+                console.error(e)
+              }
 
-        });
-      auth
-        .getWalletInfo(jwt)
-        .then(wallet => {
-          setCurentWallet(wallet);
-        })
-        .catch((e) => {
-          if (e.status === 403) {
-            refToken()
-          } else {
-            console.error(e)
-          }
+            });
+          auth
+            .getWalletInfo(jwt)
+            .then(wallet => {
+              setCurentWallet(wallet);
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+                console.error(e)
+              }
 
-        });
-      auth
-        .getTeamInfo(jwt)
-        .then(team => {
-          setCurentTeam(team);
-        })
-        .catch((e) => {
-          if (e.status === 403) {
-            refToken()
-          } else {
-            console.error(e)
-          }
+            });
+          auth
+            .getTeamInfo(jwt)
+            .then(team => {
+              setCurentTeam(team);
+            })
+            .catch((e) => {
+              if (e.status === 403) {
+                refToken()
+              } else {
+                console.error(e)
+              }
 
-        });
+            });
 
-    } else {
-      setLoggedIn(false);
-    }
+        } else {
+          setLoggedIn(false);
+        }
+      })
   }
 
 
