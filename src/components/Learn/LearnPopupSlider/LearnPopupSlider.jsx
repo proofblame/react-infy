@@ -56,14 +56,6 @@ export default class PreviousNextMethods extends Component {
           {this.props.children}
         </Slider>
         <div className="slider__header learn__slider">
-
-
-
-
-
-
-
-
           <div style={buttonGroup}>
             <button
               className="slider__button button learn__button"
@@ -77,7 +69,6 @@ export default class PreviousNextMethods extends Component {
               onClick={() => {
                 this.next();
                 this.props.nextPage();
-
               }}
             ></button>
           </div>

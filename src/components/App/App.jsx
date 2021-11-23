@@ -30,6 +30,7 @@ import {
 import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 import Learn from '../Learn/Learn';
 import jsonwebtoken from 'jsonwebtoken'
+import Loader from '../Loader/Loader';
 
 
 
@@ -178,6 +179,7 @@ function App() {
           <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
           <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
+          <ProtectedRoute loggedIn={loggedIn} component={Learn} refToken={refToken} path="/learn" />
 
           <Route path="/login">
             <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
@@ -185,11 +187,9 @@ function App() {
           <Route path="/registration">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
-
-          <Route path="/learn">
-            <Learn refToken={refToken}></Learn>
-            {/* <Error title={'Soon'}></Error> */}
-          </Route>
+          {/* <Route path="/loader">
+            <Loader />
+          </Route> */}
 
           <Route component={Error} path="*" />
         </Switch>

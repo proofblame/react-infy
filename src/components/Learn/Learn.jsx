@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import "./Learn.scss";
 import Nav from "../Nav/Nav";
 import LearnSlider from "./LearnSlider/LearnSlider";
@@ -15,6 +15,7 @@ import { useList } from "react-use";
 import token from 'jsonwebtoken'
 
 const Learn = ({ refToken }) => {
+  const inputElement = createRef();
 
   const [modalActive, setModalActive] = useState({
     testPopup: false,
@@ -34,18 +35,21 @@ const Learn = ({ refToken }) => {
 
   ];
 
-  const [list, { updateAt }] = useList([]);
+  const [list, { updateAt, clear }] = useList([]);
   const [answerList, setAnswersList] = useState(list);
   const [result, setResult] = useState({});
   const [filteredAnswer, setFilteredAnswer] = useState([]);
-
+  const [state, setState] = useState({});
   useEffect(() => {
     document.title = "Study"
     getLessions();
   }, []);
 
 
-  const handleClosePopup = () => {
+  const handleClosePopup = (e) => {
+    clear();
+    setState(false)
+    console.log(e)
     setAnswersList([])
     setModalActive({
       testPopup: false,
@@ -137,6 +141,9 @@ const Learn = ({ refToken }) => {
       setAnswersList={setAnswersList}
       refToken={refToken}
       page={index}
+      state={state}
+      setState={setState}
+
     // filteredAnswer={filteredAnswer}
     />
   ));
@@ -357,7 +364,6 @@ const Learn = ({ refToken }) => {
             handleClosePopup();
             getLessions();
             nextLesson();
-            window.location.reload()
           }}
         ></button>
       </Modal>

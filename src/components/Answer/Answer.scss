@@ -1,0 +1,88 @@
+@import './AnswerDark.scss';
+@mixin adaptiv($value, $pcSize, $mobSize) {
+  #{$value}: #{$pcSize + px};
+
+  @media screen and (max-width: 1627.98px) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    #{$value}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+}
+
+$maxWidth: 1628;
+
+.answer {
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: relative;
+
+  @include adaptiv(margin-bottom, 14, 10);
+
+  &:hover {
+    .answer__check {
+      border-color: #633d8d;
+      @include adaptiv(border-width, 3, 1);
+    }
+
+    .answer__label {
+      color: #000;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    visibility: hidden;
+
+    &:checked ~ .answer__check {
+      border-color: #633d8d;
+      border-style: solid;
+      color: #fff;
+      background-color: #633d8d;
+      @include adaptiv(border-width, 3, 1);
+    }
+
+    &:checked ~ .answer__check::before {
+      background: #fff;
+      border-color: #fff;
+    }
+
+    &:checked ~ .answer__label {
+      color: #633d8d;
+    }
+  }
+
+  &__label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
+    border-style: solid;
+    border-color: transparent;
+    @include adaptiv(border-width, 3, 1);
+    &::before {
+      display: flex;
+      flex-shrink: 0;
+      content: '';
+      background-color: rgba(255, 255, 255, 0.7);
+      border-color: #633d8d;
+      border-style: solid;
+      border-width: 1px;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      margin-right: 0.375em;
+      transition: 0.25s ease;
+    }
+  }
+}

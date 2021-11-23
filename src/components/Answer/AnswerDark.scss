@@ -1,0 +1,41 @@
+.dark .answer {
+  &:hover {
+    .answer__check {
+      border-color: #fff;
+      color: rgba(255, 255, 255, 0.8);
+
+      &::before {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .answer__label {
+      color: #fff;
+    }
+  }
+
+  &__input {
+    &:checked ~ .answer__check {
+      border-color: #633d8d;
+      color: #633d8d;
+      background: none;
+    }
+
+    &:checked ~ .answer__check::before {
+      background: #633d8d;
+    }
+
+    &:checked ~ .answer__label {
+      color: #633d8d;
+    }
+  }
+
+  &__check {
+    border-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    &::before {
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+    }
+  }
+}
