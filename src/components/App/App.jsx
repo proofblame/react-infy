@@ -76,7 +76,7 @@ function App() {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+                // refToken() 
               } else {
                 console.error(e)
               }
@@ -89,7 +89,7 @@ function App() {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+                // refToken()
               } else {
                 console.error(e)
               }
@@ -102,7 +102,7 @@ function App() {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+                // refToken()
               } else {
                 console.error(e)
               }
@@ -112,6 +112,10 @@ function App() {
         } else {
           setLoggedIn(false);
         }
+      }).catch(() => {
+
+        setLoggedIn(false);
+
       })
   }
 
@@ -187,9 +191,7 @@ function App() {
           <Route path="/registration">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
           </Route>
-          {/* <Route path="/loader">
-            <Loader />
-          </Route> */}
+
 
           <Route component={Error} path="*" />
         </Switch>
