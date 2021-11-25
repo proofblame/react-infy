@@ -35,7 +35,7 @@ const About = () => {
             </div>
             <div className="wrapper">
               <p className="about__text about__text_black text">Курс INFY</p>
-              <p className="about__text about__text_black-2 text">28 рублей</p>
+              <p className="about__text about__text_black-2 text">30 рублей</p>
             </div>
           </div>
           <div className="about__article-footer">
@@ -97,9 +97,9 @@ const About = () => {
                     <td><s className="crossed-out">26 рублей</s></td>
                   </tr>
                   <tr>
-                    <td>№8</td>
-                    <td>19.11 - 25.11</td>
-                    <td>28 рублей</td>
+                    <td><s className="crossed-out">№8</s></td>
+                    <td><s className="crossed-out">19.11 - 25.11</s></td>
+                    <td><s className="crossed-out">28 рублей</s></td>
                   </tr>
                   <tr>
                     <td>№9</td>
@@ -123,7 +123,7 @@ const About = () => {
                   <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
                 </picture>
               </div>
-              <p className="about__table-text text">4 627 094 (46.27%) / 10 000 000 INFY</p>
+              <p className="about__table-text text">4 967 312 (49.67%) / 10 000 000 INFY</p>
             </div>
 
           </div>

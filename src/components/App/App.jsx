@@ -171,7 +171,7 @@ function App() {
         <Header themeToggler={themeToggler} check={check} onSignOut={handleSignout} />
         <Switch>
           <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
-          <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
+          {/* <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" /> */}
           <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
           <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
           <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
