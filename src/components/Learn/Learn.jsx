@@ -13,6 +13,7 @@ import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
 import token from 'jsonwebtoken'
+import MainRoute from '../MainRoute/MainRoute';
 
 const Learn = ({ refToken }) => {
   const inputElement = createRef();
@@ -40,6 +41,7 @@ const Learn = ({ refToken }) => {
   const [result, setResult] = useState({});
   const [filteredAnswer, setFilteredAnswer] = useState([]);
   const [state, setState] = useState({});
+  const [isChecked, setIschecked] = useState(false);
   useEffect(() => {
     document.title = "Study"
     getLessions();
@@ -85,6 +87,9 @@ const Learn = ({ refToken }) => {
               console.error(res)
             });
         }
+      })
+      .finally(() => {
+        setIschecked(true)
       })
 
   };
@@ -234,7 +239,7 @@ const Learn = ({ refToken }) => {
   ));
 
   return (
-    <>
+    <MainRoute isChecked={isChecked}>
       <main className="main">
         <div className="container">
           <Nav />
@@ -367,7 +372,7 @@ const Learn = ({ refToken }) => {
           }}
         ></button>
       </Modal>
-    </>
+    </MainRoute>
   );
 };
 

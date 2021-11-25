@@ -21,6 +21,7 @@ import Error from '../Error/Error';
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import Support from '../Support/Support';
+import MainRoute from '../MainRoute/MainRoute';
 import {
   Switch,
   Route,
@@ -46,6 +47,7 @@ function App() {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
+  const [isChecked, setIsChecked] = useState(false);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
@@ -116,6 +118,9 @@ function App() {
         setLoggedIn(false);
 
       })
+      .finally(() => {
+        setIsChecked(true)
+      })
   }
 
 
@@ -169,31 +174,34 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className={themeMode}>
         <Header themeToggler={themeToggler} check={check} onSignOut={handleSignout} />
-        <Switch>
-          <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
-          <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
-          <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
-          <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
-          <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
-          <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
-          <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
-          <ProtectedRoute loggedIn={loggedIn} component={Tarif} refToken={refToken} path="/tarif" />
-          <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
-          <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
-          <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
-          <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
-          <ProtectedRoute loggedIn={loggedIn} component={Learn} refToken={refToken} path="/learn" />
+        <MainRoute isChecked={isChecked}>
+          <Switch>
+            <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
+            <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
+            <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
+            <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
+            <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
+            <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
+            <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
+            <ProtectedRoute loggedIn={loggedIn} component={Tarif} refToken={refToken} path="/tarif" />
+            <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
+            <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
+            <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
+            <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
+            <ProtectedRoute loggedIn={loggedIn} component={Learn} refToken={refToken} path="/learn" />
 
-          <Route path="/login">
-            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
-          </Route>
-          <Route path="/registration">
-            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
-          </Route>
+            <Route path="/login">
+              <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
+            </Route>
+            <Route path="/registration">
+              <Registration loggedIn={loggedIn} onRegister={handleRegister} />
+            </Route>
 
 
-          <Route component={Error} path="*" />
-        </Switch>
+            <Route component={Error} path="*" />
+          </Switch>
+        </MainRoute>
+
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
       </div>
     </CurrentUserContext.Provider>
