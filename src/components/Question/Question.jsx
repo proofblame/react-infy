@@ -17,7 +17,8 @@ const Question = ({
   answerList,
   setAnswersList,
   refToken,
-  page
+  page, state, setState
+
   // filteredAnswer
 }) => {
   // const [filteredAnswer, setFilteredAnswer] = useState([]);
@@ -70,12 +71,15 @@ const Question = ({
       setSelectAnswer={setSelectAnswer}
       updateAt={updateAt}
       lesson={lesson}
+      state={state}
+      setState={setState}
+      page={page + 1}
 
     />
   ));
 
   return (
-    <form onSubmit={handkleSendAnswers} className="question">
+    <form onSubmit={handkleSendAnswers} className="question" id={page + 1}>
       <p
         className="question__title tree__title tree__title_popup text_size_large"
         onClick={() => handkleSendAnswers}
@@ -95,8 +99,8 @@ const Question = ({
             <b>{question.question}</b>
           </p>
         </li>
-        {answersList}
       </ul>
+      {answersList}
       {question.questionNumber === lesson.questionList.length && answerList.length === lesson.questionList.length ? (
         <button type="submit" className="link link_active question__button" onClick={(() => { console.log() })}>
           Сохранить

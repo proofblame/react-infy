@@ -7,6 +7,7 @@ const Switcher = ({
   setSelectAnswer,
   updateAt,
   lesson,
+  answer,
 }) => {
   const handleChange = (e) => {
     const index = e.currentTarget.id - 1;
@@ -18,7 +19,7 @@ const Switcher = ({
   };
 
   return (
-    <div className="learn__radio">
+    <fieldset className="learn__radio">
       <input
         type="radio"
         className="learn__radio-input"
@@ -26,14 +27,14 @@ const Switcher = ({
         id={questionNumber}
         onChange={handleChange}
         value={answerNumber + 1}
-
-
       />
       <label
         htmlFor={questionNumber}
-        className="text text_size_x-small learn__label"
-      ></label>
-    </div>
+        className="test__question text text_size_small"
+      >
+        {answer}
+      </label>
+    </fieldset>
   );
 };
 
