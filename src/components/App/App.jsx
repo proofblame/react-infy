@@ -46,7 +46,6 @@ function App() {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
-  // const [loggedIn, setLoggedIn] = useState(true);
 
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
