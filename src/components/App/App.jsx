@@ -77,14 +77,14 @@ const App = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       try {
-        const res = await Promise.all([
+        const [user, wallet, team] = await Promise.all([
           getUserInfo(jwt),
           getWalletInfo(jwt),
           getTeamInfo(jwt),
         ]);
-        setCurrentUser(res[0]);
-        setCurentWallet(res[1]);
-        setCurentTeam(res[2]);
+        setCurrentUser(user);
+        setCurentWallet(wallet);
+        setCurentTeam(team);
       }
       catch (err) {
         console.error(err);
