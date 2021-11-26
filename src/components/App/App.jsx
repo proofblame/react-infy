@@ -32,6 +32,7 @@ import { useDarkMode } from "../UseDarkMode/UseDarkMode"
 import Learn from '../Learn/Learn';
 import jsonwebtoken from 'jsonwebtoken'
 import Loader from '../Loader/Loader';
+import { getUserData } from '../../utils/api'
 
 
 
@@ -61,66 +62,66 @@ function App() {
   }, [theme]);
 
   function checkToken() {
-    refToken()
+    // refToken()
     const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .getUserInfo(jwt)
-            .then(user => {
-              setLoggedIn(true);
-              setCurrentUser(user);
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                // refToken() 
-              } else {
-                console.error(e)
-              }
+    // return auth.refreshToken(refresh_token)
+    //   .then(res => {
+    //     localStorage.setItem('jwt', res.access_token);
+    //   }).then(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      // auth
+      //   .getUserInfo(jwt)
+      //   .then(user => {
+      //     setLoggedIn(true);
+      //     setCurrentUser(user);
+      //   })
+      //   .catch((e) => {
+      //     if (e.status === 403) {
+      //       // refToken() 
+      //     } else {
+      //       console.error(e)
+      //     }
 
-            });
-          auth
-            .getWalletInfo(jwt)
-            .then(wallet => {
-              setCurentWallet(wallet);
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                // refToken()
-              } else {
-                console.error(e)
-              }
+      //   });
+      // auth
+      //   .getWalletInfo(jwt)
+      //   .then(wallet => {
+      //     setCurentWallet(wallet);
+      //   })
+      //   .catch((e) => {
+      //     if (e.status === 403) {
+      //       // refToken()
+      //     } else {
+      //       console.error(e)
+      //     }
 
-            });
-          auth
-            .getTeamInfo(jwt)
-            .then(team => {
-              setCurentTeam(team);
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                // refToken()
-              } else {
-                console.error(e)
-              }
+      //   });
+      // auth
+      //   .getTeamInfo(jwt)
+      //   .then(team => {
+      //     setCurentTeam(team);
+      //   })
+      //   .catch((e) => {
+      //     if (e.status === 403) {
+      //       // refToken()
+      //     } else {
+      //       console.error(e)
+      //     }
+      //   });
+      getUserData()
 
-            });
+    } else {
+      setLoggedIn(false);
+    }
+    // }).catch (() => {
 
-        } else {
-          setLoggedIn(false);
-        }
-      }).catch(() => {
+    //   setLoggedIn(false);
 
-        setLoggedIn(false);
-
-      })
-      .finally(() => {
-        setIsChecked(true)
-      })
+    // })
+    //     .finally(() => {
+    //   setIsChecked(true)
+    // })
   }
 
 
@@ -174,33 +175,33 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className={themeMode}>
         <Header themeToggler={themeToggler} check={check} onSignOut={handleSignout} />
-        <MainRoute isChecked={isChecked}>
-          <Switch>
-            <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
-            <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
-            <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
-            <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
-            <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
-            <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
-            <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
-            <ProtectedRoute loggedIn={loggedIn} component={Tarif} refToken={refToken} path="/tarif" />
-            <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
-            <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
-            <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
-            <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
-            <ProtectedRoute loggedIn={loggedIn} component={Learn} refToken={refToken} path="/learn" />
 
-            <Route path="/login">
-              <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
-            </Route>
-            <Route path="/registration">
-              <Registration loggedIn={loggedIn} onRegister={handleRegister} />
-            </Route>
+        <Switch>
+          <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
+          <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" />
+          <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
+          <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
+          <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
+          <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
+          <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
+          <ProtectedRoute loggedIn={loggedIn} component={Tarif} refToken={refToken} path="/tarif" />
+          <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
+          <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
+          <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
+          <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
+          <ProtectedRoute loggedIn={loggedIn} component={Learn} refToken={refToken} path="/learn" />
+
+          <Route path="/login">
+            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
+          </Route>
+          <Route path="/registration">
+            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
+          </Route>
 
 
-            <Route component={Error} path="*" />
-          </Switch>
-        </MainRoute>
+          <Route component={Error} path="*" />
+        </Switch>
+
 
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
       </div>
