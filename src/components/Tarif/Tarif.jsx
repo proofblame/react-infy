@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal';
 import Popup from '../Popup/Popup';
 
 
-function Tarif({ refToken }) {
+function Tarif({ }) {
   useEffect(() => {
     document.title = "Tarif"
   }, []);
@@ -23,7 +23,7 @@ function Tarif({ refToken }) {
   }, [])
 
   const handleGetTarif = () => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -38,7 +38,7 @@ function Tarif({ refToken }) {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
                 console.error(e)
               }
@@ -49,7 +49,7 @@ function Tarif({ refToken }) {
   }
 
   const handlePayTarif = () => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -72,7 +72,7 @@ function Tarif({ refToken }) {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
 
                 console.error(e)

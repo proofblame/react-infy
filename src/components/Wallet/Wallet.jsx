@@ -13,7 +13,7 @@ import WalletSlider from './Slider/Slider';
 
 
 
-function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
+function Wallet({ currentUser, currentWallet }) {
   useEffect(() => {
     document.title = "Wallet"
   }, []);
@@ -28,7 +28,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
   const [pageCount, setPageCount] = useState(0);
 
   const handleUndelegateInfy = (amountUndel) => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -40,11 +40,10 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             .undelegateInfy(jwt, amountUndel)
             .then(() => {
               setModalActive({ ...modalActive, undelegationPopup: false })
-              checkToken();
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
 
                 console.error(e)
@@ -56,7 +55,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
   }
 
   const handleDelegateInfy = (amountDel) => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -68,11 +67,10 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             .delegateInfy(jwt, amountDel)
             .then(() => {
               setModalActive({ ...modalActive, delegationPopup: false })
-              checkToken();
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
 
                 console.error(e)
@@ -84,7 +82,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
   }
 
   const handleSendInfy = (amount, walletTo,) => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -96,11 +94,10 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             .sendInfy(jwt, walletTo, amount)
             .then(() => {
               setModalActive({ ...modalActive, transferPopup: false })
-              checkToken();
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
 
                 console.error(e)
@@ -135,7 +132,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
   }, [page, modalActive])
 
   const getTansactions = () => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -151,7 +148,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
 
                 console.error(e)

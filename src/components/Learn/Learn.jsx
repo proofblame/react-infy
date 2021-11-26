@@ -12,10 +12,8 @@ import auth from "../../utils/auth";
 import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
-import token from 'jsonwebtoken'
-import MainRoute from '../MainRoute/MainRoute';
 
-const Learn = ({ refToken }) => {
+const Learn = ({ }) => {
   const inputElement = createRef();
 
   const [modalActive, setModalActive] = useState({
@@ -66,7 +64,7 @@ const Learn = ({ refToken }) => {
   };
 
   const getLessions = () => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -78,7 +76,7 @@ const Learn = ({ refToken }) => {
             .getLessions(jwt)
             .then((res) => {
               if (res.status === 403) {
-                refToken()
+
               }
               setLessons(res.lessons);
               setIsTested(res.isTested);
@@ -144,7 +142,7 @@ const Learn = ({ refToken }) => {
       modalActive={modalActive}
       answerList={answerList}
       setAnswersList={setAnswersList}
-      refToken={refToken}
+
       page={index}
       state={state}
       setState={setState}
@@ -239,7 +237,7 @@ const Learn = ({ refToken }) => {
   ));
 
   return (
-    <MainRoute isChecked={isChecked}>
+    <>
       <main className="main">
         <div className="container">
           <Nav />
@@ -372,7 +370,7 @@ const Learn = ({ refToken }) => {
           }}
         ></button>
       </Modal>
-    </MainRoute>
+    </>
   );
 };
 

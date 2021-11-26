@@ -6,7 +6,7 @@ import auth from '../../utils/auth';
 import TreeItem from '../TreeItem/TreeItem';
 import Card from '../Card/Card';
 
-const Tree = ({ refToken }) => {
+const Tree = ({ }) => {
   const [modalActive, setModalActive] = useState({
     treePopup: false,
     cardPopup: false,
@@ -40,10 +40,10 @@ const Tree = ({ refToken }) => {
   useEffect(() => {
     handleGetTreeInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [line, page, refToken])
+  }, [line, page])
 
   const handleGetTreeInfo = () => {
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -60,7 +60,7 @@ const Tree = ({ refToken }) => {
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
 
                 console.error(e)

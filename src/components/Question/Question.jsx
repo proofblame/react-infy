@@ -16,7 +16,6 @@ const Question = ({
   setResult,
   answerList,
   setAnswersList,
-  refToken,
   page, state, setState
 
   // filteredAnswer
@@ -32,7 +31,7 @@ const Question = ({
 
   const handkleSendAnswers = (e) => {
     e.preventDefault();
-    refToken()
+
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
       .then(res => {
@@ -50,7 +49,7 @@ const Question = ({
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+
               } else {
                 console.error(e)
               }
