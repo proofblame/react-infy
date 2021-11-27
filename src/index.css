@@ -12,7 +12,6 @@
 @import url("./blocks/nav/nav.css");
 @import url("./blocks/cards/cards.css");
 @import url("./blocks/card/card.css");
-/* @import url("./components/Preloader/Preloader.scss"); */
 
 * {
   -webkit-box-sizing: border-box;

@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import auth from "../../utils/auth";
@@ -24,8 +24,6 @@ import Support from "../Support/Support";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode";
 import Learn from "../Learn/Learn";
-import Modal from "../Modal/Modal";
-import Preloader from "../Preloader/Preloder";
 import jsonwebtoken from "jsonwebtoken";
 import Loader from "../Loader/Loader";
 import { loadFont } from "react-tsparticles";
@@ -40,19 +38,8 @@ function App() {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
-  // const [isLoaded, setIsLoaded] = useState(false);
-  const [isOpened, setIsOpened] = useState(true);
-
+  const [isLoaded, setIsLoaded] = useState(false);
   const themeMode = theme === "light" ? "app" : "dark app";
-
-  useEffect(() => {
-    //   // setIsLoaded(true);
-    setIsOpened(false);
-
-    //   if (isLoaded === true) {
-    //     setIsOpened(false);
-    // }
-  }, [isOpened]);
 
   useEffect(() => {
     checkToken();
@@ -118,6 +105,14 @@ function App() {
       });
   }
 
+  function handleLoadingTrue() {
+    setIsLoaded(true);
+  }
+
+  function handleLoadingFalse() {
+    setIsLoaded(false);
+  }
+
   function handleRegister(username, joinedBy, email, password, telegram) {
     return auth.register(username, joinedBy, email, password, telegram);
   }
@@ -152,114 +147,107 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("refresh_token");
   }
-  console.log(isOpened);
+  // console.log(isOpened);
   return (
-    <Suspense
-      fallback={
-        <Modal active={isOpened}>
-          <Preloader active={isOpened} />
-        </Modal>
-      }
-    >
-      <CurrentUserContext.Provider value={currentUser}>
-        <div className={themeMode}>
-          <Header
-            themeToggler={themeToggler}
-            check={check}
-            onSignOut={handleSignout}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className={themeMode}>
+        <Header
+          themeToggler={themeToggler}
+          check={check}
+          onSignOut={handleSignout}
+        />
+        <Switch>
+          <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
+          {/* <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" /> */}
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={RoadMap}
+            path="/roadmap"
           />
-          <Switch>
-            <ProtectedRoute
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Marketing}
+            path="/marketing"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Privacy}
+            path="/privacy"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Policy}
+            path="/policy"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Status}
+            path="/status"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Tarif}
+            refToken={refToken}
+            path="/tarif"
+            isLoaded={isLoaded}
+            handleLoadingTrue={handleLoadingTrue}
+            handleLoadingFalse={handleLoadingFalse}
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Profile}
+            currentUser={currentUser}
+            path="/profile"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Team}
+            refToken={refToken}
+            currentUser={currentUser}
+            currentTeam={currentTeam}
+            checkToken={checkToken}
+            path="/team"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Wallet}
+            refToken={refToken}
+            currentUser={currentUser}
+            currentWallet={currentWallet}
+            checkToken={checkToken}
+            isLoaded={isLoaded}
+            handleLoadingTrue={handleLoadingTrue}
+            handleLoadingFalse={handleLoadingFalse}
+            path="/wallet"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Support}
+            path="/support"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Learn}
+            refToken={refToken}
+            path="/learn"
+          />
+          <Route path="/login">
+            <Login
+              onLogin={handleLogin}
               loggedIn={loggedIn}
-              component={Main}
-              exact
-              path="/"
-            />
-            {/* <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" /> */}
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={RoadMap}
-              path="/roadmap"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Marketing}
-              path="/marketing"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Privacy}
-              path="/privacy"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Policy}
-              path="/policy"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Status}
-              path="/status"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Tarif}
-              refToken={refToken}
-              path="/tarif"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Profile}
-              currentUser={currentUser}
-              path="/profile"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Team}
-              refToken={refToken}
-              currentUser={currentUser}
-              currentTeam={currentTeam}
               checkToken={checkToken}
-              path="/team"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Wallet}
               refToken={refToken}
-              currentUser={currentUser}
-              currentWallet={currentWallet}
-              checkToken={checkToken}
-              path="/wallet"
             />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Support}
-              path="/support"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Learn}
-              refToken={refToken}
-              path="/learn"
-            />
-            <Route path="/login">
-              <Login
-                onLogin={handleLogin}
-                loggedIn={loggedIn}
-                checkToken={checkToken}
-                refToken={refToken}
-              />
-            </Route>
-            <Route path="/registration">
-              <Registration loggedIn={loggedIn} onRegister={handleRegister} />
-            </Route>
+          </Route>
+          <Route path="/registration">
+            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
+          </Route>
 
-            <Route component={Error} path="*" />
-          </Switch>
-          <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
-        </div>
-      </CurrentUserContext.Provider>
-    </Suspense>
+          <Route component={Error} path="*" />
+        </Switch>
+        <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

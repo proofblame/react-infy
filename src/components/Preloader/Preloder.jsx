@@ -1,6 +1,6 @@
 import "./Preloader.scss";
 
-function Preloader({ isOpened }) {
+function Preloader() {
   return (
     <section className="preloader">
       <div className="preloader__container">

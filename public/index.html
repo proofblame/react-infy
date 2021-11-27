@@ -11,14 +11,10 @@
     />
     <style>
       .loading {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
+        position: relative;
+        min-height: 100vh;
       }
-      svg {
+      .loading__svg {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -91,6 +87,7 @@
     <div id="root">
       <div class="loading">
         <svg
+          class="loading__svg"
           width="300px"
           height="200px"
           viewBox="0 0 187.3 93.7"

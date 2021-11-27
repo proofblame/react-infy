@@ -3,15 +3,8 @@ $time: 3000ms;
 
 .preloader {
   &__container {
-    // position: absolute;
-    // top: 0;
-    // bottom: 0;
-    // left: 0;
-    // right: 0;
-    // margin: auto;
-    // display: flex;
-    // justify-content: center;
-    position: relative;
+    display: flex;
+    justify-content: center;
     min-height: 100vh;
   }
 
@@ -19,8 +12,6 @@ $time: 3000ms;
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
     margin: auto;
   }
 }

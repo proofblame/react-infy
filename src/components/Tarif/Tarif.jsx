@@ -1,99 +1,100 @@
-import React, { useEffect, useState } from 'react'
-import Nav from '../Nav/Nav'
-import auth from '../../utils/auth';
-import Modal from '../Modal/Modal';
-import Popup from '../Popup/Popup';
+import React, { useEffect, useState } from "react";
+import Nav from "../Nav/Nav";
+import auth from "../../utils/auth";
+import Modal from "../Modal/Modal";
+import Popup from "../Popup/Popup";
+import Preloader from "../Preloader/Preloder";
 
-
-function Tarif({ refToken }) {
+function Tarif({ refToken, isLoaded, handleLoadingTrue, handleLoadingFalse }) {
   useEffect(() => {
-    document.title = "Tarif"
+    document.title = "Tarif";
   }, []);
   const [tarif, setTarif] = useState({});
   const [pay, setPay] = useState(null);
-  const [statusMessage, setStatusMessage] = useState('');
-
+  const [statusMessage, setStatusMessage] = useState("");
 
   const [modalActive, setModalActive] = useState(false);
 
-
-
   useEffect(() => {
     handleGetTarif();
-  }, [])
+  }, []);
 
   const handleGetTarif = () => {
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
+    refToken();
+    const refresh_token = localStorage.getItem("refresh_token");
+    return auth
+      .refreshToken(refresh_token)
+      .then((res) => {
+        localStorage.setItem("jwt", res.access_token);
+      })
+      .then(() => {
+        const jwt = localStorage.getItem("jwt");
         if (jwt) {
           auth
             .getTarif(jwt)
             .then((tarif) => {
-              setTarif(tarif)
+              setTarif(tarif);
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+                refToken();
               } else {
-                console.error(e)
+                console.error(e);
               }
-
             });
         }
-      })
-  }
+      });
+  };
 
   const handlePayTarif = () => {
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
+    handleLoadingTrue();
+    refToken();
+    const refresh_token = localStorage.getItem("refresh_token");
+    return auth
+      .refreshToken(refresh_token)
+      .then((res) => {
+        localStorage.setItem("jwt", res.access_token);
+      })
+      .then(() => {
+        const jwt = localStorage.getItem("jwt");
         if (jwt) {
           auth
             .payTarif(jwt)
             .then((pay) => {
-              setTarif(pay)
-              setPay(true)
-              setStatusMessage('Тариф оплачен')
+              setTarif(pay);
+              setPay(true);
+              handleLoadingFalse();
+              setStatusMessage("Тариф оплачен");
               setTimeout(() => {
                 setModalActive(false);
-                setStatusMessage('')
-                setPay(null)
-              }, 2000)
-
+                setStatusMessage("");
+                setPay(null);
+              }, 2000);
             })
             .catch((e) => {
               if (e.status === 403) {
-                refToken()
+                handleLoadingFalse();
+                refToken();
               } else {
-
-                console.error(e)
+                handleLoadingFalse();
+                console.error(e);
               }
-              setPay(false)
-              setStatusMessage('Недостаточно монет')
+              setPay(false);
+              setStatusMessage("Недостаточно монет");
             });
         }
-      })
-  }
-
+      });
+  };
 
   const handleClosePopup = () => {
     setModalActive(false);
-    setPay(null)
-    setStatusMessage('')
-  }
+    setPay(null);
+    setStatusMessage("");
+  };
   const handleOpenPopup = () => {
     setModalActive(true);
-  }
-
+  };
+  console.log(isLoaded);
   return (
     <>
       <main className="main">
@@ -102,71 +103,116 @@ function Tarif({ refToken }) {
           <section className="main__profile profile tarif">
             <div className="profile__body">
               <h1 className="profile__title title">Тариф</h1>
-              {
-                !tarif.isPaid ?
-                  (<button className='link link_active' style={{ marginBottom: '15px' }} onClick={handleOpenPopup}>Оплатить тариф</button>)
-                  :
-                  (<p className="text text_size_normal tarif__subtitle" style={{ color: 'green' }}>Тариф оплачен до {tarif.nextPayTime}</p>)
-              }
+              {!tarif.isPaid ? (
+                <button
+                  className="link link_active"
+                  style={{ marginBottom: "15px" }}
+                  onClick={handleOpenPopup}
+                >
+                  Оплатить тариф
+                </button>
+              ) : (
+                <p
+                  className="text text_size_normal tarif__subtitle"
+                  style={{ color: "green" }}
+                >
+                  Тариф оплачен до {tarif.nextPayTime}
+                </p>
+              )}
 
-
-              <p className="text text_size_normal tarif__subtitle">Оплата тарифа активирует продукты Infinity Post, Infinity
-                Browser, infinity incognito (компьютерная версия), даёт доступ к партнёрской программе и обучению партнёров. Стоимость тарифа составляет 990 рублей по курсу в
-                монетах INFY.</p>
+              <p className="text text_size_normal tarif__subtitle">
+                Оплата тарифа активирует продукты Infinity Post, Infinity
+                Browser, infinity incognito (компьютерная версия), даёт доступ к
+                партнёрской программе и обучению партнёров. Стоимость тарифа
+                составляет 990 рублей по курсу в монетах INFY.
+              </p>
               <section className="banner__buttons wallet__buttons">
                 <div className="tarif__card">
-                  <p className="text text_size_normal tarif__text tarif__text_type_email"> Безопасная электронная почта </p> <button
-                    className="wallet__button link link_active" href="/tarif" disabled>Скачать</button>
+                  <p className="text text_size_normal tarif__text tarif__text_type_email">
+                    {" "}
+                    Безопасная электронная почта{" "}
+                  </p>{" "}
+                  <button
+                    className="wallet__button link link_active"
+                    href="/tarif"
+                    disabled
+                  >
+                    Скачать
+                  </button>
                 </div>
                 <div className="tarif__card">
-                  <p className="text text_size_normal tarif__text tarif__text_type_browser"> Защищённый браузер </p> <button
-                    className="wallet__button link link_active" href="/tarif" disabled>Скачать</button>
+                  <p className="text text_size_normal tarif__text tarif__text_type_browser">
+                    {" "}
+                    Защищённый браузер{" "}
+                  </p>{" "}
+                  <button
+                    className="wallet__button link link_active"
+                    href="/tarif"
+                    disabled
+                  >
+                    Скачать
+                  </button>
                 </div>
                 <div className="tarif__card">
-                  <p className="text text_size_normal tarif__text tarif__text_type_messager"> Инкогнито мессенджер </p> <button
-                    className="wallet__button link link_active" href="/tarif" disabled>Скачать</button>
+                  <p className="text text_size_normal tarif__text tarif__text_type_messager">
+                    {" "}
+                    Инкогнито мессенджер{" "}
+                  </p>{" "}
+                  <button
+                    className="wallet__button link link_active"
+                    href="/tarif"
+                    disabled
+                  >
+                    Скачать
+                  </button>
                 </div>
               </section>
             </div>
           </section>
         </div>
       </main>
+
       <Modal active={modalActive}>
-        <Popup onClose={handleClosePopup} >
-          <p className="form__title">Отправить</p>
-          <p className="form__text-subtitle">
-            Ваш баланс:&nbsp;
-            <span className="form__text-subtitle_count">
-              {tarif.balance}
-            </span>
-          </p>
-          <p className="form__text-subtitle">
-            Стоимость тарифа:&nbsp;
-            <span className="form__text-subtitle_count">
-              {tarif.tarifCostCoins} INFY (990 &#x20bd;)
-            </span>
-          </p>
-          <p className="form__text-subtitle">
-            <b>Хотите оплатить тариф?</b>
-          </p>
-          <p className="form__text-subtitle" style={pay ? { color: 'green' } : { color: 'red' }}>
-            <b>{statusMessage}</b>
-          </p>
+        <>
+          {isLoaded ? (
+            <Preloader />
+          ) : (
+            <Popup onClose={handleClosePopup}>
+              <p className="form__title">Отправить</p>
+              <p className="form__text-subtitle">
+                Ваш баланс:&nbsp;
+                <span className="form__text-subtitle_count">
+                  {tarif.balance}
+                </span>
+              </p>
+              <p className="form__text-subtitle">
+                Стоимость тарифа:&nbsp;
+                <span className="form__text-subtitle_count">
+                  {tarif.tarifCostCoins} INFY (990 &#x20bd;)
+                </span>
+              </p>
+              <p className="form__text-subtitle">
+                <b>Хотите оплатить тариф?</b>
+              </p>
+              <p
+                className="form__text-subtitle"
+                style={pay ? { color: "green" } : { color: "red" }}
+              >
+                <b>{statusMessage}</b>
+              </p>
 
-
-
-
-          <input
-            type="button"
-            className="link link_active"
-            value="Оплатить"
-            onClick={handlePayTarif}
-          />
-
-        </Popup>
+              <input
+                type="button"
+                className="link link_active"
+                value="Оплатить"
+                onClick={handlePayTarif}
+              />
+            </Popup>
+          )}
+        </>
       </Modal>
     </>
-  )
+  );
 }
 
-export default Tarif
+export default Tarif;
