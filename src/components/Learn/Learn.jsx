@@ -13,13 +13,15 @@ import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
 import token from 'jsonwebtoken'
+import Preloader from "../Preloader/Preloder";
 
 const Learn = ({ refToken }) => {
   const inputElement = createRef();
 
   const [modalActive, setModalActive] = useState({
     testPopup: false,
-    testResult: false
+    testResult: false,
+    preloader: false,
   });
   const [lessons, setLessons] = useState([]);
   const [isTested, setIsTested] = useState(false);
@@ -64,6 +66,7 @@ const Learn = ({ refToken }) => {
   };
 
   const getLessions = () => {
+    setModalActive({ ...modalActive, preloader: true });
     refToken()
     const refresh_token = localStorage.getItem('refresh_token');
     return auth.refreshToken(refresh_token)
@@ -85,6 +88,9 @@ const Learn = ({ refToken }) => {
               console.error(res)
             });
         }
+      })
+      .finally(() => {
+        setModalActive({ ...modalActive, preloader: false });
       })
 
   };
@@ -366,6 +372,9 @@ const Learn = ({ refToken }) => {
             nextLesson();
           }}
         ></button>
+      </Modal>
+      <Modal active={modalActive.preloader}>
+        <Preloader />
       </Modal>
     </>
   );
