@@ -18,7 +18,6 @@ import { refreshToken, getUserInfo, getWalletInfo, getTeamInfo } from '../../uti
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
-import WhitePaper from '../WhitePaper/WhitePaper';
 import RoadMap from '../RoadMap/RoadMap';
 import Marketing from '../Marketing/Marketing';
 import Privacy from '../Privacy/Privacy';
@@ -33,7 +32,7 @@ import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import Support from '../Support/Support';
 import Learn from '../Learn/Learn';
-import MainRoute from '../MainRoute/MainRoute';
+
 
 
 const App = () => {
@@ -47,8 +46,9 @@ const App = () => {
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
   useEffect(() => {
-    checkToken();
+    getData();
   }, []);
+
   useEffect(() => {
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
@@ -63,7 +63,6 @@ const App = () => {
         const res = await refreshToken(rt);
         localStorage.setItem('jwt', res.access_token);
         localStorage.setItem('rt', res.refresh_token);
-        getData();
         setLoggedIn(true);
       } catch (err) {
         console.error(err);
@@ -73,7 +72,9 @@ const App = () => {
       setLoggedIn(false);
     }
   }
+
   const getData = async () => {
+    await checkToken()
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       try {
@@ -94,15 +95,17 @@ const App = () => {
     }
   }
 
+
+
   function handleRegister(username, joinedBy, email, password, telegram) {
     return auth.register(username, joinedBy, email, password, telegram)
   }
 
-  function handleLogin(username, password) {
-    return auth.login(username, password).then(res => {
-      localStorage.setItem('jwt', res.access_token);
-      localStorage.setItem('rt', res.refresh_token);
-    });
+  async function handleLogin(username, password) {
+    const res = await auth.login(username, password);
+    localStorage.setItem('jwt', res.access_token);
+    localStorage.setItem('rt', res.refresh_token);
+    getData();
   }
 
   function handleSignout() {
@@ -132,7 +135,7 @@ const App = () => {
           <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
           <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
           <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
-          <ProtectedRoute loggedIn={loggedIn} component={Learn} path="/learn" />
+          <ProtectedRoute loggedIn={loggedIn} component={Learn} checkToken={checkToken} path="/learn" />
           <Route path="/login">
             <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} />
           </Route>

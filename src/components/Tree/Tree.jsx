@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Tree.css";
 import Modal from '../Modal/Modal'
 import TreePopup from '../TreePopup/TreePopup'
-import auth from '../../utils/auth';
 import TreeItem from '../TreeItem/TreeItem';
 import Card from '../Card/Card';
+import { getTreeInfo } from '../../utils/api'
 
-const Tree = ({ }) => {
+const Tree = ({ checkToken }) => {
   const [modalActive, setModalActive] = useState({
     treePopup: false,
     cardPopup: false,
@@ -16,8 +16,6 @@ const Tree = ({ }) => {
   const [page, setPage] = useState(0);
   const [line, setLine] = useState(null);
   const [cardItem, setCardItem] = useState({});
-
-
 
 
   const nextPage = () => {
@@ -42,32 +40,19 @@ const Tree = ({ }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [line, page])
 
-  const handleGetTreeInfo = () => {
-
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .getTreeInfo(jwt, line, page, 4)
-            .then((tree) => {
-              setModalActive({ ...modalActive, treePopup: true })
-              setCurrentTree(tree.lines)
-              setPageCount(tree.pagesCount)
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-
-              } else {
-
-                console.error(e)
-              }
-            });
-        }
-      })
+  const handleGetTreeInfo = async () => {
+    await checkToken();
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      try {
+        const tree = await getTreeInfo(jwt, line, page, 4)
+        setModalActive({ ...modalActive, treePopup: true });
+        setCurrentTree(tree.lines);
+        setPageCount(tree.pagesCount);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
 
   const handleOpenPopup = (line) => {

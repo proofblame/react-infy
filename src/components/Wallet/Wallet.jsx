@@ -6,17 +6,17 @@ import DelegationPopup from '../DelegationPopup/DelegationPopup'
 import UndelegationPopup from '../UndelegationPopup/UndelegationPopup'
 import Modal from '../Modal/Modal'
 import './Wallet.css'
-import auth from '../../utils/auth';
 import Transaction from '../Transaction/Transaction';
 import WalletSlider from './Slider/Slider';
+import { undelegateInfy, delegateInfy, sendInfy, getTransactionsInfo } from '../../utils/api'
 
 
-
-
-function Wallet({ currentUser, currentWallet }) {
+function Wallet({ currentUser, currentWallet, checkToken }) {
   useEffect(() => {
+
     document.title = "Wallet"
   }, []);
+
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
@@ -27,91 +27,62 @@ function Wallet({ currentUser, currentWallet }) {
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
-  const handleUndelegateInfy = (amountUndel) => {
-
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .undelegateInfy(jwt, amountUndel)
-            .then(() => {
-              setModalActive({ ...modalActive, undelegationPopup: false })
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
+  const handleUndelegateInfy = async (amountUndel) => {
+    await checkToken();
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      try {
+        await undelegateInfy(jwt, amountUndel)
+        setModalActive({ ...modalActive, undelegationPopup: false });
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
 
-  const handleDelegateInfy = (amountDel) => {
-
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .delegateInfy(jwt, amountDel)
-            .then(() => {
-              setModalActive({ ...modalActive, delegationPopup: false })
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
+  const handleDelegateInfy = async (amountDel) => {
+    await checkToken();
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      try {
+        await delegateInfy(jwt, amountDel)
+        setModalActive({ ...modalActive, delegationPopup: false })
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
 
-  const handleSendInfy = (amount, walletTo,) => {
+  const handleSendInfy = async (amount, walletTo,) => {
+    await checkToken();
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      try {
+        await sendInfy(jwt, walletTo, amount)
+        setModalActive({ ...modalActive, transferPopup: false })
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
 
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .sendInfy(jwt, walletTo, amount)
-            .then(() => {
-              setModalActive({ ...modalActive, transferPopup: false })
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
+  const getTansactions = async () => {
+    await checkToken();
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      try {
+        const transactions = await getTransactionsInfo(jwt, page, 8)
+        setCurentTransactions(transactions.histories);
+        setPageCount(transactions.pageCount);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
 
   const nextPage = () => {
     if (page >= 0 && page < pageCount - 1) {
       setPage(page + 1)
-      // getTansactions()
     } else {
       setPage(page)
     }
@@ -120,7 +91,6 @@ function Wallet({ currentUser, currentWallet }) {
   const prevPage = () => {
     if (page > 0 && page <= pageCount - 1) {
       setPage(page - 1)
-      // getTansactions()
     } else {
       setPage(page)
     }
@@ -131,33 +101,6 @@ function Wallet({ currentUser, currentWallet }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, modalActive])
 
-  const getTansactions = () => {
-
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .getTransactionsInfo(jwt, page, 8)
-            .then(transactions => {
-              setCurentTransactions(transactions.histories);
-              setPageCount(transactions.pageCount)
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
-  }
 
 
 

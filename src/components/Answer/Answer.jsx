@@ -1,23 +1,22 @@
 import React from "react";
 import './Answer.scss'
-// import './AnswerDark.scss';
 
 const Answer = ({
   question,
   answer,
   answerNumber,
-  setSelectAnswer,
   updateAt,
-  lesson, setState, state, page
+  lesson,
+  setState,
+  state,
+  page
 }) => {
   const handleChange = (e) => {
-    let { name, value, id } = e.target;
+    let { value, id } = e.target;
     setState(
       {
         ...state,
         [id]: value,
-        // isCheck: e.target.value
-        // [`${question.questionNumber}-${name}`]: e.target.value
       }
     );
     const index = e.currentTarget.id - 1;
@@ -27,7 +26,6 @@ const Answer = ({
       questionNumber: question.questionNumber,
       answer: e.target.name,
     });
-    console.log(e.target)
   };
 
   return (
@@ -41,9 +39,7 @@ const Answer = ({
           onChange={handleChange}
           name={answerNumber + 1}
           id={page}
-
           value={`${question.questionNumber}-${answerNumber + 1}`}
-          // value={state}
           checked={state[page] === `${question.questionNumber}-${answerNumber + 1}`}
         />
         <span className="answer__check">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Learn.scss";
 import Nav from "../Nav/Nav";
 import LearnSlider from "./LearnSlider/LearnSlider";
@@ -8,13 +8,12 @@ import TestPopup from "../TestPopup/TestPopup";
 import "./Test.scss";
 
 import LearnPopupSlider from "./LearnPopupSlider/LearnPopupSlider";
-import auth from "../../utils/auth";
 import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
+import { getLessionsInfo } from '../../utils/api'
 
-const Learn = ({ }) => {
-  const inputElement = createRef();
+const Learn = ({ checkToken }) => {
 
   const [modalActive, setModalActive] = useState({
     testPopup: false,
@@ -24,7 +23,6 @@ const Learn = ({ }) => {
   const [isTested, setIsTested] = useState(false);
   const [lesson, setLesson] = useState({});
   const [questions, setQuestions] = useState([]);
-  // const [page, setPage] = useState(0)
   const videoList = [
     "https://www.youtube.com/embed/lTUejHSdpYE",
     "https://www.youtube.com/embed/lqvwu-_a5wo",
@@ -37,14 +35,11 @@ const Learn = ({ }) => {
   const [list, { updateAt, clear }] = useList([]);
   const [answerList, setAnswersList] = useState(list);
   const [result, setResult] = useState({});
-  const [filteredAnswer, setFilteredAnswer] = useState([]);
   const [state, setState] = useState({});
-  const [isChecked, setIschecked] = useState(false);
   useEffect(() => {
     document.title = "Study"
     getLessions();
   }, []);
-
 
   const handleClosePopup = (e) => {
     clear();
@@ -63,41 +58,24 @@ const Learn = ({ }) => {
 
   };
 
-  const getLessions = () => {
-
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-          auth
-            .getLessions(jwt)
-            .then((res) => {
-              if (res.status === 403) {
-
-              }
-              setLessons(res.lessons);
-              setIsTested(res.isTested);
-            })
-            .catch((res) => {
-              console.error(res)
-            });
-        }
-      })
-      .finally(() => {
-        setIschecked(true)
-      })
-
+  const getLessions = async () => {
+    await checkToken();
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        const res = await getLessionsInfo(jwt)
+        setLessons(res.lessons);
+        setIsTested(res.isTested);
+      } catch (err) {
+        console.error(err)
+      }
+    }
   };
 
 
   useEffect(() => {
     let filtered = list.filter(Boolean)
     setAnswersList(filtered);
-    // setFilteredAnswer(filtered)
-    // console.log(filteredAnswer)
   }, [list]);
 
   const nextLesson = () => {
@@ -115,7 +93,6 @@ const Learn = ({ }) => {
 
   const nextQuestion = () => {
     if (lesson.testNumber >= 1 && lesson.testNumber < lessons.length) {
-      // setQuestionNumber(questionNumber + 1)
     } else {
       return;
     }
@@ -123,7 +100,6 @@ const Learn = ({ }) => {
 
   const prevQuestion = () => {
     if (lesson.testNumber > 1 && lesson.testNumber <= lessons.length) {
-      // setQuestionNumber(questionNumber - 1)
     } else {
       return;
     }
@@ -142,12 +118,10 @@ const Learn = ({ }) => {
       modalActive={modalActive}
       answerList={answerList}
       setAnswersList={setAnswersList}
-
       page={index}
       state={state}
       setState={setState}
-
-    // filteredAnswer={filteredAnswer}
+      checkToken={checkToken}
     />
   ));
 
@@ -166,9 +140,6 @@ const Learn = ({ }) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
-              {/* <button className="learn__test-button link link_active">
-                          Play
-                        </button> */}
             </div>
           </div>
           <div className="learn__body">

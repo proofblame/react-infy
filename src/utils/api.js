@@ -191,7 +191,7 @@ const payTarif = async (jwt) => {
 }
 
 // Получить вопросы
-const getLessions = async (jwt) => {
+const getLessionsInfo = async (jwt) => {
   const res = await fetch(`${baseURL}/learn/get-question`, {
     method: 'GET',
     headers: {
@@ -229,6 +229,6 @@ module.exports = {
   undelegateInfy,
   getTarif,
   payTarif,
-  getLessions,
+  getLessionsInfo,
   sendAnswers
 }

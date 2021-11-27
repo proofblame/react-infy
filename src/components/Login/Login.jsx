@@ -27,10 +27,6 @@ function Login(props) {
   function onSubmit(e) {
     e.preventDefault();
     props.onLogin(data.username, data.password)
-      .then(() => {
-        props.checkToken();
-      })
-
   }
 
 
