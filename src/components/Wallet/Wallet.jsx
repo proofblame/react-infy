@@ -81,7 +81,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   };
 
   const getTansactions = async () => {
-    // setModalActive({ ...modalActive, preloader: true });
+    setModalActive({ ...modalActive, preloader: true });
     await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -91,10 +91,11 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
         setPageCount(transactions.pageCount);
       } catch (err) {
         console.error(err);
+        console.log("hi");
+        setModalActive({ ...modalActive, preloader: false });
+      } finally {
+        setModalActive({ ...modalActive, preloader: false });
       }
-      //  finally {
-      //   setModalActive({ ...modalActive, preloader: false });
-      // }
     }
   };
 
@@ -119,7 +120,12 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
 
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, modalActive]);
+  }, [
+    page,
+    modalActive.transferPopup,
+    modalActive.delegationPopup,
+    modalActive.undelegationPopup,
+  ]);
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(currentUser.wallet);
