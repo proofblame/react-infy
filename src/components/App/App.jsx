@@ -44,7 +44,11 @@ const App = () => {
   const themeMode = theme === "light" ? "app" : "dark app";
 
   useEffect(() => {
-    // getData();
+    const refTok = localStorage.getItem("refresh_token");
+    if (refTok) {
+      localStorage.removeItem("refresh_token");
+    }
+    getData();
   }, []);
 
   useEffect(() => {
@@ -144,6 +148,7 @@ const App = () => {
           check={check}
           onSignOut={handleSignout}
         />
+
         <div className="content">
           <Scrolltotop />
           <Switch>
@@ -224,6 +229,8 @@ const App = () => {
             <Route component={Error} path="*" />
           </Switch>
         </div>
+
+
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
         <Modal active={modalActive.preloader}>
           <Preloader />
