@@ -39,11 +39,11 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     if (jwt) {
       try {
         await undelegateInfy(jwt, amountUndel);
-        setModalActive({ ...modalActive, undelegationPopup: false });
       } catch (err) {
         console.error(err);
       } finally {
-        setModalActive({ ...modalActive, preloader: false });
+        await getTansactions();
+        handleClosePopup();
       }
     }
   };
@@ -55,11 +55,11 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     if (jwt) {
       try {
         await delegateInfy(jwt, amountDel);
-        setModalActive({ ...modalActive, delegationPopup: false });
       } catch (err) {
         console.error(err);
       } finally {
-        setModalActive({ ...modalActive, preloader: false });
+        await getTansactions();
+        handleClosePopup();
       }
     }
   };
@@ -71,13 +71,14 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     if (jwt) {
       try {
         await sendInfy(jwt, walletTo, amount);
-        setModalActive({ ...modalActive, transferPopup: false });
       } catch (err) {
         console.error(err);
       } finally {
-        setModalActive({ ...modalActive, preloader: false });
+        await getTansactions();
+        handleClosePopup();
       }
     }
+
   };
 
   const getTansactions = async () => {
@@ -86,18 +87,32 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        setModalActive({ ...modalActive, preloader: true });
         const transactions = await getTransactionsInfo(jwt, page, 8);
         setCurentTransactions(transactions.histories);
         setPageCount(transactions.pageCount);
       } catch (err) {
         console.error(err);
-        setModalActive({ ...modalActive, preloader: false });
       } finally {
         setModalActive({ ...modalActive, preloader: false });
       }
     }
   };
+
+  const handleOpenPopup = (e) => {
+    const { name } = e.target;
+    setModalActive({
+      ...modalActive,
+      [name]: true
+    })
+  }
+  const handleClosePopup = () => {
+    setModalActive({
+      ...modalActive,
+      transferPopup: false,
+      delegationPopup: false,
+      undelegationPopup: false,
+    })
+  }
 
   const nextPage = () => {
     if (page >= 0 && page < pageCount - 1) {
@@ -117,15 +132,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
 
   useEffect(() => {
     getTansactions();
-
-    return null;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    page,
-    modalActive.transferPopup,
-    modalActive.delegationPopup,
-    modalActive.undelegationPopup,
-  ]);
+  }, [page]);
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(currentUser.wallet);
@@ -259,30 +266,28 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
             </div>
           </section>
           <section className="banner__buttons wallet__buttons">
-            <span
+            <button
               className="wallet__button link link_active open-transferPopup open"
-              onClick={() =>
-                setModalActive({ ...modalActive, transferPopup: true })
-              }
+              name="transferPopup"
+              onClick={handleOpenPopup}
             >
               Перевести
-            </span>{" "}
-            <span
+            </button>
+            <button
               className="wallet__button link link_active open-delegationsPopup open"
-              onClick={() =>
-                setModalActive({ ...modalActive, delegationPopup: true })
-              }
+              name="delegationPopup"
+              onClick={handleOpenPopup}
             >
               Отправить в стейкинг
-            </span>{" "}
-            <span
+            </button>
+            <button
               className="wallet__button link link_active open-undelegatePopup open"
-              onClick={() =>
-                setModalActive({ ...modalActive, undelegationPopup: true })
-              }
+              name='undelegationPopup'
+              type='button'
+              onClick={handleOpenPopup}
             >
               Вывод из стейкинга
-            </span>
+            </button>
           </section>
           <section className="transactions">
             <section className="main-profile profile section">
@@ -314,27 +319,21 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
       </main>
       <Modal active={modalActive.transferPopup}>
         <TransferPopup
-          onClose={() => {
-            setModalActive({ ...modalActive, transferPopup: false });
-          }}
+          onClose={handleClosePopup}
           currentWallet={currentWallet}
           handleSendInfy={handleSendInfy}
         />
       </Modal>
       <Modal active={modalActive.delegationPopup}>
         <DelegationPopup
-          onClose={() => {
-            setModalActive({ ...modalActive, delegationPopup: false });
-          }}
+          onClose={handleClosePopup}
           currentWallet={currentWallet}
           handleDelegateInfy={handleDelegateInfy}
         />
       </Modal>
       <Modal active={modalActive.undelegationPopup}>
         <UndelegationPopup
-          onClose={() => {
-            setModalActive({ ...modalActive, undelegationPopup: false });
-          }}
+          onClose={handleClosePopup}
           handleUndelegateInfy={handleUndelegateInfy}
           currentWallet={currentWallet}
         />

@@ -21,14 +21,15 @@ const Question = ({
 }) => {
 
   const handkleSendAnswers = async (e) => {
+    setModalActive({ ...modalActive, testResult: true });
     e.preventDefault();
     await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
         const res = await sendAnswers(jwt, lesson.lessonNumber, list)
-        setModalActive({ ...modalActive, testResult: true });
         setResult(res);
+        setModalActive({ ...modalActive, testResult: false });
       } catch (err) {
         console.error(err);
       }

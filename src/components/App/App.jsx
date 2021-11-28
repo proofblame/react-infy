@@ -48,10 +48,7 @@ const App = () => {
   const themeMode = theme === "light" ? "app" : "dark app";
 
   useEffect(() => {
-    // setModalActive({ ...modalActive, preloader: true });
-    checkToken();
-
-    // return setModalActive({ ...modalActive, preloader: false });
+    getData();
   }, []);
 
   useEffect(() => {
@@ -62,35 +59,33 @@ const App = () => {
   // Получаем данные пользователя, кошелька, команды.
   // TODO: получать все данные тут (еще: Обучение, Дерево)
   const checkToken = async () => {
-    const expires = localStorage.getItem('expires')
-    const rt = localStorage.getItem('rt');
-    const jwt = localStorage.getItem('jwt');
+    const expires = localStorage.getItem("expires");
+    const rt = localStorage.getItem("rt");
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
       if (Date.now() >= expires && jwt) {
         try {
           const res = await refreshToken(rt);
-          localStorage.setItem('jwt', res.access_token);
-          localStorage.setItem('rt', res.refresh_token);
-          localStorage.setItem('expires', res.expires_at)
-          getData()
-          setLoggedIn(true)
+          localStorage.setItem("jwt", res.access_token);
+          localStorage.setItem("rt", res.refresh_token);
+          localStorage.setItem("expires", res.expires_at);
+          // getData();
+          setLoggedIn(true);
         } catch (err) {
           console.error(err);
         }
+      } else {
+        // getData();
+        setLoggedIn(true);
       }
-      else {
-        getData()
-        setLoggedIn(true)
-      }
-
     } else {
-      setLoggedIn(false)
+      setLoggedIn(false);
     }
-
-  }
-
+  };
 
   const getData = async () => {
+    setModalActive({ modalActive, preloader: true });
+    await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -104,6 +99,8 @@ const App = () => {
         setCurentTeam(team);
       } catch (err) {
         console.error(err);
+      } finally {
+        setModalActive({ modalActive, preloader: false });
       }
     } else {
       setLoggedIn(false);
@@ -115,16 +112,22 @@ const App = () => {
   }
 
   async function handleLogin(username, password) {
+    setModalActive({ modalActive, preloader: true });
     const res = await auth.login(username, password);
     if (res) {
-      localStorage.setItem('jwt', res.access_token);
-      localStorage.setItem('rt', res.refresh_token);
-      localStorage.setItem('expires', res.expires_at)
-      setLoggedIn(true);
-      history.push('/profile');
-      checkToken();
+      try {
+        localStorage.setItem("jwt", res.access_token);
+        localStorage.setItem("rt", res.refresh_token);
+        localStorage.setItem("expires", res.expires_at);
+        setLoggedIn(true);
+        history.push("/profile");
+        await getData();
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setModalActive({ modalActive, preloader: false });
+      }
     }
-
   }
 
   function handleSignout() {
@@ -172,11 +175,12 @@ const App = () => {
             component={Status}
             path="/status"
           />
-          <ProtectedRoute loggedIn={loggedIn} component={Tarif} path="/tarif" />
+          <ProtectedRoute loggedIn={loggedIn} component={Tarif} checkToken={checkToken} path="/tarif" />
           <ProtectedRoute
             loggedIn={loggedIn}
             component={Profile}
             currentUser={currentUser}
+
             path="/profile"
           />
           <ProtectedRoute
@@ -204,6 +208,7 @@ const App = () => {
             loggedIn={loggedIn}
             component={Learn}
             checkToken={checkToken}
+            setModalActive={setModalActive}
             path="/learn"
           />
           <Route path="/login">

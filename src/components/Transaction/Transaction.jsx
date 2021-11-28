@@ -1,7 +1,7 @@
+
 import React from 'react'
 
 const Transaction = ({ transaction }) => {
-
 
   return (
     <div className="wallet__slider-body">

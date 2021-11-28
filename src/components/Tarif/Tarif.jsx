@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../Nav/Nav";
-import auth from "../../utils/auth";
+import { getTarif, payTarif } from '../../utils/api'
 import Modal from "../Modal/Modal";
 import Popup from "../Popup/Popup";
 import Preloader from "../Preloader/Preloader";
 
-function Tarif({}) {
+
+function Tarif({ checkToken }) {
   useEffect(() => {
     document.title = "Tarif";
   }, []);
@@ -21,70 +22,45 @@ function Tarif({}) {
     handleGetTarif();
   }, []);
 
-  const handleGetTarif = () => {
-    const refresh_token = localStorage.getItem("refresh_token");
-    return auth
-      .refreshToken(refresh_token)
-      .then((res) => {
-        localStorage.setItem("jwt", res.access_token);
-      })
-      .then(() => {
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-          auth
-            .getTarif(jwt)
-            .then((tarif) => {
-              setTarif(tarif);
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-              } else {
-                console.error(e);
-              }
-            });
-        }
-      });
+  const handleGetTarif = async () => {
+    setModalActive({ ...modalActive, preloader: true });
+    checkToken()
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        const tarif = await getTarif(jwt)
+        setTarif(tarif);
+        setModalActive({ ...modalActive, preloader: false });
+      } catch (err) {
+        console.error(err);
+        setModalActive({ ...modalActive, preloader: false });
+      }
+    }
   };
 
-  const handlePayTarif = () => {
+  const handlePayTarif = async () => {
     setModalActive({ ...modalActive, preloader: true });
-    const refresh_token = localStorage.getItem("refresh_token");
-    return auth
-      .refreshToken(refresh_token)
-      .then((res) => {
-        localStorage.setItem("jwt", res.access_token);
-      })
-      .then(() => {
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-          auth
-            .payTarif(jwt)
-            .then((pay) => {
-              setTarif(pay);
-              setPay(true);
-              setStatusMessage("Тариф оплачен");
-              setTimeout(() => {
-                setModalActive({ ...modalActive, preloader: false });
-                setModalActive({ ...modalActive, tarifPopup: false });
-                setStatusMessage("");
-                setPay(null);
-              }, 2000);
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                setModalActive({ ...modalActive, preloader: false });
-              } else {
-                console.error(e);
-              }
-              setPay(false);
-              setStatusMessage("Недостаточно монет");
-              setModalActive({ ...modalActive, preloader: false });
-            })
-            .finally(() => {
-              setModalActive({ ...modalActive, preloader: false });
-            });
-        }
-      });
+    checkToken()
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        const pay = payTarif(jwt)
+        setTarif(pay);
+        setPay(true);
+        setStatusMessage("Тариф оплачен");
+        setTimeout(() => {
+          setModalActive({ ...modalActive, preloader: false });
+          setModalActive({ ...modalActive, tarifPopup: false });
+          setStatusMessage("");
+          setPay(null);
+        }, 2000);
+        setModalActive({ ...modalActive, preloader: false });
+      } catch (error) {
+        setPay(false);
+        setStatusMessage("Недостаточно монет");
+        setModalActive({ ...modalActive, preloader: false });
+      }
+    }
   };
 
   const handleClosePopup = () => {

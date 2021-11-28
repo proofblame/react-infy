@@ -25,9 +25,6 @@ function Login(props) {
   function onSubmit(e) {
     e.preventDefault();
     props.onLogin(data.username, data.password).then(() => {
-      props.setModalActive({ ...props.modalActive, preloader: true });
-      props.checkToken();
-      props.setModalActive({ ...props.modalActive, preloader: false });
     });
   }
 

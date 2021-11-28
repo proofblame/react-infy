@@ -12,6 +12,7 @@ import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
 import { getLessionsInfo } from '../../utils/api'
+import Preloader from "../Preloader/Preloader";
 
 const Learn = ({ checkToken }) => {
 
@@ -48,7 +49,8 @@ const Learn = ({ checkToken }) => {
     setAnswersList([])
     setModalActive({
       testPopup: false,
-      resultPopup: false
+      resultPopup: false,
+      preloader: false,
     });
   };
   const handleOpenPopup = (lesson) => {
@@ -59,6 +61,7 @@ const Learn = ({ checkToken }) => {
   };
 
   const getLessions = async () => {
+    setModalActive({ ...modalActive, preloader: true });
     await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -66,8 +69,10 @@ const Learn = ({ checkToken }) => {
         const res = await getLessionsInfo(jwt)
         setLessons(res.lessons);
         setIsTested(res.isTested);
+        setModalActive({ ...modalActive, preloader: false });
       } catch (err) {
         console.error(err)
+        setModalActive({ ...modalActive, preloader: false });
       }
     }
   };
@@ -340,6 +345,9 @@ const Learn = ({ checkToken }) => {
             nextLesson();
           }}
         ></button>
+      </Modal>
+      <Modal active={modalActive.preloader}>
+        <Preloader />
       </Modal>
     </>
   );
