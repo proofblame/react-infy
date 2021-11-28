@@ -7,6 +7,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
+  <style>
+    .main-loader-container {
+      width: 100%;
+      min-height: 98vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #canvas {
+      background: #fff;
+      position: absolute;
+    }
+
+    div.metadata {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      font-family: Helvetica, Arial;
+      font-size: 11px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    @media screen and (min-width: 320px) {
+      .main-loader-container {
+        width: 60%;
+        margin: 0 auto;
+      }
+
+      #canvas {
+        width: 100%;
+      }
+    }
+  </style>
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -28,28 +64,15 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
   <script src="./jquery.min.js"></script>
-  <style>
-    .main-preloader {
-      position: absolute;
-      top: 100px;
-      z-index: 100;
-      /* width: 320px;
-      height: 100%; */
-    }
-
-    .canvas-wrapper {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-    }
-  </style>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-
   <div id="root">
-
+    <div class="main-loader-container">
+      <canvas id="canvas" width="800" height="500"></canvas>
+      <div class="metadata"></div>
+    </div>
   </div>
   <!--
       This HTML file is a template.
@@ -61,7 +84,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-
 
   <script src="./loader.js"></script>
   <script src="./webP.js"></script>

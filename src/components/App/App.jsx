@@ -1,40 +1,39 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import {
-  Switch,
-  Route,
-  useLocation,
-  useHistory
-} from "react-router-dom";
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
-
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useDarkMode } from "../UseDarkMode/UseDarkMode"
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useDarkMode } from "../UseDarkMode/UseDarkMode";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 // Api
-import auth from '../../utils/auth';
-import { refreshToken, getUserInfo, getWalletInfo, getTeamInfo } from '../../utils/api'
+import auth from "../../utils/auth";
+import {
+  refreshToken,
+  getUserInfo,
+  getWalletInfo,
+  getTeamInfo,
+} from "../../utils/api";
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Main from '../Main/Main';
-import RoadMap from '../RoadMap/RoadMap';
-import Marketing from '../Marketing/Marketing';
-import Privacy from '../Privacy/Privacy';
-import Policy from '../Policy/Policy';
-import Status from '../Status/Status';
-import Tarif from '../Tarif/Tarif';
-import Profile from '../Profile/Profile';
-import Team from '../Team/Team';
-import Wallet from '../Wallet/Wallet';
-import Error from '../Error/Error';
-import Login from '../Login/Login';
-import Registration from '../Registration/Registration';
-import Support from '../Support/Support';
-import Learn from '../Learn/Learn';
-
-
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import Main from "../Main/Main";
+import RoadMap from "../RoadMap/RoadMap";
+import Marketing from "../Marketing/Marketing";
+import Privacy from "../Privacy/Privacy";
+import Policy from "../Policy/Policy";
+import Status from "../Status/Status";
+import Tarif from "../Tarif/Tarif";
+import Profile from "../Profile/Profile";
+import Team from "../Team/Team";
+import Wallet from "../Wallet/Wallet";
+import Error from "../Error/Error";
+import Login from "../Login/Login";
+import Registration from "../Registration/Registration";
+import Support from "../Support/Support";
+import Learn from "../Learn/Learn";
+import Modal from "../Modal/Modal";
+import Preloader from "../Preloader/Preloader";
 
 const App = () => {
   const history = useHistory();
@@ -45,10 +44,14 @@ const App = () => {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
-  const themeMode = theme === "light" ? 'app' : 'dark app';
+  const [modalActive, setModalActive] = useState({ preloader: false });
+  const themeMode = theme === "light" ? "app" : "dark app";
 
   useEffect(() => {
-    checkToken()
+    // setModalActive({ ...modalActive, preloader: true });
+    checkToken();
+
+    // return setModalActive({ ...modalActive, preloader: false });
   }, []);
 
   useEffect(() => {
@@ -88,7 +91,7 @@ const App = () => {
 
 
   const getData = async () => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
         const [user, wallet, team] = await Promise.all([
@@ -99,19 +102,16 @@ const App = () => {
         setCurrentUser(user);
         setCurentWallet(wallet);
         setCurentTeam(team);
-      }
-      catch (err) {
+      } catch (err) {
         console.error(err);
       }
     } else {
       setLoggedIn(false);
     }
-  }
-
-
+  };
 
   function handleRegister(username, joinedBy, email, password, telegram) {
-    return auth.register(username, joinedBy, email, password, telegram)
+    return auth.register(username, joinedBy, email, password, telegram);
   }
 
   async function handleLogin(username, password) {
@@ -132,32 +132,88 @@ const App = () => {
     setCurrentUser({});
     setCurentWallet({});
     setCurentTeam({});
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('rt');
-    localStorage.removeItem('expires');
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("rt");
+    localStorage.removeItem("expires");
   }
-
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className={themeMode}>
-        <Header themeToggler={themeToggler} check={check} onSignOut={handleSignout} />
+        <Header
+          themeToggler={themeToggler}
+          check={check}
+          onSignOut={handleSignout}
+        />
         <Switch>
-
           <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
-          <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
-          <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
-          <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
-          <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
-          <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={RoadMap}
+            path="/roadmap"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Marketing}
+            path="/marketing"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Privacy}
+            path="/privacy"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Policy}
+            path="/policy"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Status}
+            path="/status"
+          />
           <ProtectedRoute loggedIn={loggedIn} component={Tarif} path="/tarif" />
-          <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
-          <ProtectedRoute loggedIn={loggedIn} component={Team} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
-          <ProtectedRoute loggedIn={loggedIn} component={Wallet} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
-          <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
-          <ProtectedRoute loggedIn={loggedIn} component={Learn} checkToken={checkToken} path="/learn" />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Profile}
+            currentUser={currentUser}
+            path="/profile"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Team}
+            currentUser={currentUser}
+            currentTeam={currentTeam}
+            checkToken={checkToken}
+            path="/team"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Wallet}
+            currentUser={currentUser}
+            currentWallet={currentWallet}
+            checkToken={checkToken}
+            path="/wallet"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Support}
+            path="/support"
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            component={Learn}
+            checkToken={checkToken}
+            path="/learn"
+          />
           <Route path="/login">
-            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} />
+            <Login
+              onLogin={handleLogin}
+              loggedIn={loggedIn}
+              checkToken={checkToken}
+              modalActive={modalActive}
+              setModalActive={setModalActive}
+            />
           </Route>
           <Route path="/registration">
             <Registration loggedIn={loggedIn} onRegister={handleRegister} />
@@ -165,9 +221,12 @@ const App = () => {
           <Route component={Error} path="*" />
         </Switch>
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
+        <Modal active={modalActive.preloader}>
+          <Preloader />
+        </Modal>
       </div>
     </CurrentUserContext.Provider>
   );
-}
+};
 
 export default App;

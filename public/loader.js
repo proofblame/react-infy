@@ -1,12 +1,11 @@
-
-
-function square(x) { return x * x; }
+function square(x) {
+  return x * x;
+}
 
 function leminescate_of_bernoulli(t, a) {
-  var x = (a * Math.sqrt(2) * Math.cos(t)) /
-    (square(Math.sin(t)) + 1);
-  var y = (a * Math.sqrt(2) * Math.cos(t) * Math.sin(t)) /
-    (square(Math.sin(t)) + 1);
+  var x = (a * Math.sqrt(2) * Math.cos(t)) / (square(Math.sin(t)) + 1);
+  var y =
+    (a * Math.sqrt(2) * Math.cos(t) * Math.sin(t)) / (square(Math.sin(t)) + 1);
 
   /* parametric three-leaf clover
   x = Math.cos(3*t)*Math.cos(t)*a;
@@ -21,14 +20,18 @@ function rotate_point(pointX, pointY, originX, originY, angle, extrude) {
   pointY = originY + Math.sin(slope) * extrude;
   pointX = originX + Math.cos(slope) * extrude;
 
-  angle = angle * Math.PI / 180.0;
+  angle = (angle * Math.PI) / 180.0;
   return {
-    x: Math.cos(angle) * (pointX - originX) - Math.sin(angle) * (pointY - originY) + originX,
-    y: Math.sin(angle) * (pointX - originX) + Math.cos(angle) * (pointY - originY) + originY
+    x:
+      Math.cos(angle) * (pointX - originX) -
+      Math.sin(angle) * (pointY - originY) +
+      originX,
+    y:
+      Math.sin(angle) * (pointX - originX) +
+      Math.cos(angle) * (pointY - originY) +
+      originY,
   };
 }
-
-
 
 /*
   Some global variables
@@ -43,7 +46,7 @@ var colors = [
   ["rgba(81, 39, 137, 0.7)", 15, 10, pi / 2],
   ["rgba(156, 119, 206, 1)", 10, 8, pi],
   ["rgba(156, 119, 206, 0.9)", 10, 4, 1.5 * pi],
-  ["rgba(211, 188, 242, 1)", 5, 3, 1.5 * pi]
+  ["rgba(211, 188, 242, 1)", 5, 3, 1.5 * pi],
 ];
 
 /*
@@ -54,18 +57,16 @@ function InfinityLoop() {
 
   this.a = Math.random() * 50 + 150;
   //this.length = (Math.random() * 0.75 + 0.25) * pi; //Max = 2*PI
-  this.length = Math.random() * pickedColor[3] + (0.25 * pi);
+  this.length = Math.random() * pickedColor[3] + 0.25 * pi;
   this.position = Math.random() * 2 * pi; //0.5 * pi;
-  this.speed = (2 * pi / 100) - (Math.random() * (pi / 200));
+  this.speed = (2 * pi) / 100 - Math.random() * (pi / 200);
   this.heightAdjust = Math.random() * 0.2 + 1;
   this.center = {
     x: Math.random() * 20 - 10 + center[0],
     y: Math.random() * 20 - 10 + center[1],
-  }
+  };
 
-
-
-  this.color = pickedColor[0];//"rgba(200, 180, 0, 0.75)";
+  this.color = pickedColor[0]; //"rgba(200, 180, 0, 0.75)";
   this.thickness = Math.random() * pickedColor[1] + pickedColor[2];
 
   this.computePath = function (start, length, a) {
@@ -76,9 +77,8 @@ function InfinityLoop() {
 
     var lastPoint = null;
 
-    for (i = 0; i < segments; i++) {
-
-      t = this.speed * i + this.position;
+    for (let i = 0; i < segments; i++) {
+      let t = this.speed * i + this.position;
       if (t > 2 * pi) t = t - 2 * pi;
       if (t < 0) t = 2 * pi - t;
 
@@ -86,7 +86,7 @@ function InfinityLoop() {
       main_point[1] = main_point[1] * this.heightAdjust + this.center.y;
       var newPoint = {
         x: main_point[0] + this.center.x,
-        y: main_point[1]
+        y: main_point[1],
       };
 
       if (lastPoint == null) {
@@ -95,19 +95,28 @@ function InfinityLoop() {
         lastPoint = { x: prevPoint[0] + this.center.x, y: prevPoint[1] };
       }
 
-      var ribbonReductionIndex = ((i / (segments / 200)));
+      var ribbonReductionIndex = i / (segments / 200);
       //ribbonReductionIndex *= (Math.cos(2*t)+1);
-      var ribbonThickness = Math.sin(pi / 2 * (ribbonReductionIndex / 100)) * this.thickness;
+      var ribbonThickness =
+        Math.sin((pi / 2) * (ribbonReductionIndex / 100)) * this.thickness;
 
       var extrudedLeftPoint = rotate_point(
-        lastPoint.x, lastPoint.y,
-        newPoint.x, newPoint.y, 90, - ribbonThickness / 2
+        lastPoint.x,
+        lastPoint.y,
+        newPoint.x,
+        newPoint.y,
+        90,
+        -ribbonThickness / 2
       );
       extruded_left_points.push(extrudedLeftPoint);
 
       var extrudedRightPoint = rotate_point(
-        lastPoint.x, lastPoint.y,
-        newPoint.x, newPoint.y, 90, ribbonThickness / 2
+        lastPoint.x,
+        lastPoint.y,
+        newPoint.x,
+        newPoint.y,
+        90,
+        ribbonThickness / 2
       );
       extruded_right_points.push(extrudedRightPoint);
 
@@ -116,20 +125,17 @@ function InfinityLoop() {
     var points = extruded_left_points.concat(extruded_right_points.reverse());
 
     return points;
-  }
+  };
 
   this.drawPath = function () {
-    var leafPath = this.computePath(
-      this.position,
-      this.length,
-      this.a, 5);
+    var leafPath = this.computePath(this.position, this.length, this.a, 5);
 
     this.position += this.speed;
 
     ctx.fillStyle = this.color;
     ctx.beginPath();
     ctx.moveTo(leafPath[0].x, leafPath[0].y);
-    for (i = 1; i < leafPath.length; i++) {
+    for (let i = 1; i < leafPath.length; i++) {
       ctx.lineTo(leafPath[i].x, leafPath[i].y);
     }
     ctx.closePath();
@@ -138,31 +144,28 @@ function InfinityLoop() {
     if (this.position > 2 * pi) {
       this.position = this.position - 2 * pi;
     }
-  }
+  };
 
   this.reposition = function () {
     this.center = {
       x: Math.random() * 20 - 10 + center[0],
       y: Math.random() * 20 - 10 + center[1],
-    }
-  }
+    };
+  };
 
   this.tick = function (timestamp) {
     this.drawPath();
-  }
+  };
 
   return this;
 }
-
-
 
 /*
   Get the animation started
 */
 var Scene = function () {
-
   var loops = [];
-  var lastTick = 0
+  var lastTick = 0;
 
   for (var i = 0; i < 50; i++) {
     loops.push(new InfinityLoop());
@@ -171,7 +174,7 @@ var Scene = function () {
   var clearCanvas = function () {
     ctx.fillStyle = "rgba(255,255,255,0.2)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
+  };
 
   var animate = function (timestamp) {
     /*skip frames if more than 60/second*/
@@ -185,47 +188,46 @@ var Scene = function () {
       loops[i].tick(timestamp);
     }
 
-
     lastTick = timestamp;
     requestAnimationFrame(animate);
-  }
+  };
 
   this.run = function () {
     requestAnimationFrame(animate);
-  }
+  };
 
   this.reset = function () {
     loops = [];
-    lastTick = 0
+    lastTick = 0;
 
     for (var i = 0; i < 50; i++) {
       loops.push(new InfinityLoop());
     }
-  }
+  };
 
   this.reposition = function () {
     for (i = 0; i < loops.length; i++) {
       loops[i].reposition();
     }
-  }
+  };
 
   return this;
-}
+};
 
-var canvas = document.getElementsByTagName('canvas')[0];
-var ctx = canvas.getContext('2d');
+var canvas = document.getElementsByTagName("canvas")[0];
+var ctx = canvas.getContext("2d");
 var scene = new Scene();
 scene.run();
 
-$(window).resize(function () {
-  // canvas.width = canvas.offsetWidth;
-  // canvas.height = canvas.offsetHeight;
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  center[0] = canvas.width / 2;
-  center[1] = canvas.height / 2;
-  scene.reposition();
-}).resize();
+window
+  .resize(function () {
+    canvas.width = window.width();
+    canvas.height = window.height();
+    center[0] = canvas.width / 2;
+    center[1] = canvas.height / 2;
+    scene.reposition();
+  })
+  .resize();
 
 function reset() {
   scene.reset();
