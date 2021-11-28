@@ -62,22 +62,28 @@ const App = () => {
     const expires = localStorage.getItem('expires')
     const rt = localStorage.getItem('rt');
     const jwt = localStorage.getItem('jwt');
-    if (Date.now() >= expires && rt && jwt) {
-      try {
-        const res = await refreshToken(rt);
-        localStorage.setItem('jwt', res.access_token);
-        localStorage.setItem('rt', res.refresh_token);
-        localStorage.setItem('expires', res.expires_at)
-        getData()
-        setLoggedIn(true);
-      } catch (err) {
-        console.error(err);
+    if (jwt) {
+      if (Date.now() >= expires && jwt) {
+        try {
+          const res = await refreshToken(rt);
+          localStorage.setItem('jwt', res.access_token);
+          localStorage.setItem('rt', res.refresh_token);
+          localStorage.setItem('expires', res.expires_at)
+          getData()
+          setLoggedIn(true)
+        } catch (err) {
+          console.error(err);
+        }
       }
+      else {
+        getData()
+        setLoggedIn(true)
+      }
+
+    } else {
+      setLoggedIn(false)
     }
-    else {
-      // getData()
-      // setLoggedIn(false);
-    }
+
   }
 
 
@@ -110,9 +116,15 @@ const App = () => {
 
   async function handleLogin(username, password) {
     const res = await auth.login(username, password);
-    localStorage.setItem('jwt', res.access_token);
-    localStorage.setItem('rt', res.refresh_token);
-    localStorage.setItem('expires', res.expires_at)
+    if (res) {
+      localStorage.setItem('jwt', res.access_token);
+      localStorage.setItem('rt', res.refresh_token);
+      localStorage.setItem('expires', res.expires_at)
+      setLoggedIn(true);
+      history.push('/profile');
+      checkToken();
+    }
+
   }
 
   function handleSignout() {
