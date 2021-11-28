@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   useLocation,
+  useHistory
 } from "react-router-dom";
 
 
@@ -36,6 +37,7 @@ import Learn from '../Learn/Learn';
 
 
 const App = () => {
+  const history = useHistory();
   const { pathname } = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [currentWallet, setCurentWallet] = useState({});
@@ -46,7 +48,7 @@ const App = () => {
   const themeMode = theme === "light" ? 'app' : 'dark app';
 
   useEffect(() => {
-    getData();
+    checkToken()
   }, []);
 
   useEffect(() => {
@@ -57,24 +59,28 @@ const App = () => {
   // Получаем данные пользователя, кошелька, команды.
   // TODO: получать все данные тут (еще: Обучение, Дерево)
   const checkToken = async () => {
+    const expires = localStorage.getItem('expires')
     const rt = localStorage.getItem('rt');
-    if (rt) {
+    if (Date.now() >= expires && rt) {
       try {
         const res = await refreshToken(rt);
         localStorage.setItem('jwt', res.access_token);
         localStorage.setItem('rt', res.refresh_token);
+        localStorage.setItem('expires', res.expires_at)
+        getData()
         setLoggedIn(true);
       } catch (err) {
         console.error(err);
       }
     }
     else {
-      setLoggedIn(false);
+      getData()
+      setLoggedIn(true);
     }
   }
 
+
   const getData = async () => {
-    await checkToken()
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       try {
@@ -105,7 +111,7 @@ const App = () => {
     const res = await auth.login(username, password);
     localStorage.setItem('jwt', res.access_token);
     localStorage.setItem('rt', res.refresh_token);
-    getData();
+    localStorage.setItem('expires', res.expires_at)
   }
 
   function handleSignout() {
@@ -115,6 +121,7 @@ const App = () => {
     setCurentTeam({});
     localStorage.removeItem('jwt');
     localStorage.removeItem('rt');
+    localStorage.removeItem('expires');
   }
 
   // TODO: сделать через один защищенный компонент
