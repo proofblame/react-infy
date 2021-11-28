@@ -13,7 +13,10 @@ function Tarif({ refToken, isLoaded, handleLoadingTrue, handleLoadingFalse }) {
   const [pay, setPay] = useState(null);
   const [statusMessage, setStatusMessage] = useState("");
 
-  const [modalActive, setModalActive] = useState(false);
+  const [modalActive, setModalActive] = useState({
+    tarifPopup: false,
+    preloader: false,
+  });
 
   useEffect(() => {
     handleGetTarif();
@@ -47,6 +50,7 @@ function Tarif({ refToken, isLoaded, handleLoadingTrue, handleLoadingFalse }) {
   };
 
   const handlePayTarif = () => {
+    setModalActive({ ...modalActive, preloader: true });
     handleLoadingTrue();
     refToken();
     const refresh_token = localStorage.getItem("refresh_token");
@@ -66,7 +70,8 @@ function Tarif({ refToken, isLoaded, handleLoadingTrue, handleLoadingFalse }) {
               handleLoadingFalse();
               setStatusMessage("Тариф оплачен");
               setTimeout(() => {
-                setModalActive(false);
+                setModalActive({ ...modalActive, preloader: false });
+                setModalActive({ ...modalActive, tarifPopup: false });
                 setStatusMessage("");
                 setPay(null);
               }, 2000);
@@ -81,20 +86,24 @@ function Tarif({ refToken, isLoaded, handleLoadingTrue, handleLoadingFalse }) {
               }
               setPay(false);
               setStatusMessage("Недостаточно монет");
+              setModalActive({ ...modalActive, preloader: false });
             });
         }
+      })
+      .finally(() => {
+        setModalActive({ ...modalActive, preloader: false });
       });
   };
 
   const handleClosePopup = () => {
-    setModalActive(false);
+    setModalActive({ ...modalActive, tarifPopup: false });
     setPay(null);
     setStatusMessage("");
   };
   const handleOpenPopup = () => {
-    setModalActive(true);
+    setModalActive({ ...modalActive, tarifPopup: true });
   };
-  console.log(isLoaded);
+
   return (
     <>
       <main className="main">
@@ -172,44 +181,41 @@ function Tarif({ refToken, isLoaded, handleLoadingTrue, handleLoadingFalse }) {
         </div>
       </main>
 
-      <Modal active={modalActive}>
+      <Modal active={modalActive.tarifPopup}>
         <>
-          {isLoaded ? (
-            <Preloader />
-          ) : (
-            <Popup onClose={handleClosePopup}>
-              <p className="form__title">Отправить</p>
-              <p className="form__text-subtitle">
-                Ваш баланс:&nbsp;
-                <span className="form__text-subtitle_count">
-                  {tarif.balance}
-                </span>
-              </p>
-              <p className="form__text-subtitle">
-                Стоимость тарифа:&nbsp;
-                <span className="form__text-subtitle_count">
-                  {tarif.tarifCostCoins} INFY (990 &#x20bd;)
-                </span>
-              </p>
-              <p className="form__text-subtitle">
-                <b>Хотите оплатить тариф?</b>
-              </p>
-              <p
-                className="form__text-subtitle"
-                style={pay ? { color: "green" } : { color: "red" }}
-              >
-                <b>{statusMessage}</b>
-              </p>
+          <Popup onClose={handleClosePopup}>
+            <p className="form__title">Отправить</p>
+            <p className="form__text-subtitle">
+              Ваш баланс:&nbsp;
+              <span className="form__text-subtitle_count">{tarif.balance}</span>
+            </p>
+            <p className="form__text-subtitle">
+              Стоимость тарифа:&nbsp;
+              <span className="form__text-subtitle_count">
+                {tarif.tarifCostCoins} INFY (990 &#x20bd;)
+              </span>
+            </p>
+            <p className="form__text-subtitle">
+              <b>Хотите оплатить тариф?</b>
+            </p>
+            <p
+              className="form__text-subtitle"
+              style={pay ? { color: "green" } : { color: "red" }}
+            >
+              <b>{statusMessage}</b>
+            </p>
 
-              <input
-                type="button"
-                className="link link_active"
-                value="Оплатить"
-                onClick={handlePayTarif}
-              />
-            </Popup>
-          )}
+            <input
+              type="button"
+              className="link link_active"
+              value="Оплатить"
+              onClick={handlePayTarif}
+            />
+          </Popup>
         </>
+      </Modal>
+      <Modal active={modalActive.preloader}>
+        <Preloader />
       </Modal>
     </>
   );

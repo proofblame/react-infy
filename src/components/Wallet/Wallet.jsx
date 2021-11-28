@@ -9,6 +9,7 @@ import "./Wallet.css";
 import auth from "../../utils/auth";
 import Transaction from "../Transaction/Transaction";
 import WalletSlider from "./Slider/Slider";
+import Preloader from "../Preloader/Preloder";
 
 function Wallet({
   currentUser,
@@ -27,12 +28,14 @@ function Wallet({
     transferPopup: false,
     delegationPopup: false,
     undelegationPopup: false,
+    preloader: false,
   });
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
   const handleUndelegateInfy = (amountUndel) => {
+    setModalActive({ ...modalActive, preloader: true });
     refToken();
     const refresh_token = localStorage.getItem("refresh_token");
     return auth
@@ -60,10 +63,14 @@ function Wallet({
               }
             });
         }
+      })
+      .finally(() => {
+        setModalActive({ ...modalActive, preloader: false });
       });
   };
 
   const handleDelegateInfy = (amountDel) => {
+    setModalActive({ ...modalActive, preloader: true });
     refToken();
     const refresh_token = localStorage.getItem("refresh_token");
     return auth
@@ -91,10 +98,14 @@ function Wallet({
               }
             });
         }
+      })
+      .finally(() => {
+        setModalActive({ ...modalActive, preloader: false });
       });
   };
 
   const handleSendInfy = (amount, walletTo) => {
+    setModalActive({ ...modalActive, preloader: true });
     refToken();
     const refresh_token = localStorage.getItem("refresh_token");
     return auth
@@ -122,6 +133,9 @@ function Wallet({
               }
             });
         }
+      })
+      .finally(() => {
+        setModalActive({ ...modalActive, preloader: false });
       });
   };
 
@@ -392,6 +406,9 @@ function Wallet({
           isLoaded={isLoaded}
           handleLoadingTrue={handleLoadingTrue}
         />
+      </Modal>
+      <Modal active={modalActive.preloader}>
+        <Preloader />
       </Modal>
     </>
   );
