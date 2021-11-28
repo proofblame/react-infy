@@ -8,12 +8,7 @@ import Modal from "../Modal/Modal";
 import "./Wallet.css";
 import Transaction from "../Transaction/Transaction";
 import WalletSlider from "./Slider/Slider";
-import {
-  undelegateInfy,
-  delegateInfy,
-  sendInfy,
-  getTransactionsInfo,
-} from "../../utils/api";
+import api from "../../utils/api";
 import Preloader from "../Preloader/Preloader";
 
 function Wallet({ currentUser, currentWallet, checkToken }) {
@@ -38,7 +33,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        await undelegateInfy(jwt, amountUndel);
+        await api.undelegateInfy(jwt, amountUndel);
       } catch (err) {
         console.error(err);
       } finally {
@@ -54,7 +49,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        await delegateInfy(jwt, amountDel);
+        await api.delegateInfy(jwt, amountDel);
       } catch (err) {
         console.error(err);
       } finally {
@@ -70,7 +65,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        await sendInfy(jwt, walletTo, amount);
+        await api.sendInfy(jwt, walletTo, amount);
       } catch (err) {
         console.error(err);
       } finally {
@@ -87,7 +82,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const transactions = await getTransactionsInfo(jwt, page, 8);
+        const transactions = await api.getTransactionsInfo(jwt, page, 8);
         setCurentTransactions(transactions.histories);
         setPageCount(transactions.pageCount);
       } catch (err) {

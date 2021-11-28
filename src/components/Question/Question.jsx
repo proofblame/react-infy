@@ -1,6 +1,6 @@
 import React from "react";
 import Answer from "../Answer/Answer";
-import { sendAnswers } from '../../utils/api'
+import api from '../../utils/api'
 import "./Question.css";
 
 const Question = ({
@@ -27,7 +27,7 @@ const Question = ({
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const res = await sendAnswers(jwt, lesson.lessonNumber, list)
+        const res = await api.sendAnswers(jwt, lesson.lessonNumber, list)
         setResult(res);
         setModalActive({ ...modalActive, testResult: false });
       } catch (err) {

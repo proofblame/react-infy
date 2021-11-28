@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../Nav/Nav";
-import { getTarif, payTarif } from '../../utils/api'
+import api from '../../utils/api'
 import Modal from "../Modal/Modal";
 import Popup from "../Popup/Popup";
 import Preloader from "../Preloader/Preloader";
@@ -28,7 +28,7 @@ function Tarif({ checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const tarif = await getTarif(jwt)
+        const tarif = await api.getTarif(jwt)
         setTarif(tarif);
         setModalActive({ ...modalActive, preloader: false });
       } catch (err) {
@@ -44,7 +44,7 @@ function Tarif({ checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const pay = payTarif(jwt)
+        const pay = api.payTarif(jwt)
         setTarif(pay);
         setPay(true);
         setStatusMessage("Тариф оплачен");

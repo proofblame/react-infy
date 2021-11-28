@@ -215,7 +215,7 @@ const sendAnswers = async (jwt, lessonNumber, list) => {
   return getResponseData(res);
 }
 
-module.exports = {
+const api = {
   register,
   login,
   refreshToken,
@@ -225,10 +225,11 @@ module.exports = {
   getTreeInfo,
   getTransactionsInfo,
   sendInfy,
-  delegateInfy,
   undelegateInfy,
   getTarif,
   payTarif,
   getLessionsInfo,
-  sendAnswers
+  sendAnswers,
+  delegateInfy
 }
+export default api

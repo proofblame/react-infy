@@ -11,7 +11,7 @@ import LearnPopupSlider from "./LearnPopupSlider/LearnPopupSlider";
 import Question from "../Question/Question";
 import Lesson from "../Lesson/Lesson";
 import { useList } from "react-use";
-import { getLessionsInfo } from '../../utils/api'
+import api from '../../utils/api'
 import Preloader from "../Preloader/Preloader";
 
 const Learn = ({ checkToken }) => {
@@ -66,7 +66,7 @@ const Learn = ({ checkToken }) => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const res = await getLessionsInfo(jwt)
+        const res = await api.getLessionsInfo(jwt)
         setLessons(res.lessons);
         setIsTested(res.isTested);
         setModalActive({ ...modalActive, preloader: false });

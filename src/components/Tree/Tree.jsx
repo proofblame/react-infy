@@ -4,7 +4,7 @@ import Modal from "../Modal/Modal";
 import TreePopup from "../TreePopup/TreePopup";
 import TreeItem from "../TreeItem/TreeItem";
 import Card from "../Card/Card";
-import { getTreeInfo } from "../../utils/api";
+import api from "../../utils/api";
 import Preloader from "../Preloader/Preloader";
 
 const Tree = ({ checkToken }) => {
@@ -46,7 +46,7 @@ const Tree = ({ checkToken }) => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const tree = await getTreeInfo(jwt, line, page, 4);
+        const tree = await api.getTreeInfo(jwt, line, page, 4);
         setModalActive({ ...modalActive, treePopup: true });
         setCurrentTree(tree.lines);
         setPageCount(tree.pagesCount);

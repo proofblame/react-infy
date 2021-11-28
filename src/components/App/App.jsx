@@ -8,12 +8,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 // Api
 import auth from "../../utils/auth";
-import {
-  refreshToken,
-  getUserInfo,
-  getWalletInfo,
-  getTeamInfo,
-} from "../../utils/api";
+import api from "../../utils/api";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -65,7 +60,7 @@ const App = () => {
     if (jwt) {
       if (Date.now() >= expires && jwt) {
         try {
-          const res = await refreshToken(rt);
+          const res = await api.refreshToken(rt);
           localStorage.setItem("jwt", res.access_token);
           localStorage.setItem("rt", res.refresh_token);
           localStorage.setItem("expires", res.expires_at);
@@ -90,9 +85,9 @@ const App = () => {
     if (jwt) {
       try {
         const [user, wallet, team] = await Promise.all([
-          getUserInfo(jwt),
-          getWalletInfo(jwt),
-          getTeamInfo(jwt),
+          api.getUserInfo(jwt),
+          api.getWalletInfo(jwt),
+          api.getTeamInfo(jwt),
         ]);
         setCurrentUser(user);
         setCurentWallet(wallet);
