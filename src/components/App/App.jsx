@@ -61,7 +61,8 @@ const App = () => {
   const checkToken = async () => {
     const expires = localStorage.getItem('expires')
     const rt = localStorage.getItem('rt');
-    if (Date.now() >= expires && rt) {
+    const jwt = localStorage.getItem('jwt');
+    if (Date.now() >= expires && rt && jwt) {
       try {
         const res = await refreshToken(rt);
         localStorage.setItem('jwt', res.access_token);
@@ -74,8 +75,8 @@ const App = () => {
       }
     }
     else {
-      getData()
-      setLoggedIn(true);
+      // getData()
+      // setLoggedIn(false);
     }
   }
 
