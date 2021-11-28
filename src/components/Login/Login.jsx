@@ -12,8 +12,7 @@ function Login(props) {
 
   useEffect(() => {
     document.title = "Login";
-    if (props.loggedIn) history.push("/profile");
-  }, [props.loggedIn, history]);
+  }, []);
 
   function onChange(e) {
     const { name, value } = e.target;
