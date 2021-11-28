@@ -86,12 +86,12 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
+        setModalActive({ ...modalActive, preloader: true });
         const transactions = await getTransactionsInfo(jwt, page, 8);
         setCurentTransactions(transactions.histories);
         setPageCount(transactions.pageCount);
       } catch (err) {
         console.error(err);
-        console.log("hi");
         setModalActive({ ...modalActive, preloader: false });
       } finally {
         setModalActive({ ...modalActive, preloader: false });
