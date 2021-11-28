@@ -3,6 +3,9 @@
   font-family: HelveticaNeueCyr, sans-serif;
   font-style: normal;
   letter-spacing: 0.05em;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 .dark.app {
   /* background-color: #0E0E0E; */

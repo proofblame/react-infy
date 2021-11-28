@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import Particles from "../Particles/Particles";
 import { NavLink } from "react-router-dom";
 
 function Login(props) {
-  const history = useHistory();
   const [data, setData] = useState({
     username: "",
     password: "",

@@ -219,16 +219,20 @@ var ctx = canvas.getContext("2d");
 var scene = new Scene();
 scene.run();
 
-window
-  .resize(function () {
-    canvas.width = window.width();
-    canvas.height = window.height();
-    center[0] = canvas.width / 2;
-    center[1] = canvas.height / 2;
-    scene.reposition();
-  })
-  .resize();
+
 
 function reset() {
   scene.reset();
 }
+
+$(document).ready(function () {
+  // window
+  //   .resize(function () {
+  //     canvas.width = window.width();
+  //     canvas.height = window.height();
+  //     center[0] = canvas.width / 2;
+  //     center[1] = canvas.height / 2;
+  //     scene.reposition();
+  //   })
+  //   .resize();
+})
