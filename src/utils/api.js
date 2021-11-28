@@ -1,15 +1,15 @@
 // На продакшн
-const baseURL = 'https://server.infy-corp.com/react-api';
+// const baseURL = 'https://server.infy-corp.com/react-api';
 
 // На тестовый сервер
-// const baseURL = 'http://api.infy-corp.com/react-api';
+const baseURL = 'http://api.infy-corp.com/react-api';
 
 // Возвращаем объект ответа
 const getResponseData = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(res);
+  return Promise.reject(new Error(`Возникла ошибка: ${res}`));
 }
 //  Регистрация
 const register = async (username, joinedBy, email, password, telegram) => {

@@ -48,6 +48,7 @@ const App = () => {
     if (refTok) {
       localStorage.removeItem("refresh_token");
     }
+
     getData();
   }, []);
 
@@ -104,6 +105,7 @@ const App = () => {
       }
     } else {
       setLoggedIn(false);
+      setModalActive({ modalActive, preloader: false });
     }
   };
 
