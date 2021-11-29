@@ -63,7 +63,7 @@ const App = () => {
     const expires = localStorage.getItem("expires");
     const rt = localStorage.getItem("rt");
     const jwt = localStorage.getItem("jwt");
-    if (jwt) {
+    if (rt && jwt && expires) {
       if (Date.now() >= expires && jwt) {
         try {
           const res = await api.refreshToken(rt);
@@ -145,34 +145,6 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className={themeMode}>
-<<<<<<< HEAD
-        <Header themeToggler={themeToggler} check={check} onSignOut={handleSignout} />
-        <Switch>
-          <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
-          {/* <ProtectedRoute loggedIn={loggedIn} component={WhitePaper} path="/whitepaper" /> */}
-          <ProtectedRoute loggedIn={loggedIn} component={RoadMap} path="/roadmap" />
-          <ProtectedRoute loggedIn={loggedIn} component={Marketing} path="/marketing" />
-          <ProtectedRoute loggedIn={loggedIn} component={Privacy} path="/privacy" />
-          <ProtectedRoute loggedIn={loggedIn} component={Policy} path="/policy" />
-          <ProtectedRoute loggedIn={loggedIn} component={Status} path="/status" />
-          <ProtectedRoute loggedIn={loggedIn} component={Tarif} refToken={refToken} path="/tarif" />
-          <ProtectedRoute loggedIn={loggedIn} component={Profile} currentUser={currentUser} path="/profile" />
-          <ProtectedRoute loggedIn={loggedIn} component={Team} refToken={refToken} currentUser={currentUser} currentTeam={currentTeam} checkToken={checkToken} path="/team" />
-          <ProtectedRoute loggedIn={loggedIn} component={Wallet} refToken={refToken} currentUser={currentUser} currentWallet={currentWallet} checkToken={checkToken} path="/wallet" />
-          <ProtectedRoute loggedIn={loggedIn} component={Support} path="/support" />
-          <ProtectedRoute loggedIn={loggedIn} component={Learn} refToken={refToken} path="/learn" />
-
-          <Route path="/login">
-            <Login onLogin={handleLogin} loggedIn={loggedIn} checkToken={checkToken} refToken={refToken} />
-          </Route>
-          <Route path="/registration">
-            <Registration loggedIn={loggedIn} onRegister={handleRegister} />
-          </Route>
-
-
-          <Route component={Error} path="*" />
-        </Switch>
-=======
         <Header
           themeToggler={themeToggler}
           check={check}
@@ -261,7 +233,6 @@ const App = () => {
         </div>
 
 
->>>>>>> refactor-api-req
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
         <Modal active={modalActive.preloader}>
           <Preloader />
