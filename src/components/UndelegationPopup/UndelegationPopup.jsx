@@ -34,7 +34,7 @@ function UndelegationPopup({ onClose, currentWallet, handleUndelegateInfy }) {
           <p className="form__text-subtitle">
             Доступно к разделегированию:
             <span className="form__text-subtitle_count">
-            {currentWallet.delegateBalance}.{currentWallet.delegateBalanceAfter}
+              {currentWallet.delegateBalance}.{currentWallet.delegateBalanceAfter}
             </span>
           </p>
         </fieldset>

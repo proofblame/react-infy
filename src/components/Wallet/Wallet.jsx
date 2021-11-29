@@ -1,168 +1,133 @@
-import React, { useState, useEffect } from 'react'
-import Nav from '../Nav/Nav'
-import copyIcon from './images/copy-icon.svg';
-import TransferPopup from '../TransferPopup/TransferPopup'
-import DelegationPopup from '../DelegationPopup/DelegationPopup'
-import UndelegationPopup from '../UndelegationPopup/UndelegationPopup'
-import Modal from '../Modal/Modal'
-import './Wallet.css'
-import auth from '../../utils/auth';
-import Transaction from '../Transaction/Transaction';
-import WalletSlider from './Slider/Slider';
+import React, { useState, useEffect } from "react";
+import Nav from "../Nav/Nav";
+import copyIcon from "./images/copy-icon.svg";
+import TransferPopup from "../TransferPopup/TransferPopup";
+import DelegationPopup from "../DelegationPopup/DelegationPopup";
+import UndelegationPopup from "../UndelegationPopup/UndelegationPopup";
+import Modal from "../Modal/Modal";
+import "./Wallet.css";
+import Transaction from "../Transaction/Transaction";
+import WalletSlider from "./Slider/Slider";
+import api from "../../utils/api";
+import Preloader from "../Preloader/Preloader";
 
-
-
-
-function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
+function Wallet({ currentUser, currentWallet, checkToken }) {
   useEffect(() => {
-    document.title = "Wallet"
+    document.title = "Wallet";
   }, []);
+
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
     delegationPopup: false,
-    undelegationPopup: false
-  })
+    undelegationPopup: false,
+    preloader: false,
+  });
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
-  const handleUndelegateInfy = (amountUndel) => {
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .undelegateInfy(jwt, amountUndel)
-            .then(() => {
-              setModalActive({ ...modalActive, undelegationPopup: false })
-              checkToken();
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                refToken()
-              } else {
+  const handleUndelegateInfy = async (amountUndel) => {
+    setModalActive({ ...modalActive, preloader: true });
+    await checkToken();
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        await api.undelegateInfy(jwt, amountUndel);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        await getTansactions();
+        handleClosePopup();
+      }
+    }
+  };
 
-                console.error(e)
-              }
+  const handleDelegateInfy = async (amountDel) => {
+    setModalActive({ ...modalActive, preloader: true });
+    await checkToken();
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        await api.delegateInfy(jwt, amountDel);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        await getTansactions();
+        handleClosePopup();
+      }
+    }
+  };
 
-            });
-        }
-      })
+  const handleSendInfy = async (amount, walletTo) => {
+    setModalActive({ ...modalActive, preloader: true });
+    await checkToken();
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        await api.sendInfy(jwt, walletTo, amount);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        await getTansactions();
+        handleClosePopup();
+      }
+    }
+
+  };
+
+  const getTansactions = async () => {
+    setModalActive({ ...modalActive, preloader: true });
+    await checkToken();
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        const transactions = await api.getTransactionsInfo(jwt, page, 8);
+        setCurentTransactions(transactions.histories);
+        setPageCount(transactions.pageCount);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setModalActive({ ...modalActive, preloader: false });
+      }
+    }
+  };
+
+  const handleOpenPopup = (e) => {
+    const { name } = e.target;
+    setModalActive({
+      ...modalActive,
+      [name]: true
+    })
   }
-
-  const handleDelegateInfy = (amountDel) => {
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .delegateInfy(jwt, amountDel)
-            .then(() => {
-              setModalActive({ ...modalActive, delegationPopup: false })
-              checkToken();
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                refToken()
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
-  }
-
-  const handleSendInfy = (amount, walletTo,) => {
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .sendInfy(jwt, walletTo, amount)
-            .then(() => {
-              setModalActive({ ...modalActive, transferPopup: false })
-              checkToken();
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                refToken()
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
+  const handleClosePopup = () => {
+    setModalActive({
+      ...modalActive,
+      transferPopup: false,
+      delegationPopup: false,
+      undelegationPopup: false,
+    })
   }
 
   const nextPage = () => {
     if (page >= 0 && page < pageCount - 1) {
-      setPage(page + 1)
-      // getTansactions()
+      setPage(page + 1);
     } else {
-      setPage(page)
+      setPage(page);
     }
-  }
+  };
 
   const prevPage = () => {
     if (page > 0 && page <= pageCount - 1) {
-      setPage(page - 1)
-      // getTansactions()
+      setPage(page - 1);
     } else {
-      setPage(page)
+      setPage(page);
     }
-  }
+  };
 
   useEffect(() => {
     getTansactions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, modalActive])
-
-  const getTansactions = () => {
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-          auth
-            .getTransactionsInfo(jwt, page, 8)
-            .then(transactions => {
-              setCurentTransactions(transactions.histories);
-              setPageCount(transactions.pageCount)
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                refToken()
-              } else {
-
-                console.error(e)
-              }
-
-            });
-        }
-      })
-  }
-
-
+  }, [page]);
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(currentUser.wallet);
@@ -171,7 +136,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
     setTimeout(() => {
       setTextCopy("text-copy");
     }, 2000);
-  }
+  };
 
   const transactionList = currentTransactions.map((transaction, index) => (
     <Transaction
@@ -179,8 +144,7 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
       transaction={transaction}
       modalActive={modalActive}
     />
-  ))
-
+  ));
 
   return (
     <>
@@ -192,17 +156,29 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             <div className="wrapper profile__body">
               <h1 className="profile__title title">Кошелек</h1>
             </div>
-
-
           </section>
           <div className="data__contacts">
             <div className="data__contacts-block">
-              <p className="text text_size_small text_color_lighter">Адрес кошелька</p>
+              <p className="text text_size_small text_color_lighter">
+                Адрес кошелька
+              </p>
               <div className="data__contacts-wrapper">
-                <p className="data__text text text_size_medium text_color_normal" id="number-wallet">{currentUser.wallet}</p>
+                <p
+                  className="data__text text text_size_medium text_color_normal"
+                  id="number-wallet"
+                >
+                  {currentUser.wallet}
+                </p>
                 <div className="data__copy-button">
-                  <img src={copyIcon} alt="Копировать адрес кошелька" className="data__copy" onClick={handleCopyClick} />
-                  <span className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}>
+                  <img
+                    src={copyIcon}
+                    alt="Копировать адрес кошелька"
+                    className="data__copy"
+                    onClick={handleCopyClick}
+                  />
+                  <span
+                    className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}
+                  >
                     Скопировано
                   </span>
                 </div>
@@ -214,10 +190,14 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             <div className="card card_one">
               <div className="card__body">
                 <div className="card__title-wrapper">
-                  <p className="card__title">Основной кошелёк</p> <button className="card__ref">?</button>
+                  <p className="card__title">Основной кошелёк</p>{" "}
+                  <button className="card__ref">?</button>
                 </div>
-                <p className="card__coins">{currentWallet.balance}
-                  <span className="card__coins_cents">.{currentWallet.balanceAfter}</span>
+                <p className="card__coins">
+                  {currentWallet.balance}
+                  <span className="card__coins_cents">
+                    .{currentWallet.balanceAfter}
+                  </span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.balanceRu} ₽`}</p>
                 <p className="card__rub">30₽</p>
@@ -230,41 +210,79 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
             <div className="card card_two">
               <div className="card__body">
                 <div className="card__title-wrapper">
-                  <p className="card__title">Кошелёк стейкинга</p> <button className="card__ref">?</button>
+                  <p className="card__title">Кошелёк стейкинга</p>{" "}
+                  <button className="card__ref">?</button>
                 </div>
-                <p className="card__coins">{currentWallet.delegateBalance}
-                  <span className="card__coins_cents">.{currentWallet.delegateBalanceAfter}</span>
+                <p className="card__coins">
+                  {currentWallet.delegateBalance}
+                  <span className="card__coins_cents">
+                    .{currentWallet.delegateBalanceAfter}
+                  </span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.delegateBalanceRu} ₽`}</p>
                 <p className="card__coins card__coins_curse"></p>
               </div>
               <div className="card__footer">
-                <p className="card__profits">В выводе:
-                  {currentWallet.sumUndelegate}</p>
-                <p className="card__profits">Вознагражд.: {currentWallet.delegateInMonth}/мес ({currentWallet.delegateInDay}/день)</p>
-                <p className="card__subtitle">Монеты автоматически переводятся на основной кошелек 1 раз в сутки</p>
+                <p className="card__profits">
+                  В выводе:
+                  {currentWallet.sumUndelegate}
+                </p>
+                <p className="card__profits">
+                  Вознагражд.: {currentWallet.delegateInMonth}/мес (
+                  {currentWallet.delegateInDay}/день)
+                </p>
+                <p className="card__subtitle">
+                  Монеты автоматически переводятся на основной кошелек 1 раз в
+                  сутки
+                </p>
               </div>
             </div>
             <div className="card card_three">
               <div className="card__body">
                 <div className="card__title-wrapper">
-                  <p className="card__title">Весь портфель </p> <button className="card__ref">?</button>
+                  <p className="card__title">Весь портфель </p>{" "}
+                  <button className="card__ref">?</button>
                 </div>
-                <p className="card__coins">{currentWallet.sumBalance}
-                  <span className="card__coins_cents">.{currentWallet.sumBalanceAfter}</span>
+                <p className="card__coins">
+                  {currentWallet.sumBalance}
+                  <span className="card__coins_cents">
+                    .{currentWallet.sumBalanceAfter}
+                  </span>
                 </p>
                 <p className="card__coins card__coins_cents">{`${currentWallet.sumBalanceRu} ₽`}</p>
                 <p className="card__coins card__coins_curse"></p>
               </div>
               <div className="card__footer">
-                <p className="card__subtitle">Заработано всего: <br /> {currentWallet.sumEarned} ({`${currentWallet.sumEarnedRu} ₽`})</p>
+                <p className="card__subtitle">
+                  Заработано всего: <br /> {currentWallet.sumEarned} (
+                  {`${currentWallet.sumEarnedRu} ₽`})
+                </p>
               </div>
             </div>
           </section>
           <section className="banner__buttons wallet__buttons">
-            <span className="wallet__button link link_active open-transferPopup open" onClick={() => setModalActive({ ...modalActive, transferPopup: true })}>Перевести</span> <span
-              className="wallet__button link link_active open-delegationsPopup open" onClick={() => setModalActive({ ...modalActive, delegationPopup: true })}>Отправить в стейкинг</span> <span
-                className="wallet__button link link_active open-undelegatePopup open" onClick={() => setModalActive({ ...modalActive, undelegationPopup: true })}>Вывод из стейкинга</span>
+            <button
+              className="wallet__button link link_active open-transferPopup open"
+              name="transferPopup"
+              onClick={handleOpenPopup}
+            >
+              Перевести
+            </button>
+            <button
+              className="wallet__button link link_active open-delegationsPopup open"
+              name="delegationPopup"
+              onClick={handleOpenPopup}
+            >
+              Отправить в стейкинг
+            </button>
+            <button
+              className="wallet__button link link_active open-undelegatePopup open"
+              name='undelegationPopup'
+              type='button'
+              onClick={handleOpenPopup}
+            >
+              Вывод из стейкинга
+            </button>
           </section>
           <section className="transactions">
             <section className="main-profile profile section">
@@ -272,11 +290,6 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
                 <h1 className="profile__title title">Транзакции</h1>
               </div>
             </section>
-
-
-
-
-
 
             <div className="wrapper">
               <div className="slider">
@@ -297,30 +310,34 @@ function Wallet({ currentUser, currentWallet, checkToken, refToken }) {
               </div>
             </div>
           </section>
-        </div >
-      </main >
+        </div>
+      </main>
       <Modal active={modalActive.transferPopup}>
         <TransferPopup
-          onClose={() => { setModalActive({ ...modalActive, transferPopup: false }) }}
+          onClose={handleClosePopup}
           currentWallet={currentWallet}
           handleSendInfy={handleSendInfy}
         />
       </Modal>
       <Modal active={modalActive.delegationPopup}>
         <DelegationPopup
-          onClose={() => { setModalActive({ ...modalActive, delegationPopup: false }) }}
+          onClose={handleClosePopup}
           currentWallet={currentWallet}
           handleDelegateInfy={handleDelegateInfy}
         />
       </Modal>
       <Modal active={modalActive.undelegationPopup}>
-        <UndelegationPopup onClose={() => { setModalActive({ ...modalActive, undelegationPopup: false }) }}
+        <UndelegationPopup
+          onClose={handleClosePopup}
           handleUndelegateInfy={handleUndelegateInfy}
           currentWallet={currentWallet}
         />
       </Modal>
+      <Modal active={modalActive.preloader}>
+        <Preloader />
+      </Modal>
     </>
-  )
+  );
 }
 
-export default Wallet
+export default Wallet;

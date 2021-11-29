@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Answer from "../Answer/Answer";
-import auth from "../../utils/auth";
+import api from '../../utils/api'
 import "./Question.css";
 
 const Question = ({
   answers,
   question,
   questions,
-  setSelectAnswer,
   updateAt,
   list,
   lesson,
@@ -15,51 +14,26 @@ const Question = ({
   setModalActive,
   setResult,
   answerList,
-  setAnswersList,
-  refToken,
-  page, state, setState
-
-  // filteredAnswer
+  checkToken,
+  page,
+  state,
+  setState
 }) => {
-  // const [filteredAnswer, setFilteredAnswer] = useState([]);
-  // useEffect(() => {
 
-  //   let filterred = list.filter(Boolean)
-  //   setFilteredAnswer(filterred)
-  //   console.log(filteredAnswer)
-  // }, [list])
-
-
-  const handkleSendAnswers = (e) => {
+  const handkleSendAnswers = async (e) => {
+    setModalActive({ ...modalActive, testResult: true });
     e.preventDefault();
-    refToken()
-    const refresh_token = localStorage.getItem('refresh_token');
-    return auth.refreshToken(refresh_token)
-      .then(res => {
-        localStorage.setItem('jwt', res.access_token);
-      }).then(() => {
-
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-          auth
-            .sendAnswers(jwt, lesson.lessonNumber, list)
-            .then((res) => {
-              setModalActive({ ...modalActive, testResult: true })
-              setResult(res)
-              console.log(res);
-            })
-            .catch((e) => {
-              if (e.status === 403) {
-                refToken()
-              } else {
-                console.error(e)
-              }
-
-            });
-        }
-      })
-
-
+    await checkToken();
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      try {
+        const res = await api.sendAnswers(jwt, lesson.lessonNumber, list)
+        setResult(res);
+        setModalActive({ ...modalActive, testResult: false });
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
 
   const answersList = answers.map((answer, index) => (
@@ -68,7 +42,6 @@ const Question = ({
       question={question}
       answer={answer}
       answerNumber={index}
-      setSelectAnswer={setSelectAnswer}
       updateAt={updateAt}
       lesson={lesson}
       state={state}

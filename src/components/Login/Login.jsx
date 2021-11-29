@@ -1,41 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import Particles from '../Particles/Particles';
+import Particles from "../Particles/Particles";
 import { NavLink } from "react-router-dom";
 
 function Login(props) {
-  const history = useHistory();
   const [data, setData] = useState({
     username: "",
-    password: ""
+    password: "",
   });
 
   useEffect(() => {
-    document.title = "Login"
+    document.title = "Login";
   }, []);
-
-  useEffect(() => {
-    if (props.loggedIn) history.push("/profile");
-  }, [props.loggedIn, history]);
-
 
   function onChange(e) {
     const { name, value } = e.target;
     setData({
       ...data,
-      [name]: value
+      [name]: value,
     });
   }
 
   function onSubmit(e) {
     e.preventDefault();
-    props.onLogin(data.username, data.password)
-      .then(() => {
-        props.checkToken();
-      })
-
+    props.onLogin(data.username, data.password).then(() => {
+    });
   }
-
 
   return (
     <>
@@ -84,7 +73,7 @@ function Login(props) {
                   type="text"
                   name="username"
                   required
-                  autoComplete='off'
+                  autoComplete="off"
                   value={data.username}
                   onChange={onChange}
                 />
@@ -101,19 +90,18 @@ function Login(props) {
                   type="password"
                   name="password"
                   required
-                  autoComplete='off'
+                  autoComplete="off"
                   value={data.password}
                   onChange={onChange}
                 />
               </fieldset>
-              <p className='text text_size_x-small'>
+              <p className="text text_size_x-small">
                 Формы для ввода чувствительны к регистру!
               </p>
               <input type="submit" className="link link_active" value="Войти" />
             </form>
           </section>
         </div>
-
       </main>
     </>
   );

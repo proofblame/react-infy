@@ -1,10 +1,11 @@
-@import url('./FooterDark.css');
+@import url("./FooterDark.css");
 
 .footer {
   position: relative;
+  flex: 0 0 auto;
 }
 .footer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -119,7 +120,7 @@
   padding-left: 17px;
 }
 .footer__status_active::before {
-  content: '';
+  content: "";
   position: absolute;
   border-radius: 50%;
   background: #00ff19;

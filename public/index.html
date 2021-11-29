@@ -7,6 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
+  <style>
+    .main-loader-container {
+      min-height: 98vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 280px;
+      margin: 0 auto;
+    }
+
+    #canvas {
+      width: 100%;
+      background: #fff;
+    }
+  </style>
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -32,8 +47,11 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
+  <div id="root">
+    <div class="main-loader-container">
+      <canvas id="canvas" width="800" height="500"></canvas>
+    </div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -44,10 +62,9 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-
-  <script src="./loader.js"></script>
-  <script src="./webP.js"></script>
-  <script src="./burger.js"></script>
+    <script src="./loader.js"></script>
+    <script src="./webP.js"></script>
+    <script src="./burger.js"></script>
 </body>
 
 </html>

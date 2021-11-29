@@ -23,6 +23,9 @@ body {
   background-color: #fdfdfd;
   background-size: 100% auto;
 }
+.content {
+  flex: 1 0 auto;
+}
 
 /* #particle-canvas {
   position: fixed !important;
