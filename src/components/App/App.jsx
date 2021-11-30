@@ -48,8 +48,8 @@ const App = () => {
     if (refTok) {
       localStorage.removeItem("refresh_token");
     }
-
-    getData();
+    checkToken()
+    // getData();
   }, []);
 
   useEffect(() => {
@@ -70,14 +70,14 @@ const App = () => {
           localStorage.setItem("jwt", res.access_token);
           localStorage.setItem("rt", res.refresh_token);
           localStorage.setItem("expires", res.expires_at);
-          // getData();
+          getData();
           setLoggedIn(true);
         } catch (err) {
           console.error(err);
           setLoggedIn(false);
         }
       } else {
-        // getData();
+        getData();
         setLoggedIn(true);
       }
     } else {
@@ -87,7 +87,7 @@ const App = () => {
 
   const getData = async () => {
     setModalActive({ preloader: true });
-    await checkToken();
+    // await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -125,7 +125,7 @@ const App = () => {
         localStorage.setItem("expires", res.expires_at);
         setLoggedIn(true);
         history.push("/profile");
-        await getData();
+        await checkToken();
       } catch (error) {
         console.error(error)
       } finally {
