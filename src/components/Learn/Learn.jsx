@@ -40,26 +40,32 @@ const Learn = ({ checkToken }) => {
   const [answerList, setAnswersList] = useState(list);
   const [result, setResult] = useState({});
   const [state, setState] = useState({});
+  const [defSlide, setDefSlide] = useState(false)
+
   useEffect(() => {
     document.title = "Study"
     getLessions();
   }, []);
 
+
+
   const handleClosePopup = (e) => {
     clear();
     setState(false)
-    console.log(e)
+    console.log()
     setAnswersList([])
     setModalActive({
       ...modalActive,
       testPopup: false,
       testResult: false,
     });
+    setDefSlide(false)
   };
   const handleOpenPopup = (lesson) => {
     setModalActive({ ...modalActive, testPopup: true });
     setLesson(lesson);
     setQuestions(lesson.questionList);
+    setDefSlide(true)
 
   };
 
@@ -89,13 +95,14 @@ const Learn = ({ checkToken }) => {
 
   const nextLesson = () => {
     if (lesson.testNumber >= 1 && lesson.testNumber < lessons.length) {
+
     } else {
     }
   };
 
   const prevLesson = () => {
     if (lesson.testNumber > 1 && lesson.testNumber <= lessons.length) {
-      console.log(lesson);
+
     } else {
     }
   };
@@ -115,7 +122,7 @@ const Learn = ({ checkToken }) => {
   };
   const questionsList = questions.map((question, index) => (
     <Question
-      key={question.questionNumber + index}
+      key={index}
       question={question}
       answers={question.answers}
       questions={questions}
@@ -243,7 +250,7 @@ const Learn = ({ checkToken }) => {
                             </b>
                           </p>
                           <br />
-                          <a className="link link_active" href='./pdf/certificate.pdf' target='_blank'>
+                          <a className="link link_active" href='./pdf/certificate.png' target='_blank'>
                             Скачать сертификат
                           </a>
 
@@ -314,7 +321,10 @@ const Learn = ({ checkToken }) => {
           </main>
           <Modal active={modalActive.testPopup}>
             <TestPopup onClose={handleClosePopup}>
-              <LearnPopupSlider prevPage={prevQuestion} nextPage={nextQuestion}>
+              <LearnPopupSlider prevPage={prevQuestion} nextPage={nextQuestion} defSlide={defSlide}
+                handleClosePopup={handleClosePopup}
+
+              >
                 {questionsList}
               </LearnPopupSlider>
             </TestPopup>

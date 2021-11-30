@@ -48,8 +48,8 @@ const App = () => {
     if (refTok) {
       localStorage.removeItem("refresh_token");
     }
+
     checkToken()
-    // getData();
   }, []);
 
   useEffect(() => {
@@ -64,23 +64,27 @@ const App = () => {
     const rt = localStorage.getItem("rt");
     const jwt = localStorage.getItem("jwt");
     if (rt && jwt && expires) {
-      if (Date.now() >= expires && jwt) {
+      if (expires < Date.now()) {
         try {
+
           const res = await api.refreshToken(rt);
           localStorage.setItem("jwt", res.access_token);
           localStorage.setItem("rt", res.refresh_token);
           localStorage.setItem("expires", res.expires_at);
-          getData();
+          await getData();
           setLoggedIn(true);
         } catch (err) {
+
           console.error(err);
           setLoggedIn(false);
         }
       } else {
-        getData();
+
+        await getData();
         setLoggedIn(true);
       }
     } else {
+
       setLoggedIn(false);
     }
   };
@@ -123,9 +127,10 @@ const App = () => {
         localStorage.setItem("jwt", res.access_token);
         localStorage.setItem("rt", res.refresh_token);
         localStorage.setItem("expires", res.expires_at);
+        // await checkToken();
         setLoggedIn(true);
         history.push("/profile");
-        await checkToken();
+        await getData();
       } catch (error) {
         console.error(error)
       } finally {

@@ -78,7 +78,7 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
 
   const getTansactions = async () => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken();
+    checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
