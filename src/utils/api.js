@@ -1,8 +1,8 @@
 // На продакшн
-// const baseURL = 'https://server.infy-corp.com/react-api';
+const baseURL = 'https://server.infy-corp.com/react-api';
 
 // На тестовый сервер
-const baseURL = 'http://api.infy-corp.com/react-api';
+// const baseURL = 'http://api.infy-corp.com/react-api';
 
 // Возвращаем объект ответа
 const getResponseData = (res) => {
