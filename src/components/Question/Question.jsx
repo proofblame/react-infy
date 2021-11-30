@@ -17,11 +17,13 @@ const Question = ({
   checkToken,
   page,
   state,
-  setState
+  setState,
+  preloaderActive,
+  setPreloaderActive
 }) => {
 
   const handkleSendAnswers = async (e) => {
-    setModalActive({ ...modalActive, testResult: true });
+    setPreloaderActive({ preloader: true });
     e.preventDefault();
     await checkToken();
     const jwt = localStorage.getItem("jwt");
@@ -29,9 +31,12 @@ const Question = ({
       try {
         const res = await api.sendAnswers(jwt, lesson.lessonNumber, list)
         setResult(res);
-        setModalActive({ ...modalActive, testResult: false });
+        setModalActive({ ...modalActive, testResult: true });
       } catch (err) {
         console.error(err);
+      }
+      finally {
+        setPreloaderActive({ preloader: false });
       }
     }
   };

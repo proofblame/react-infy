@@ -18,7 +18,10 @@ const Learn = ({ checkToken }) => {
 
   const [modalActive, setModalActive] = useState({
     testPopup: false,
-    testResult: false
+    testResult: false,
+  });
+  const [preloaderActive, setPreloaderActive] = useState({
+    preloader: false,
   });
   const [lessons, setLessons] = useState([]);
   const [isTested, setIsTested] = useState(false);
@@ -48,9 +51,9 @@ const Learn = ({ checkToken }) => {
     console.log(e)
     setAnswersList([])
     setModalActive({
+      ...modalActive,
       testPopup: false,
-      resultPopup: false,
-      preloader: false,
+      testResult: false,
     });
   };
   const handleOpenPopup = (lesson) => {
@@ -61,18 +64,19 @@ const Learn = ({ checkToken }) => {
   };
 
   const getLessions = async () => {
-    setModalActive({ ...modalActive, preloader: true });
+    setPreloaderActive({ preloader: true });
     await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
+
         const res = await api.getLessionsInfo(jwt)
         setLessons(res.lessons);
         setIsTested(res.isTested);
-        setModalActive({ ...modalActive, preloader: false });
       } catch (err) {
         console.error(err)
-        setModalActive({ ...modalActive, preloader: false });
+      } finally {
+        setPreloaderActive({ preloader: false });
       }
     }
   };
@@ -127,6 +131,8 @@ const Learn = ({ checkToken }) => {
       state={state}
       setState={setState}
       checkToken={checkToken}
+      preloaderActive={preloaderActive}
+      setPreloaderActive={setPreloaderActive}
     />
   ));
 
@@ -214,141 +220,151 @@ const Learn = ({ checkToken }) => {
 
   return (
     <>
-      <main className="main">
-        <div className="container">
-          <Nav />
-          <section className="main__profile profile">
-            <div className="profile__body">
-              {isTested ? (
-                <>
-                  <div className="learn__data learn__data_complete">
-                    <div className="data__user">
-                      <img src={completeStudyIcon} className="learn__img" alt="Succes" />
+      {lessons ? (
+        <>
+          <main className="main">
+            <div className="container">
+              <Nav />
+              <section className="main__profile profile">
+                <div className="profile__body">
+                  {isTested ? (
+                    <>
+                      <div className="learn__data learn__data_complete">
+                        <div className="data__user">
+                          <img src={completeStudyIcon} className="learn__img" alt="Succes" />
 
-                    </ div>
-                    <div className="learn__body">
+                        </ div>
+                        <div className="learn__body">
 
-                      <h1 className="profile__title title">Обучение партнёров</h1>
-                      <p className="text text_size_large">
-                        <b>
-                          Поздравляем! Ты прошёл обучение!
-                        </b>
-                      </p>
-                      <br />
-                      <a className="link link_active" href='./pdf/certificate.pdf' target='_blank'>
-                        Скачать сертификат
-                      </a>
+                          <h1 className="profile__title title">Обучение партнёров</h1>
+                          <p className="text text_size_large">
+                            <b>
+                              Поздравляем! Ты прошёл обучение!
+                            </b>
+                          </p>
+                          <br />
+                          <a className="link link_active" href='./pdf/certificate.pdf' target='_blank'>
+                            Скачать сертификат
+                          </a>
 
 
 
-                    </div>
+                        </div>
 
-                  </div>
-                  <div className="learn__body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <p className="text text_size_large">
-                      <b>
-                        Дополнительные уроки
-                      </b>
-                    </p>
-                    <div className="learn__video">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={'https://www.youtube.com/embed/Na_SxDK12-s'}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    </div><div className="learn__video">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={'https://www.youtube.com/embed/tYZFwKUW6M4'}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    </div><div className="learn__video">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={'https://www.youtube.com/embed/cvKcyjljIFM'}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
+                      </div>
+                      <div className="learn__body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <p className="text text_size_large">
+                          <b>
+                            Дополнительные уроки
+                          </b>
+                        </p>
+                        <div className="learn__video">
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={'https://www.youtube.com/embed/Na_SxDK12-s'}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </div><div className="learn__video">
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={'https://www.youtube.com/embed/tYZFwKUW6M4'}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </div><div className="learn__video">
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={'https://www.youtube.com/embed/cvKcyjljIFM'}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
 
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h1 className="profile__title title learn__title">
-                    Обучение партнёров
-                  </h1>
-                  <LearnSlider
-                    prevPage={prevLesson}
-                    nextPage={nextLesson}
-                    lesson={lesson}
-                  >
-                    {lessonList}
-                  </LearnSlider>
-                </>
-              )
-              }
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="profile__title title learn__title">
+                        Обучение партнёров
+                      </h1>
+                      <LearnSlider
+                        prevPage={prevLesson}
+                        nextPage={nextLesson}
+                        lesson={lesson}
+                      >
+                        {lessonList}
+                      </LearnSlider>
+                    </>
+                  )
+                  }
+                </div>
+
+              </section>
             </div>
+          </main>
+          <Modal active={modalActive.testPopup}>
+            <TestPopup onClose={handleClosePopup}>
+              <LearnPopupSlider prevPage={prevQuestion} nextPage={nextQuestion}>
+                {questionsList}
+              </LearnPopupSlider>
+            </TestPopup>
+          </Modal>
+          <Modal active={modalActive.testResult}>
+            <section className="popup">
+              <form name="form" className="popup__form form form_type_seed">
+                <p className="form__title">Результаты</p>
+                <p
+                  className="form__text form_seed-word"
+                  style={{ textAlign: "center", marginBottom: "20px" }}
+                >
+                  <b>
+                    Пройдено {result.rightAnswers} из {result.allAnswers}
+                  </b>
+                </p>
+                <p className="form__text form_seed-word" style={{ textAlign: 'center' }}>
+                  {result.rightAnswers === result.allAnswers ?
+                    (
+                      'Поздравляем! Вы успешно завершили тест. Следующий тест доступен.'
+                    ) :
+                    (
+                      'Для успешного прохождения теста необходимо правильно ответить на все вопросы. Попробуйте еще раз!'
+                    )
+                  }
+                </p>
 
-          </section>
-        </div>
-      </main>
-      <Modal active={modalActive.testPopup}>
-        <TestPopup onClose={handleClosePopup}>
-          <LearnPopupSlider prevPage={prevQuestion} nextPage={nextQuestion}>
-            {questionsList}
-          </LearnPopupSlider>
-        </TestPopup>
-      </Modal>
-      <Modal active={modalActive.testResult}>
-        <section className="popup">
-          <form name="form" className="popup__form form form_type_seed">
-            <p className="form__title">Результаты</p>
-            <p
-              className="form__text form_seed-word"
-              style={{ textAlign: "center", marginBottom: "20px" }}
-            >
-              <b>
-                Пройдено {result.rightAnswers} из {result.allAnswers}
-              </b>
-            </p>
-            <p className="form__text form_seed-word" style={{ textAlign: 'center' }}>
-              {result.rightAnswers === result.allAnswers ?
-                (
-                  'Поздравляем! Вы успешно завершили тест. Следующий тест доступен.'
-                ) :
-                (
-                  'Для успешного прохождения теста необходимо правильно ответить на все вопросы. Попробуйте еще раз!'
-                )
-              }
-            </p>
+              </form>
+            </section>
+            <button
+              type="button"
+              className="form__button form__button_type_close close"
+              onClick={() => {
+                handleClosePopup();
+                nextLesson();
+                getLessions()
+              }}
+            ></button>
+          </Modal>
+        </>
+      ) : (
+        ''
+      )}
 
-          </form>
-        </section>
-        <button
-          type="button"
-          className="form__button form__button_type_close close"
-          onClick={() => {
-            handleClosePopup();
-            getLessions();
-            nextLesson();
-          }}
-        ></button>
-      </Modal>
-      <Modal active={modalActive.preloader}>
+
+
+      <Modal active={preloaderActive.preloader}>
         <Preloader />
       </Modal>
+
     </>
   );
 };

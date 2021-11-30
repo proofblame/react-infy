@@ -1,8 +1,8 @@
-@import url('./modalDark.css');
+@import url("./modalDark.css");
 .modal {
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0,0,0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,8 @@
   background-color: #fff;
   transform: scale(0.5);
   transition: 0.4s all;
+  border-radius: 10px;
 }
 .modal__content.active {
-transform: scale(1);
+  transform: scale(1);
 }
