@@ -85,7 +85,7 @@ const App = () => {
   };
 
   const getData = async () => {
-    setModalActive({ modalActive, preloader: true });
+    setModalActive({ preloader: true });
     await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -101,11 +101,11 @@ const App = () => {
       } catch (err) {
         console.error(err);
       } finally {
-        setModalActive({ modalActive, preloader: false });
+        setModalActive({ preloader: false });
       }
     } else {
       setLoggedIn(false);
-      setModalActive({ modalActive, preloader: false });
+      setModalActive({ preloader: false });
     }
   };
 
@@ -114,7 +114,7 @@ const App = () => {
   }
 
   async function handleLogin(username, password) {
-    setModalActive({ modalActive, preloader: true });
+    setModalActive({ preloader: true });
     const res = await auth.login(username, password);
     if (res) {
       try {
@@ -127,7 +127,7 @@ const App = () => {
       } catch (error) {
         console.error(error)
       } finally {
-        setModalActive({ modalActive, preloader: false });
+        setModalActive({ preloader: false });
       }
     }
   }

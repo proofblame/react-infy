@@ -10,9 +10,11 @@ export default class PreviousNextMethods extends Component {
   }
   next() {
     this.slider.slickNext();
+    this.props.nextPage()
   }
   previous() {
     this.slider.slickPrev();
+    this.props.prevPage()
   }
   render() {
     const settings = {
@@ -34,14 +36,14 @@ export default class PreviousNextMethods extends Component {
             className="slider__button button"
             onClick={() => {
               this.previous()
-              this.props.prevPage()
+
             }}
           ></button>
           <button
             className="slider__button slider__button_next button"
             onClick={() => {
               this.next()
-              this.props.nextPage()
+
             }}
           ></button>
         </div>
