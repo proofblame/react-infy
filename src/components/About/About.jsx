@@ -123,7 +123,7 @@ const About = () => {
                   <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
                 </picture>
               </div>
-              <p className="about__table-text text">4 967 312 (49.67%) / 10 000 000 INFY</p>
+              <p className="about__table-text text">4 967 927 (49.68%) / 10 000 000 INFY</p>
             </div>
 
           </div>
