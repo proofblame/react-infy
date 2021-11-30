@@ -41,6 +41,13 @@ const App = () => {
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
   const [modalActive, setModalActive] = useState({ preloader: false });
+  const [currentTransactions, setCurentTransactions] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+
+
+
+
   const themeMode = theme === "light" ? "app" : "dark app";
 
   useEffect(() => {
@@ -95,14 +102,17 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const [user, wallet, team] = await Promise.all([
+        const [user, wallet, team, transactions] = await Promise.all([
           api.getUserInfo(jwt),
           api.getWalletInfo(jwt),
           api.getTeamInfo(jwt),
+          api.getTransactionsInfo(jwt, page, 8)
         ]);
         setCurrentUser(user);
         setCurentWallet(wallet);
         setCurentTeam(team);
+        setCurentTransactions(transactions.histories);
+        setPageCount(transactions.pageCount);
       } catch (err) {
         console.error(err);
         setLoggedIn(false);
@@ -114,6 +124,7 @@ const App = () => {
       setModalActive({ preloader: false });
     }
   };
+
 
   function handleRegister(username, joinedBy, email, password, telegram) {
     return auth.register(username, joinedBy, email, password, telegram);
@@ -210,6 +221,12 @@ const App = () => {
               currentWallet={currentWallet}
               checkToken={checkToken}
               path="/wallet"
+              currentTransactions={currentTransactions}
+              setCurentTransactions={setCurentTransactions}
+              pageCount={pageCount}
+              setPageCount={setPageCount}
+              page={page}
+              setPage={setPage}
             />
             <ProtectedRoute
               loggedIn={loggedIn}

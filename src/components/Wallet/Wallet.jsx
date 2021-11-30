@@ -11,10 +11,12 @@ import WalletSlider from "./Slider/Slider";
 import api from "../../utils/api";
 import Preloader from "../Preloader/Preloader";
 
-function Wallet({ currentUser, currentWallet, checkToken }) {
-  useEffect(() => {
-    document.title = "Wallet";
-  }, []);
+function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, setCurentTransactions, pageCount, setPageCount, page, setPage }) {
+
+
+
+
+
 
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
@@ -23,9 +25,9 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
     undelegationPopup: false,
     preloader: false,
   });
-  const [currentTransactions, setCurentTransactions] = useState([]);
-  const [page, setPage] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  // const [currentTransactions, setCurentTransactions] = useState([]);
+  // const [page, setPage] = useState(0);
+  // const [pageCount, setPageCount] = useState(0);
 
   const handleUndelegateInfy = async (amountUndel) => {
     setModalActive({ ...modalActive, preloader: true });
@@ -37,8 +39,10 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
       } catch (err) {
         console.error(err);
       } finally {
-        await getTansactions();
+        // await getTansactions();
+        setModalActive({ ...modalActive, preloader: false });
         handleClosePopup();
+        setPage(0)
       }
     }
   };
@@ -53,8 +57,10 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
       } catch (err) {
         console.error(err);
       } finally {
-        await getTansactions();
+        // await getTansactions();
+        setModalActive({ ...modalActive, preloader: false });
         handleClosePopup();
+        setPage(0)
       }
     }
   };
@@ -69,29 +75,36 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
       } catch (err) {
         console.error(err);
       } finally {
-        await getTansactions();
-        handleClosePopup();
-      }
-    }
-
-  };
-
-  const getTansactions = async () => {
-    setModalActive({ ...modalActive, preloader: true });
-    checkToken();
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      try {
-        const transactions = await api.getTransactionsInfo(jwt, page, 8);
-        setCurentTransactions(transactions.histories);
-        setPageCount(transactions.pageCount);
-      } catch (err) {
-        console.error(err);
-      } finally {
+        // await getTansactions();
         setModalActive({ ...modalActive, preloader: false });
+        handleClosePopup();
+        setPage(0)
       }
     }
+
   };
+
+  useEffect(() => {
+    document.title = "Wallet";
+    checkToken()
+  }, [page, modalActive]);
+
+  // const getTansactions = async () => {
+  //   setModalActive({ ...modalActive, preloader: true });
+  //   checkToken();
+  //   const jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     try {
+  //       const transactions = await api.getTransactionsInfo(jwt, page, 8);
+  //       setCurentTransactions(transactions.histories);
+  //       setPageCount(transactions.pageCount);
+  //     } catch (err) {
+  //       console.error(err);
+  //     } finally {
+  //       setModalActive({ ...modalActive, preloader: false });
+  //     }
+  //   }
+  // };
 
   const handleOpenPopup = (e) => {
     const { name } = e.target;
@@ -126,8 +139,8 @@ function Wallet({ currentUser, currentWallet, checkToken }) {
   };
 
   useEffect(() => {
-    getTansactions();
-  }, [page]);
+    // getTansactions();
+  }, []);
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(currentUser.wallet);
