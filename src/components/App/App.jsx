@@ -74,6 +74,7 @@ const App = () => {
           setLoggedIn(true);
         } catch (err) {
           console.error(err);
+          setLoggedIn(false);
         }
       } else {
         // getData();
@@ -100,6 +101,7 @@ const App = () => {
         setCurentTeam(team);
       } catch (err) {
         console.error(err);
+        setLoggedIn(false);
       } finally {
         setModalActive({ preloader: false });
       }
