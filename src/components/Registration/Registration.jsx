@@ -4,6 +4,7 @@ import Modal from "../Modal/Modal";
 import SeedPopup from "../SeedPopup/SeedPopup";
 import Particles from "../Particles/Particles";
 import Preloader from "../Preloader/Preloader";
+import ResponcePopup from "../ResponcePopup/ResponcePopup";
 
 function Registration(props) {
   const location = useLocation();
@@ -30,7 +31,11 @@ function Registration(props) {
     secondpassword: "",
     email: "",
     telegram: "",
-    checkbox: false,
+    politics: false,
+  });
+  const [resStatusText, setResStatusText] = useState({
+    title: "",
+    subtitle: "",
   });
 
   useEffect(() => {
@@ -44,7 +49,9 @@ function Registration(props) {
   }
 
   function onChange(e) {
-    const { name, value, validity, validationMessage } = e.target;
+    const { name, validity, validationMessage } = e.target;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setData({
       ...data,
       [name]: value,
@@ -57,12 +64,7 @@ function Registration(props) {
     } else {
       setErrorMessage("");
     }
-    console.log(e.target.required);
   }
-
-  const handleClick = () => {
-    setData({ ...data, checkbox: !data.checkbox });
-  };
 
   const isFormValid = () => {
     const { username, password, secondpassword, email, telegram, checkbox } =
@@ -84,7 +86,6 @@ function Registration(props) {
 
   const handleClosePopup = () => {
     setModalActive(false);
-    history.push("/login");
   };
 
   async function onSubmit(e) {
@@ -98,9 +99,18 @@ function Registration(props) {
         data.telegram
       );
       setSeed(user.seed);
-      setModalActive({ ...modalActive, seed: true });
+      await setModalActive({ ...modalActive, seed: true });
+      history.push("/login");
     } catch (error) {
-      console.error(error);
+      setResStatusText({
+        title:
+          "Не удалось зарегистрироваться, проверьте данные для заполнения.",
+        subtitle:
+          "Возможно аккаунт с таким ником или почтой уже зарегистрирован",
+      });
+      await setModalActive({ ...modalActive, resStatus: true });
+    } finally {
+      setData({});
     }
   }
 
@@ -305,7 +315,8 @@ function Registration(props) {
                   type="checkbox"
                   name="politics"
                   id="politics"
-                  onClick={handleClick}
+                  onChange={onChange}
+                  checked={data.politics}
                   required
                 />
               </fieldset>
@@ -340,12 +351,17 @@ function Registration(props) {
         </div>
       </main>
       <Modal active={modalActive.seed}>
-        <SeedPopup onClose={handleClosePopup} seed={seed} />
+        <SeedPopup seed={seed} />
       </Modal>
       <Modal active={modalActive.preloader}>
         <Preloader />
       </Modal>
-      <Modal active={modalActive.resStatus}></Modal>
+      <Modal active={modalActive.resStatus}>
+        <ResponcePopup
+          onClose={handleClosePopup}
+          resStatusText={resStatusText}
+        />
+      </Modal>
     </>
   );
 }
