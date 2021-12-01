@@ -30,6 +30,7 @@ function Registration(props) {
     secondpassword: "",
     email: "",
     telegram: "",
+    politics: false,
   });
 
   useEffect(() => {
@@ -44,7 +45,9 @@ function Registration(props) {
   }
 
   function onChange(e) {
-    const { name, value, validity, validationMessage } = e.target;
+    const { name, validity, validationMessage } = e.target;
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    console.log(e.target.checked)
     setData({
       ...data,
       [name]: value,
@@ -94,6 +97,8 @@ function Registration(props) {
       setModalActive({ ...modalActive, seed: true });
     } catch (error) {
       console.error(error);
+    } finally {
+      setData('')
     }
   }
 
@@ -286,6 +291,8 @@ function Registration(props) {
                   type="checkbox"
                   name="politics"
                   id="politics"
+                  onChange={onChange}
+                  checked={data.politics}
                   required
                 />
               </fieldset>
