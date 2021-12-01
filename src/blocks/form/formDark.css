@@ -11,8 +11,12 @@
 }
 
 .dark .form__input {
-  color: #6A6A6A;
+  color: #6a6a6a;
   background: #1e1e1e;
+}
+
+.dark .form__input_isInvalid {
+  background: #eb0000;
 }
 
 .dark .form__text-subtitle {
