@@ -3,65 +3,91 @@ import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import SeedPopup from '../SeedPopup/SeedPopup';
 import Particles from '../Particles/Particles';
+import Preloader from "../Preloader/Preloader";
 
 function Registration(props) {
-  useEffect(() => {
-    document.title = "Registration"
-  }, []);
-
-
-
   const location = useLocation();
   const joinedBy = location.search.slice(10)
+  const history = useHistory();
+  const [formValid, setFormValid] = useState(false)
+  const [modalActive, setModalActive] = useState({
+    preloader: false,
+    seed: false,
+    resStatus: false,
+  });
+  const [seed, setSeed] = useState('');
+  const [errorMessage, setErrorMessage] = useState({
+    username: '',
+    email: '',
+    password: '',
+    secondpassword: '',
+    telegram: '',
+  })
+  const [data, setData] = useState({
+    username: '',
+    joinedBy: '' || urldecode(joinedBy),
+    password: '',
+    secondpassword: '',
+    email: '',
+    telegram: '',
+  });
+
+  useEffect(() => {
+    document.title = "Registration"
+    urldecode(joinedBy);
+  }, [formValid]);
 
   function urldecode(str) {
     return decodeURIComponent((str + '').replace(/\+/g, '%20'));
   }
 
-  urldecode(joinedBy)
-
-  const history = useHistory();
-  ;
-
-  const [data, setData] = useState({
-    username: '',
-    joinedBy: '' || urldecode(joinedBy),
-    password: '',
-    email: '',
-    telegram: '',
-  });
-  const [modalActive, setModalActive] = useState(false);
-
-  const [seed, setSeed] = useState('');
-
   function onChange(e) {
-    const { name, value } = e.target;
+    const { name, value, validity, validationMessage } = e.target;
     setData({
       ...data,
       [name]: value,
     });
-  }
+    if (!validity.valid) {
+      setFormValid(false)
+      setErrorMessage({
+        ...errorMessage,
+        [name]: validationMessage
+      })
+    } else {
+      setFormValid(true)
+      setErrorMessage('')
+    }
 
+  }
+  const handleConfirmPassword = () => {
+    if (data.password !== data.secondpassword) {
+      setFormValid(false)
+      setErrorMessage({
+        ...errorMessage,
+        secondpassword: 'Пароли не совпадают',
+      })
+    } else {
+      setErrorMessage('')
+      setFormValid(true)
+    }
+  }
 
   const handleClosePopup = () => {
     setModalActive(false);
     history.push("/login");
-
   }
 
+  async function onSubmit(e) {
 
-
-  function onSubmit(e) {
     e.preventDefault();
-    props
-      .onRegister(data.username, data.joinedBy, data.email, data.password, data.telegram)
-      .then((user) => {
-        setSeed(user.seed)
-        setModalActive(true)
-
-      })
-      .catch(e => console.error(e.message))
-
+    try {
+      const user = await props
+        .onRegister(data.username, data.joinedBy, data.email, data.password, data.telegram)
+      setSeed(user.seed)
+      setModalActive({ ...modalActive, seed: true })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -120,7 +146,9 @@ function Registration(props) {
                   value={data.username}
                   onChange={onChange}
                   autoComplete="username"
+                  minLength="1"
                 />
+                <span className='text text_size_small'>{errorMessage.username}</span>
               </fieldset>
               <fieldset className='form__fieldset'>
                 <label
@@ -136,7 +164,9 @@ function Registration(props) {
                   autoComplete="email"
                   value={data.email}
                   onChange={onChange}
+                  minLength="1"
                 />
+                <span className='text text_size_small'>{errorMessage.email}</span>
               </fieldset>
               <fieldset className='form__fieldset'>
                 <label
@@ -152,6 +182,8 @@ function Registration(props) {
                   required
                   value={data.password}
                   onChange={onChange}
+                  minLength="1"
+                  onBlur={handleConfirmPassword}
                 />
                 <p className='text text_size_x-small'>
                   Пароль должен содержать минимум 1 заглавную букву, 1 строчную
@@ -159,6 +191,7 @@ function Registration(props) {
                   символов.Необходим для авторизации на сайте.В приложении вход по
                   Seed-фразе.
                 </p>
+                <span className='text text_size_small'>{errorMessage.password}</span>
               </fieldset>
               <fieldset className='form__fieldset'>
                 <label
@@ -171,8 +204,12 @@ function Registration(props) {
                   type='password'
                   name='secondpassword'
                   autoComplete="new-password"
-
+                  minLength="1"
+                  onChange={onChange}
+                  value={data.secondpassword}
+                  onBlur={handleConfirmPassword}
                 />
+                <span className='text text_size_small'>{errorMessage.secondpassword}</span>
               </fieldset>
               <fieldset className='form__fieldset'>
                 <label
@@ -188,7 +225,9 @@ function Registration(props) {
                   required
                   value={data.telegram}
                   onChange={onChange}
+                  minLength="1"
                 />
+                <span className='text text_size_small text__error'>{errorMessage.telegram}</span>
               </fieldset>
               <fieldset className='form__fieldset form__fieldset_type_politics'>
                 <label
@@ -222,17 +261,22 @@ function Registration(props) {
               </p>
               <button
                 type='submit'
-                className='link link_active'>
+                className={`link link_active ${formValid ? '' : 'link_disabled'}`}
+                disabled={!formValid}
+              >
                 Создать Аккаунт
               </button>
             </form>
           </section>
         </div>
       </main>
-      <Modal active={modalActive}>
-        <SeedPopup onClose={handleClosePopup} seed={seed}>
-
-        </SeedPopup>
+      <Modal active={modalActive.seed}>
+        <SeedPopup onClose={handleClosePopup} seed={seed} />
+      </Modal>
+      <Modal active={modalActive.preloader}>
+        <Preloader />
+      </Modal>
+      <Modal active={modalActive.resStatus}>
       </Modal>
     </>
   );
