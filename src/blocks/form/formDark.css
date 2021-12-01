@@ -14,9 +14,15 @@
   color: #6a6a6a;
   background: #1e1e1e;
 }
-
-.dark .form__input_isInvalid {
-  background: #eb0000;
+.dark .form__input_error {
+  border: 1px solid #ffc5c5;
+  background-image: url("../../images/icons/invalid-dark.svg");
+  background-position: 95% 50%;
+  background-repeat: no-repeat;
+  background-size: 10%;
+}
+.dark .form__error {
+  color: #ffc5c5;
 }
 
 .dark .form__text-subtitle {

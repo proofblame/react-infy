@@ -4,71 +4,55 @@ import { NavLink } from "react-router-dom";
 import "./Login.scss";
 
 function Login(props) {
-  // const [data, setData] = useState({
-  //   username: "",
-  //   password: "",
-  // });
+  const [data, setData] = useState({
+    username: "",
+    password: "",
+  });
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [nameIsValid, setNameIsValid] = useState(true);
-  const [passwordIsValid, setPasswordIsValid] = useState(true);
-  const [nameError, setNameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [formValid, setFormValid] = useState(false)
+  const [errorMessage, setErrorMessage] = useState({
+    username: '',
+    password: '',
+  })
 
   useEffect(() => {
     document.title = "Login";
-  }, []);
+    isFormValid();
+  }, [data]);
 
-  const handleName = (e) => {
-    setName(e.target.value);
-    if (e.target.validity.valid) {
-      setNameError("");
-      setNameIsValid(true);
+  function onChange(e) {
+    const { name, value, validity, validationMessage } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+    if (!validity.valid) {
+      setFormValid(false)
+      setErrorMessage({
+        ...errorMessage,
+        [name]: validationMessage
+      })
     } else {
-      setNameIsValid(false);
-      setNameError("Поле 'Никнейм' должно быть заполнено");
+      setFormValid(true)
+      setErrorMessage('')
     }
-  };
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    if (e.target.validity.valid) {
-      setPasswordError("");
-      setPasswordIsValid(true);
-    } else {
-      setPasswordIsValid(false);
-      setPasswordError("Поле 'Пароль' должно быть заполнено");
-    }
-  };
-
-  // function onChange(e) {
-  //   const { name, value } = e.target;
-  //   setData({
-  //     ...data,
-  //     [name]: value,
-  //   });
-  // }
-  function resetInputs() {
-    setName("");
-    setPassword("");
+  }
+  const isFormValid = () => {
+    const { username, password, } = data
+    setFormValid(username && password)
   }
 
-  const submitLogin = () => {
-    if (nameIsValid && passwordIsValid) {
-      setButtonDisabled(false);
-      return buttonDisabled;
-    } else {
-      setButtonDisabled(true);
-      return buttonDisabled;
-    }
-  };
 
   function onSubmit(e) {
+
     e.preventDefault();
-    props.onLogin(name, password).then(() => {
-      resetInputs();
-    });
+    props.onLogin(data.username, data.password).then(() => {
+      // props.checkToken()
+    })
+
+
   }
 
   return (
@@ -79,7 +63,6 @@ function Login(props) {
           <section className="registration login">
             <form
               onSubmit={onSubmit}
-              onChange={submitLogin}
               className="form form_type_support form_type_login"
             >
               <section className="banner__buttons wallet__buttons registration__buttons">
@@ -114,36 +97,20 @@ function Login(props) {
                 >
                   Введите номер кошелька или Никнейм
                 </label>
-                <div
-                  className={
-                    nameIsValid
-                      ? "form__container"
-                      : "form__container form__container_isInvalid"
-                  }
+                <input
+                  className={`form__input text text_size_normal ${errorMessage.username ? "form__input_error" : ""}`}
+                  type="text"
+                  name="username"
+                  required
+                  autoComplete="off"
+                  value={data.username}
+                  onChange={onChange}
+                />
+                <span
+                  className={`text text_size_small ${errorMessage.username ? "form__error" : "form__error_hide"}`}
                 >
-                  <input
-                    className={
-                      nameIsValid
-                        ? "form__input text text_size_normal text_background_mode"
-                        : "form__input form__input_isInvalid text text_size_normal text_background_mode"
-                    }
-                    type="text"
-                    name="username"
-                    required
-                    autoComplete="off"
-                    value={name}
-                    onChange={handleName}
-                  />
-                  <span
-                    className={
-                      nameIsValid
-                        ? "form__error"
-                        : "form__error form__error_isActive"
-                    }
-                  >
-                    {nameError}
-                  </span>
-                </div>
+                  {errorMessage.username}
+                </span>
               </fieldset>
               <fieldset className="form__fieldset">
                 <label
@@ -152,47 +119,30 @@ function Login(props) {
                 >
                   Введите пароль
                 </label>
-                <div
-                  className={
-                    passwordIsValid
-                      ? "form__container"
-                      : "form__container form__container_isInvalid"
-                  }
+
+                <input
+                  className={`form__input text text_size_normal ${errorMessage.password ? "form__input_error" : ""}`}
+                  type="password"
+                  name="password"
+                  required
+                  autoComplete="off"
+                  value={data.password}
+                  onChange={onChange}
+                />
+                <span
+                  className={`text text_size_small ${errorMessage.password ? "form__error" : "form__error_hide"}`}
                 >
-                  <input
-                    className={
-                      passwordIsValid
-                        ? "form__input text text_size_normal text_background_mode"
-                        : "form__input form__input_isInvalid text text_size_normal text_background_mode"
-                    }
-                    type="password"
-                    name="password"
-                    required
-                    autoComplete="off"
-                    value={password}
-                    onChange={handlePassword}
-                  />
-                  <span
-                    className={
-                      passwordIsValid
-                        ? "form__error"
-                        : "form__error form__error_isActive"
-                    }
-                  >
-                    {passwordError}
-                  </span>
-                </div>
+                  {errorMessage.password}
+                </span>
               </fieldset>
               <p className="text text_size_x-small">
                 Формы для ввода чувствительны к регистру!
               </p>
               <input
                 type="submit"
-                className={`link  ${
-                  nameIsValid && passwordIsValid ? "link_active" : ""
-                }`}
+                className={`link link_active  ${formValid ? "" : "link_disabled"}`}
                 value="Войти"
-                disabled={nameIsValid && passwordIsValid ? false : true}
+                disabled={!formValid}
               />
             </form>
           </section>
