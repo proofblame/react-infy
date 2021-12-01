@@ -1,4 +1,4 @@
-@import url('./formDark.css');
+@import url("./formDark.css");
 .form {
   width: 568px;
   font-family: HelveticaNeueCyr, sans-serif;
@@ -105,6 +105,11 @@
   width: 33px;
   height: 33px;
 }
+
+.form__input_isInvalid {
+  background: rgba(255, 197, 197, 1);
+}
+
 .form__text-subtitle {
   font-weight: 400;
   font-size: 18px;
@@ -183,7 +188,6 @@
   right: 10px;
   padding: 0;
   border-radius: 50%;
-
 }
 ._webp .form__button_type_close {
   background-image: url(./images/close-button.webp);
@@ -237,5 +241,4 @@
   .form__button {
     font-size: calc(20px + 34 * (100vw - 320px) / 1628);
   }
-
 }

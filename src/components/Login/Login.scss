@@ -1,0 +1,42 @@
+.form {
+  &__fieldset {
+    position: relative;
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  &__container::after {
+    content: "";
+    display: none;
+    position: absolute;
+    background-image: url("../../images/icons/invalid.svg");
+    width: 39px;
+    height: 39px;
+    top: 20%;
+    left: 85%;
+  }
+
+  &__container_isInvalid::after {
+    display: block;
+  }
+
+  &__error {
+    width: 100%;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.05em;
+    color: rgba(235, 0, 0, 0.8);
+    display: none;
+
+    &_isActive {
+      display: block;
+    }
+  }
+}
+
+.dark .form__container::after {
+  background-image: url("../../images/icons/invalid-dark.svg");
+}
