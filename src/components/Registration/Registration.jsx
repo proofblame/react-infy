@@ -103,7 +103,7 @@ function Registration(props) {
       console.error(error);
     }
   }
-  console.log(data);
+
   return (
     <>
       <Particles />
