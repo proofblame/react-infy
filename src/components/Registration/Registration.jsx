@@ -30,14 +30,14 @@ function Registration(props) {
     secondpassword: "",
     email: "",
     telegram: "",
+    checkbox: false,
   });
 
   useEffect(() => {
     document.title = "Registration";
     urldecode(joinedBy);
-    isFormValid()
+    isFormValid();
   }, [data]);
-
 
   function urldecode(str) {
     return decodeURIComponent((str + "").replace(/\+/g, "%20"));
@@ -57,13 +57,20 @@ function Registration(props) {
     } else {
       setErrorMessage("");
     }
-    console.log(e.target.required)
+    console.log(e.target.required);
   }
 
+  const handleClick = () => {
+    setData({ ...data, checkbox: !data.checkbox });
+  };
+
   const isFormValid = () => {
-    const { username, password, secondpassword, email, telegram } = data
-    setFormValid(username && password && secondpassword && email && telegram)
-  }
+    const { username, password, secondpassword, email, telegram, checkbox } =
+      data;
+    setFormValid(
+      username && password && secondpassword && email && telegram && checkbox
+    );
+  };
   const handleConfirmPassword = () => {
     if (data.password !== data.secondpassword) {
       setErrorMessage({
@@ -96,7 +103,7 @@ function Registration(props) {
       console.error(error);
     }
   }
-
+  console.log(data);
   return (
     <>
       <Particles />
@@ -149,8 +156,9 @@ function Registration(props) {
                   Ваш никнейм
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.username ? "form__input_error" : ""
-                    }`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.username ? "form__input_error" : ""
+                  }`}
                   type="text"
                   name="username"
                   required
@@ -160,8 +168,9 @@ function Registration(props) {
                   minLength="1"
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.username ? "form__error" : "form__error_hide"
-                    }`}
+                  className={`text text_size_small ${
+                    errorMessage.username ? "form__error" : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.username}
                 </span>
@@ -174,8 +183,9 @@ function Registration(props) {
                   E-mail
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.email ? "form__input_error" : ""
-                    }`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.email ? "form__input_error" : ""
+                  }`}
                   type="email"
                   name="email"
                   required
@@ -185,8 +195,9 @@ function Registration(props) {
                   minLength="1"
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.email ? "form__error" : "form__error_hide"
-                    }`}
+                  className={`text text_size_small ${
+                    errorMessage.email ? "form__error" : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.email}
                 </span>
@@ -199,8 +210,9 @@ function Registration(props) {
                   Введите пароль
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.password ? "form__input_error" : ""
-                    }`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.password ? "form__input_error" : ""
+                  }`}
                   type="password"
                   name="password"
                   autoComplete="new-password"
@@ -217,8 +229,9 @@ function Registration(props) {
                   по Seed-фразе.
                 </p>
                 <span
-                  className={`text text_size_small ${errorMessage.password ? "form__error" : "form__error_hide"
-                    }`}
+                  className={`text text_size_small ${
+                    errorMessage.password ? "form__error" : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.password}
                 </span>
@@ -231,8 +244,9 @@ function Registration(props) {
                   Повторите пароль
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.secondpassword ? "form__input_error" : ""
-                    }`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.secondpassword ? "form__input_error" : ""
+                  }`}
                   type="password"
                   name="secondpassword"
                   autoComplete="new-password"
@@ -242,8 +256,11 @@ function Registration(props) {
                   onBlur={handleConfirmPassword}
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.secondpassword ? "form__error" : "form__error_hide"
-                    }`}
+                  className={`text text_size_small ${
+                    errorMessage.secondpassword
+                      ? "form__error"
+                      : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.secondpassword}
                 </span>
@@ -256,8 +273,9 @@ function Registration(props) {
                   Telegram
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.telegram ? "form__input_error" : ""
-                    }`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.telegram ? "form__input_error" : ""
+                  }`}
                   type="text"
                   name="telegram"
                   id="text"
@@ -267,8 +285,9 @@ function Registration(props) {
                   minLength="1"
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.telegram ? "form__error" : "form__error_hide"
-                    }`}
+                  className={`text text_size_small ${
+                    errorMessage.telegram ? "form__error" : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.telegram}
                 </span>
@@ -286,6 +305,7 @@ function Registration(props) {
                   type="checkbox"
                   name="politics"
                   id="politics"
+                  onClick={handleClick}
                   required
                 />
               </fieldset>
@@ -308,7 +328,9 @@ function Registration(props) {
               </p>
               <button
                 type="submit"
-                className={`link link_active  ${formValid ? "" : "link_disabled"}`}
+                className={`link link_active  ${
+                  formValid ? "" : "link_disabled"
+                }`}
                 disabled={!formValid}
               >
                 Создать Аккаунт
