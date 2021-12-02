@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import SeedPopup from "../SeedPopup/SeedPopup";
 import Particles from "../Particles/Particles";
 import Preloader from "../Preloader/Preloader";
 import ResponcePopup from "../ResponcePopup/ResponcePopup";
+import Fail from "../../images/Fail.svg";
 
 function Registration(props) {
   const location = useLocation();
   const joinedBy = location.search.slice(10);
-  const history = useHistory();
   const [formValid, setFormValid] = useState(false);
   const [modalActive, setModalActive] = useState({
     preloader: false,
@@ -26,7 +26,7 @@ function Registration(props) {
   });
   const [data, setData] = useState({
     username: "",
-    joinedBy: "" || urldecode(joinedBy),
+    joinedBy: " " || urldecode(joinedBy),
     password: "",
     secondpassword: "",
     email: "",
@@ -36,13 +36,17 @@ function Registration(props) {
   const [resStatusText, setResStatusText] = useState({
     title: "",
     subtitle: "",
+    image: '',
   });
 
   useEffect(() => {
     document.title = "Registration";
-    urldecode(joinedBy);
     isFormValid();
   }, [data]);
+
+  useEffect(() => {
+    urldecode(joinedBy);
+  }, [])
 
   function urldecode(str) {
     return decodeURIComponent((str + "").replace(/\+/g, "%20"));
@@ -67,10 +71,10 @@ function Registration(props) {
   }
 
   const isFormValid = () => {
-    const { username, password, secondpassword, email, telegram, checkbox } =
+    const { username, password, secondpassword, email, telegram, politics } =
       data;
     setFormValid(
-      username && password && secondpassword && email && telegram && checkbox
+      username && password && secondpassword && email && telegram && politics
     );
   };
   const handleConfirmPassword = () => {
@@ -99,18 +103,20 @@ function Registration(props) {
         data.telegram
       );
       setSeed(user.seed);
-      await setModalActive({ ...modalActive, seed: true });
-      history.push("/login");
+      setModalActive({ ...modalActive, seed: true });
+
     } catch (error) {
       setResStatusText({
         title:
           "Не удалось зарегистрироваться, проверьте данные для заполнения.",
         subtitle:
           "Возможно аккаунт с таким ником или почтой уже зарегистрирован",
+        image: Fail
       });
       await setModalActive({ ...modalActive, resStatus: true });
     } finally {
       setData({});
+      e.target.reset();
     }
   }
 
@@ -260,8 +266,8 @@ function Registration(props) {
                 />
                 <span
                   className={`text text_size_small ${errorMessage.secondpassword
-                      ? "form__error"
-                      : "form__error_hide"
+                    ? "form__error"
+                    : "form__error_hide"
                     }`}
                 >
                   {errorMessage.secondpassword}

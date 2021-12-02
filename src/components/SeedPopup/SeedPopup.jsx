@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-function SeedPopup({ onClose, seed }) {
+function SeedPopup({ seed }) {
+  const history = useHistory();
   const [copyStatus, setcopyStatus] = useState("Копировать seed-фразу");
 
   const handleCopyClick = () => {
@@ -32,7 +34,7 @@ function SeedPopup({ onClose, seed }) {
         <button
           className="link link_active"
           onClick={() => {
-            onClose();
+            history.push("/login");
           }}
         >
           Продолжить

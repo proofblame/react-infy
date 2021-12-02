@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Particles from "../Particles/Particles";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./Login.scss";
 import Modal from "../Modal/Modal";
 import ResponcePopup from "../ResponcePopup/ResponcePopup";
 import Fail from "../../images/Fail.svg";
+import Success from "../../images/Success.svg";
 
 function Login(props) {
+  const history = useHistory();
   const [resStatus, setResStatus] = useState(false);
   const [data, setData] = useState({
     username: "",
     password: "",
-  });
-  const [modalActive, setModalActive] = useState({
-    preloader: false,
   });
   const [resStatusText, setResStatusText] = useState({
     title: "",
@@ -57,6 +56,17 @@ function Login(props) {
     e.preventDefault();
     try {
       await props.onLogin(data.username, data.password);
+      await props.checkToken();
+      setResStatusText({
+        title: "Поздравляем",
+        subtitle: "Вы успешно вошли в систему!",
+        image: Success,
+      });
+      setResStatus(true);
+      setTimeout(() => {
+        setResStatus(false);
+        history.push("/profile");
+      }, 2000);
     } catch (error) {
       console.log(error);
       setResStatusText({
@@ -118,9 +128,8 @@ function Login(props) {
                   Введите номер кошелька или Никнейм
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${
-                    errorMessage.username ? "form__input_error" : ""
-                  }`}
+                  className={`form__input text text_size_normal ${errorMessage.username ? "form__input_error" : ""
+                    }`}
                   type="text"
                   name="username"
                   required
@@ -129,9 +138,8 @@ function Login(props) {
                   onChange={onChange}
                 />
                 <span
-                  className={`text text_size_small ${
-                    errorMessage.username ? "form__error" : "form__error_hide"
-                  }`}
+                  className={`text text_size_small ${errorMessage.username ? "form__error" : "form__error_hide"
+                    }`}
                 >
                   {errorMessage.username}
                 </span>
@@ -145,9 +153,8 @@ function Login(props) {
                 </label>
 
                 <input
-                  className={`form__input text text_size_normal ${
-                    errorMessage.password ? "form__input_error" : ""
-                  }`}
+                  className={`form__input text text_size_normal ${errorMessage.password ? "form__input_error" : ""
+                    }`}
                   type="password"
                   name="password"
                   required
@@ -156,9 +163,8 @@ function Login(props) {
                   onChange={onChange}
                 />
                 <span
-                  className={`text text_size_small ${
-                    errorMessage.password ? "form__error" : "form__error_hide"
-                  }`}
+                  className={`text text_size_small ${errorMessage.password ? "form__error" : "form__error_hide"
+                    }`}
                 >
                   {errorMessage.password}
                 </span>
@@ -168,9 +174,8 @@ function Login(props) {
               </p>
               <input
                 type="submit"
-                className={`link link_active  ${
-                  formValid ? "" : "link_disabled"
-                }`}
+                className={`link link_active  ${formValid ? "" : "link_disabled"
+                  }`}
                 value="Войти"
                 disabled={!formValid}
               />

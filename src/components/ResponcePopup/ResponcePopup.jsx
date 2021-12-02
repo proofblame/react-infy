@@ -28,7 +28,6 @@ function ResponcePopup({ onClose, resStatusText }) {
           onClose();
         }}
       >
-        {" "}
       </button>
     </section>
   );

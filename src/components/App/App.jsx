@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { Switch, Route, useLocation, useHistory } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode";
@@ -30,11 +30,8 @@ import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
-import ResponcePopup from "../ResponcePopup/ResponcePopup";
-import Success from "../../images/Success.svg";
 
 const App = () => {
-  const history = useHistory();
   const { pathname } = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [currentWallet, setCurentWallet] = useState({});
@@ -45,15 +42,9 @@ const App = () => {
   const [modalActive, setModalActive] = useState({
     preloader: false,
   });
-  const [resStatus, setResStatus] = useState(false);
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [resStatusText, setResStatusText] = useState({
-    title: "",
-    subtitle: "",
-    image: "",
-  });
 
   const themeMode = theme === "light" ? "app" : "dark app";
 
@@ -101,7 +92,6 @@ const App = () => {
 
   const getData = async () => {
     setModalActive({ preloader: true });
-    // await checkToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -139,29 +129,12 @@ const App = () => {
         localStorage.setItem("jwt", res.access_token);
         localStorage.setItem("rt", res.refresh_token);
         localStorage.setItem("expires", res.expires_at);
-        setResStatusText({
-          title: "Поздравляем",
-          subtitle: "Вы успешно вошли в систему!",
-          image: Success,
-        });
-        setResStatus(true);
-        setTimeout(() => {
-          setResStatus(false);
-          history.push("/profile");
-        }, 3000);
         setLoggedIn(true);
-        await getData();
       } catch (error) {
         console.error(error);
-      } finally {
-        setModalActive({ preloader: false });
       }
     }
   }
-
-  const handleClosePopup = () => {
-    setModalActive(false);
-  };
 
   function handleSignout() {
     setLoggedIn(false);
@@ -267,8 +240,6 @@ const App = () => {
                 onLogin={handleLogin}
                 loggedIn={loggedIn}
                 checkToken={checkToken}
-                modalActive={modalActive}
-                setModalActive={setModalActive}
               />
             </Route>
             <Route path="/registration">
@@ -281,12 +252,6 @@ const App = () => {
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
         <Modal active={modalActive.preloader}>
           <Preloader />
-        </Modal>
-        <Modal active={resStatus}>
-          <ResponcePopup
-            onClose={handleClosePopup}
-            resStatusText={resStatusText}
-          />
         </Modal>
       </div>
     </CurrentUserContext.Provider>
