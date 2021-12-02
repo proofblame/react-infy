@@ -1,6 +1,6 @@
 import "./ChatHeader.scss";
 
-function ChatHeader() {
+function ChatHeader({ toggleChatOpened }) {
   return (
     <section className="chat-header">
       <div className="chat-header__img-container"></div>
@@ -11,7 +11,10 @@ function ChatHeader() {
           <span className="chat-header__online-status-image"></span>
         </p>
       </div>
-      <button className="chat-header__close"></button>
+      <button
+        className="chat-header__close"
+        onClick={toggleChatOpened}
+      ></button>
     </section>
   );
 }

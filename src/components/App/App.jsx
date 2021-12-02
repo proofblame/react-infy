@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, Link } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode";
@@ -46,6 +46,7 @@ const App = () => {
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
+  const [chatIsOpened, setChatIsOpened] = useState(false);
 
   const themeMode = theme === "light" ? "app" : "dark app";
 
@@ -62,9 +63,9 @@ const App = () => {
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
 
-  const popups = {
-    chat: Chat,
-  };
+  function toggleChatOpened() {
+    setChatIsOpened(!chatIsOpened);
+  }
 
   // Обновляем токен
   // Получаем данные пользователя, кошелька, команды.
@@ -150,6 +151,8 @@ const App = () => {
     localStorage.removeItem("rt");
     localStorage.removeItem("expires");
   }
+  console.log(chatIsOpened);
+  console.log(pathname);
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -162,7 +165,12 @@ const App = () => {
 
         <div className="content">
           <Scrolltotop />
-          <button className="chat-button"></button>
+          <Link to={"/chat"}>
+            <button
+              className={`${loggedIn ? "chat-button" : ""}`}
+              onClick={toggleChatOpened}
+            ></button>
+          </Link>
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -170,7 +178,13 @@ const App = () => {
               exact
               path="/"
             />
-            <ProtectedRoute loggedIn={loggedIn} component={Chat} path="/chat" />
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              component={Chat}
+              path="/chat"
+              chatIsOpened={chatIsOpened}
+              toggleChatOpened={toggleChatOpened}
+            />
             <ProtectedRoute
               loggedIn={loggedIn}
               component={RoadMap}

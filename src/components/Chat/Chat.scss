@@ -2,6 +2,10 @@
   position: relative;
   width: 100%;
 
+  &_isHidden {
+    display: none;
+  }
+
   &__container {
     position: absolute;
     width: 444px;

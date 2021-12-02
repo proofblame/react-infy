@@ -3,12 +3,13 @@ import ChatHeader from "../ChatHeader/ChatHeader";
 import ChatInput from "../ChatInput/ChatInput";
 import "./Chat.scss";
 
-function Chat() {
+function Chat(props) {
+  console.log(props.chatIsOpened);
   return (
-    <section className="chat">
+    <section className={props.chatIsOpened ? "chat" : "chat_isHidden"}>
       <main className="main">
         <div className="chat__container">
-          <ChatHeader />
+          <ChatHeader toggleChatOpened={props.toggleChatOpened} />
           <ChatBody />
           <ChatInput />
         </div>
