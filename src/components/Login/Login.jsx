@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 import ResponcePopup from "../ResponcePopup/ResponcePopup";
 import Fail from "../../images/Fail.svg";
 import Success from "../../images/Success.svg";
+import Preloader from "../Preloader/Preloader";
 
 function Login(props) {
   const history = useHistory();
@@ -23,6 +24,9 @@ function Login(props) {
   const [errorMessage, setErrorMessage] = useState({
     username: "",
     password: "",
+  });
+  const [modalActive, setModalActive] = useState({
+    preloader: false,
   });
 
   useEffect(() => {
@@ -53,6 +57,7 @@ function Login(props) {
   };
 
   async function onSubmit(e) {
+    setModalActive({ preloader: true })
     e.preventDefault();
     try {
       await props.onLogin(data.username, data.password);
@@ -74,6 +79,7 @@ function Login(props) {
         subtitle: "Проверьте правильность логина и пароля",
         image: Fail,
       });
+
       setResStatus(true);
       setTimeout(() => {
         setResStatus(false);
@@ -125,7 +131,7 @@ function Login(props) {
                   className="form__label text text_size_normal"
                   htmlFor="username"
                 >
-                  Введите номер кошелька или Никнейм
+                  Введите никнейм
                 </label>
                 <input
                   className={`form__input text text_size_normal ${errorMessage.username ? "form__input_error" : ""
@@ -183,6 +189,10 @@ function Login(props) {
           </section>
         </div>
       </main>
+
+      <Modal active={modalActive.preloader}>
+        <Preloader />
+      </Modal>
       <Modal active={resStatus}>
         <ResponcePopup
           resStatusText={resStatusText}

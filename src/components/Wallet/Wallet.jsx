@@ -11,12 +11,7 @@ import WalletSlider from "./Slider/Slider";
 import api from "../../utils/api";
 import Preloader from "../Preloader/Preloader";
 
-function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, setCurentTransactions, pageCount, setPageCount, page, setPage }) {
-
-
-
-
-
+function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, setCurentTransactions, pageCount, setPageCount, page, setPage, refToken }) {
 
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
@@ -25,13 +20,11 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
     undelegationPopup: false,
     preloader: false,
   });
-  // const [currentTransactions, setCurentTransactions] = useState([]);
-  // const [page, setPage] = useState(0);
-  // const [pageCount, setPageCount] = useState(0);
+
 
   const handleUndelegateInfy = async (amountUndel) => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken();
+    await checkToken()
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -39,17 +32,14 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-        // await getTansactions();
-        setModalActive({ ...modalActive, preloader: false });
         handleClosePopup();
-        setPage(0)
       }
     }
   };
 
   const handleDelegateInfy = async (amountDel) => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken();
+    await checkToken()
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -57,17 +47,15 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-        // await getTansactions();
-        setModalActive({ ...modalActive, preloader: false });
+
         handleClosePopup();
-        setPage(0)
       }
     }
   };
 
   const handleSendInfy = async (amount, walletTo) => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken();
+    await checkToken()
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -75,10 +63,8 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-        // await getTansactions();
-        setModalActive({ ...modalActive, preloader: false });
+
         handleClosePopup();
-        setPage(0)
       }
     }
 
@@ -86,25 +72,13 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
 
   useEffect(() => {
     document.title = "Wallet";
+    setModalActive({ ...modalActive, preloader: true });
     checkToken()
-  }, [page, modalActive]);
+      .then(() => {
+        setModalActive({ ...modalActive, preloader: false });
+      })
+  }, [page]);
 
-  // const getTansactions = async () => {
-  //   setModalActive({ ...modalActive, preloader: true });
-  //   checkToken();
-  //   const jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     try {
-  //       const transactions = await api.getTransactionsInfo(jwt, page, 8);
-  //       setCurentTransactions(transactions.histories);
-  //       setPageCount(transactions.pageCount);
-  //     } catch (err) {
-  //       console.error(err);
-  //     } finally {
-  //       setModalActive({ ...modalActive, preloader: false });
-  //     }
-  //   }
-  // };
 
   const handleOpenPopup = (e) => {
     const { name } = e.target;
@@ -119,7 +93,9 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       transferPopup: false,
       delegationPopup: false,
       undelegationPopup: false,
+      preloader: false
     })
+    setPage(0)
   }
 
   const nextPage = () => {

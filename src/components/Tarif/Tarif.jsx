@@ -6,13 +6,14 @@ import Popup from "../Popup/Popup";
 import Preloader from "../Preloader/Preloader";
 
 
-function Tarif({ checkToken }) {
+function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
+
   useEffect(() => {
     document.title = "Tarif";
-    handleGetTarif();
+    // handleGetTarif();
   }, []);
-  const [tarif, setTarif] = useState(null);
-  const [isPaid, setIsPaid] = useState(false)
+  // const [tarif, setTarif] = useState(null);
+  // const [isPaid, setIsPaid] = useState(false)
   const [pay, setPay] = useState(null);
   const [statusMessage, setStatusMessage] = useState("");
   const [modalActive, setModalActive] = useState({
@@ -20,22 +21,6 @@ function Tarif({ checkToken }) {
     preloader: false,
   });
 
-  const handleGetTarif = async () => {
-    setModalActive({ ...modalActive, preloader: true });
-    await checkToken()
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      try {
-        const res = await api.getTarif(jwt)
-        setTarif(res);
-        setIsPaid(res.isPaid)
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setModalActive({ ...modalActive, preloader: false });
-      }
-    }
-  };
 
   const handlePayTarif = async () => {
     setModalActive({ ...modalActive, preloader: true });

@@ -93,6 +93,7 @@ function Registration(props) {
   };
 
   async function onSubmit(e) {
+    setModalActive({ ...modalActive, preloader: true });
     e.preventDefault();
     try {
       const user = await props.onRegister(

@@ -45,6 +45,12 @@ const App = () => {
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
+  const [tarif, setTarif] = useState(null);
+  const [isPaid, setIsPaid] = useState(false)
+
+
+
+
 
   const themeMode = theme === "light" ? "app" : "dark app";
 
@@ -65,6 +71,16 @@ const App = () => {
   // Получаем данные пользователя, кошелька, команды.
   // TODO: получать все данные тут (еще: Обучение, Дерево)
   const checkToken = async () => {
+    await refToken();
+    if (refToken) {
+      await getData();
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  };
+
+  const refToken = async () => {
     const expires = localStorage.getItem("expires");
     const rt = localStorage.getItem("rt");
     const jwt = localStorage.getItem("jwt");
@@ -75,46 +91,47 @@ const App = () => {
           localStorage.setItem("jwt", res.access_token);
           localStorage.setItem("rt", res.refresh_token);
           localStorage.setItem("expires", res.expires_at);
-          await getData();
-          setLoggedIn(true);
+          return true
         } catch (err) {
           console.error(err);
-          setLoggedIn(false);
+          return false
         }
       } else {
-        await getData();
-        setLoggedIn(true);
+        return true
       }
     } else {
-      setLoggedIn(false);
+      return false
     }
-  };
+  }
 
   const getData = async () => {
-    setModalActive({ preloader: true });
+    // setModalActive({ preloader: true });
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
-        const [user, wallet, team, transactions] = await Promise.all([
+        const [user, wallet, team, transactions, tarif] = await Promise.all([
           api.getUserInfo(jwt),
           api.getWalletInfo(jwt),
           api.getTeamInfo(jwt),
           api.getTransactionsInfo(jwt, page, 8),
+          api.getTarif(jwt)
         ]);
         setCurrentUser(user);
         setCurentWallet(wallet);
         setCurentTeam(team);
         setCurentTransactions(transactions.histories);
         setPageCount(transactions.pageCount);
+        setTarif(tarif);
+        setIsPaid(tarif.isPaid)
       } catch (err) {
         console.error(err);
         setLoggedIn(false);
       } finally {
-        setModalActive({ preloader: false });
+        // setModalActive({ preloader: false });
       }
     } else {
       setLoggedIn(false);
-      setModalActive({ preloader: false });
+      // setModalActive({ preloader: false });
     }
   };
 
@@ -193,7 +210,12 @@ const App = () => {
               loggedIn={loggedIn}
               component={Tarif}
               checkToken={checkToken}
+              refToken={refToken}
               path="/tarif"
+              tarif={tarif}
+              setTarif={setTarif}
+              isPaid={isPaid}
+              setIsPaid={setIsPaid}
             />
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -207,6 +229,7 @@ const App = () => {
               currentUser={currentUser}
               currentTeam={currentTeam}
               checkToken={checkToken}
+              refToken={refToken}
               path="/team"
             />
             <ProtectedRoute
@@ -215,6 +238,7 @@ const App = () => {
               currentUser={currentUser}
               currentWallet={currentWallet}
               checkToken={checkToken}
+              refToken={refToken}
               path="/wallet"
               currentTransactions={currentTransactions}
               setCurentTransactions={setCurentTransactions}
@@ -232,6 +256,7 @@ const App = () => {
               loggedIn={loggedIn}
               component={Learn}
               checkToken={checkToken}
+              refToken={refToken}
               setModalActive={setModalActive}
               path="/learn"
             />
