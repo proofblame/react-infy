@@ -117,7 +117,6 @@ function Registration(props) {
       await setModalActive({ ...modalActive, resStatus: true });
     } finally {
       setData({});
-      e.target.reset();
     }
   }
 

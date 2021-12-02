@@ -9,7 +9,7 @@ const getResponseData = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(new Error(res.status));
+  return res.json().then((res) => Promise.reject(new Error(res.message || res.error)));
 }
 //  Регистрация
 const register = async (username, joinedBy, email, password, telegram) => {

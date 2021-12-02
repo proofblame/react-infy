@@ -84,6 +84,8 @@ function Login(props) {
       setTimeout(() => {
         setResStatus(false);
       }, 3000);
+    } finally {
+      setModalActive({ preloader: false })
     }
   }
 

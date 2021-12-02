@@ -32,8 +32,13 @@ const config = {
     detectsOn: "window",
     events: {
       onClick: {
-        enable: true,
-        mode: "push"
+        enable: false,
+        mode: "repulse",
+        parallax: {
+          enable: false,
+          force: 60,
+          smooth: 10
+        }
       },
       onDiv: {
         selectors: [],

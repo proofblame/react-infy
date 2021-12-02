@@ -16,7 +16,7 @@ const Tree = ({ checkToken }) => {
   const [currentTree, setCurrentTree] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [line, setLine] = useState(null);
+  const [line, setLine] = useState(0);
   const [cardItem, setCardItem] = useState({});
 
   const nextPage = () => {
@@ -63,7 +63,7 @@ const Tree = ({ checkToken }) => {
 
   const handleClosePopup = () => {
     setModalActive({ ...modalActive, treePopup: false });
-    setLine(null);
+    setLine(0);
     setPage(0);
     setPageCount(0);
   };
