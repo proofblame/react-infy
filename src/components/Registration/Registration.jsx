@@ -4,6 +4,7 @@ import Modal from "../Modal/Modal";
 import SeedPopup from "../SeedPopup/SeedPopup";
 import Particles from "../Particles/Particles";
 import Preloader from "../Preloader/Preloader";
+import ResponcePopup from "../ResponcePopup/ResponcePopup";
 
 function Registration(props) {
   const location = useLocation();
@@ -32,13 +33,16 @@ function Registration(props) {
     telegram: "",
     politics: false,
   });
+  const [resStatusText, setResStatusText] = useState({
+    title: "",
+    subtitle: "",
+  });
 
   useEffect(() => {
     document.title = "Registration";
     urldecode(joinedBy);
-    isFormValid()
+    isFormValid();
   }, [data]);
-
 
   function urldecode(str) {
     return decodeURIComponent((str + "").replace(/\+/g, "%20"));
@@ -46,8 +50,8 @@ function Registration(props) {
 
   function onChange(e) {
     const { name, validity, validationMessage } = e.target;
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    console.log(e.target.checked)
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setData({
       ...data,
       [name]: value,
@@ -60,13 +64,15 @@ function Registration(props) {
     } else {
       setErrorMessage("");
     }
-    console.log(e.target.required)
   }
 
   const isFormValid = () => {
-    const { username, password, secondpassword, email, telegram } = data
-    setFormValid(username && password && secondpassword && email && telegram)
-  }
+    const { username, password, secondpassword, email, telegram, checkbox } =
+      data;
+    setFormValid(
+      username && password && secondpassword && email && telegram && checkbox
+    );
+  };
   const handleConfirmPassword = () => {
     if (data.password !== data.secondpassword) {
       setErrorMessage({
@@ -80,7 +86,6 @@ function Registration(props) {
 
   const handleClosePopup = () => {
     setModalActive(false);
-    history.push("/login");
   };
 
   async function onSubmit(e) {
@@ -94,11 +99,18 @@ function Registration(props) {
         data.telegram
       );
       setSeed(user.seed);
-      setModalActive({ ...modalActive, seed: true });
+      await setModalActive({ ...modalActive, seed: true });
+      history.push("/login");
     } catch (error) {
-      console.error(error);
+      setResStatusText({
+        title:
+          "Не удалось зарегистрироваться, проверьте данные для заполнения.",
+        subtitle:
+          "Возможно аккаунт с таким ником или почтой уже зарегистрирован",
+      });
+      await setModalActive({ ...modalActive, resStatus: true });
     } finally {
-      setData('')
+      setData({});
     }
   }
 
@@ -247,7 +259,9 @@ function Registration(props) {
                   onBlur={handleConfirmPassword}
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.secondpassword ? "form__error" : "form__error_hide"
+                  className={`text text_size_small ${errorMessage.secondpassword
+                      ? "form__error"
+                      : "form__error_hide"
                     }`}
                 >
                   {errorMessage.secondpassword}
@@ -315,7 +329,8 @@ function Registration(props) {
               </p>
               <button
                 type="submit"
-                className={`link link_active  ${formValid ? "" : "link_disabled"}`}
+                className={`link link_active  ${formValid ? "" : "link_disabled"
+                  }`}
                 disabled={!formValid}
               >
                 Создать Аккаунт
@@ -325,12 +340,17 @@ function Registration(props) {
         </div>
       </main>
       <Modal active={modalActive.seed}>
-        <SeedPopup onClose={handleClosePopup} seed={seed} />
+        <SeedPopup seed={seed} />
       </Modal>
       <Modal active={modalActive.preloader}>
         <Preloader />
       </Modal>
-      <Modal active={modalActive.resStatus}></Modal>
+      <Modal active={modalActive.resStatus}>
+        <ResponcePopup
+          onClose={handleClosePopup}
+          resStatusText={resStatusText}
+        />
+      </Modal>
     </>
   );
 }

@@ -29,7 +29,9 @@ import Support from "../Support/Support";
 import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
-import Scrolltotop from '../Scrolltotop/Scrolltotop';
+import Scrolltotop from "../Scrolltotop/Scrolltotop";
+import ResponcePopup from "../ResponcePopup/ResponcePopup";
+import Success from "../../images/Success.svg";
 
 const App = () => {
   const history = useHistory();
@@ -40,13 +42,18 @@ const App = () => {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
-  const [modalActive, setModalActive] = useState({ preloader: false });
+  const [modalActive, setModalActive] = useState({
+    preloader: false,
+  });
+  const [resStatus, setResStatus] = useState(false);
   const [currentTransactions, setCurentTransactions] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
-
-
-
+  const [resStatusText, setResStatusText] = useState({
+    title: "",
+    subtitle: "",
+    image: "",
+  });
 
   const themeMode = theme === "light" ? "app" : "dark app";
 
@@ -56,7 +63,7 @@ const App = () => {
       localStorage.removeItem("refresh_token");
     }
 
-    checkToken()
+    checkToken();
   }, []);
 
   useEffect(() => {
@@ -73,7 +80,6 @@ const App = () => {
     if (rt && jwt && expires) {
       if (expires < Date.now()) {
         try {
-
           const res = await api.refreshToken(rt);
           localStorage.setItem("jwt", res.access_token);
           localStorage.setItem("rt", res.refresh_token);
@@ -81,17 +87,14 @@ const App = () => {
           await getData();
           setLoggedIn(true);
         } catch (err) {
-
           console.error(err);
           setLoggedIn(false);
         }
       } else {
-
         await getData();
         setLoggedIn(true);
       }
     } else {
-
       setLoggedIn(false);
     }
   };
@@ -106,7 +109,7 @@ const App = () => {
           api.getUserInfo(jwt),
           api.getWalletInfo(jwt),
           api.getTeamInfo(jwt),
-          api.getTransactionsInfo(jwt, page, 8)
+          api.getTransactionsInfo(jwt, page, 8),
         ]);
         setCurrentUser(user);
         setCurentWallet(wallet);
@@ -125,30 +128,40 @@ const App = () => {
     }
   };
 
-
   function handleRegister(username, joinedBy, email, password, telegram) {
     return auth.register(username, joinedBy, email, password, telegram);
   }
 
   async function handleLogin(username, password) {
-    setModalActive({ preloader: true });
     const res = await auth.login(username, password);
     if (res) {
       try {
         localStorage.setItem("jwt", res.access_token);
         localStorage.setItem("rt", res.refresh_token);
         localStorage.setItem("expires", res.expires_at);
-        // await checkToken();
+        setResStatusText({
+          title: "Поздравляем",
+          subtitle: "Вы успешно вошли в систему!",
+          image: Success,
+        });
+        setResStatus(true);
+        setTimeout(() => {
+          setResStatus(false);
+          history.push("/profile");
+        }, 3000);
         setLoggedIn(true);
-        history.push("/profile");
         await getData();
       } catch (error) {
-        console.error(error)
+        console.error(error);
       } finally {
         setModalActive({ preloader: false });
       }
     }
   }
+
+  const handleClosePopup = () => {
+    setModalActive(false);
+  };
 
   function handleSignout() {
     setLoggedIn(false);
@@ -172,7 +185,12 @@ const App = () => {
         <div className="content">
           <Scrolltotop />
           <Switch>
-            <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/" />
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              component={Main}
+              exact
+              path="/"
+            />
             <ProtectedRoute
               loggedIn={loggedIn}
               component={RoadMap}
@@ -198,12 +216,16 @@ const App = () => {
               component={Status}
               path="/status"
             />
-            <ProtectedRoute loggedIn={loggedIn} component={Tarif} checkToken={checkToken} path="/tarif" />
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              component={Tarif}
+              checkToken={checkToken}
+              path="/tarif"
+            />
             <ProtectedRoute
               loggedIn={loggedIn}
               component={Profile}
               currentUser={currentUser}
-
               path="/profile"
             />
             <ProtectedRoute
@@ -256,10 +278,15 @@ const App = () => {
           </Switch>
         </div>
 
-
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
         <Modal active={modalActive.preloader}>
           <Preloader />
+        </Modal>
+        <Modal active={resStatus}>
+          <ResponcePopup
+            onClose={handleClosePopup}
+            resStatusText={resStatusText}
+          />
         </Modal>
       </div>
     </CurrentUserContext.Provider>

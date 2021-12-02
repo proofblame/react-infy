@@ -2,19 +2,29 @@ import React, { useState, useEffect } from "react";
 import Particles from "../Particles/Particles";
 import { NavLink } from "react-router-dom";
 import "./Login.scss";
+import Modal from "../Modal/Modal";
+import ResponcePopup from "../ResponcePopup/ResponcePopup";
+import Fail from "../../images/Fail.svg";
 
 function Login(props) {
+  const [resStatus, setResStatus] = useState(false);
   const [data, setData] = useState({
     username: "",
     password: "",
   });
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [formValid, setFormValid] = useState(false)
+  const [modalActive, setModalActive] = useState({
+    preloader: false,
+  });
+  const [resStatusText, setResStatusText] = useState({
+    title: "",
+    subtitle: "",
+    image: "",
+  });
+  const [formValid, setFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
-    username: '',
-    password: '',
-  })
+    username: "",
+    password: "",
+  });
 
   useEffect(() => {
     document.title = "Login";
@@ -28,32 +38,42 @@ function Login(props) {
       [name]: value,
     });
     if (!validity.valid) {
-      setFormValid(false)
+      setFormValid(false);
       setErrorMessage({
         ...errorMessage,
-        [name]: validationMessage
-      })
+        [name]: validationMessage,
+      });
     } else {
-      setFormValid(true)
-      setErrorMessage('')
+      setFormValid(true);
+      setErrorMessage("");
     }
-
   }
   const isFormValid = () => {
-    const { username, password, } = data
-    setFormValid(username && password)
-  }
+    const { username, password } = data;
+    setFormValid(username && password);
+  };
 
-
-  function onSubmit(e) {
-
+  async function onSubmit(e) {
     e.preventDefault();
-    props.onLogin(data.username, data.password).then(() => {
-      // props.checkToken()
-    })
-
-
+    try {
+      await props.onLogin(data.username, data.password);
+    } catch (error) {
+      console.log(error);
+      setResStatusText({
+        title: "Ошибка",
+        subtitle: "Проверьте правильность логина и пароля",
+        image: Fail,
+      });
+      setResStatus(true);
+      setTimeout(() => {
+        setResStatus(false);
+      }, 3000);
+    }
   }
+
+  const handleClosePopup = () => {
+    setResStatus(false);
+  };
 
   return (
     <>
@@ -98,7 +118,9 @@ function Login(props) {
                   Введите номер кошелька или Никнейм
                 </label>
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.username ? "form__input_error" : ""}`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.username ? "form__input_error" : ""
+                  }`}
                   type="text"
                   name="username"
                   required
@@ -107,7 +129,9 @@ function Login(props) {
                   onChange={onChange}
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.username ? "form__error" : "form__error_hide"}`}
+                  className={`text text_size_small ${
+                    errorMessage.username ? "form__error" : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.username}
                 </span>
@@ -121,7 +145,9 @@ function Login(props) {
                 </label>
 
                 <input
-                  className={`form__input text text_size_normal ${errorMessage.password ? "form__input_error" : ""}`}
+                  className={`form__input text text_size_normal ${
+                    errorMessage.password ? "form__input_error" : ""
+                  }`}
                   type="password"
                   name="password"
                   required
@@ -130,7 +156,9 @@ function Login(props) {
                   onChange={onChange}
                 />
                 <span
-                  className={`text text_size_small ${errorMessage.password ? "form__error" : "form__error_hide"}`}
+                  className={`text text_size_small ${
+                    errorMessage.password ? "form__error" : "form__error_hide"
+                  }`}
                 >
                   {errorMessage.password}
                 </span>
@@ -140,7 +168,9 @@ function Login(props) {
               </p>
               <input
                 type="submit"
-                className={`link link_active  ${formValid ? "" : "link_disabled"}`}
+                className={`link link_active  ${
+                  formValid ? "" : "link_disabled"
+                }`}
                 value="Войти"
                 disabled={!formValid}
               />
@@ -148,6 +178,12 @@ function Login(props) {
           </section>
         </div>
       </main>
+      <Modal active={resStatus}>
+        <ResponcePopup
+          resStatusText={resStatusText}
+          onClose={handleClosePopup}
+        />
+      </Modal>
     </>
   );
 }
