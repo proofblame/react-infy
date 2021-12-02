@@ -47,7 +47,7 @@ const config = {
         type: "circle"
       },
       onHover: {
-        enable: true,
+        enable: false,
         mode: "repulse",
         parallax: {
           enable: false,

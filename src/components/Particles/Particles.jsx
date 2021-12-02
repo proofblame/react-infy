@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Particle from "react-tsparticles";
-import config from './particlesConfig'
+import config from './particlesConfigNoHover'
 import './particles.css'
 
 
