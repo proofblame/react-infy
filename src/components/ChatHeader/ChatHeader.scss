@@ -74,6 +74,11 @@ $main-color: rgba(67, 7, 114, 1);
     border: none;
     outline: none;
     margin-right: 29px;
+    transition: 0.5s;
+
+    &:hover {
+      opacity: 0.7;
+    }
 
     &::after {
       position: absolute;
