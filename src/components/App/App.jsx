@@ -30,6 +30,7 @@ import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
+import Chat from "../Chat/Chat";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -60,6 +61,10 @@ const App = () => {
   useEffect(() => {
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
+
+  const popups = {
+    chat: Chat,
+  };
 
   // Обновляем токен
   // Получаем данные пользователя, кошелька, команды.
@@ -157,6 +162,7 @@ const App = () => {
 
         <div className="content">
           <Scrolltotop />
+          <button className="chat-button"></button>
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -164,6 +170,7 @@ const App = () => {
               exact
               path="/"
             />
+            <ProtectedRoute loggedIn={loggedIn} component={Chat} path="/chat" />
             <ProtectedRoute
               loggedIn={loggedIn}
               component={RoadMap}
