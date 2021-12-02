@@ -5,14 +5,12 @@
   &__container {
     position: absolute;
     width: 444px;
-    height: 574px;
     background: #fdfdfd;
     box-shadow: 0px 4px 4px rgba(240, 240, 240, 0.25);
     border-radius: 10px;
     position: fixed;
     top: 10%;
     right: 10%;
-    border: 1px solid black;
     z-index: 101;
     overflow: hidden;
   }

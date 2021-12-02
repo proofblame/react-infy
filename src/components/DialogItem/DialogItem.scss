@@ -1,0 +1,127 @@
+$main-color: #f2f2f2;
+$message-color: rgba(14, 14, 14, 0.7);
+
+.dialogItem {
+  display: flex;
+  width: 288px;
+  margin-left: 29px;
+  margin-top: 21px;
+  position: relative;
+
+  &_user {
+    margin-left: 142px;
+  }
+
+  &__avatar-container {
+    width: 34px;
+    height: 34px;
+    background-color: $main-color;
+    border-radius: 50%;
+    align-self: flex-end;
+    display: block;
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__avatar {
+    object-fit: contain;
+    margin: 1px 0 0 3px;
+    width: 80%;
+    height: 100%;
+  }
+
+  &__message {
+    width: 224px;
+    margin-left: 30px;
+    background-color: $main-color;
+    padding: 17px 0 12px 22px;
+    border-radius: 10px;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 24px solid $main-color;
+      border-right: 12px solid transparent;
+      border-top: 12px solid $main-color;
+      border-bottom: 20px solid transparent;
+      left: -8px;
+      bottom: -9px;
+      transform: rotate(40deg);
+    }
+
+    &-user {
+      width: 224px;
+      margin-left: 30px;
+      background-color: $main-color;
+      padding: 17px 0 12px 22px;
+      border-radius: 10px;
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 24px solid $main-color;
+        border-right: 12px solid transparent;
+        border-top: 12px solid $main-color;
+        border-bottom: 20px solid transparent;
+        left: 204px;
+        bottom: -9px;
+        transform: rotate(40deg);
+      }
+    }
+
+    &-header {
+      color: rgba(74, 40, 127, 1);
+      font-size: 14px;
+      line-height: 14px;
+      font-style: normal;
+      font-weight: normal;
+      margin-bottom: 10px;
+      display: block;
+
+      &_hidden {
+        display: none;
+      }
+    }
+
+    &-text {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 12px;
+      letter-spacing: 0.05em;
+      color: $message-color;
+    }
+
+    &-time {
+      font-size: 9px;
+      line-height: 9px;
+      letter-spacing: 0.05em;
+      color: $message-color;
+      margin: 6px 12px 0 81%;
+    }
+  }
+
+  &__read {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 10px;
+    letter-spacing: 0.05em;
+    color: rgba(14, 14, 14, 0.5);
+    position: absolute;
+    top: 102%;
+    left: 60%;
+
+    &_hidden {
+      display: none;
+    }
+  }
+}
