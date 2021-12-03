@@ -1,5 +1,5 @@
 import React from 'react'
-// import './Moder.scss'
+import './Moder.scss'
 import constants from './constants.js'
 
 const Moder = () => {
@@ -150,6 +150,9 @@ const Moder = () => {
               <li className="message">
                 <p className="message-author">
                   Поддержка Infinity
+                </p>
+                <p>
+
                 </p>
               </li>
 

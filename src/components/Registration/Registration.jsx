@@ -26,7 +26,7 @@ function Registration(props) {
   });
   const [data, setData] = useState({
     username: "",
-    joinedBy: " " || urldecode(joinedBy),
+    joinedBy: "" || urldecode(joinedBy),
     password: "",
     secondpassword: "",
     email: "",
