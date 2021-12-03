@@ -1,3 +1,75 @@
+@keyframes pulse-inner {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  20% {
+    opacity: 0.5;
+    transition: border-width 0.5s;
+    border-width: 2.5px;
+  }
+
+  40% {
+    transition: border-width 0.1s;
+    border-width: 2px;
+  }
+
+  60% {
+    opacity: 1;
+    transition: border-width 0.1s;
+    border-width: 1.5px;
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    border-color: 0 0 0 45px rgba(145, 77, 244, 1);
+    transition: 2.5s cubic-bezier(0.66, 0, 0, 1);
+    border-width: 1px;
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  20% {
+    opacity: 0.5;
+    transition: border-width 0.5s;
+    border-width: 2.5px;
+  }
+
+  40% {
+    transition: border-width 0.1s;
+    border-width: 2px;
+  }
+
+  60% {
+    opacity: 1;
+    transition: border-width 0.1s;
+    border-width: 1.5px;
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    border-color: 0 0 0 45px rgba(145, 77, 244, 1);
+    transition: 2.5s cubic-bezier(0.66, 0, 0, 1);
+    border-width: 1px;
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
 .app {
   background-color: rgba(240, 240, 240, 0.1);
   font-family: HelveticaNeueCyr, sans-serif;
@@ -11,16 +83,64 @@
 .dark.app {
   /* background-color: #0E0E0E; */
 }
-.chat-button {
+
+.content {
+  width: 100%;
+  position: relative;
+}
+
+.button-container {
   position: fixed;
-  top: 73%;
-  left: 85%;
-  width: 141px;
-  height: 141px;
+  top: 83%;
+  right: 7%;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(rgba(68, 30, 120, 1), rgba(145, 77, 244, 1));
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.button-container::before {
+  content: "";
+  position: absolute;
+  width: 115px;
+  height: 115px;
+  border: 3px solid rgba(145, 77, 244, 1);
+  border-radius: 50%;
+  animation: pulse-inner 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+.button-container::after {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border: 3px solid rgba(110, 49, 194, 0.5);
+  border-radius: 50%;
+  animation: pulse-outer 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+.button-container_hidden {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+  pointer-events: none;
+}
+
+.chat-button {
   border: none;
   outline: none;
   cursor: pointer;
   background-color: transparent;
-  z-index: 100;
-  background-image: url("../../images/Chat.svg");
+  width: 47px;
+  height: 35px;
+
+  background-image: url("../../images/icons/ChatButton.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }

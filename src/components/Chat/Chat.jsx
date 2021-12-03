@@ -4,7 +4,6 @@ import ChatInput from "../ChatInput/ChatInput";
 import "./Chat.scss";
 
 function Chat(props) {
-  console.log(props.chatIsOpened);
   return (
     <section className={props.chatIsOpened ? "chat" : "chat_isHidden"}>
       <main className="main">

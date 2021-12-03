@@ -151,8 +151,7 @@ const App = () => {
     localStorage.removeItem("rt");
     localStorage.removeItem("expires");
   }
-  console.log(chatIsOpened);
-  console.log(pathname);
+
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -165,25 +164,24 @@ const App = () => {
 
         <div className="content">
           <Scrolltotop />
-          <Link to={"/chat"}>
-            <button
-              className={`${loggedIn ? "chat-button" : ""}`}
+          {chatIsOpened ? (
+            ""
+          ) : (
+            <div
+              className={`${
+                loggedIn ? "button-container" : "button-container_hidden"
+              }`}
               onClick={toggleChatOpened}
-            ></button>
-          </Link>
+            >
+              <button className="chat-button"></button>
+            </div>
+          )}
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
               component={Main}
               exact
               path="/"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Chat}
-              path="/chat"
-              chatIsOpened={chatIsOpened}
-              toggleChatOpened={toggleChatOpened}
             />
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -269,7 +267,7 @@ const App = () => {
             <Route component={Error} path="*" />
           </Switch>
         </div>
-
+        <Chat chatIsOpened={chatIsOpened} toggleChatOpened={toggleChatOpened} />
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
         <Modal active={modalActive.preloader}>
           <Preloader />
