@@ -9,7 +9,7 @@ const constants = {
     filter: {
       title: 'Фильтр:',
       paramDate: 'Дата',
-      paramStatus: 'Статус',
+      paramStatus: 'Статус:',
     },
     body: {
       date: 'Дата',

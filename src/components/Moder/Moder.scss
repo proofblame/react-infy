@@ -29,12 +29,23 @@ $minWidth: 320;
 $breakPoint: $maxWidth - 0.2;
 
 $bgColor_1: #0e0e0e;
-$bgColor_3: #202020;
-$bgColor_4: #2f2f2f;
-$bgColor_5: rgba(255, 255, 255, 0.8);
+$bgColor_2: #202020;
+$bgColor_3: #2f2f2f;
+$bgColor_4: rgba(255, 255, 255, 0.8);
 
 $textColor_1: #ffffff;
 $textColor_2: #202020;
+$textColor_3: #000000;
+$textColor_4: #999999;
+
+$scrollBG: #2b2b2b;
+$thumbBG: #3e3e3e;
+// $heightHeader: ;
+// $heightBody: ;
+button {
+  padding: 0;
+  margin: 0;
+}
 
 %fontSizeTitle {
   @include adaptive(font-size, 48, 20);
@@ -56,40 +67,423 @@ $textColor_2: #202020;
   @include adaptive(font-size, 20, 12);
   @include adaptive(line-height, 31, 18);
 }
+%fontSizeMessageAuthor {
+  @include adaptive(font-size, 18, 14);
+  @include adaptive(line-height, 18, 14);
+}
+%fontSizeMessageText {
+  @include adaptive(font-size, 14, 10);
+  @include adaptive(line-height, 14, 10);
+}
 
 .moderation {
-  font-family: 'HelveticaNeueCyr' sans-serif;
+  font-family: 'HelveticaNeueCyr', sans-serif;
   font-style: normal;
-
+  letter-spacing: 0.05em;
   width: 100%;
-  height: 100%;
-  background: #202020;
+  background: $bgColor_2;
   box-shadow: 20px 20px 100px rgba(14, 14, 14, 0.48);
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  box-sizing: border-box;
 
   &__wrapper {
     width: 100%;
     max-width: #{$maxWidth}px;
-    @include adaptivePadding(padding, 50, 45, 20, 20);
   }
 
   &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $bgColor_1;
+    box-shadow: 20px 20px 100px rgba(0, 0, 0, 0.48);
+    @include adaptivePadding(padding, 0, 45, 0, 20);
+    @include adaptive(height, 150, 85);
+  }
+
+  &__header-title {
+    font-weight: normal;
+    @extend %fontSizeTitle;
+    color: $textColor_1;
+  }
+
+  &__header-burger {
   }
 
   &__main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    @include adaptive(margin-top, 150, 85);
+    background: $bgColor_2;
   }
 
   &__aside {
+    @include adaptive(width, 133, 0);
+    display: flex;
+    flex-direction: column;
+    background: $bgColor_2;
+    box-shadow: 20px 20px 100px rgba(14, 14, 14, 0.48);
+  }
+
+  &__aside-service-list {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__aside-service-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include adaptive(height, 94, 0);
+    background: $bgColor_3;
+  }
+
+  &__aside-image {
+    @include adaptive(width, 42, 10);
+    @include adaptive(height, 42, 10);
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include adaptivePadding(padding, 50, 50, 0, 0);
+  }
+
+  &__table-header {
+    display: flex;
+    align-items: center;
+    background: $bgColor_4;
+    @include adaptivePadding(padding, 14, 40, 14, 20);
+    @include adaptive(margin-bottom, 25, 0);
+  }
+
+  &__table-filter {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    @include adaptive(column-gap, 65, 25);
+    @extend %fontSizeTableTitle;
+  }
+
+  &__table-filter-title {
+    font-weight: bold;
+    color: $textColor_3;
+    opacity: 0.5;
+  }
+  &__table-filter-params {
+    display: flex;
+    align-items: center;
+    @include adaptive(column-gap, 35, 18);
+  }
+  &__table-filter-param {
+    display: flex;
+    align-items: center;
+    color: $textColor_3;
+    opacity: 0.5;
+    &_selected {
+      opacity: initial;
+    }
+  }
+  &__table-filter-button {
+    background: none;
+    cursor: pointer;
+    border: none;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      opacity: 0.8;
+    }
+  }
+  &__table-filter-status {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+  &__table-filter-subtitle {
+  }
+  &__table-filter-select {
+    background: none;
+    border: none;
+  }
+
+  &__table-body {
+    overflow-y: auto;
+    @include adaptive(margin-bottom, 15, 10);
+    &::-webkit-scrollbar {
+      @include adaptive(width, 21, 10);
+      background-color: $scrollBG;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumbBG;
+    }
+  }
+
+  &__table-subtitle-row {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    @include adaptive(column-gap, 30, 10);
+    @include adaptivePadding(padding, 23, 40, 15, 20);
+    color: $textColor_1;
+    opacity: 0.5;
+    &:not(:first-of-type) {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+      &:active {
+        opacity: 1;
+      }
+    }
+    &:first-of-type {
+      font-weight: bold;
+      opacity: initial;
+    }
+    &:nth-of-type(odd) {
+      background: $bgColor_3;
+    }
+    &:nth-of-type(even) {
+      background: $bgColor_2;
+    }
+  }
+  &__table-pagination {
+    align-self: flex-end;
+  }
+
+  &__table-subtitle-cell {
   }
 
   &__page-count {
   }
 
   &__chat {
+    flex: 1 0 auto;
+    height: 940px;
+    @include adaptive(width, 495, 320);
+  }
+
+  &__chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include adaptive(height, 80, 60);
+    padding: 0 22px;
+    background: $bgColor_1;
+    box-shadow: 10px 10px 200px rgba(0, 0, 0, 0.48);
+  }
+
+  &__chat-title {
+    color: $textColor_1;
+    @extend %fontSizeNumbers;
+  }
+
+  &__chat-close-button {
+    background-color: $bgColor_2;
+    background-image: url('./images/close-button.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 100%;
+    @include adaptive(width, 35, 22);
+    @include adaptive(height, 35, 22);
+    @include adaptive(background-size, 18, 15);
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: initial;
+    }
+  }
+
+  &__chat-message-list {
+    display: flex;
+    flex-direction: column;
+    @include adaptive(row-gap, 56, 19);
+    background: $bgColor_2;
+    box-shadow: -20px 4px 100px rgba(0, 0, 0, 0.48);
+    @include adaptivePadding(padding, 40, 20, 30, 20);
+  }
+
+  &__chat-form-answer {
+    display: flex;
+    align-items: center;
+    background: $bgColor_1;
+    height: 72px;
+  }
+  &__chat-form-area {
+    background: none;
+    border: none;
+    resize: none;
+    &::placeholder {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__chat-form-send-button {
+  }
+}
+.table-filter {
+  &__title {
+  }
+
+  &__params {
+  }
+}
+.table-filter-param {
+}
+.table-filter-title {
+}
+.table-filter-select {
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  @include adaptive(column-gap, 14, 17);
+  &_dark {
+    color: $textColor_1;
+    opacity: 0.5;
+  }
+
+  &__arrow {
+    background-color: $bgColor_3;
+    background-image: url('./images/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 12px;
+    border-radius: 3px;
+    border: none;
+    color: $textColor_4;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 1;
+    }
+    &_previos {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    @include adaptive(column-gap, 14, 17);
+  }
+
+  &__page {
+    @extend %fontSizeNumbers;
+    opacity: 0.5;
+    &_current {
+      opacity: 1;
+    }
+  }
+  &__page-button {
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  $margin: 27;
+  background: $bgColor_1;
+  box-shadow: 20px 20px 200px rgba(0, 0, 0, 0.48);
+  border-radius: 10px;
+  @include adaptivePadding(padding, 24, 30, 17, 22);
+  @include adaptive(width, 315, 215);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: $margin / 2 + px;
+    left: -$margin + px;
+    @include adaptive(width, $margin, 20);
+    @include adaptive(height, $margin, 20);
+    border: $margin / 2 + px solid transparent;
+    border-right: $margin / 2 + px solid $bgColor_1;
+    border-bottom: $margin / 2 + px solid $bgColor_1;
+  }
+  &_type {
+    &_incoming {
+      align-self: flex-start;
+      left: $margin + px;
+    }
+    &_outgoing {
+      align-self: flex-end;
+      right: $margin + px;
+      &::before {
+        left: initial;
+        right: -$margin + px;
+        transform: rotate(90deg);
+      }
+      .message__status {
+        right: 0;
+        left: initial;
+      }
+      .message__time {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.7);
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+  }
+
+  &__author {
+    font-weight: normal;
+    color: $textColor_1;
+    @extend %fontSizeMessageAuthor;
+    @include adaptive(margin-bottom, 14, 10);
+  }
+  &__text {
+    @extend %fontSizeMessageText;
+    color: rgba(255, 255, 255, 0.7);
+    @include adaptive(margin-bottom, 10, 5);
+  }
+  &__time {
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 0.5;
+    align-self: flex-end;
   }
 }
