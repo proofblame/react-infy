@@ -6,13 +6,13 @@ import "./Chat.scss";
 function Chat(props) {
   return (
     <section className={props.chatIsOpened ? "chat" : "chat_isHidden"}>
-      <main className="main">
-        <div className="chat__container">
-          <ChatHeader toggleChatOpened={props.toggleChatOpened} />
-          <ChatBody />
-          <ChatInput />
-        </div>
-      </main>
+      {/* <main className="main"> */}
+      <div className="chat__container">
+        <ChatHeader toggleChatOpened={props.toggleChatOpened} />
+        <ChatBody />
+        <ChatInput />
+      </div>
+      {/* </main> */}
     </section>
   );
 }

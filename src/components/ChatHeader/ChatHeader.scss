@@ -2,9 +2,8 @@ $main-color: rgba(67, 7, 114, 1);
 
 .chat-header {
   background: linear-gradient(rgba(70, 31, 123, 1), rgba(139, 73, 235, 1));
-  padding-top: 21px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   &__img-container {
     position: relative;
@@ -12,7 +11,11 @@ $main-color: rgba(67, 7, 114, 1);
     height: 69px;
     background-color: $main-color;
     border-radius: 50%;
-    margin: 0 0 20px 29px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 21px;
 
     &::after {
       position: absolute;
@@ -32,6 +35,13 @@ $main-color: rgba(67, 7, 114, 1);
     object-fit: contain;
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  &-container {
+    display: flex;
+    max-height: 80%;
+    flex-direction: column;
+    justify-content: center;
   }
 
   &__main-header {
@@ -73,8 +83,8 @@ $main-color: rgba(67, 7, 114, 1);
     border-radius: 50%;
     border: none;
     outline: none;
-    margin-right: 29px;
     transition: 0.5s;
+    margin-top: 21px;
 
     &:hover {
       opacity: 0.7;
@@ -90,6 +100,20 @@ $main-color: rgba(67, 7, 114, 1);
       top: 20%;
       left: 20%;
       background-repeat: no-repeat;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .chat-header {
+    &__main-header {
+      font-size: 14px;
+      line-height: 14px;
+    }
+
+    &__online-status {
+      font-size: 12px;
+      line-height: 12px;
     }
   }
 }
