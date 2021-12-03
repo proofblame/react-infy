@@ -26,7 +26,7 @@ function Registration(props) {
   });
   const [data, setData] = useState({
     username: "",
-    joinedBy: " " || urldecode(joinedBy),
+    joinedBy: "" || urldecode(joinedBy),
     password: "",
     secondpassword: "",
     email: "",
@@ -114,7 +114,7 @@ function Registration(props) {
           "Возможно аккаунт с таким ником или почтой уже зарегистрирован",
         image: Fail
       });
-      await setModalActive({ ...modalActive, resStatus: true });
+      setModalActive({ ...modalActive, resStatus: true });
     } finally {
       setData({});
     }

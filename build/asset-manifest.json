@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "./static/css/main.c424d927.chunk.css",
-    "main.js": "./static/js/main.8213b750.chunk.js",
-    "main.js.map": "./static/js/main.8213b750.chunk.js.map",
+    "main.css": "./static/css/main.2ade2f11.chunk.css",
+    "main.js": "./static/js/main.c2bfac5d.chunk.js",
+    "main.js.map": "./static/js/main.c2bfac5d.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.67a1c3aa.js",
     "runtime-main.js.map": "./static/js/runtime-main.67a1c3aa.js.map",
     "static/js/2.92accdd0.chunk.js": "./static/js/2.92accdd0.chunk.js",
     "static/js/2.92accdd0.chunk.js.map": "./static/js/2.92accdd0.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/main.c424d927.chunk.css.map": "./static/css/main.c424d927.chunk.css.map",
+    "static/css/main.2ade2f11.chunk.css.map": "./static/css/main.2ade2f11.chunk.css.map",
     "static/js/2.92accdd0.chunk.js.LICENSE.txt": "./static/js/2.92accdd0.chunk.js.LICENSE.txt",
     "static/media/index.css": "./static/media/wallet-3.febacf75.png",
     "static/media/Fail.df8eddf6.svg": "./static/media/Fail.df8eddf6.svg",
@@ -29,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.67a1c3aa.js",
     "static/js/2.92accdd0.chunk.js",
-    "static/css/main.c424d927.chunk.css",
-    "static/js/main.8213b750.chunk.js"
+    "static/css/main.2ade2f11.chunk.css",
+    "static/js/main.c2bfac5d.chunk.js"
   ]
 }
