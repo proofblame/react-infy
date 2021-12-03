@@ -1,0 +1,95 @@
+@mixin adaptive($value, $pcSize, $mobSize) {
+  #{$value}: #{$pcSize + px};
+
+  @media screen and (max-width: #{$breakPoint + px}) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    #{$value}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+  }
+}
+@mixin adaptivePadding($value, $topBottomPC, $rightLeftPC, $topBottomMB, $rightLeftMB) {
+  #{$value}-top: #{$topBottomPC + px};
+  #{$value}-bottom: #{$topBottomPC + px};
+  #{$value}-right: #{$rightLeftPC + px};
+  #{$value}-left: #{$rightLeftPC + px};
+
+  @media screen and (max-width: #{$breakPoint + px}) {
+    $addSizeTopBottom: $topBottomPC - $topBottomMB;
+    $addSizeRightLeft: $rightLeftPC - $rightLeftMB;
+    $maxWidth: $maxWidth - 320;
+    #{$value}-top: calc(#{$topBottomMB + px} + #{$addSizeTopBottom} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+    #{$value}-bottom: calc(#{$topBottomMB + px} + #{$addSizeTopBottom} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+    #{$value}-right: calc(#{$rightLeftMB + px} + #{$addSizeRightLeft} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+    #{$value}-left: calc(#{$rightLeftMB + px} + #{$addSizeRightLeft} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+  }
+}
+
+$maxWidth: 1920;
+$minWidth: 320;
+$breakPoint: $maxWidth - 0.2;
+
+$bgColor_1: #0e0e0e;
+$bgColor_3: #202020;
+$bgColor_4: #2f2f2f;
+$bgColor_5: rgba(255, 255, 255, 0.8);
+
+$textColor_1: #ffffff;
+$textColor_2: #202020;
+
+%fontSizeTitle {
+  @include adaptive(font-size, 48, 20);
+  @include adaptive(line-height, 48, 21);
+}
+%fontSizeNumbers {
+  @include adaptive(font-size, 24, 18);
+  @include adaptive(line-height, 37, 27);
+}
+%fontSizeSubtitle {
+  @include adaptive(font-size, 24, 10);
+  @include adaptive(line-height, 37, 15);
+}
+%fontSizeText {
+  @include adaptive(font-size, 24, 9);
+  @include adaptive(line-height, 37, 15);
+}
+%fontSizeTableTitle {
+  @include adaptive(font-size, 20, 12);
+  @include adaptive(line-height, 31, 18);
+}
+
+.moderation {
+  font-family: 'HelveticaNeueCyr' sans-serif;
+  font-style: normal;
+
+  width: 100%;
+  height: 100%;
+  background: #202020;
+  box-shadow: 20px 20px 100px rgba(14, 14, 14, 0.48);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  &__wrapper {
+    width: 100%;
+    max-width: #{$maxWidth}px;
+    @include adaptivePadding(padding, 50, 45, 20, 20);
+  }
+
+  &__header {
+  }
+
+  &__main {
+  }
+
+  &__aside {
+  }
+
+  &__table {
+  }
+
+  &__page-count {
+  }
+
+  &__chat {
+  }
+}

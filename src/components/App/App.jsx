@@ -30,6 +30,7 @@ import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
+import Moder from '../Moder/Moder';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -270,11 +271,16 @@ const App = () => {
             <Route path="/registration">
               <Registration loggedIn={loggedIn} onRegister={handleRegister} />
             </Route>
+            {/* <Route path="/moder">
+              <Moder />
+            </Route> */}
             <Route component={Error} path="*" />
           </Switch>
+
         </div>
 
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
+
         <Modal active={modalActive.preloader}>
           <Preloader />
         </Modal>
