@@ -1,3 +1,4 @@
+@import "../../mixins/mixins.scss";
 @import "./DialogItemDark.scss";
 
 $main-color: #f2f2f2;
@@ -6,12 +7,11 @@ $message-color: rgba(14, 14, 14, 0.7);
 .dialogItem {
   display: flex;
   width: 288px;
-  margin-left: 29px;
-  margin-top: 21px;
+  @include adaptivePadding(margin, 21, 29, 10, 12);
   position: relative;
 
   &_user {
-    margin-left: 35%;
+    @include adaptivePadding(margin, 21, 172, 10, 55);
   }
 
   &__avatar-container {
@@ -36,7 +36,8 @@ $message-color: rgba(14, 14, 14, 0.7);
 
   &__message {
     width: 224px;
-    margin-left: 30px;
+    @include adaptivePadding(margin, 14, 30, 10, 12);
+    @include adaptivePadding(padding, 7, 10, 12, 5);
     background-color: $main-color;
     padding: 17px 0 12px 22px;
     border-radius: 10px;
@@ -58,7 +59,7 @@ $message-color: rgba(14, 14, 14, 0.7);
 
     &-user {
       width: 224px;
-      margin-left: 23%;
+      margin-top: 15px;
       background-color: $main-color;
       padding: 17px 0 12px 22px;
       border-radius: 10px;
@@ -120,7 +121,7 @@ $message-color: rgba(14, 14, 14, 0.7);
     color: rgba(14, 14, 14, 0.5);
     position: absolute;
     top: 102%;
-    left: 60%;
+    left: 52%;
 
     &_hidden {
       display: none;
