@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import ChatLogo from "../../images/icons/ChatLogo.svg";
 import "./DialogItem.scss";
 
 function DialogItem(props) {
+  useEffect(() => {
+    props.calculateMessageHeight();
+  }, [props]);
   return (
     <section
+      ref={props.messageRef}
       className={` ${
         props.name === "moderator" ? "dialogItem" : "dialogItem dialogItem_user"
       } `}
