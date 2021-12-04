@@ -173,6 +173,7 @@ const App = () => {
               }`}
               onClick={toggleChatOpened}
             >
+              <div className="button__chat-newMessages"></div>
               <button className="chat-button"></button>
             </div>
           )}

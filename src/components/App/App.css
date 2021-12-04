@@ -144,3 +144,18 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.button__chat-newMessages {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 31px;
+  height: 31px;
+  background-color: #a827c7;
+  border: 3px solid #0e0e0e;
+  border-radius: 50%;
+}
+
+.button__chat-newMessages_hidden {
+  display: none;
+}
