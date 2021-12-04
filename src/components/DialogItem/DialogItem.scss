@@ -11,7 +11,7 @@ $message-color: rgba(14, 14, 14, 0.7);
   position: relative;
 
   &_user {
-    margin-left: 20%;
+    margin-left: 35%;
   }
 
   &__avatar-container {
@@ -124,76 +124,6 @@ $message-color: rgba(14, 14, 14, 0.7);
 
     &_hidden {
       display: none;
-    }
-  }
-}
-
-@media screen and (max-width: 374px) {
-  .dialogItem {
-    margin-left: 0;
-    margin-top: 20px;
-
-    &__read {
-      margin-left: 15%;
-    }
-
-    &_user {
-      margin-left: 3%;
-    }
-  }
-}
-
-@media screen and (min-width: 375px) and (max-width: 424px) {
-  .dialogItem {
-    &__read {
-      margin-left: 15%;
-    }
-    &_user {
-      margin-left: 15%;
-    }
-  }
-}
-
-@media screen and (min-width: 425px) and (max-width: 767px) {
-  .dialogItem {
-    &__read {
-      margin-left: 15%;
-    }
-    &_user {
-      margin-left: 20%;
-    }
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1900px) {
-  .dialogItem {
-    &__read {
-      margin-left: 15%;
-    }
-    &_user {
-      margin-left: 25%;
-    }
-  }
-}
-
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .dialogItem {
-    &__read {
-      margin-left: 15%;
-    }
-    &_user {
-      margin-left: 25%;
-    }
-  }
-}
-
-@media screen and (min-width: 1440px) and (max-width: 1900px) {
-  .dialogItem {
-    &__read {
-      margin-left: 15%;
-    }
-    &_user {
-      margin-left: 25%;
     }
   }
 }

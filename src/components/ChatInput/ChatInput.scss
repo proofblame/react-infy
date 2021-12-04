@@ -52,10 +52,3 @@ $main-color: #f2f2f2;
     }
   }
 }
-
-@media screen and (min-width: 320px) and (max-width: 767px) {
-  .chat-form__submit {
-    margin-top: 0;
-    margin-left: 3px;
-  }
-}
