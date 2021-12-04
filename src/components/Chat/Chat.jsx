@@ -34,6 +34,7 @@ function Chat(props) {
       addMessage(e);
     }
   };
+
   return (
     <section className={props.chatIsOpened ? "chat" : "chat_isHidden"}>
       <div className="chat__container">

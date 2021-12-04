@@ -24,6 +24,10 @@ $main-color: #f2f2f2;
     max-height: 50px;
     overflow-y: hidden;
 
+    &:focus::-webkit-input-placeholder {
+      opacity: 0.3;
+    }
+
     &::-webkit-input-placeholder {
       font-style: normal;
       font-weight: normal;
