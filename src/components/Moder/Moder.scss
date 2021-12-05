@@ -280,7 +280,8 @@ button {
 
   &__chat {
     flex: 1 0 auto;
-    height: 940px;
+    display: flex;
+    flex-direction: column;
     @include adaptive(width, 495, 320);
   }
 
@@ -319,6 +320,7 @@ button {
   }
 
   &__chat-message-list {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     @include adaptive(row-gap, 56, 19);
@@ -329,18 +331,20 @@ button {
 
   &__chat-form-answer {
     display: flex;
+    flex-direction: column;
     align-items: center;
     background: $bgColor_1;
-    height: 72px;
   }
   &__chat-form-area {
+    width: 100%;
     background: none;
     border: none;
     resize: none;
-    &::placeholder {
-      display: flex;
-      align-items: center;
-    }
+    color: rgba(255, 255, 255, 0.34);
+    outline: none;
+    -moz-appearance: none;
+    overflow: auto;
+    padding: 30px;
   }
   &__chat-form-send-button {
   }

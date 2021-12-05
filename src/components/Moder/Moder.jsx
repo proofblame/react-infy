@@ -315,7 +315,7 @@ const Moder = () => {
             </ul>
 
             <form className="moderation__chat-form-answer">
-              <textarea className="moderation__chat-form-area" type="text" placeholder="Написать сообщение..." />
+              <textarea rows="1" className="moderation__chat-form-area" type="text" placeholder="Написать сообщение..." />
               <button lassName="moderation__chat-form-send-button" type="submit"> </button>
             </form>
 
