@@ -1,79 +1,8 @@
-@mixin adaptive($value, $pcSize, $mobSize) {
-  #{$value}: #{$pcSize + px};
+@import './mixins.scss';
 
-  @media screen and (max-width: #{$breakPoint + px}) {
-    $addSize: $pcSize - $mobSize;
-    $maxWidth: $maxWidth - 320;
-    #{$value}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
-  }
-}
-@mixin adaptivePadding($value, $topBottomPC, $rightLeftPC, $topBottomMB, $rightLeftMB) {
-  #{$value}-top: #{$topBottomPC + px};
-  #{$value}-bottom: #{$topBottomPC + px};
-  #{$value}-right: #{$rightLeftPC + px};
-  #{$value}-left: #{$rightLeftPC + px};
-
-  @media screen and (max-width: #{$breakPoint + px}) {
-    $addSizeTopBottom: $topBottomPC - $topBottomMB;
-    $addSizeRightLeft: $rightLeftPC - $rightLeftMB;
-    $maxWidth: $maxWidth - 320;
-    #{$value}-top: calc(#{$topBottomMB + px} + #{$addSizeTopBottom} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
-    #{$value}-bottom: calc(#{$topBottomMB + px} + #{$addSizeTopBottom} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
-    #{$value}-right: calc(#{$rightLeftMB + px} + #{$addSizeRightLeft} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
-    #{$value}-left: calc(#{$rightLeftMB + px} + #{$addSizeRightLeft} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
-  }
-}
-
-$maxWidth: 1920;
-$minWidth: 320;
-$breakPoint: $maxWidth - 0.2;
-
-$bgColor_1: #0e0e0e;
-$bgColor_2: #202020;
-$bgColor_3: #2f2f2f;
-$bgColor_4: rgba(255, 255, 255, 0.8);
-
-$textColor_1: #ffffff;
-$textColor_2: #202020;
-$textColor_3: #000000;
-$textColor_4: #999999;
-
-$scrollBG: #2b2b2b;
-$thumbBG: #3e3e3e;
-// $heightHeader: ;
-// $heightBody: ;
 button {
   padding: 0;
   margin: 0;
-}
-
-%fontSizeTitle {
-  @include adaptive(font-size, 48, 20);
-  @include adaptive(line-height, 48, 21);
-}
-%fontSizeNumbers {
-  @include adaptive(font-size, 24, 18);
-  @include adaptive(line-height, 37, 27);
-}
-%fontSizeSubtitle {
-  @include adaptive(font-size, 24, 10);
-  @include adaptive(line-height, 37, 15);
-}
-%fontSizeText {
-  @include adaptive(font-size, 24, 9);
-  @include adaptive(line-height, 37, 15);
-}
-%fontSizeTableTitle {
-  @include adaptive(font-size, 20, 12);
-  @include adaptive(line-height, 31, 18);
-}
-%fontSizeMessageAuthor {
-  @include adaptive(font-size, 18, 14);
-  @include adaptive(line-height, 18, 14);
-}
-%fontSizeMessageText {
-  @include adaptive(font-size, 14, 10);
-  @include adaptive(line-height, 14, 10);
 }
 
 .moderation {
@@ -91,6 +20,7 @@ button {
   &__wrapper {
     width: 100%;
     max-width: #{$maxWidth}px;
+    position: relative;
   }
 
   &__header {
@@ -134,6 +64,7 @@ button {
     flex-direction: column;
     background: $bgColor_2;
     box-shadow: 20px 20px 100px rgba(14, 14, 14, 0.48);
+    display: none;
   }
 
   &__aside-service-list {
@@ -161,194 +92,8 @@ button {
       height: 100%;
     }
   }
-
-  &__table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    @include adaptivePadding(padding, 50, 50, 0, 0);
-  }
-
-  &__table-header {
-    display: flex;
-    align-items: center;
-    background: $bgColor_4;
-    @include adaptivePadding(padding, 14, 40, 14, 20);
-    @include adaptive(margin-bottom, 25, 0);
-  }
-
-  &__table-filter {
-    flex: 1 1 100%;
-    display: flex;
-    align-items: center;
-    @include adaptive(column-gap, 65, 25);
-    @extend %fontSizeTableTitle;
-  }
-
-  &__table-filter-title {
-    font-weight: bold;
-    color: $textColor_3;
-    opacity: 0.5;
-  }
-  &__table-filter-params {
-    display: flex;
-    align-items: center;
-    @include adaptive(column-gap, 35, 18);
-  }
-  &__table-filter-param {
-    display: flex;
-    align-items: center;
-    color: $textColor_3;
-    opacity: 0.5;
-    &_selected {
-      opacity: initial;
-    }
-  }
-  &__table-filter-button {
-    background: none;
-    cursor: pointer;
-    border: none;
-    &:hover {
-      opacity: 0.5;
-    }
-    &:active {
-      opacity: 0.8;
-    }
-  }
-  &__table-filter-status {
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
-  }
-  &__table-filter-subtitle {
-  }
-  &__table-filter-select {
-    background: none;
-    border: none;
-  }
-
-  &__table-body {
-    overflow-y: auto;
-    @include adaptive(margin-bottom, 15, 10);
-    &::-webkit-scrollbar {
-      @include adaptive(width, 21, 10);
-      background-color: $scrollBG;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: $thumbBG;
-    }
-  }
-
-  &__table-subtitle-row {
-    width: 100%;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(4, 1fr);
-    @include adaptive(column-gap, 30, 10);
-    @include adaptivePadding(padding, 23, 40, 15, 20);
-    color: $textColor_1;
-    opacity: 0.5;
-    &:not(:first-of-type) {
-      cursor: pointer;
-      &:hover {
-        opacity: 0.8;
-      }
-      &:active {
-        opacity: 1;
-      }
-    }
-    &:first-of-type {
-      font-weight: bold;
-      opacity: initial;
-    }
-    &:nth-of-type(odd) {
-      background: $bgColor_3;
-    }
-    &:nth-of-type(even) {
-      background: $bgColor_2;
-    }
-  }
-  &__table-pagination {
-    align-self: flex-end;
-  }
-
-  &__table-subtitle-cell {
-  }
-
-  &__page-count {
-  }
-
-  &__chat {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    @include adaptive(width, 495, 320);
-  }
-
-  &__chat-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    @include adaptive(height, 80, 60);
-    padding: 0 22px;
-    background: $bgColor_1;
-    box-shadow: 10px 10px 200px rgba(0, 0, 0, 0.48);
-  }
-
-  &__chat-title {
-    color: $textColor_1;
-    @extend %fontSizeNumbers;
-  }
-
-  &__chat-close-button {
-    background-color: $bgColor_2;
-    background-image: url('./images/close-button.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    border: none;
-    border-radius: 100%;
-    @include adaptive(width, 35, 22);
-    @include adaptive(height, 35, 22);
-    @include adaptive(background-size, 18, 15);
-    &:hover {
-      opacity: 0.6;
-    }
-    &:active {
-      opacity: initial;
-    }
-  }
-
-  &__chat-message-list {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    @include adaptive(row-gap, 56, 19);
-    background: $bgColor_2;
-    box-shadow: -20px 4px 100px rgba(0, 0, 0, 0.48);
-    @include adaptivePadding(padding, 40, 20, 30, 20);
-  }
-
-  &__chat-form-answer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: $bgColor_1;
-  }
-  &__chat-form-area {
-    width: 100%;
-    background: none;
-    border: none;
-    resize: none;
-    color: rgba(255, 255, 255, 0.34);
-    outline: none;
-    -moz-appearance: none;
-    overflow: auto;
-    padding: 30px;
-  }
-  &__chat-form-send-button {
-  }
 }
+
 .table-filter {
   &__title {
   }
@@ -369,6 +114,11 @@ button {
   &_dark {
     color: $textColor_1;
     opacity: 0.5;
+  }
+  &_top {
+    @media screen and (max-width: 480px) {
+      display: none;
+    }
   }
 
   &__arrow {
@@ -418,76 +168,5 @@ button {
     &:active {
       opacity: 1;
     }
-  }
-}
-.message {
-  display: flex;
-  flex-direction: column;
-  $margin: 27;
-  background: $bgColor_1;
-  box-shadow: 20px 20px 200px rgba(0, 0, 0, 0.48);
-  border-radius: 10px;
-  @include adaptivePadding(padding, 24, 30, 17, 22);
-  @include adaptive(width, 315, 215);
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: $margin / 2 + px;
-    left: -$margin + px;
-    @include adaptive(width, $margin, 20);
-    @include adaptive(height, $margin, 20);
-    border: $margin / 2 + px solid transparent;
-    border-right: $margin / 2 + px solid $bgColor_1;
-    border-bottom: $margin / 2 + px solid $bgColor_1;
-  }
-  &_type {
-    &_incoming {
-      align-self: flex-start;
-      left: $margin + px;
-    }
-    &_outgoing {
-      align-self: flex-end;
-      right: $margin + px;
-      &::before {
-        left: initial;
-        right: -$margin + px;
-        transform: rotate(90deg);
-      }
-      .message__status {
-        right: 0;
-        left: initial;
-      }
-      .message__time {
-        font-size: 9px;
-        color: rgba(255, 255, 255, 0.7);
-        opacity: 0.5;
-      }
-    }
-  }
-
-  &__status {
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-  }
-
-  &__author {
-    font-weight: normal;
-    color: $textColor_1;
-    @extend %fontSizeMessageAuthor;
-    @include adaptive(margin-bottom, 14, 10);
-  }
-  &__text {
-    @extend %fontSizeMessageText;
-    color: rgba(255, 255, 255, 0.7);
-    @include adaptive(margin-bottom, 10, 5);
-  }
-  &__time {
-    font-size: 9px;
-    color: rgba(255, 255, 255, 0.7);
-    opacity: 0.5;
-    align-self: flex-end;
   }
 }

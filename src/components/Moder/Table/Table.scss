@@ -1,0 +1,87 @@
+@import '../mixins.scss';
+
+.moderation {
+  &__table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include adaptivePadding(padding, 50, 50, 0, 0);
+  }
+
+  &__table-header {
+    display: flex;
+    align-items: center;
+    background: $bgColor_4;
+    @include adaptivePadding(padding, 14, 40, 14, 20);
+    @include adaptive(margin-bottom, 25, 0);
+  }
+
+  &__table-filter {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    @include adaptive(column-gap, 65, 25);
+    @extend %fontSizeTableTitle;
+  }
+
+  &__table-filter-title {
+    font-weight: bold;
+    color: $textColor_3;
+    opacity: 0.5;
+  }
+  &__table-filter-params {
+    display: flex;
+    align-items: center;
+    @include adaptive(column-gap, 35, 18);
+  }
+  &__table-filter-param {
+    display: flex;
+    align-items: center;
+    color: $textColor_3;
+    opacity: 0.5;
+    &_selected {
+      opacity: initial;
+    }
+  }
+  &__table-filter-button {
+    background: none;
+    cursor: pointer;
+    border: none;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      opacity: 0.8;
+    }
+  }
+  &__table-filter-status {
+    display: flex;
+    column-gap: 5px;
+  }
+  &__table-filter-subtitle {
+  }
+  &__table-filter-select {
+    cursor: pointer;
+    background: none;
+    border: none;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__table-body {
+    overflow-y: auto;
+    @include adaptive(margin-bottom, 15, 10);
+    &::-webkit-scrollbar {
+      @include adaptive(width, 21, 10);
+      background-color: $scrollBG;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumbBG;
+    }
+  }
+
+  &__table-pagination {
+    align-self: flex-end;
+  }
+}

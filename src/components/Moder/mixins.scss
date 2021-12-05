@@ -1,0 +1,75 @@
+@mixin adaptive($value, $pcSize, $mobSize) {
+  #{$value}: #{$pcSize + px};
+
+  @media screen and (max-width: #{$breakPoint + px}) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    #{$value}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+  }
+}
+@mixin adaptivePadding($value, $topBottomPC, $rightLeftPC, $topBottomMB, $rightLeftMB) {
+  #{$value}-top: #{$topBottomPC + px};
+  #{$value}-bottom: #{$topBottomPC + px};
+  #{$value}-right: #{$rightLeftPC + px};
+  #{$value}-left: #{$rightLeftPC + px};
+
+  @media screen and (max-width: #{$breakPoint + px}) {
+    $addSizeTopBottom: $topBottomPC - $topBottomMB;
+    $addSizeRightLeft: $rightLeftPC - $rightLeftMB;
+    $maxWidth: $maxWidth - 320;
+    #{$value}-top: calc(#{$topBottomMB + px} + #{$addSizeTopBottom} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+    #{$value}-bottom: calc(#{$topBottomMB + px} + #{$addSizeTopBottom} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+    #{$value}-right: calc(#{$rightLeftMB + px} + #{$addSizeRightLeft} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+    #{$value}-left: calc(#{$rightLeftMB + px} + #{$addSizeRightLeft} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+  }
+}
+
+$maxWidth: 1920;
+$minWidth: 320;
+$breakPoint: $maxWidth - 0.2;
+
+$bgColor_1: #0e0e0e;
+$bgColor_2: #202020;
+$bgColor_3: #2f2f2f;
+$bgColor_4: rgba(255, 255, 255, 0.8);
+
+$textColor_1: #ffffff;
+$textColor_2: #202020;
+$textColor_3: #000000;
+$textColor_4: #999999;
+
+$scrollBG: #2b2b2b;
+$thumbBG: #3e3e3e;
+
+%fontSizeTitle {
+  @include adaptive(font-size, 48, 20);
+  @include adaptive(line-height, 48, 21);
+}
+%fontSizeNumbers {
+  @include adaptive(font-size, 24, 18);
+  @include adaptive(line-height, 37, 27);
+}
+%fontSizeSubtitle {
+  @include adaptive(font-size, 24, 10);
+  @include adaptive(line-height, 37, 15);
+}
+%fontSizeText {
+  @include adaptive(font-size, 24, 9);
+  @include adaptive(line-height, 37, 15);
+}
+%fontSizeTableTitle {
+  @include adaptive(font-size, 20, 12);
+  @include adaptive(line-height, 31, 18);
+}
+%fontSizeMessageAuthor {
+  @include adaptive(font-size, 18, 14);
+  @include adaptive(line-height, 18, 14);
+}
+%fontSizeMessageText {
+  @include adaptive(font-size, 14, 10);
+  @include adaptive(line-height, 14, 10);
+}
+%fontSizeStatus {
+  @include adaptive(font-size, 12, 9);
+  @include adaptive(line-height, 12, 9);
+}
