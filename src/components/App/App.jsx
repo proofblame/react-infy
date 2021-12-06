@@ -1,6 +1,6 @@
-import "./App.css";
+import "./App.scss";
 import React, { useState, useEffect } from "react";
-import { Switch, Route, useLocation, Link } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useDarkMode } from "../UseDarkMode/UseDarkMode";

@@ -1,3 +1,5 @@
+@import "../../mixins/mixins.scss";
+
 @keyframes pulse-inner {
   0% {
     opacity: 0;
@@ -92,8 +94,8 @@
   position: fixed;
   top: 83%;
   right: 7%;
-  width: 100px;
-  height: 100px;
+  @include adaptive(width, 100, 50);
+  @include adaptive(height, 100, 50);
   background: linear-gradient(rgba(68, 30, 120, 1), rgba(145, 77, 244, 1));
   border-radius: 50%;
   display: flex;
@@ -103,32 +105,32 @@
   z-index: 100;
   opacity: 1;
   transition: opacity 1s ease-in;
-}
 
-.button-container::before {
-  content: "";
-  position: absolute;
-  width: 115px;
-  height: 115px;
-  border: 3px solid rgba(145, 77, 244, 1);
-  border-radius: 50%;
-  animation: pulse-inner 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
-}
+  &::before {
+    content: "";
+    position: absolute;
+    @include adaptive(width, 115, 55);
+    @include adaptive(height, 115, 55);
+    border: 3px solid rgba(145, 77, 244, 1);
+    border-radius: 50%;
+    animation: pulse-inner 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
 
-.button-container::after {
-  content: "";
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  border: 3px solid rgba(110, 49, 194, 0.5);
-  border-radius: 50%;
-  animation: pulse-outer 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
-}
+  &::after {
+    content: "";
+    position: absolute;
+    @include adaptive(width, 140, 65);
+    @include adaptive(height, 140, 65);
+    border: 3px solid rgba(110, 49, 194, 0.5);
+    border-radius: 50%;
+    animation: pulse-outer 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
 
-.button-container_hidden {
-  opacity: 0;
-  transition: opacity 1s ease-in;
-  pointer-events: none;
+  &_hidden {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    pointer-events: none;
+  }
 }
 
 .chat-button {
@@ -136,9 +138,8 @@
   outline: none;
   cursor: pointer;
   background-color: transparent;
-  width: 47px;
-  height: 35px;
-
+  @include adaptive(width, 47, 25);
+  @include adaptive(height, 35, 20);
   background-image: url("../../images/icons/ChatButton.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -148,13 +149,13 @@
   position: absolute;
   top: 5px;
   right: 0;
-  width: 31px;
-  height: 31px;
+  @include adaptive(width, 31, 15);
+  @include adaptive(height, 31, 15);
   background-color: #a827c7;
   border: 3px solid #0e0e0e;
   border-radius: 50%;
-}
 
-.button__chat-newMessages_hidden {
-  display: none;
+  &_hidden {
+    display: none;
+  }
 }

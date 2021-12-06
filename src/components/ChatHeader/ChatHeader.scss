@@ -17,7 +17,7 @@ $main-color: rgba(67, 7, 114, 1);
     flex-direction: column;
     justify-content: center;
     min-width: 69px;
-    @include adaptivePadding(margin, 21, 0, 21, 8);
+    @include adaptivePadding(margin, 21, 0, 4, 8);
 
     &::after {
       position: absolute;
@@ -47,15 +47,15 @@ $main-color: rgba(67, 7, 114, 1);
 
   &__main-header {
     font-weight: bold;
-    font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-    line-height: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+    font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
     color: #fff;
     margin-bottom: 7px;
   }
 
   &__online-status {
-    font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
-    line-height: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+    font-size: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
     color: #ffffff;
     opacity: 0.8;
   }
@@ -102,5 +102,11 @@ $main-color: rgba(67, 7, 114, 1);
       left: 20%;
       background-repeat: no-repeat;
     }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chat-header {
+    height: 79px;
   }
 }

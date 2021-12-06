@@ -5,3 +5,9 @@
   overflow-x: hidden;
   padding-bottom: 37px;
 }
+
+@media screen and (max-width: 480px) {
+  .chatBody {
+    height: 81vh;
+  }
+}
