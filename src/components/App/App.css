@@ -77,7 +77,6 @@
   letter-spacing: 0.05em;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   position: relative;
 }
 .dark.app {

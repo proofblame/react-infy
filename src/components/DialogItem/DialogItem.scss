@@ -42,6 +42,7 @@ $message-color: rgba(14, 14, 14, 0.7);
     padding: 17px 0 12px 22px;
     border-radius: 10px;
     position: relative;
+    word-wrap: break-word;
 
     &::before {
       content: "";
@@ -64,6 +65,7 @@ $message-color: rgba(14, 14, 14, 0.7);
       padding: 17px 0 12px 22px;
       border-radius: 10px;
       position: relative;
+      word-wrap: break-word;
 
       &::after {
         content: "";
