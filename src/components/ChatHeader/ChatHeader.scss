@@ -9,25 +9,27 @@ $main-color: rgba(67, 7, 114, 1);
 
   &__img-container {
     position: relative;
-    width: 69px;
-    height: 69px;
+    @include adaptive(width, 66, 50);
+    @include adaptive(height, 66, 50);
     background-color: $main-color;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 69px;
-    @include adaptivePadding(margin, 21, 0, 4, 8);
+    @include adaptivePadding(margin, 29, 21, 15, 21);
 
     &::after {
       position: absolute;
       content: "";
       background-image: url("../../images/icons/ChatLogo.svg");
-      width: 100%;
-      height: 100%;
+      @include adaptive(width, 46.41, 33.45);
+      @include adaptive(height, 26, 19.74);
       object-fit: cover;
       background-repeat: no-repeat;
+      background-size: cover;
       background-position: center;
+      @include adaptivePadding(margin, 0, 10, 0, 7);
+      margin-left: 7px;
     }
   }
 
@@ -76,8 +78,10 @@ $main-color: rgba(67, 7, 114, 1);
   }
 
   &__close {
-    min-width: 32px;
-    height: 32px;
+    @include adaptive(width, 32, 23);
+    @include adaptive(height, 32, 23);
+    // min-width: 32px;
+    // height: 32px;
     background-color: $main-color;
     position: relative;
     cursor: pointer;
@@ -94,9 +98,14 @@ $main-color: rgba(67, 7, 114, 1);
     &::after {
       position: absolute;
       content: "";
-      width: 100%;
-      height: 100%;
+      @include adaptive(width, 16, 11);
+      @include adaptive(height, 16, 11);
+      // width: 100%;
+      // height: 100%;
       background-image: url("../../images/icons/CloseButton.svg");
+      background-size: cover;
+      background-position: center;
+      @include adaptivePadding(margin, 4, 0, 1, 1);
       object-fit: contain;
       top: 20%;
       left: 20%;
@@ -108,5 +117,9 @@ $main-color: rgba(67, 7, 114, 1);
 @media screen and (max-width: 480px) {
   .chat-header {
     height: 79px;
+
+    &__close::after {
+      @include adaptivePadding(margin, 21, 0, 1, 1);
+    }
   }
 }

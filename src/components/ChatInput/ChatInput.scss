@@ -14,12 +14,13 @@ $main-color: #f2f2f2;
 
   &__textarea {
     width: 80%;
+    margin-left: 0;
+    padding-left: 29px;
     height: 52px;
     border: none;
     outline: none;
     background: $main-color;
     resize: none;
-    margin-left: 3%;
     min-height: 10px;
     max-height: 50px;
     overflow-y: hidden;
@@ -35,7 +36,7 @@ $main-color: #f2f2f2;
       line-height: 14px;
       letter-spacing: 0.05em;
       color: rgba(14, 14, 14, 0.7);
-      padding: 8px 0 0 14px;
+      padding-top: 8px;
     }
   }
 
