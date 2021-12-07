@@ -52,7 +52,6 @@ const LearnPopupSlider = ({ children, defSlide, handleClosePopup }) => {
 
   const next = () => {
     customSlider.current.slickNext()
-    console.log(543)
   }
   const previous = () => {
     customSlider.current.slickPrev();

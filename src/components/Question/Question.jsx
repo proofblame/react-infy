@@ -42,18 +42,20 @@ const Question = ({
   };
 
   const answersList = answers.map((answer, index) => (
-    <Answer
-      key={question.questionNumber + index}
-      question={question}
-      answer={answer}
-      answerNumber={index}
-      updateAt={updateAt}
-      lesson={lesson}
-      state={state}
-      setState={setState}
-      page={page + 1}
+    <>
+      <Answer
+        key={question.questionNumber + index}
+        question={question}
+        answer={answer}
+        answerNumber={index}
+        updateAt={updateAt}
+        lesson={lesson}
+        state={state}
+        setState={setState}
+        page={page + 1}
 
-    />
+      />
+    </>
   ));
 
   return (
@@ -79,10 +81,13 @@ const Question = ({
         </li>
       </ul>
       {answersList}
-      {question.questionNumber === lesson.questionList.length && answerList.length === lesson.questionList.length ? (
+      {answerList.length === lesson.questionList.length && page === answerList.length - 1 ? (
+
         <button type="submit" className="link link_active question__button" onClick={(() => { console.log() })}>
           Сохранить
         </button>
+
+
       ) : (
         ""
       )}

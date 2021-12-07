@@ -121,26 +121,30 @@ const Learn = ({ checkToken }) => {
     }
   };
   const questionsList = questions.map((question, index) => (
-    <Question
-      key={index}
-      question={question}
-      answers={question.answers}
-      questions={questions}
-      updateAt={updateAt}
-      list={list}
-      lesson={lesson}
-      setModalActive={setModalActive}
-      setResult={setResult}
-      modalActive={modalActive}
-      answerList={answerList}
-      setAnswersList={setAnswersList}
-      page={index}
-      state={state}
-      setState={setState}
-      checkToken={checkToken}
-      preloaderActive={preloaderActive}
-      setPreloaderActive={setPreloaderActive}
-    />
+    <>
+      <Question
+        key={index}
+        question={question}
+        answers={question.answers}
+        questions={questions}
+        updateAt={updateAt}
+        list={list}
+        lesson={lesson}
+        setModalActive={setModalActive}
+        setResult={setResult}
+        modalActive={modalActive}
+        answerList={answerList}
+        setAnswersList={setAnswersList}
+        page={index}
+        state={state}
+        setState={setState}
+        checkToken={checkToken}
+        preloaderActive={preloaderActive}
+        setPreloaderActive={setPreloaderActive}
+      />
+
+
+    </>
   ));
 
   const lessonList = lessons.map((lesson, page) => (
