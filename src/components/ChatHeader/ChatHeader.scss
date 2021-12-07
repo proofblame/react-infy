@@ -17,7 +17,6 @@ $main-color: rgba(67, 7, 114, 1);
     flex-direction: column;
     justify-content: center;
     @include adaptivePadding(margin, 29, 0, 15, 0);
-    // @include adaptivePadding(padding, 0, 17, 0, 12);
 
     &::after {
       position: absolute;
