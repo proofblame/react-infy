@@ -40,7 +40,7 @@ $message-color: rgba(14, 14, 14, 0.7);
     width: 224px;
     @include adaptivePadding(margin, 14, 30, 5, 12);
     background-color: $main-color;
-    padding: 17px 0 12px 22px;
+    padding: 17px 11px 12px 22px;
     border-radius: 10px;
     position: relative;
     word-wrap: break-word;
@@ -63,7 +63,7 @@ $message-color: rgba(14, 14, 14, 0.7);
       @include adaptive(width, 224, 214);
       margin-top: 15px;
       background-color: $main-color;
-      padding: 17px 0 12px 22px;
+      padding: 17px 11px 12px 22px;
       border-radius: 10px;
       position: relative;
       word-wrap: break-word;
@@ -107,7 +107,7 @@ $message-color: rgba(14, 14, 14, 0.7);
       line-height: 9px;
       letter-spacing: 0.05em;
       color: $message-color;
-      margin: 6px 12px 0 79%;
+      margin: 6px 12px 0 78%;
       z-index: 103;
     }
   }
