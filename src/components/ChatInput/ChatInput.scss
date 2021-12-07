@@ -5,15 +5,15 @@ $main-color: #f2f2f2;
 .chatInput {
   background: $main-color;
   border-radius: 0px 0px 10px 10px;
-  height: 72px;
 }
 
 .chat-form {
   padding: 20px;
   display: flex;
+  justify-content: space-between;
 
   &__textarea {
-    width: 80%;
+    width: 85%;
     margin-left: 0;
     height: 52px;
     border: none;
@@ -48,8 +48,6 @@ $main-color: #f2f2f2;
     border: none;
     outline: none;
     cursor: pointer;
-    // margin-top: 10px;
-    margin-left: 10px;
 
     &:hover {
       transition: 0.5s;
