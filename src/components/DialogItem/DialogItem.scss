@@ -38,8 +38,7 @@ $message-color: rgba(14, 14, 14, 0.7);
 
   &__message {
     width: 224px;
-    @include adaptivePadding(margin, 14, 30, 10, 12);
-    // @include adaptivePadding(padding, 7, 10, 12, 5);
+    @include adaptivePadding(margin, 14, 30, 5, 12);
     background-color: $main-color;
     padding: 17px 0 12px 22px;
     border-radius: 10px;
@@ -140,5 +139,11 @@ $message-color: rgba(14, 14, 14, 0.7);
 @media screen and (min-width: 320px) and (max-width: 374px) {
   .dialogItem_user {
     margin-left: 25%;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 319px) {
+  .dialogItem_user {
+    margin-left: 40px;
   }
 }

@@ -49,30 +49,30 @@ $main-color: rgba(67, 7, 114, 1);
 
   &__main-header {
     font-weight: bold;
-    font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
-    line-height: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
+    font-size: calc(16px + (24 - 16) * ((100vw - 280px) / (1920 - 280)));
+    line-height: calc(16px + (24 - 16) * ((100vw - 280px) / (1920 - 280)));
     color: #fff;
     margin-bottom: 7px;
   }
 
   &__online-status {
-    font-size: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
-    line-height: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
+    font-size: calc(8px + (14 - 8) * ((100vw - 280px) / (1920 - 280)));
+    line-height: calc(8px + (14 - 8) * ((100vw - 280px) / (1920 - 280)));
     color: #ffffff;
     opacity: 0.8;
-  }
 
-  &__online-status-image {
-    position: relative;
+    &-image {
+      position: relative;
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background-color: rgba(0, 255, 25, 1);
-      border-radius: 50%;
-      @include adaptivePadding(margin, 4, 6, 1, 6);
+      &::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background-color: rgba(0, 255, 25, 1);
+        border-radius: 50%;
+        @include adaptivePadding(margin, 4, 6, 0, 6);
+      }
     }
   }
 
@@ -109,9 +109,19 @@ $main-color: rgba(67, 7, 114, 1);
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 320px) and (max-width: 480px) {
   .chat-header {
     height: 79px;
+
+    &__main-header {
+      font-size: 18px;
+      line-height: 18px;
+    }
+
+    &__online-status {
+      font-size: 10px;
+      line-height: 10px;
+    }
 
     &__img-container {
       margin-right: 12px;

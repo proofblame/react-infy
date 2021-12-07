@@ -41,11 +41,10 @@
     background: #fdfdfd;
     box-shadow: 0px 4px 4px rgba(240, 240, 240, 0.25);
     border-radius: 10px;
-    // top: calc(100% - 75%);
-    // right: 3%;
     bottom: 0;
     right: 0;
     z-index: 101;
+    @include adaptive(height, 655, 395);
     overflow: hidden;
     display: flex;
     flex-direction: column;
