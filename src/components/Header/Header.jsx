@@ -31,7 +31,6 @@ function Header({ themeToggler, check, onSignOut }) {
                   <Switcher themeToggler={themeToggler} check={check} />
                 </li>
                 <li className="header__item"> <Link to="/" className="header__menu-link ">О компании</Link></li>
-                <li className="header__item"> <Link to="/marketing" className="header__menu-link ">Маркетинг план</Link></li>
                 <li className="header__item"> <Link to="/roadmap" className="header__menu-link ">Дорожная карта</Link></li>
                 <li className="header__item"> <Link to="/support" className="header__menu-link ">Поддержка</Link></li>
               </ul>

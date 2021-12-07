@@ -6,7 +6,7 @@ import {
 import './Footer.css'
 import Logo from '../Logo/Logo';
 
-function Footer({onSignOut}) {
+function Footer({ onSignOut }) {
   return (
     <footer className="footer">
       <div className="container">
@@ -29,9 +29,7 @@ function Footer({onSignOut}) {
           <nav className="footer__nav">
             <ul className="menu">
               <li className="footer__item"><Link to="/react-infy" className="footer__link text text_size_normal">О компании</Link></li>
-              <li className="footer__item text text_size_normal"><Link to="/marketing" className="footer__link text text_size_normal">Маркетинг план</Link></li>
               <li className="footer__item text text_size_normal"><Link to="/roadmap" className="footer__link text text_size_normal">Дорожная карта</Link></li>
-              <li className="footer__item text text_size_normal"><Link to="/whitepaper" className="footer__link text text_size_normal">White Paper</Link></li>
               <li className="footer__item text text_size_normal"><Link to="/support" className="footer__link text text_size_normal">Поддержка</Link></li>
             </ul>
             <ul className="footer__contacts">
