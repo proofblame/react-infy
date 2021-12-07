@@ -49,30 +49,14 @@
 }
 
 @media screen and (max-width: 480px) {
-  .chat__container {
-    right: 0;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  .chat {
+    &__container {
+      border-radius: 0;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 }
-
-// @media screen and (max-width: 425px) {
-//   .chat__container {
-//     right: 6%;
-//   }
-// }
-
-// @media screen and (min-width: 350px) and (max-width: 424px) {
-//   .chat__container {
-//     right: 3%;
-//   }
-// }
-
-// @media screen and (max-width: 349px) {
-//   .chat__container {
-
-//   }
-// }

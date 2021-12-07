@@ -71,17 +71,14 @@ $main-color: rgba(67, 7, 114, 1);
       width: 8px;
       height: 8px;
       background-color: rgba(0, 255, 25, 1);
-      margin-left: 6px;
       border-radius: 50%;
-      margin-top: 4px;
+      @include adaptivePadding(margin, 4, 6, 1, 6);
     }
   }
 
   &__close {
     @include adaptive(width, 32, 23);
     @include adaptive(height, 32, 23);
-    // min-width: 32px;
-    // height: 32px;
     background-color: $main-color;
     position: relative;
     cursor: pointer;
@@ -100,12 +97,10 @@ $main-color: rgba(67, 7, 114, 1);
       content: "";
       @include adaptive(width, 16, 11);
       @include adaptive(height, 16, 11);
-      // width: 100%;
-      // height: 100%;
       background-image: url("../../images/icons/CloseButton.svg");
       background-size: cover;
       background-position: center;
-      @include adaptivePadding(margin, 4, 0, 1, 1);
+      @include adaptivePadding(margin, 4, 1.5, 0, 0);
       object-fit: contain;
       top: 20%;
       left: 20%;
@@ -117,6 +112,10 @@ $main-color: rgba(67, 7, 114, 1);
 @media screen and (max-width: 480px) {
   .chat-header {
     height: 79px;
+
+    &__img-container {
+      margin-right: 12px;
+    }
 
     &__close::after {
       @include adaptivePadding(margin, 21, 0, 1, 1);

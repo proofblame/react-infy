@@ -33,14 +33,8 @@ function DialogItem(props) {
             : "dialogItem__message-user"
         } `}
       >
-        <h2
-          className={` ${
-            props.name === "moderator"
-              ? "dialogItem__message-header"
-              : "dialogItem__message-header_hidden"
-          } `}
-        >
-          Поддержка Infinity
+        <h2 className={"dialogItem__message-header"}>
+          {props.name === "moderator" ? "Поддержка Infinity" : "Вы"}
         </h2>
         <p className="dialogItem__message-text">{props.text}</p>
         <span className="dialogItem__message-time">{props.time}</span>

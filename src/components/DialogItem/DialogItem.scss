@@ -7,8 +7,9 @@ $message-color: rgba(14, 14, 14, 0.7);
 .dialogItem {
   display: flex;
   @include adaptive(width, 290, 275);
-  @include adaptivePadding(margin, 21, 29, 10, 12);
+  @include adaptivePadding(margin, 21, 29, 19, 12);
   position: relative;
+  box-sizing: border-box;
 
   &_user {
     @include adaptive(width, 224, 214);
@@ -38,7 +39,7 @@ $message-color: rgba(14, 14, 14, 0.7);
   &__message {
     width: 224px;
     @include adaptivePadding(margin, 14, 30, 10, 12);
-    @include adaptivePadding(padding, 7, 10, 12, 5);
+    // @include adaptivePadding(padding, 7, 10, 12, 5);
     background-color: $main-color;
     padding: 17px 0 12px 22px;
     border-radius: 10px;
@@ -91,10 +92,6 @@ $message-color: rgba(14, 14, 14, 0.7);
       font-weight: normal;
       margin-bottom: 10px;
       display: block;
-
-      &_hidden {
-        display: none;
-      }
     }
 
     &-text {
@@ -126,6 +123,7 @@ $message-color: rgba(14, 14, 14, 0.7);
     position: absolute;
     top: 102%;
     left: 145px;
+    margin-top: 5px;
 
     &_hidden {
       display: none;
