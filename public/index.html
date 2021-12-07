@@ -22,6 +22,12 @@
       width: 100%;
       background: #fff;
     }
+
+    .body-wrapper {
+      width: 100vw;
+      height: 100vh; 
+      overflow: auto
+    }
   </style>
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <!--
@@ -49,6 +55,7 @@
 </head>
 
 <body>
+  <div class="body-wrapper">
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root">
     <div class="main-loader-container">
@@ -68,6 +75,7 @@
     <script src="./loader.js"></script>
     <script src="./webP.js"></script>
     <script src="./burger.js"></script>
+  </div>
 </body>
 
 </html>
