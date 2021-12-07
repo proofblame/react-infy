@@ -100,7 +100,7 @@ $main-color: rgba(67, 7, 114, 1);
       background-image: url("../../images/icons/CloseButton.svg");
       background-size: cover;
       background-position: center;
-      @include adaptivePadding(margin, 4, 1.5, 1, 1.5);
+      @include adaptivePadding(margin, 2.5, 1.7, 1.3, 1.5);
       object-fit: contain;
       top: 20%;
       left: 20%;
