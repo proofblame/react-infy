@@ -14,7 +14,6 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import RoadMap from "../RoadMap/RoadMap";
-import Marketing from "../Marketing/Marketing";
 import Privacy from "../Privacy/Privacy";
 import Policy from "../Policy/Policy";
 import Status from "../Status/Status";
@@ -185,11 +184,6 @@ const App = () => {
               loggedIn={loggedIn}
               component={RoadMap}
               path="/roadmap"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={Marketing}
-              path="/marketing"
             />
             <ProtectedRoute
               loggedIn={loggedIn}
