@@ -15,7 +15,7 @@ function WhitePaper() {
           <p className="text text_color_dark text_size_large">Термины:</p>
           <p className="text">· Infinity Corporation – название it компании.</p>
           <p className="text">· Infinity Corp – название будущего приложения в App Store и Play Market.</p>
-          <p className="text">· INFY - название собственной монеты (она же является тэг-токеном и внутренней утилитарной монетой проекта).</p>
+          <p className="text">· INFY - название собственной монеты (она же является тэг-токеном и внутренней цифровой монетой проекта).</p>
 
           <p className="text text_color_dark" style={{ fontStyle: "italic" }}>Тезисы:</p>
 
@@ -286,7 +286,7 @@ function WhitePaper() {
           <p className="text">• Мониторинг и анализ рынка;</p>
           <p className="text">• Не привлекаем инвесторов;</p>
           <p className="text">• Не берем денежные средства под доверительное управление;</p>
-          <p className="text">• Не замораживаем внутреннюю утилитарную монету;</p>
+          <p className="text">• Не замораживаем внутреннюю цифровую монету;</p>
           <p className="text">• Собрали самое эффективное и востребованное;</p>
           <p className="text">• Создаем квинтэссенцию из эффективного blockchain и полезных it продуктов
             предназначенные для персональной кибергигиены;</p>
@@ -303,7 +303,7 @@ function WhitePaper() {
 
           <p className="text text_color_dark text_size_large" style={{ textAlign: "center" }}>Техническая часть</p>
 
-          <p className="text">    Разрабатывая Infinity Blockchain, мы стремимся реализовать описанную концепцию
+          <p className="text">    Разрабатывая Infinity Corporation, мы стремимся реализовать описанную концепцию
             оптимально, с точки зрения сроков и КАЧЕСТВА. В данном разделе мы опишем часть
             структуру проекта Infinity с разделением на блоки. </p>
           <p className="text" style={{ fontStyle: "italic" }}><b>Ключевыми особенностями блокчейна являются:</b></p>
@@ -352,10 +352,10 @@ function WhitePaper() {
           <p className="text">Предоставление сервисов для передачи данных Infinity;</p>
           <p className="text">Управление распределенным защищенным хранилищем Infinity;</p>
           <p className="text">Предоставление сервисов Infinity Browser, Infinity Post.</p>
-          <p className="text" style={{ textAlign: "center" }}><b> Infinity Blockchain</b></p>
+          <p className="text" style={{ textAlign: "center" }}><b> Infinity Corporation</b></p>
           <p className="text">Информация по blockchain в скором времени будет добавлена в данный раздел.</p>
           <p className="text" style={{ fontStyle: "italic" }}><b>Адресация кошельков -</b></p>
-          <p className="text">В качестве основы Infinity Blockchain использует встроенную систему адресации кошельков
+          <p className="text">В качестве основы Infinity Corporation использует встроенную систему адресации кошельков
             , основанную - на рекомендациях BIP32, BIP43 и BIP44. Для создания приватного и публичного
             ключей и адреса кошелька будет использоваться мнемоника (seed phrase, сид фраза) из 28 слов. Первая
             возможность - это использование упрощенных 16-символьных адресов, вида INFY−XXXX−XXXX−XXXX, где X
@@ -396,8 +396,8 @@ function WhitePaper() {
             после выхода блока, будет переведена валидатору. Распределение вознаграждений по реферальной структуре и
             пересчёт статусов происходят сразу же, после каждой транзакции. В конце блока применяются обновления
             списка валидаторов.</p>
-          <p className="text"><b>Модули Infinity Blockchain</b></p>
-          <p className="text">В данном разделе краткое описание модулей, разработанных для Infinity Blockchain.
+          <p className="text"><b>Модули Infinity Corporation</b></p>
+          <p className="text">В данном разделе краткое описание модулей, разработанных для Infinity Corporation.
           </p>
           <p className="text"><b>• Bank</b></p>
           <p className="text">Представляет из себя переработанную версию стандартного модуля Cosmos SDK, отвечает за перевод
@@ -477,8 +477,8 @@ function WhitePaper() {
             любое действие на блок с определённой высотой в будущем. Все запланированные задачи выполняются в начале
             блока.</p>
           <p className="text"><b>Обновление ПО блокчейн</b></p>
-          <p className="text">Infinity Blockchain предусматривает возможность обновления своего кода. Для этого
-            используется модуль обновления Infinity Blockchain. Когда работа над обновлением завершена, его
+          <p className="text">Infinity Corporation предусматривает возможность обновления своего кода. Для этого
+            используется модуль обновления Infinity Corporation. Когда работа над обновлением завершена, его
             исходный код будет выкладывается на GitHub в репозиторий. Исполняемые файлы под различные платформы собираются из этого кода и планируем выкладывать на официальный сайт компании. Ссылки на эти файлы и их контрольные суммы записываются в файл специального формата, который выкладывается там же.</p>
           <p className="text"><b>Off-chain сервисы</b></p>
           <p className="text">Infinity VPN</p>

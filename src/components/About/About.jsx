@@ -40,7 +40,7 @@ const About = () => {
           </div>
           <div className="about__article-footer">
             <p className="about__text about__text-footer text">Собственная криптовалюта INFY была создана как
-              внутренняя утилитарная монета проекта для доступа к&nbsp;IT продуктам компании и&nbsp;выплат
+              внутренняя цифровая монета проекта для доступа к&nbsp;IT продуктам компании и&nbsp;выплат
               вознаграждений партнерской программы.</p>
           </div>
           <div className="about__graph ">

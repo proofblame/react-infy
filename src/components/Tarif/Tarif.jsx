@@ -91,46 +91,43 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
                 {isPaid ? PayedTarif() : PayTarifButton()}
 
                 <p className="text text_size_normal tarif__subtitle">
-                  Оплата тарифа активирует продукты Infinity Post, Infinity
-                  Browser, infinity incognito (компьютерная версия), даёт доступ к
-                  партнёрской программе и обучению партнёров.Стоимость тарифа
-                  составляет 990 рублей по курсу в монетах INFY.
+                  Оплата тарифа предоставляет доступ к партнерской программе.
                 </p>
                 <section className="banner__buttons wallet__buttons">
                   <div className="tarif__card">
-                    <p className="text text_size_normal tarif__text tarif__text_type_email">
-                      Безопасная электронная почта
+                    <p className="text text_size_normal">
+                      <b>Infinity Майнинг отель</b>
                     </p>
                     <button
-                      className="wallet__button link link_active"
+                      className="wallet__button link link_disabled"
                       href="/tarif"
                       disabled
                     >
-                      Скачать
+                      Скоро
                     </button>
                   </div>
                   <div className="tarif__card">
-                    <p className="text text_size_normal tarif__text tarif__text_type_browser">
-                      Защищённый браузер
+                    <p className="text text_size_normal">
+                      <b>Infinity Cloud Mining</b>
                     </p>
                     <button
-                      className="wallet__button link link_active"
+                      className="wallet__button link link_disabled"
                       href="/tarif"
                       disabled
                     >
-                      Скачать
+                      Скоро
                     </button>
                   </div>
                   <div className="tarif__card">
-                    <p className="text text_size_normal tarif__text tarif__text_type_messager">
-                      Инкогнито мессенджер
+                    <p className="text text_size_normal">
+                      <b>Infinity Travel Club</b>
                     </p>
                     <button
-                      className="wallet__button link link_active"
+                      className="wallet__button link link_disabled"
                       href="/tarif"
                       disabled
                     >
-                      Скачать
+                      Скоро
                     </button>
                   </div>
                 </section>

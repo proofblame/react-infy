@@ -31,7 +31,6 @@ function Header({ themeToggler, check, onSignOut }) {
                   <Switcher themeToggler={themeToggler} check={check} />
                 </li>
                 <li className="header__item"> <Link to="/" className="header__menu-link ">О компании</Link></li>
-                <li className="header__item"> <Link to="/roadmap" className="header__menu-link ">Дорожная карта</Link></li>
                 <li className="header__item"> <Link to="/support" className="header__menu-link ">Поддержка</Link></li>
               </ul>
               <div className="header__profile">
@@ -42,9 +41,7 @@ function Header({ themeToggler, check, onSignOut }) {
                   <option value="EN">EN</option>
                 </select> </div>
               <ul className="header__contacts contacts">
-                <li className="header__contacts-item">Общие вопросы <br /> info @infinity.network</li>
-                <li className="header__contacts-item">Партнерство/листинг <br /> partnership @infinity.network</li>
-                <li className="header__contacts-item">PR & Маркетинг <br /> pr @infinity.network</li>
+                <li className="header__contacts-item">По всем вопросам <br /> info@infy-corp.com</li>
                 <li className="header__item">
                   <Link to="/login" className="link link_active rollup" onClick={onSignOut}>Выход</Link>
                 </li>

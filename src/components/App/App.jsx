@@ -13,7 +13,6 @@ import api from "../../utils/api";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
-import RoadMap from "../RoadMap/RoadMap";
 import Privacy from "../Privacy/Privacy";
 import Policy from "../Policy/Policy";
 import Status from "../Status/Status";
@@ -179,11 +178,6 @@ const App = () => {
               component={Main}
               exact
               path="/"
-            />
-            <ProtectedRoute
-              loggedIn={loggedIn}
-              component={RoadMap}
-              path="/roadmap"
             />
             <ProtectedRoute
               loggedIn={loggedIn}

@@ -116,6 +116,12 @@ body {
   padding-left: 60px;
   position: relative;
 }
+.tarif__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
 ._no-webp .tarif__text_type_email::before {
   background-image: url(./images/mail.png);
 }

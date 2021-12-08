@@ -25,10 +25,10 @@ export default class PreviousNextMethods extends Component {
     return (
       <div>
         <div className="slider__header">
-          <h2 className="slider__title slider__title_main-page title">Infinity Blockchain</h2>
+          <h2 className="slider__title slider__title_main-page title">Экосистема Infinity</h2>
           <button
             className="slider__button button" onClick={this.previous}></button>
-          <h2 className="slider__title title">Infinity Blockchain</h2>
+          <h2 className="slider__title title">Экосистема Infinity</h2>
           <button
             className="slider__button slider__button_next button" onClick={this.next}></button>
         </div>

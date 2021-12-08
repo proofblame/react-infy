@@ -140,6 +140,7 @@ function Profile({ currentUser }) {
                 </div>
                 <div className="data__contacts">
                   <div className="data__contacts-block">
+
                     <div className="banner__subscribe">
                       <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link">
                         <div className="image image_type_telegram">
@@ -187,7 +188,6 @@ function Profile({ currentUser }) {
                       </a>
                       <a href="https://t.me/infinitynetworkchannel">
                         <p className="banner__subtext text text_size_small">
-
                           Наш новостной Telegram-канал Infinity Corporation
                         </p>
                       </a>
@@ -203,12 +203,43 @@ function Profile({ currentUser }) {
                       </a>
                       <a href="https://t.me/infy_official_exchange_bot">
                         <p className="banner__subtext text text_size_small">
-
                           Наш официальный чат-бот обменник
                         </p>
                       </a>
                     </div>
+                    <div className="banner__subscribe">
+                      <a href="https://t.me/orcaeyes_bot">
+                        <div className="image image_type_telegram">
+                          <picture>
+                            <source srcSet={telegramIcon} type="image/webp" />
+                            <img src={telegramIcon} alt="Telegram icon" />
+                          </picture>
+                        </div>
+                      </a>
+                      <a href="https://t.me/orcaeyes_bot">
+                        <p className="banner__subtext text text_size_small">
+                          Индивидуальный менеджмент вашего портфеля Orca.Eyes
+                        </p>
+                      </a>
+                    </div>
+                    <div className="banner__subscribe">
+                      <a href="https://t.me/manager_travel_club">
+                        <div className="image image_type_telegram">
+                          <picture>
+                            <source srcSet={telegramIcon} type="image/webp" />
+                            <img src={telegramIcon} alt="Telegram icon" />
+                          </picture>
+                        </div>
+                      </a>
+                      <a href="https://t.me/manager_travel_club">
+                        <p className="banner__subtext text text_size_small">
+                          Infinity Travel Club
+                        </p>
+                      </a>
+                    </div>
+
                   </div>
+
                   <div className="data__contacts-block">
                     <div className="data__contacts-wrapper">
                       <p className="text text_size_small text_color_lighter">
