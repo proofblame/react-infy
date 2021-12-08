@@ -24,7 +24,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
 
   const handleUndelegateInfy = async (amountUndel) => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken()
+    await refToken()
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -33,13 +33,14 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
         console.error(err);
       } finally {
         handleClosePopup();
+        checkToken()
       }
     }
   };
 
   const handleDelegateInfy = async (amountDel) => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken()
+    await refToken()
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -47,7 +48,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-
+        checkToken()
         handleClosePopup();
       }
     }
@@ -55,7 +56,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
 
   const handleSendInfy = async (amount, walletTo) => {
     setModalActive({ ...modalActive, preloader: true });
-    await checkToken()
+    await refToken()
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -63,7 +64,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-
+        checkToken()
         handleClosePopup();
       }
     }
