@@ -100,7 +100,7 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
                       <b>Infinity Майнинг отель</b>
                     </p>
                     <button
-                      className="wallet__button link link_disabled"
+                      className="wallet__button link link_active"
                       href="/tarif"
                       disabled
                     >
@@ -112,7 +112,7 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
                       <b>Infinity Cloud Mining</b>
                     </p>
                     <button
-                      className="wallet__button link link_disabled"
+                      className="wallet__button link link_active"
                       href="/tarif"
                       disabled
                     >
@@ -124,7 +124,7 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
                       <b>Infinity Travel Club</b>
                     </p>
                     <button
-                      className="wallet__button link link_disabled"
+                      className="wallet__button link link_active"
                       href="/tarif"
                       disabled
                     >

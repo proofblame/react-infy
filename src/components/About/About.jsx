@@ -10,9 +10,13 @@ const About = () => {
         <div className="wrapper">
           <h2 className="title">Всегда в курсе новостей!</h2>
           <div className="about__links">
-            <a href="https://www.youtube.com/channel/UCCPjoKqynKjBYnHlmXDkZhg" className="about__link link_type_telegram">You Tube</a>
+            <a href="https://www.youtube.com/channel/UCCPjoKqynKjBYnHlmXDkZhg" className="about__link link_type_telegram">YouTube</a>
             <a href="https://t.me/infinitynetworkchannel" className="about__link link_type_youtube">Telegram</a>
             <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link" className="about__link link_type_github">Instagram</a>
+
+            <a href="https://t.me/orcaeyes_bot" className="about__link labout__link link_type_telegram">Orca.Eyes</a>
+
+            <a href="https://t.me/manager_travel_club" className="about__link link_type_youtube">TravelClub</a>
           </div>
         </div>
       </div>
@@ -35,11 +39,11 @@ const About = () => {
             </div>
             <div className="wrapper">
               <p className="about__text about__text_black text">Курс INFY</p>
-              <p className="about__text about__text_black-2 text">32 рубля</p>
+              <p className="about__text about__text_black-2 text">34 рубля</p>
             </div>
           </div>
           <div className="about__article-footer">
-            <p className="about__text about__text-footer text">Собственная криптовалюта INFY была создана как
+            <p className="about__text about__text-footer text">Собственная ВЦМ INFY была создана как
               внутренняя цифровая монета проекта для доступа к&nbsp;IT продуктам компании и&nbsp;выплат
               вознаграждений партнерской программы.</p>
           </div>
@@ -107,9 +111,9 @@ const About = () => {
                     <td><s className="crossed-out">30 рублей</s></td>
                   </tr>
                   <tr>
-                    <td>№10</td>
-                    <td>03.12 - 09.12</td>
-                    <td>32 рубля</td>
+                    <td><s className="crossed-out">№10</s></td>
+                    <td><s className="crossed-out">03.12 - 09.12</s></td>
+                    <td><s className="crossed-out">32 рубля</s></td>
                   </tr>
                   <tr>
                     <td>№11</td>
@@ -123,7 +127,7 @@ const About = () => {
                   <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
                 </picture>
               </div>
-              <p className="about__table-text text">5 107 342 (51.07%) / 10 000 000 INFY</p>
+              <p className="about__table-text text">5 129 487 (51.29%) / 10 000 000 INFY</p>
             </div>
 
           </div>

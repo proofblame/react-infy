@@ -1,13 +1,10 @@
 @import url("./AboutDark.css");
 
 .about__links {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-column-gap: 60px;
-  -moz-column-gap: 60px;
   column-gap: 60px;
   margin-bottom: 88px;
+  flex-wrap: wrap;
 }
 
 .about__link {
@@ -17,7 +14,7 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  margin-bottom: 86px;
+  /* margin-bottom: 86px; */
   font-size: 40px;
   line-height: 61px;
 }
@@ -204,7 +201,7 @@
   }
 
   .about__link {
-    margin-bottom: calc(33px + 53 * ((100vw - 320px) / 1308));
+    /* margin-bottom: calc(33px + 53 * ((100vw - 320px) / 1308)); */
   }
 
   .about__link {
