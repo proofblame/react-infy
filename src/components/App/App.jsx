@@ -165,6 +165,7 @@ const App = () => {
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      <Scrolltotop />
       <div className={themeMode}>
         <Header
           themeToggler={themeToggler}
@@ -173,7 +174,7 @@ const App = () => {
         />
 
         <div className="content">
-          <Scrolltotop />
+
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}

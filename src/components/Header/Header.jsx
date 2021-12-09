@@ -32,7 +32,7 @@ function Header({ themeToggler, check, onSignOut }) {
                 <li className="header__item">
                   <Switcher themeToggler={themeToggler} check={check} />
                 </li>
-                <li className="header__item"> <Link to="/" className="header__menu-link ">О компании</Link></li>
+                <li className="header__item"> <Link to="/about" className="header__menu-link ">О компании</Link></li>
                 <li className="header__item"> <Link to="/roadmap" className="header__menu-link ">Дорожная карта</Link></li>
                 <li className="header__item"> <Link to="/support" className="header__menu-link ">Поддержка</Link></li>
               </ul>
