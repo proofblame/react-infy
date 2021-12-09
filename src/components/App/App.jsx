@@ -28,6 +28,7 @@ import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
+import RoadMap from '../RoadMap/RoadMap';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -183,6 +184,11 @@ const App = () => {
               loggedIn={loggedIn}
               component={Privacy}
               path="/privacy"
+            />
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              component={RoadMap}
+              path='/roadmap'
             />
             <ProtectedRoute
               loggedIn={loggedIn}
