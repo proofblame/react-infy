@@ -12,26 +12,23 @@ const Apps = () => {
       <div className="wrapper">
         <ul className="apps__list">
           <li className="apps__item">
-            <h3 className="apps__list-title apps__list-title_status">Meta-вселенная Infinity.<span
+            <h3 className="apps__list-title apps__list-title_delegation">Мобильное приложение Infinity
+              {/* <span
               className="apps__list-title-icons">
-              {/* <picture>
+              <picture>
                 <source srcSet={sprite + "#mobile-icon"} type="image/webp" />
                 <img src={sprite + "#mobile-icon"} alt="" />
               </picture>
               <picture>
                 <source srcSet={sprite + "#laptop-icon"} type="image/webp" />
                 <img src={sprite + "#laptop-icon"} alt="" />
-              </picture> */}
-            </span></h3>
+              </picture>
+            </span> */}
+            </h3>
             <ul className="apps__sublist">
               <li className="apps__subitem">
-                <p className="text">Полноценная цифровая вселенная для экосистемы.</p>
+                <p className="text">Мобильное приложение Infinity для скачивания в AppStore и PlayMarket, которое станет доступно после модерации и других процедур.</p>
               </li>
-              {/* <li className="apps__subitem">
-                <p className="text">Также пользователь получив статус Partner, имеет возможность
-                  подключить свою устройство к&nbsp;Node и&nbsp;получать ежедневные
-                  вознаграждения.</p>
-              </li> */}
             </ul>
           </li>
 
@@ -91,25 +88,29 @@ const Apps = () => {
             </ul>
           </li>
           <li className="apps__item">
-            <h3 className="apps__list-title apps__list-title_delegation">Мобильное приложение Infinity
-              {/* <span
+            <h3 className="apps__list-title apps__list-title_status">Meta-вселенная Infinity.<span
               className="apps__list-title-icons">
-              <picture>
+              {/* <picture>
                 <source srcSet={sprite + "#mobile-icon"} type="image/webp" />
                 <img src={sprite + "#mobile-icon"} alt="" />
               </picture>
               <picture>
                 <source srcSet={sprite + "#laptop-icon"} type="image/webp" />
                 <img src={sprite + "#laptop-icon"} alt="" />
-              </picture>
-            </span> */}
-            </h3>
+              </picture> */}
+            </span></h3>
             <ul className="apps__sublist">
               <li className="apps__subitem">
-                <p className="text">Мобильное приложение Infinity для скачивания в AppStore и PlayMarket, которое станет доступно после модерации и других процедур.</p>
+                <p className="text">Полноценная цифровая вселенная для экосистемы.</p>
               </li>
+              {/* <li className="apps__subitem">
+                <p className="text">Также пользователь получив статус Partner, имеет возможность
+                  подключить свою устройство к&nbsp;Node и&nbsp;получать ежедневные
+                  вознаграждения.</p>
+              </li> */}
             </ul>
           </li>
+
 
           <li className="apps__item">
             <h3 className="apps__list-title apps__list-title_delegation">CRM Infinity

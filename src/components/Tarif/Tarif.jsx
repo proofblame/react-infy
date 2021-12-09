@@ -121,7 +121,7 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
                   </div>
                   <div className="tarif__card">
                     <p className="text text_size_normal">
-                      <b>Infinity Travel Club</b>
+                      <b>GameHall</b>
                     </p>
                     <button
                       className="wallet__button link link_active"
