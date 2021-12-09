@@ -1,4 +1,4 @@
-@import url('./MainDark.css');
+@import url("./MainDark.css");
 
 .main {
   /* background-color: rgba(240, 240, 240, 0.1); */
@@ -9,7 +9,9 @@
   margin-bottom: 390px;
 }
 .main__slider {
-  margin-bottom: 390px;
+  margin-bottom: 280px;
+  position: relative;
+  z-index: 3;
 }
 .main__list {
   padding-top: 74px;
@@ -22,7 +24,7 @@
   z-index: 2;
 }
 .main__roadmap::before {
-  content: '';
+  content: "";
   background-image: url(../../images/icons/icons.svg#comb);
   background-repeat: no-repeat;
   background-position: center;
@@ -39,7 +41,6 @@
 .main__profile {
   margin-bottom: 42px;
 }
-
 
 @media screen and (max-width: 1627.98px) {
   .main {
@@ -66,5 +67,4 @@
   .main__profile {
     margin-bottom: calc(37px + 5 * ((100vw - 320px) / 1308));
   }
-
 }

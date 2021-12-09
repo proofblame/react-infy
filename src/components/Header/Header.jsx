@@ -15,18 +15,20 @@ function Header({ themeToggler, check, onSignOut }) {
       <header className="header">
         <div className="container">
           <div className="header__body">
-            <div className="wrapper">
-              <Link to="/" className="header__logo logo">
+            <div className="wrapper header__logo_mobile">
+              <Link to="/" className="header__logo  logo">
                 <Logo />
               </Link>
             </div>
 
-            <nav className="header__nav">
+            <nav className="header__nav ">
+              <div className="wrapper header__logo_desktop">
+                <Link to="/" className="header__logo  logo">
+                  <Logo />
+                </Link>
+              </div>
 
               <ul className="header__menu menu">
-                {
-
-                }
                 <li className="header__item">
                   <Switcher themeToggler={themeToggler} check={check} />
                 </li>
@@ -48,6 +50,7 @@ function Header({ themeToggler, check, onSignOut }) {
                 </li>
               </ul>
             </nav>
+
             <div className="header__burger"> <span></span> <span></span> <span></span> </div>
 
           </div>

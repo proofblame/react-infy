@@ -92,6 +92,7 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
 
                 <p className="text text_size_normal tarif__subtitle">
                   Оплата тарифа предоставляет доступ к партнерской программе.
+                  Стоимость тарифа составляет 490 рублей по курсу в монетах INFY.
                 </p>
                 <section className="banner__buttons wallet__buttons">
                   <div className="tarif__card">

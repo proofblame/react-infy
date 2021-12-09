@@ -10,7 +10,6 @@
   left: 0;
   right: 0;
   background-color: #fff;
-
 }
 .header__padding {
   /* margin-bottom: 200px; */
@@ -31,10 +30,9 @@
   -webkit-column-gap: 17px;
   -moz-column-gap: 17px;
   column-gap: 17px;
-
 }
 .header__body::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -50,6 +48,20 @@
   position: relative;
   z-index: 5;
 }
+.header__logo_desktop {
+  display: block;
+}
+.header__logo_mobile {
+  display: none;
+}
+@media screen and (max-width: 1070px) {
+  .header__logo_mobile {
+    display: block;
+  }
+  .header__logo_desktop {
+    display: none;
+  }
+}
 .header__nav {
   /* position: relative; */
   z-index: 4;
@@ -59,9 +71,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: space-between;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   -webkit-column-gap: 17px;
@@ -128,7 +139,7 @@
   opacity: 0.8;
 }
 .header__profile-link::before {
-  content: '';
+  content: "";
   position: absolute;
   border-radius: 50%;
   background-image: url(./images/profileButtonLight.png);

@@ -21,11 +21,11 @@ function Main() {
                 <ul className="slider__sublist">
                   <li className="slider__subitem">
                     <p className="slider__number">1</p>
-                    <p className="slider__text text">Внутренняя цифровая монета INFY.</p>
+                    <p className="slider__text text">Ультрасовременный защищенный сайт (официальный сайт компании), в котором интегрирован личный кабинет с необходимыми инструментами для взаимодействия с компанией.</p>
                   </li>
                   <li className="slider__subitem">
                     <p className="slider__number">2</p>
-                    <p className="slider__text text">Транзакции между кошельками до 30 секунд с комиссией 0.03%, но не более 25 INFY.</p>
+                    <p className="slider__text text">Внутренняя Цифровая монета INFY - создана специально для доступа к реферальной программе и к продуктам компании.</p>
                   </li>
                 </ul>
               </li>
@@ -33,13 +33,46 @@ function Main() {
                 <ul className="slider__sublist">
                   <li className="slider__subitem">
                     <p className="slider__number">3</p>
-                    <p className="slider__text text">Встроенная система поощерения активным агентам/инвесторам за использование и
-                      продвижение продуктов компании.</p>
+                    <p className="slider__text text">Infinity Wallet - горячий моно-кошелек, открывающий доступ к экосистеме Infinity.</p>
                   </li>
                   <li className="slider__subitem">
                     <p className="slider__number">4</p>
-                    <p className="slider__text text">ВЦМ INFY была создана для доступа к продуктам компании и начисления
-                      вознаграждений в партнерской программе.</p>
+                    <p className="slider__text text">Партнерская программа из двенадцать уровней и система лояльности при достижении определенных результатов в компании.</p>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="slider__item">
+                <ul className="slider__sublist">
+                  <li className="slider__subitem">
+                    <p className="slider__number">5</p>
+                    <p className="slider__text text">Система внутренних статусов компании, разработанная для мотивации активных Инвесторов и Агентов компании.</p>
+                  </li>
+                  <li className="slider__subitem">
+                    <p className="slider__number">6</p>
+                    <p className="slider__text text">Продукты для b2b сектора. На сегодняшний день компания Infinity разрабатывает несколько продуктов для сектора b2b в направлении CRM и Software.</p>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="slider__item">
+                <ul className="slider__sublist">
+                  <li className="slider__subitem">
+                    <p className="slider__number">7</p>
+                    <p className="slider__text text">Сервис Orca.Eyes — система была специально разработана для экосистемы Infinity, которая позволяет уже сегодня научится грамотно обращаться с личными средствами прививая финансовую дисциплину и финансовую грамотность. В Сервисе используются только проверенные и надежные инструменты.</p>
+                  </li>
+                  <li className="slider__subitem">
+                    <p className="slider__number">8</p>
+                    <p className="slider__text text">Infinity Майнинг отель и Infinity Cloud Mining. У компании есть специализированные помещения для деятельности майнинга/майнеров, и Компания предоставляет место(а) в одном, из которых заключив договор можно разместить практически любого желающего установки и оборудования для добычи цифровых активов. Компания создает и поддерживают максимально комфортные условия для работы майнинг установок пользователей.</p>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="slider__item">
+                <ul className="slider__sublist">
+                  <li className="slider__subitem">
+                    <p className="slider__number">9</p>
+                    <p className="slider__text text">Infinity Travel Club. Это сообщество энтузиастов, практикующих нетривиальный нетворкинг в путешествиях. На сегодняшний день компания уже разработала два направления и готова предложить туры на озеро Байкал и в Адыгею по системе все включено. Оплата за туры производится ВЦМ INFY. В ближайшее время будут добавлены и другие направления туров.</p>
                   </li>
                 </ul>
               </li>
@@ -51,7 +84,7 @@ function Main() {
       <About />
       <div className="container">
         <div className="wrapper">
-          <RoadMapBlock />
+
         </div>
       </div>
     </main>

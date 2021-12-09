@@ -29,6 +29,7 @@ import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
 import RoadMap from '../RoadMap/RoadMap';
+import AboutMore from '../AboutMore/AboutMore'
 
 const App = () => {
   const { pathname } = useLocation();
@@ -174,6 +175,12 @@ const App = () => {
         <div className="content">
           <Scrolltotop />
           <Switch>
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              component={AboutMore}
+              exact
+              path="/about"
+            />
             <ProtectedRoute
               loggedIn={loggedIn}
               component={Main}

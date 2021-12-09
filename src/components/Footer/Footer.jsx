@@ -28,7 +28,7 @@ function Footer({ onSignOut }) {
           </div>
           <nav className="footer__nav">
             <ul className="menu">
-              <li className="footer__item"><Link to="/" className="footer__link text text_size_normal">О компании</Link></li>
+              <li className="footer__item"><Link to="/about" className="footer__link text text_size_normal">О компании</Link></li>
               <li className="footer__item"><Link to="/roadmap" className="footer__link text text_size_normal">Дорожная карта</Link></li>
               <li className="footer__item text text_size_normal"><Link to="/support" className="footer__link text text_size_normal">Поддержка</Link></li>
             </ul>
