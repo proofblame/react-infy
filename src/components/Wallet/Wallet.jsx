@@ -11,13 +11,17 @@ import WalletSlider from "./Slider/Slider";
 import api from "../../utils/api";
 import Preloader from "../Preloader/Preloader";
 
-function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, setCurentTransactions, pageCount, setPageCount, page, setPage }) {
-
-
-
-
-
-
+function Wallet({
+  currentUser,
+  currentWallet,
+  checkToken,
+  currentTransactions,
+  setCurentTransactions,
+  pageCount,
+  setPageCount,
+  page,
+  setPage,
+}) {
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
@@ -42,7 +46,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
         // await getTansactions();
         setModalActive({ ...modalActive, preloader: false });
         handleClosePopup();
-        setPage(0)
+        setPage(0);
       }
     }
   };
@@ -60,7 +64,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
         // await getTansactions();
         setModalActive({ ...modalActive, preloader: false });
         handleClosePopup();
-        setPage(0)
+        setPage(0);
       }
     }
   };
@@ -78,15 +82,14 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
         // await getTansactions();
         setModalActive({ ...modalActive, preloader: false });
         handleClosePopup();
-        setPage(0)
+        setPage(0);
       }
     }
-
   };
 
   useEffect(() => {
     document.title = "Wallet";
-    checkToken()
+    checkToken();
   }, [page, modalActive]);
 
   // const getTansactions = async () => {
@@ -110,17 +113,17 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
     const { name } = e.target;
     setModalActive({
       ...modalActive,
-      [name]: true
-    })
-  }
+      [name]: true,
+    });
+  };
   const handleClosePopup = () => {
     setModalActive({
       ...modalActive,
       transferPopup: false,
       delegationPopup: false,
       undelegationPopup: false,
-    })
-  }
+    });
+  };
 
   const nextPage = () => {
     if (page >= 0 && page < pageCount - 1) {
@@ -290,8 +293,8 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
             </button>
             <button
               className="wallet__button link link_active open-undelegatePopup open"
-              name='undelegationPopup'
-              type='button'
+              name="undelegationPopup"
+              type="button"
               onClick={handleOpenPopup}
             >
               Вывод из стейкинга
