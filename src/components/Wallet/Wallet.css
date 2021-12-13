@@ -90,6 +90,23 @@
   align-self: flex-end;
 }
 
+.card {
+  margin-bottom: 2px;
+}
+
+.cards::-webkit-scrollbar {
+  /* width: 4px; */
+  height: 4px;
+  background-color: #aa91d8;
+  border-radius: 5px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  width: 15%;
+  background-color: #6139a4;
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 673px) {
   .wallet__button {
     width: 280px;
