@@ -70,7 +70,7 @@ const Banner = () => {
               </p>
             </a>
           </div>
-          <div className="banner__subscribe">
+          {/* <div className="banner__subscribe">
             <a href="https://t.me/infy_official_exchange_bot">
               <div className="image image_type_telegram">
                 <picture>
@@ -84,7 +84,7 @@ const Banner = () => {
                 Наш официальный чат-бот обменник
               </p>
             </a>
-          </div>
+          </div> */}
           <div className="banner__subscribe">
             <a href="https://t.me/orcaeyes_bot">
               <div className="image image_type_telegram">

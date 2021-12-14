@@ -131,10 +131,10 @@ const About = () => {
             </div>
 
           </div>
-          <div className="about__link">
+          {/* <div className="about__link">
             <a href="https://t.me/infy_official_exchange_bot" className="link link_active">Купить
               INFY</a>
-          </div>
+          </div> */}
         </div>
 
       </div>

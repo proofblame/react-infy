@@ -251,6 +251,11 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
             </div>
           </section>
           <section className="banner__buttons wallet__buttons">
+            <div className="about__link">
+              <a className="wallet__button link link_disabled" >Купить
+                INFY
+              </a>
+            </div>
             <button
               className="wallet__button link link_active open-transferPopup open"
               name="transferPopup"
