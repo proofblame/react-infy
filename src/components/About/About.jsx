@@ -116,18 +116,22 @@ const About = () => {
                     <td><s className="crossed-out">32 рубля</s></td>
                   </tr>
                   <tr>
-                    <td>№11</td>
-                    <td>10.12 - 16.12</td>
-                    <td>34 рубля</td>
+                    <td><s className="crossed-out">№11</s></td>
+                    <td><s className="crossed-out">10.12 - 16.12</s></td>
+                    <td><s className="crossed-out">34 рубля</s></td>
                   </tr>
                 </tbody>
               </table>
-              <div className="about__table-image">
+              {/* <div className="about__table-image">
                 <picture>
                   <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
                 </picture>
-              </div>
-              <p className="about__table-text text">5 129 487 (51.29%) / 10 000 000 INFY</p>
+              </div> */}
+              {/* <p className="about__table-text text">5 349 945 (53.49%) / 10 000 000 INFY</p> */}
+              <p className="text" style={{ textAlign: 'justify', paddingTop: '30px' }}>
+                За закрытый листинг мы продали - 5 349 945 (53.49%) INFY. <br />
+                На данный момент производится сжигание остатков начальной эмиссии.
+              </p>
             </div>
 
           </div>
