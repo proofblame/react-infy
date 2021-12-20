@@ -163,7 +163,7 @@ function Profile({ currentUser }) {
                       </a>
                     </div>
                     <div className="banner__subscribe">
-                      <a href="https://t.me/joinchat/wwwWBc4QguIzMGUy">
+                      <a href="https://t.me/+AgachQvHWCM3MzZi">
                         <div className="image image_type_telegram">
                           <picture>
                             <source srcSet={telegramIcon} type="image/webp" />
@@ -171,14 +171,14 @@ function Profile({ currentUser }) {
                           </picture>
                         </div>
                       </a>
-                      <a href="https://t.me/joinchat/wwwWBc4QguIzMGUy">
+                      <a href="https://t.me/+AgachQvHWCM3MzZi">
                         <p className="banner__subtext text text_size_small">
                           Наш общий чат в Telegram Infinity Corporation
                         </p>
                       </a>
                     </div>
                     <div className="banner__subscribe">
-                      <a href="https://t.me/infinitynetworkchannel">
+                      <a href="https://t.me/infinitycorporationchannel">
                         <div className="image image_type_telegram">
                           <picture>
                             <source srcSet={telegramIcon} type="image/webp" />
@@ -186,7 +186,7 @@ function Profile({ currentUser }) {
                           </picture>
                         </div>
                       </a>
-                      <a href="https://t.me/infinitynetworkchannel">
+                      <a href="https://t.me/infinitycorporationchannel">
                         <p className="banner__subtext text text_size_small">
                           Наш новостной Telegram-канал Infinity Corporation
                         </p>

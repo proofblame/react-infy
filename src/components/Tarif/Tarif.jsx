@@ -146,7 +146,7 @@ function Tarif({ checkToken, refToken, tarif, setTarif, isPaid, setIsPaid }) {
             <p className="form__text-subtitle">
               Стоимость тарифа:&nbsp;
               <span className="form__text-subtitle_count">
-                {tarif.tarifCostCoins} INFY (990 &#x20bd;)
+                {tarif.tarifCostCoins} INFY (490 &#x20bd;)
               </span>
             </p>
             <p className="form__text-subtitle">

@@ -11,7 +11,7 @@ const About = () => {
           <h2 className="title">Всегда в курсе новостей!</h2>
           <div className="about__links">
             <a href="https://www.youtube.com/channel/UCCPjoKqynKjBYnHlmXDkZhg" className="about__link link_type_telegram">YouTube</a>
-            <a href="https://t.me/infinitynetworkchannel" className="about__link link_type_youtube">Telegram</a>
+            <a href="https://t.me/infinitycorporationchannel" className="about__link link_type_youtube">Telegram</a>
             <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link" className="about__link link_type_github">Instagram</a>
 
             <a href="https://t.me/orcaeyes_bot" className="about__link labout__link link_type_telegram">Orca.Eyes</a>
