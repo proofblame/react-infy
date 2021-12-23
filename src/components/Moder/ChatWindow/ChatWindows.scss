@@ -1,0 +1,215 @@
+@import '../mixins.scss';
+
+.moderation {
+  &__chat {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    @include adaptive(width, 495, 320);
+    position: fixed;
+    right: -100%;
+    bottom: 0;
+    top: 0;
+    transition: right 0.5s linear;
+    &_visible {
+      right: 0%;
+      position: relative;
+    }
+    @media screen and (max-width: 1023.98px) {
+      top: -100%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      &_visible {
+        position: fixed;
+        top: 0;
+      }
+    }
+  }
+
+  &__chat-header {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    @include adaptive(height, 80, 60);
+    padding: 0 22px;
+    background: $bgColor_1;
+    box-shadow: 10px 10px 200px rgba(0, 0, 0, 0.48);
+  }
+  &__chat-title {
+    color: $textColor_1;
+    @extend %fontSizeNumbers;
+  }
+
+  &__chat-close-button {
+    background-color: $bgColor_2;
+    background-image: url('../images/close-button.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 100%;
+    @include adaptive(width, 35, 22);
+    @include adaptive(height, 35, 22);
+    @include adaptive(background-size, 18, 15);
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: initial;
+    }
+  }
+
+  &__chat-message-list {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: auto;
+    @include adaptive(row-gap, 56, 19);
+    background: $bgColor_2;
+    box-shadow: -20px 4px 100px rgba(0, 0, 0, 0.48);
+    @include adaptivePadding(padding, 40, 10, 30, 10);
+
+    &::-webkit-scrollbar {
+      @include adaptive(width, 21, 10);
+      background-color: $scrollBG;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumbBG;
+    }
+  }
+
+  &__chat-form-answer {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    column-gap: 10px;
+    justify-content: space-between;
+    background: $bgColor_1;
+    padding: 20px;
+  }
+  &__chat-form-area {
+    width: 100%;
+    height: 100%;
+    min-height: 50px;
+    box-sizing: border-box;
+    background: none;
+    border: none;
+    resize: vertical;
+    color: rgba(255, 255, 255, 0.34);
+    outline: none;
+    -moz-appearance: none;
+    &:focus::placeholder {
+      opacity: 0.3;
+    }
+    &::-webkit-scrollbar {
+      @include adaptive(width, 21, 10);
+      background-color: $scrollBG;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumbBG;
+    }
+    &::-webkit-resizer {
+      background: $thumbBG;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  &__chat-form-send-button {
+    border: none;
+    background: none;
+    background-image: url('../images/send-button.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: initial;
+    }
+  }
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  $margin: 27;
+  background: $bgColor_1;
+  box-shadow: 20px 20px 200px rgba(0, 0, 0, 0.48);
+  border-radius: 10px;
+  @include adaptivePadding(padding, 24, 22, 17, 22);
+  @include adaptive(padding-bottom, 15, 5);
+  @include adaptive(margin-bottom, 15, 5);
+  @include adaptive(width, 315, 215);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: $margin / 2 + px;
+    left: -$margin + px;
+    @include adaptive(width, $margin, 20);
+    @include adaptive(height, $margin, 20);
+    border: $margin / 2 + px solid transparent;
+    border-right: $margin / 2 + px solid $bgColor_1;
+    border-bottom: $margin / 2 + px solid $bgColor_1;
+  }
+  &_type {
+    &_incoming {
+      align-self: flex-start;
+      left: $margin + px;
+    }
+    &_outgoing {
+      align-self: flex-end;
+      right: $margin + px;
+      &::before {
+        left: initial;
+        right: -$margin + px;
+        transform: rotate(90deg);
+      }
+      .message__status {
+        right: 0;
+        left: initial;
+      }
+      .message__time {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.7);
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+    @include adaptive(bottom, -25, -15);
+    left: 0;
+    color: rgba(255, 255, 255, 0.5);
+    @extend %fontSizeStatus;
+  }
+
+  &__author {
+    font-weight: normal;
+    color: $textColor_1;
+    @extend %fontSizeMessageAuthor;
+    @include adaptive(margin-bottom, 14, 10);
+  }
+  &__text {
+    word-break: break-all;
+    @extend %fontSizeMessageText;
+    color: rgba(255, 255, 255, 0.7);
+    @include adaptive(margin-bottom, 10, 5);
+  }
+  &__time {
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 0.5;
+    align-self: flex-end;
+  }
+}

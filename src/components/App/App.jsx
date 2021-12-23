@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 
@@ -30,6 +30,7 @@ import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
 import RoadMap from '../RoadMap/RoadMap';
 import AboutMore from '../AboutMore/AboutMore'
+import Moder from '../Moder/Moder';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -272,11 +273,16 @@ const App = () => {
             <Route path="/registration">
               <Registration loggedIn={loggedIn} onRegister={handleRegister} />
             </Route>
+            <Route path="/moder">
+              <Moder />
+            </Route>
             <Route component={Error} path="*" />
           </Switch>
+
         </div>
 
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
+
         <Modal active={modalActive.preloader}>
           <Preloader />
         </Modal>
