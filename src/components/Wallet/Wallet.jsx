@@ -10,21 +10,33 @@ import Transaction from "../Transaction/Transaction";
 import WalletSlider from "./Slider/Slider";
 import api from "../../utils/api";
 import Preloader from "../Preloader/Preloader";
+import infoIcon from "./images/info-icon.svg";
+import ReactTooltip from "react-tooltip";
 
-function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, setCurentTransactions, pageCount, setPageCount, page, setPage, refToken }) {
-
+function Wallet({
+  currentUser,
+  currentWallet,
+  checkToken,
+  currentTransactions,
+  setCurentTransactions,
+  pageCount,
+  setPageCount,
+  page,
+  setPage,
+  refToken,
+}) {
   const [textCopy, setTextCopy] = useState("text-copy");
   const [modalActive, setModalActive] = useState({
     transferPopup: false,
     delegationPopup: false,
     undelegationPopup: false,
     preloader: false,
+    info: false,
   });
-
 
   const handleUndelegateInfy = async (amountUndel) => {
     setModalActive({ ...modalActive, preloader: true });
-    await refToken()
+    await refToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -33,14 +45,14 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
         console.error(err);
       } finally {
         handleClosePopup();
-        checkToken()
+        checkToken();
       }
     }
   };
 
   const handleDelegateInfy = async (amountDel) => {
     setModalActive({ ...modalActive, preloader: true });
-    await refToken()
+    await refToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -48,7 +60,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-        checkToken()
+        checkToken();
         handleClosePopup();
       }
     }
@@ -56,7 +68,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
 
   const handleSendInfy = async (amount, walletTo) => {
     setModalActive({ ...modalActive, preloader: true });
-    await refToken()
+    await refToken();
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       try {
@@ -64,40 +76,40 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       } catch (err) {
         console.error(err);
       } finally {
-        checkToken()
+        checkToken();
         handleClosePopup();
       }
     }
-
   };
 
   useEffect(() => {
     document.title = "Wallet";
     setModalActive({ ...modalActive, preloader: true });
-    checkToken()
-      .then(() => {
-        setModalActive({ ...modalActive, preloader: false });
-      })
+    checkToken().then(() => {
+      setModalActive({ ...modalActive, preloader: false });
+    });
   }, [page]);
 
-
   const handleOpenPopup = (e) => {
+    document.body.style.overflow = "hidden";
     const { name } = e.target;
     setModalActive({
       ...modalActive,
-      [name]: true
-    })
-  }
+      [name]: true,
+    });
+  };
   const handleClosePopup = () => {
+    document.body.style.overflow = "auto";
     setModalActive({
       ...modalActive,
       transferPopup: false,
       delegationPopup: false,
       undelegationPopup: false,
-      preloader: false
-    })
-    setPage(0)
-  }
+      preloader: false,
+      info: false,
+    });
+    setPage(0);
+  };
 
   const nextPage = () => {
     if (page >= 0 && page < pageCount - 1) {
@@ -152,26 +164,38 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
               <p className="text text_size_small text_color_lighter">
                 Адрес кошелька
               </p>
-              <div className="data__contacts-wrapper">
-                <p
-                  className="data__text text text_size_medium text_color_normal"
-                  id="number-wallet"
-                >
-                  {currentUser.wallet}
-                </p>
-                <div className="data__copy-button">
-                  <img
-                    src={copyIcon}
-                    alt="Копировать адрес кошелька"
-                    className="data__copy"
-                    onClick={handleCopyClick}
-                  />
-                  <span
-                    className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}
+              <div className="data__contacts-wrapper data__info-wrapper">
+                <div className="data__contacts-wrapper">
+                  <p
+                    className="data__text text text_size_medium text_color_normal"
+                    id="number-wallet"
                   >
-                    Скопировано
-                  </span>
+                    {currentUser.wallet}
+                  </p>
+                  <div className="data__copy-button">
+                    <img
+                      src={copyIcon}
+                      alt="Копировать адрес кошелька"
+                      className="data__copy"
+                      onClick={handleCopyClick}
+                    />
+                    <span
+                      className={`text text_size_small text_color_lighter data__copy-result ${textCopy}`}
+                    >
+                      Скопировано
+                    </span>
+                  </div>
                 </div>
+                <button
+                  className="data__info data__text text text_size_medium text_color_lighter"
+                  name="info"
+                  onClick={handleOpenPopup}
+                >
+                  Вознаграждение
+                  <span className="material-icons-info">
+                    <img src={infoIcon} alt="0" />
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -252,9 +276,7 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
           </section>
           <section className="banner__buttons wallet__buttons">
             <div className="about__link">
-              <a className="wallet__button link link_disabled" >Купить
-                INFY
-              </a>
+              <a className="wallet__button link link_disabled">Купить INFY</a>
             </div>
             <button
               className="wallet__button link link_active open-transferPopup open"
@@ -272,8 +294,8 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
             </button>
             <button
               className="wallet__button link link_active open-undelegatePopup open"
-              name='undelegationPopup'
-              type='button'
+              name="undelegationPopup"
+              type="button"
               onClick={handleOpenPopup}
             >
               Вывод из стейкинга
@@ -331,6 +353,48 @@ function Wallet({ currentUser, currentWallet, checkToken, currentTransactions, s
       <Modal active={modalActive.preloader}>
         <Preloader />
       </Modal>
+      <div
+        id="modal-1"
+        className={
+          modalActive.info ? `modal-overlay-new active` : `modal-overlay-new`
+        }
+      >
+        <div className={modalActive.info ? `modal-new active` : `modal-new`}>
+          <header className="modal-header-new">
+
+            <button
+              type="button"
+              className="close-button"
+              onClick={handleClosePopup}
+            ></button>
+          </header>
+          <div className="modal-body-new">
+            <p className='text text_size_medium text_color_normal'>
+              Заработок по уровням в партнерской программе при оплате тарифа (оплата тарифа составляет 490 рублей): <br />
+              <br />
+              1 уровень: 30% с оплаты тарифа;<br />
+              2 уровень: 25% с оплаты тарифа;<br />
+              3 уровень: 20% с оплаты тарифа;<br />
+              4 уровень: 15% с оплаты тарифа;<br />
+              5 уровень: 10% с оплаты тарифа.<br />
+              <br />
+              (В общей сложности все 100% от оплаты тарифов будет распределяться в качестве вознаграждений партнерской сети до 5 уровней в глубину).<br />
+              Заработок по уровням в партнерской программе (награждение с делегирования приглашенных):<br />
+              <br />
+              Заработок по уровням:<br />
+              1 уровень: 5% от делегируемой суммы;<br />
+              2 уровень: 4% от делегируемой суммы;<br />
+              3 уровень: 3% от делегируемой суммы;<br />
+              4 уровень: 2% от делегируемой суммы;<br />
+              5 уровень: 1% от делегируемой суммы.<br />
+              <br />
+              В общей сложности взимается только 5%, которые распределятся 1 уровню в качестве вознаграждений по партнерской программе. А вознаграждения 2, 3, 4 и 5 уровней сервис распределяет автоматически (вознаграждение от компании). <br /><br />
+              Итого 15% распределятся по уровням, а 10% из них сервис начисляет автоматически за активность (% от зарегистрированных пользователей, без приглашения).
+
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

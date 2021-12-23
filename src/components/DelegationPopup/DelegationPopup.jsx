@@ -36,7 +36,15 @@ function DelegationPopup({ onClose, currentWallet, handleDelegateInfy }) {
             value={data.amountDel}
             onChange={onChange}
           />
-          <p className="form__text-subtitle">
+
+          <p className="text text_size_x-small">
+            Итоговая сумма: {parseFloat((data.amountDel * 0.95).toFixed(5))}
+          </p>
+          <p className="text text_size_x-small">
+            Комиссия: {parseFloat((data.amountDel * 0.05).toFixed(5))}
+          </p>
+
+          <p className="text text_size_x-small">
             В делегировании:
             <span className="form__text-subtitle_count">
               {currentWallet.delegateBalance}.{currentWallet.delegateBalanceAfter}
@@ -44,14 +52,19 @@ function DelegationPopup({ onClose, currentWallet, handleDelegateInfy }) {
           </p>
         </fieldset>
 
+        <br />
+        <br />
+
+
+
         <fieldset className="form__fieldset">
-          <p className="text text_size_x-small">
-            Ваше вознаграждение зависит от размера делегированного стейка: <br />
-            Делегируете 1 – 1999 INFY, вознаграждение + 23%/мес.<br />
-            Делегируете 2 000 – 19 999 INFY, вознаграждение + 25%/мес.<br />
-            Делегируете 20 000 – 149 999 INFY, вознаграждение + 27%/мес.<br />
-            Делегируете 150 000 и выше INFY, вознаграждение + 29%/мес <br /> <br />
-          </p>
+          <p className="text text_size_x-small" style={{ whiteSpace: 'pre-wrap' }}>
+            Единый % на все время существования компании без понижений: <br />
+            1 - 1 999 INFY, вознаграждение - 8%/мес.<br />
+            2 000 - 19 999 INFY, вознаграждение - 10%/мес, (+250 INFY бонус).<br />
+            20 000 - 149 999 INFY, вознаграждение - 12%/мес, (+500 INFY бонус).<br />
+            150 000 INFY и выше, вознаграждение    - 14%/мес, (+1000 INFY бонус).<br />
+          </p> <br />
 
         </fieldset>
 

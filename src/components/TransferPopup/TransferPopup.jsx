@@ -59,10 +59,15 @@ function TransferPopup({
             value={data.amount}
             onChange={onChange}
           />
-          <p className="form__text-subtitle">
-            Комиссия: <span className="form__text-subtitle_count">0.3%</span>
+
+          <p className="text text_size_x-small">
+            Итоговая сумма: {parseFloat((data.amount * 0.997).toFixed(5))}
+          </p>
+          <p className="text text_size_x-small">
+            Комиссия: {parseFloat((data.amount * 0.003).toFixed(5))}
           </p>
         </fieldset>
+        <br />
         <input
           type="submit"
           className="form__input form__button form__button_active"

@@ -168,7 +168,7 @@ const Tree = ({ checkToken }) => {
               Смотреть список
             </button>
           </div>
-          <div className="tree__card">
+          {/* <div className="tree__card">
             <p className="tree__title">
               Линия 6 /
               <span className="tree__title_category">
@@ -279,7 +279,7 @@ const Tree = ({ checkToken }) => {
             >
               Смотреть список
             </button>
-          </div>
+          </div> */}
         </div>
       </section>
       <Modal active={modalActive.treePopup}>

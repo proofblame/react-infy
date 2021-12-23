@@ -1,4 +1,6 @@
-@import url('./WalletDark.css');
+@import url("./WalletDark.css");
+@import url("./modal-new.css");
+
 .wallet__delegations {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -59,7 +61,6 @@
   padding: 17px 19px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-
 }
 .wallet__slider-title {
   font-weight: 400;

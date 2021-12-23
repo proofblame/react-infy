@@ -1,17 +1,23 @@
-@import url('./StatusDark.css');
+@import url("./StatusDark.css");
 .grid {
   width: 100%;
 }
 .grid__list {
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-column-gap: 193px;
   -moz-column-gap: 193px;
   column-gap: 193px;
+}
+
+@media screen and (max-width: 767px) {
+  .grid__list {
+    grid-template-columns: repeat(1, minmax(280px, 1fr));
+  }
 }
 .grid__item {
   display: -webkit-box;
@@ -86,5 +92,4 @@
   .grid__text-item {
     line-height: calc(18px + 9 * ((100vw - 320px) / 1308));
   }
-
 }
