@@ -28,15 +28,9 @@ import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
-<<<<<<< HEAD
 import RoadMap from "../RoadMap/RoadMap";
 import AboutMore from "../AboutMore/AboutMore";
 import Moder from "../Moder/Moder";
-=======
-import RoadMap from '../RoadMap/RoadMap';
-import AboutMore from '../AboutMore/AboutMore'
-import Moder from '../Moder/Moder';
->>>>>>> 12e7c9b4cccfb9436e549d7197f98f0734c0aadb
 import Chat from "../Chat/Chat";
 
 const App = () => {
@@ -54,15 +48,7 @@ const App = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [tarif, setTarif] = useState(null);
-<<<<<<< HEAD
   const [isPaid, setIsPaid] = useState(false);
-=======
-  const [isPaid, setIsPaid] = useState(false)
-
-
-
-
->>>>>>> 12e7c9b4cccfb9436e549d7197f98f0734c0aadb
   const [chatIsOpened, setChatIsOpened] = useState(false);
 
   const themeMode = theme === "light" ? "app" : "dark app";
@@ -180,12 +166,9 @@ const App = () => {
     localStorage.removeItem("expires");
   }
 
-<<<<<<< HEAD
   function toggleChatOpened() {
     setChatIsOpened(!chatIsOpened);
   }
-=======
->>>>>>> 12e7c9b4cccfb9436e549d7197f98f0734c0aadb
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -210,23 +193,6 @@ const App = () => {
           </div>
         )}
         <div className="content">
-<<<<<<< HEAD
-=======
-
-          <Scrolltotop />
-          {chatIsOpened ? (
-            ""
-          ) : (
-            <div
-              className={`${loggedIn ? "button-container" : "button-container_hidden"
-                }`}
-              onClick={toggleChatOpened}
-            >
-              <div className="button__chat-newMessages"></div>
-              <button className="chat-button"></button>
-            </div>
-          )}
->>>>>>> 12e7c9b4cccfb9436e549d7197f98f0734c0aadb
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
