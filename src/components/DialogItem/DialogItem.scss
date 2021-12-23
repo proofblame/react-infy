@@ -1,0 +1,149 @@
+@import "../../mixins/mixins.scss";
+@import "./DialogItemDark.scss";
+
+$main-color: #f2f2f2;
+$message-color: rgba(14, 14, 14, 0.7);
+
+.dialogItem {
+  display: flex;
+  @include adaptive(width, 290, 275);
+  @include adaptivePadding(margin, 21, 29, 19, 12);
+  position: relative;
+  box-sizing: border-box;
+
+  &_user {
+    @include adaptive(width, 224, 214);
+    @include adaptivePadding(margin, 21, 172, 10, 66);
+  }
+
+  &__avatar-container {
+    width: 34px;
+    height: 34px;
+    background-color: $main-color;
+    border-radius: 50%;
+    align-self: flex-end;
+    display: block;
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__avatar {
+    object-fit: contain;
+    margin: 1px 0 0 3px;
+    width: 80%;
+    height: 100%;
+  }
+
+  &__message {
+    width: 224px;
+    @include adaptivePadding(margin, 14, 30, 5, 12);
+    background-color: $main-color;
+    padding: 17px 11px 12px 22px;
+    border-radius: 10px;
+    position: relative;
+    word-wrap: break-word;
+
+    &::before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 24px solid $main-color;
+      border-right: 12px solid transparent;
+      border-top: 12px solid $main-color;
+      border-bottom: 20px solid transparent;
+      left: -8px;
+      bottom: -9px;
+      transform: rotate(40deg);
+    }
+
+    &-user {
+      @include adaptive(width, 224, 214);
+      margin-top: 15px;
+      background-color: $main-color;
+      padding: 17px 11px 12px 22px;
+      border-radius: 10px;
+      position: relative;
+      word-wrap: break-word;
+
+      &::after {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 24px solid $main-color;
+        border-right: 12px solid transparent;
+        border-top: 12px solid $main-color;
+        border-bottom: 20px solid transparent;
+        @include adaptive(left, 205, 195);
+        bottom: -9px;
+        transform: rotate(40deg);
+      }
+    }
+
+    &-header {
+      color: rgba(74, 40, 127, 1);
+      font-size: 14px;
+      line-height: 14px;
+      font-style: normal;
+      font-weight: normal;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    &-text {
+      font-style: normal;
+      font-weight: normal;
+      font-size: calc(10px + (12 - 10) * ((100vw - 320px) / (1920 - 320)));
+      line-height: calc(10px + (12 - 10) * ((100vw - 320px) / (1920 - 320)));
+      letter-spacing: 0.05em;
+      color: $message-color;
+    }
+
+    &-time {
+      font-size: 9px;
+      line-height: 9px;
+      letter-spacing: 0.05em;
+      color: $message-color;
+      margin: 6px 12px 0 78%;
+      z-index: 103;
+    }
+  }
+
+  &__read {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 10px;
+    letter-spacing: 0.05em;
+    color: rgba(14, 14, 14, 0.5);
+    position: absolute;
+    top: 102%;
+    left: 165px;
+    margin-top: 5px;
+
+    &_hidden {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 480px) {
+  .dialogItem_user {
+    margin-left: 35%;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .dialogItem_user {
+    margin-left: 25%;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 319px) {
+  .dialogItem_user {
+    margin-left: 40px;
+  }
+}

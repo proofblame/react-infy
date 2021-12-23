@@ -1,0 +1,13 @@
+@import "./ChatBodyDark.scss";
+
+.chatBody {
+  height: 392px;
+  overflow-x: hidden;
+  flex: 1 1 80%;
+}
+
+@media screen and (max-width: 480px) {
+  .chatBody {
+    height: calc(100% - 146px);
+  }
+}
