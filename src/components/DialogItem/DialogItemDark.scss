@@ -1,0 +1,41 @@
+$main-background-color-dark: #202020;
+$main-text-color-dark: #fff;
+
+.dark .dialogItem {
+  &__avatar-container {
+    background-color: #1e1e1e;
+  }
+
+  &__message {
+    background-color: $main-background-color-dark;
+
+    &-header {
+      color: $main-text-color-dark;
+    }
+
+    &-text,
+    &-time {
+      color: $main-text-color-dark;
+      opacity: 0.7;
+    }
+
+    &-user {
+      background-color: $main-background-color-dark;
+
+      &::after {
+        border-left-color: $main-background-color-dark;
+        border-top-color: $main-background-color-dark;
+      }
+    }
+
+    &::before {
+      border-left-color: $main-background-color-dark;
+      border-top-color: $main-background-color-dark;
+    }
+  }
+
+  &__read {
+    color: $main-text-color-dark;
+    opacity: 0.7;
+  }
+}

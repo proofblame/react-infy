@@ -1,3 +1,7 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Footer.css";
+import Logo from "../Logo/Logo";
 
 import React from 'react';
 import {
@@ -55,10 +59,16 @@ function Footer({ onSignOut }) {
               </div>
             </div>
             <div className="footer__politics">
-              <Link to="/privacy" className="footer__status text text_size_small">
+              <Link
+                to="/privacy"
+                className="footer__status text text_size_small"
+              >
                 Пользовательское соглашение
               </Link>
-              <Link to="/policy" className="footer__status text text_size_small">
+              <Link
+                to="/policy"
+                className="footer__status text text_size_small"
+              >
                 Политика конфиденциальности
               </Link>
             </div>
@@ -75,8 +85,16 @@ function Footer({ onSignOut }) {
           </nav>
           <div className="wrapper">
             <div className="footer__buttons">
-              <Link to="/profile" className="footer__button link link_active">Профиль</Link>
-              <Link to="/login" className="footer__button link" onClick={onSignOut}>Выход</Link>
+              <Link to="/profile" className="footer__button link link_active">
+                Профиль
+              </Link>
+              <Link
+                to="/login"
+                className="footer__button link"
+                onClick={onSignOut}
+              >
+                Выход
+              </Link>
             </div>
           </div>
         </footer>
@@ -88,4 +106,4 @@ function Footer({ onSignOut }) {
   )
 }
 
-export default Footer
+export default Footer;

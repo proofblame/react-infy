@@ -31,6 +31,7 @@ import Scrolltotop from "../Scrolltotop/Scrolltotop";
 import RoadMap from '../RoadMap/RoadMap';
 import AboutMore from '../AboutMore/AboutMore'
 import Moder from '../Moder/Moder';
+import Chat from "../Chat/Chat";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -52,6 +53,7 @@ const App = () => {
 
 
 
+  const [chatIsOpened, setChatIsOpened] = useState(false);
 
   const themeMode = theme === "light" ? "app" : "dark app";
 
@@ -67,6 +69,10 @@ const App = () => {
   useEffect(() => {
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
+
+  function toggleChatOpened() {
+    setChatIsOpened(!chatIsOpened);
+  }
 
   // Обновляем токен
   // Получаем данные пользователя, кошелька, команды.
@@ -163,6 +169,7 @@ const App = () => {
     localStorage.removeItem("rt");
     localStorage.removeItem("expires");
   }
+
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -176,6 +183,19 @@ const App = () => {
 
         <div className="content">
 
+          <Scrolltotop />
+          {chatIsOpened ? (
+            ""
+          ) : (
+            <div
+              className={`${loggedIn ? "button-container" : "button-container_hidden"
+                }`}
+              onClick={toggleChatOpened}
+            >
+              <div className="button__chat-newMessages"></div>
+              <button className="chat-button"></button>
+            </div>
+          )}
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -280,7 +300,7 @@ const App = () => {
           </Switch>
 
         </div>
-
+        <Chat chatIsOpened={chatIsOpened} toggleChatOpened={toggleChatOpened} />
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
 
         <Modal active={modalActive.preloader}>
