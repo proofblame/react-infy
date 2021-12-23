@@ -250,7 +250,7 @@ const Learn = ({ checkToken }) => {
                             </b>
                           </p>
                           <br />
-                          <a className="link link_active" href='./pdf/certificate.png' target='_blank'>
+                          <a className="link link_active" href='./pdf/certificate.pdf' target='_blank'>
                             Скачать сертификат
                           </a>
 
