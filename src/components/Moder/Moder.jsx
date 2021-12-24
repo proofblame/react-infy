@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './Moder.scss'
 import constants from './constants.js'
 import complaints from './complaints'
-
+import SockJsClient from 'react-stomp';
 import ChatWindow from './ChatWindow/ChatWindow'
 import Table from './Table/Table'
 
 const Moder = () => {
 
-
+  // let ws = new WebSocket('ws://api.infy-corp.com/test-ws');
 
   const { title, img } = constants;
   const [stateWindow, setStateWindow] = useState(true)
@@ -37,6 +37,33 @@ const Moder = () => {
     // TODO: доделать.
   }
 
+  let clientRef = useRef();
+
+  const [socketState, setSocketState] = useState([])
+
+  const onMessageReceive = (msg, topic) => {
+    setSocketState([...socketState, msg]);
+    console.log(msg)
+  }
+
+  useEffect(() => {
+    // sendMessage()
+  }, [])
+
+  const obj = {
+    message: "test", messageOwner: "test"
+  }
+  // debugger
+  const sendMessage = (msg, selfMsg) => {
+    try {
+      clientRef.sendMessage("/app/ws", JSON.stringify(obj));
+      console.log('успех')
+    } catch (e) {
+      console.log('сук')
+    }
+  }
+
+
 
   return (
     <section className="moderation">
@@ -64,7 +91,7 @@ const Moder = () => {
               </li>
             </ul>
           </aside>
-
+          <button onClick={sendMessage}>SEND MESSAGE</button>
           <Table
             onOpen={handleOpenPopup}
             complaintsList={complaintsList}
@@ -81,7 +108,14 @@ const Moder = () => {
         </main>
 
       </div>
+      <SockJsClient
+        url='http://api.infy-corp.com/test-ws'
+        topics={['/topic/greetings']}
+        // onConnect={() => { setSocketState({ clientConnected: true }) }}
+        onMessage={onMessageReceive}
+        ref={(client) => { clientRef = client }}
 
+      />
     </section>
   )
 }

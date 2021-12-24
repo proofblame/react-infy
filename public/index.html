@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <meta http-equiv="Cache-Control" content="no-cache">
-
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
   <style>
     .main-loader-container {
       min-height: 98vh;
@@ -26,7 +26,7 @@
 
     .body-wrapper {
       width: 100vw;
-      height: 100vh; 
+      height: 100vh;
       overflow: auto
     }
   </style>
@@ -57,12 +57,12 @@
 
 <body>
   <div class="body-wrapper">
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root">
-    <div class="main-loader-container">
-      <canvas id="canvas" width="800" height="500"></canvas>
-    </div>
-    <!--
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="main-loader-container">
+        <canvas id="canvas" width="800" height="500"></canvas>
+      </div>
+      <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -73,10 +73,10 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <script src="./loader.js"></script>
-    <script src="./webP.js"></script>
-    <script src="./burger.js"></script>
-  </div>
+      <script src="./loader.js"></script>
+      <script src="./webP.js"></script>
+      <script src="./burger.js"></script>
+    </div>
 </body>
 
 </html>

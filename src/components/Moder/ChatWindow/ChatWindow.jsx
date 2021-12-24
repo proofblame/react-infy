@@ -1,9 +1,48 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import SockJsClient from 'react-stomp';
 import './ChatWindows.scss'
+import SockJS from 'sockjs-client'
 
 const ChatWindow = ({ onClose, stateWindow, currentComplaint, onSubmit }) => {
+  const [socketState, setSocketState] = useState({
+    clientConnected: false,
+    messages: []
+  })
   useEffect(() => {
   }, [currentComplaint])
+
+
+  let clientRef = useRef();
+
+
+
+  // debugger
+  // const sock = new SockJS('http://api.infy-corp.com/test-ws');
+  // sock.onopen = function () {
+  //   console.log('open');
+  //   sock.send('test');
+  // };
+
+  // sock.onmessage = function (e) {
+  //   console.log('message', e.data);
+  //   sock.close();
+  // };
+
+  // sock.onclose = function () {
+  //   console.log('close');
+  // };
+
+
+
+
+
+  const onMessageReceive = (msg, topic) => {
+    setSocketState(socketState => ({
+      messages: [...socketState.messages, msg]
+    }));
+  }
+
+
 
 
   const messageList = currentComplaint.history.map((message) => (
@@ -17,6 +56,8 @@ const ChatWindow = ({ onClose, stateWindow, currentComplaint, onSubmit }) => {
       </p>
       <p className="message__time">{message.time}</p>
       <p className="message__status">{message.viewed ? 'Прочитано' : ''}</p>
+
+
     </li>
   ))
 
@@ -32,9 +73,8 @@ const ChatWindow = ({ onClose, stateWindow, currentComplaint, onSubmit }) => {
 
         {messageList}
 
+
       </ul>
-
-
       <form onSubmit={onSubmit} className="moderation__chat-form-answer">
         <textarea className="moderation__chat-form-area" type="text" placeholder="Написать сообщение..." />
         <button className="moderation__chat-form-send-button" type="submit"> </button>
