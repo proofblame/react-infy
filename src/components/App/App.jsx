@@ -28,9 +28,9 @@ import Learn from "../Learn/Learn";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 import Scrolltotop from "../Scrolltotop/Scrolltotop";
-import RoadMap from '../RoadMap/RoadMap';
-import AboutMore from '../AboutMore/AboutMore'
-import Moder from '../Moder/Moder';
+import RoadMap from "../RoadMap/RoadMap";
+import AboutMore from "../AboutMore/AboutMore";
+import Moder from "../Moder/Moder";
 import Chat from "../Chat/Chat";
 
 const App = () => {
@@ -48,11 +48,7 @@ const App = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [tarif, setTarif] = useState(null);
-  const [isPaid, setIsPaid] = useState(false)
-
-
-
-
+  const [isPaid, setIsPaid] = useState(false);
   const [chatIsOpened, setChatIsOpened] = useState(false);
 
   const themeMode = theme === "light" ? "app" : "dark app";
@@ -98,18 +94,18 @@ const App = () => {
           localStorage.setItem("jwt", res.access_token);
           localStorage.setItem("rt", res.refresh_token);
           localStorage.setItem("expires", res.expires_at);
-          return true
+          return true;
         } catch (err) {
           console.error(err);
-          return false
+          return false;
         }
       } else {
-        return true
+        return true;
       }
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
   const getData = async () => {
     // setModalActive({ preloader: true });
@@ -121,7 +117,7 @@ const App = () => {
           api.getWalletInfo(jwt),
           api.getTeamInfo(jwt),
           api.getTransactionsInfo(jwt, page, 8),
-          api.getTarif(jwt)
+          api.getTarif(jwt),
         ]);
         setCurrentUser(user);
         setCurentWallet(wallet);
@@ -129,7 +125,7 @@ const App = () => {
         setCurentTransactions(transactions.histories);
         setPageCount(transactions.pageCount);
         setTarif(tarif);
-        setIsPaid(tarif.isPaid)
+        setIsPaid(tarif.isPaid);
       } catch (err) {
         console.error(err);
         setLoggedIn(false);
@@ -170,6 +166,9 @@ const App = () => {
     localStorage.removeItem("expires");
   }
 
+  function toggleChatOpened() {
+    setChatIsOpened(!chatIsOpened);
+  }
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -180,22 +179,20 @@ const App = () => {
           check={check}
           onSignOut={handleSignout}
         />
-
+        {chatIsOpened ? (
+          ""
+        ) : (
+          <div
+            className={`${
+              loggedIn ? "button-container" : "button-container_hidden"
+            }`}
+            onClick={toggleChatOpened}
+          >
+            <div className="button__chat-newMessages"></div>
+            <button className="chat-button"></button>
+          </div>
+        )}
         <div className="content">
-
-          <Scrolltotop />
-          {chatIsOpened ? (
-            ""
-          ) : (
-            <div
-              className={`${loggedIn ? "button-container" : "button-container_hidden"
-                }`}
-              onClick={toggleChatOpened}
-            >
-              <div className="button__chat-newMessages"></div>
-              <button className="chat-button"></button>
-            </div>
-          )}
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -217,7 +214,7 @@ const App = () => {
             <ProtectedRoute
               loggedIn={loggedIn}
               component={RoadMap}
-              path='/roadmap'
+              path="/roadmap"
             />
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -298,7 +295,6 @@ const App = () => {
             </Route>
             <Route component={Error} path="*" />
           </Switch>
-
         </div>
         <Chat chatIsOpened={chatIsOpened} toggleChatOpened={toggleChatOpened} />
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
