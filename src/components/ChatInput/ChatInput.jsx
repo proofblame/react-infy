@@ -1,6 +1,6 @@
 import "./ChatInput.scss";
 
-function ChatInput({ addMessage, addMessageByEnter, textRef }) {
+function ChatInput({ addMessage, addMessageByEnter, textRef, sendMessage }) {
   return (
     <section className="chatInput">
       <form action="" className="chat-form">
@@ -15,7 +15,7 @@ function ChatInput({ addMessage, addMessageByEnter, textRef }) {
 
         <button
           type="submit"
-          onClick={addMessage}
+          onClick={sendMessage}
           className="chat-form__submit"
         ></button>
       </form>

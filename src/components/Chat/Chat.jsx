@@ -1,14 +1,15 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import SockJsClient from "react-stomp";
 import ChatBody from "../ChatBody/ChatBody";
 import ChatHeader from "../ChatHeader/ChatHeader";
 import ChatInput from "../ChatInput/ChatInput";
 import messages from "../../utils/messages";
 import "./Chat.scss";
-import { useState } from "react";
 
 function Chat(props) {
   const textRef = useRef();
   const [newMessage, setNewMessage] = useState(messages);
+  const [socketState, setSocketState] = useState([]);
 
   const addMessage = (e) => {
     e.preventDefault();
@@ -31,7 +32,28 @@ function Chat(props) {
 
   const addMessageByEnter = (e) => {
     if (e.key === "Enter") {
-      addMessage(e);
+      sendMessage(e);
+    }
+  };
+
+  let clientRef = useRef();
+
+  const onMessageReceive = (msg, topic) => {
+    setSocketState([...socketState, msg]);
+  };
+  console.log(socketState);
+  const obj = {
+    message: "test",
+    messageOwner: "test",
+  };
+
+  const sendMessage = (e, msg, selfMsg) => {
+    e.preventDefault();
+    try {
+      clientRef.sendMessage("/app/ws", JSON.stringify(obj));
+      console.log("success");
+    } catch (e) {
+      console.log("fail");
     }
   };
 
@@ -44,8 +66,18 @@ function Chat(props) {
           addMessage={addMessage}
           textRef={textRef}
           addMessageByEnter={addMessageByEnter}
+          sendMessage={sendMessage}
         />
       </div>
+      <SockJsClient
+        url="http://api.infy-corp.com/test-ws"
+        topics={["/topic/greetings"]}
+        // onConnect={() => { setSocketState({ clientConnected: true }) }}
+        onMessage={onMessageReceive}
+        ref={(client) => {
+          clientRef = client;
+        }}
+      />
     </section>
   );
 }

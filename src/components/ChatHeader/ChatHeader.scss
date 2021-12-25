@@ -21,7 +21,7 @@ $main-color: rgba(67, 7, 114, 1);
     &::after {
       position: absolute;
       content: "";
-      background-image: url("../../images/icons/ChatLogo.svg");
+      background-image: url("./../images/icons/ChatLogo.svg");
       @include adaptive(width, 46.41, 33.45);
       @include adaptive(height, 26, 19.74);
       object-fit: cover;
@@ -78,7 +78,7 @@ $main-color: rgba(67, 7, 114, 1);
 
   &__close {
     background-color: $main-color;
-    background-image: url("../../images/icons/CloseButton.svg");
+    background-image: URL("../../images/icons/CloseButton.svg");
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
