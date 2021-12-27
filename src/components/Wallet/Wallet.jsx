@@ -361,7 +361,6 @@ function Wallet({
       >
         <div className={modalActive.info ? `modal-new active` : `modal-new`}>
           <header className="modal-header-new">
-
             <button
               type="button"
               className="close-button"
