@@ -1,0 +1,34 @@
+@import '../mixins.scss';
+
+.moderation {
+  &__table-subtitle-row {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    @include adaptive(column-gap, 30, 10);
+    @include adaptivePadding(padding, 23, 40, 15, 20);
+    @extend %fontSizeText;
+    color: $textColor_1;
+    opacity: 0.5;
+    &:not(:first-of-type) {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+      &:active {
+        opacity: 1;
+      }
+    }
+    &:first-of-type {
+      font-weight: bold;
+      opacity: initial;
+    }
+    &:nth-of-type(odd) {
+      background: $bgColor_3;
+    }
+    &:nth-of-type(even) {
+      background: $bgColor_2;
+    }
+  }
+}

@@ -1,0 +1,172 @@
+@import './mixins.scss';
+
+button {
+  padding: 0;
+  margin: 0;
+}
+
+.moderation {
+  font-family: 'HelveticaNeueCyr', sans-serif;
+  font-style: normal;
+  letter-spacing: 0.05em;
+  width: 100%;
+  background: $bgColor_2;
+  box-shadow: 20px 20px 100px rgba(14, 14, 14, 0.48);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+
+  &__wrapper {
+    width: 100%;
+    max-width: #{$maxWidth}px;
+    position: relative;
+  }
+
+  &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $bgColor_1;
+    box-shadow: 20px 20px 100px rgba(0, 0, 0, 0.48);
+    @include adaptivePadding(padding, 0, 45, 0, 20);
+    @include adaptive(height, 150, 85);
+  }
+
+  &__header-title {
+    font-weight: normal;
+    @extend %fontSizeTitle;
+    color: $textColor_1;
+  }
+
+  &__header-burger {
+  }
+
+  &__main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    @include adaptive(margin-top, 150, 85);
+    background: $bgColor_2;
+  }
+
+  &__aside {
+    @include adaptive(width, 133, 0);
+    display: flex;
+    flex-direction: column;
+    background: $bgColor_2;
+    box-shadow: 20px 20px 100px rgba(14, 14, 14, 0.48);
+    display: none;
+  }
+
+  &__aside-service-list {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__aside-service-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include adaptive(height, 94, 0);
+    background: $bgColor_3;
+  }
+
+  &__aside-image {
+    @include adaptive(width, 42, 10);
+    @include adaptive(height, 42, 10);
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.table-filter {
+  &__title {
+  }
+
+  &__params {
+  }
+}
+.table-filter-param {
+}
+.table-filter-title {
+}
+.table-filter-select {
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  @include adaptive(column-gap, 14, 17);
+  &_dark {
+    color: $textColor_1;
+    opacity: 0.5;
+  }
+  &_top {
+    @media screen and (max-width: 480px) {
+      display: none;
+    }
+  }
+
+  &__arrow {
+    background-color: $bgColor_3;
+    background-image: url('./images/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 12px;
+    border-radius: 3px;
+    border: none;
+    color: $textColor_4;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 1;
+    }
+    &_previos {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    @include adaptive(column-gap, 14, 17);
+  }
+
+  &__page {
+    @extend %fontSizeNumbers;
+    opacity: 0.5;
+    &_current {
+      opacity: 1;
+    }
+  }
+  &__page-button {
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+}
