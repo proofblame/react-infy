@@ -48,6 +48,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    @include adaptive(margin-right, 20, 0);
   }
 }
 
