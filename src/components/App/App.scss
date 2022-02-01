@@ -140,7 +140,7 @@
   background-color: transparent;
   @include adaptive(width, 47, 25);
   @include adaptive(height, 35, 20);
-  background-image: url('../../images/icons/ChatButton.svg');
+  // background-image: url('../../images/icons/ChatButton.svg');
   background-repeat: no-repeat;
   background-position: center;
 }

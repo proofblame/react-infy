@@ -1,4 +1,4 @@
-import "./app1.scss";
+import "./App.scss";
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 
