@@ -299,7 +299,7 @@ const App = () => {
           </Switch>
 
         </div>
-        <Chat chatIsOpened={chatIsOpened} toggleChatOpened={toggleChatOpened} />
+        {/* <Chat chatIsOpened={chatIsOpened} toggleChatOpened={toggleChatOpened} /> */}
         <Footer loggedIn={loggedIn} onSignOut={handleSignout} />
 
         <Modal active={modalActive.preloader}>
