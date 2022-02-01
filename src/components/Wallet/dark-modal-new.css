@@ -1,0 +1,38 @@
+.dark .modal-overlay-new {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Стили модального окна */
+.dark .modal-new {
+  transition: 0.4s all;
+  background-color: #0e0e0e;
+}
+
+/* Стили основого содержания модального окна */
+.dark .modal-body-new {
+  min-width: 250px;
+  max-width: 1200px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  scrollbar-color: #223c50 #f9f9fd;
+  scrollbar-width: thin;
+}
+
+/* Стилизация скролла */
+.dark .modal-body-new::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f9f9fd;
+  border-radius: 5px;
+}
+
+.dark .modal-body-new::-webkit-scrollbar-thumb {
+  background-color: #223c50;
+  border-radius: 5px;
+}
+
+.dark .modal-body-new::-webkit-scrollbar-track {
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+}

@@ -1,4 +1,4 @@
-import "./App.scss";
+import "./app1.scss";
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 
@@ -183,7 +183,7 @@ const App = () => {
 
         <div className="content">
           <Scrolltotop />
-          {chatIsOpened ? (
+          {/* {chatIsOpened ? (
             ""
           ) : (
             <div
@@ -194,7 +194,7 @@ const App = () => {
               <div className="button__chat-newMessages"></div>
               <button className="chat-button"></button>
             </div>
-          )}
+          )} */}
           <Switch>
             <ProtectedRoute
               loggedIn={loggedIn}
@@ -292,9 +292,9 @@ const App = () => {
             <Route path="/registration">
               <Registration loggedIn={loggedIn} onRegister={handleRegister} />
             </Route>
-            <Route path="/moder">
+            {/* <Route path="/moder">
               <Moder />
-            </Route>
+            </Route> */}
             <Route component={Error} path="*" />
           </Switch>
 

@@ -14,7 +14,7 @@ const About = () => {
             <a href="https://t.me/infinitycorporationchannel" className="about__link link_type_youtube">Telegram</a>
             <a href="https://www.instagram.com/infinity.blockchain.official/?utm_medium=copy_link" className="about__link link_type_github">Instagram</a>
 
-            <a href="https://t.me/orcaeyes_bot" className="about__link labout__link link_type_telegram">Orca.Eyes</a>
+
 
             <a href="https://t.me/manager_travel_club" className="about__link link_type_youtube">TravelClub</a>
           </div>
@@ -39,7 +39,7 @@ const About = () => {
             </div>
             <div className="wrapper">
               <p className="about__text about__text_black text">Курс INFY</p>
-              <p className="about__text about__text_black-2 text">34 рубля</p>
+              <p className="about__text about__text_black-2 text">32 рубля</p>
             </div>
           </div>
           <div className="about__article-footer">
@@ -47,98 +47,6 @@ const About = () => {
               внутренняя цифровая монета проекта для доступа к&nbsp;IT продуктам компании и&nbsp;выплат
               вознаграждений партнерской программы.</p>
           </div>
-          <div className="about__graph ">
-            <div className="image_type_graph">
-              <picture>
-                <source srcSet={graph} type="image/webp" /><img src={graph}
-                  alt="8 стадий продаж первой эмиссии" />
-              </picture>
-            </div>
-            <div className="about__table">
-              <p className="about__table-text text">11 стадий продаж первой эмиссии</p>
-              <table className="about__table-body">
-                <thead>
-                  <tr>
-                    <td>Стадия</td>
-                    <td>Срок</td>
-                    <td>Цена за 1 INFY</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><s className="crossed-out">№1</s></td>
-                    <td><s className="crossed-out">01.10 - 07.10</s></td>
-                    <td><s className="crossed-out">14 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№2</s></td>
-                    <td><s className="crossed-out">08.10 - 14.10</s></td>
-                    <td><s className="crossed-out">16 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№3</s></td>
-                    <td><s className="crossed-out">15.15 - 21.10</s></td>
-                    <td><s className="crossed-out">18 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№4</s></td>
-                    <td><s className="crossed-out">22.10 - 28.10</s></td>
-                    <td><s className="crossed-out">20 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№5</s></td>
-                    <td><s className="crossed-out">29.10 - 04.11</s></td>
-                    <td><s className="crossed-out">22 рубля</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№6</s></td>
-                    <td><s className="crossed-out">05.11 - 11.11</s></td>
-                    <td><s className="crossed-out">24 рубля</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№7</s></td>
-                    <td><s className="crossed-out">12.11 - 18.11</s></td>
-                    <td><s className="crossed-out">26 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№8</s></td>
-                    <td><s className="crossed-out">19.11 - 25.11</s></td>
-                    <td><s className="crossed-out">28 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№9</s></td>
-                    <td><s className="crossed-out">26.11 - 02.12</s></td>
-                    <td><s className="crossed-out">30 рублей</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№10</s></td>
-                    <td><s className="crossed-out">03.12 - 09.12</s></td>
-                    <td><s className="crossed-out">32 рубля</s></td>
-                  </tr>
-                  <tr>
-                    <td><s className="crossed-out">№11</s></td>
-                    <td><s className="crossed-out">10.12 - 16.12</s></td>
-                    <td><s className="crossed-out">34 рубля</s></td>
-                  </tr>
-                </tbody>
-              </table>
-              {/* <div className="about__table-image">
-                <picture>
-                  <source srcSet={grad} type="image/webp" /><img src={grad} alt="" />
-                </picture>
-              </div> */}
-              {/* <p className="about__table-text text">5 349 945 (53.49%) / 10 000 000 INFY</p> */}
-              <p className="text" style={{ textAlign: 'justify', paddingTop: '30px' }}>
-                За закрытый листинг мы продали - 5 349 945 (53.49%) INFY. <br />
-                На данный момент производится сжигание остатков начальной эмиссии.
-              </p>
-            </div>
-
-          </div>
-          {/* <div className="about__link">
-            <a href="https://t.me/infy_official_exchange_bot" className="link link_active">Купить
-              INFY</a>
-          </div> */}
         </div>
 
       </div>

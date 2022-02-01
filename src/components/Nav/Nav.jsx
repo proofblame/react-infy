@@ -44,7 +44,7 @@ function Nav() {
             <use href={menuIcons + "#menu-tarif"}></use>
           </svg>
         </NavLink>
-        <NavLink to="/learn" className="menu-item" activeClassName="menu-item_active">
+        <NavLink to="#" className="menu-item" activeClassName="menu-item">
           <svg className="menu-img icon">
             <use href={menuIcons + "#menu-learn"}></use>
           </svg>

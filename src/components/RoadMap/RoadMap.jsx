@@ -40,10 +40,6 @@ function RoadMap() {
           </p>
           <br />
           <p className="text">
-            13&nbsp;ноября 2021 года&nbsp;&mdash; выход Сервиса &laquo;Orca.Eyes&raquo;.
-          </p>
-          <br />
-          <p className="text">
             18&nbsp;декабря 2021 года компания начала свою деятельность в&nbsp;рамках Российского законодательства и&nbsp;заявила о&nbsp;официальном открытии.
           </p>
           <br />

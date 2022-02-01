@@ -208,21 +208,6 @@ function Profile({ currentUser }) {
                       </a>
                     </div> */}
                     <div className="banner__subscribe">
-                      <a href="https://t.me/orcaeyes_bot">
-                        <div className="image image_type_telegram">
-                          <picture>
-                            <source srcSet={telegramIcon} type="image/webp" />
-                            <img src={telegramIcon} alt="Telegram icon" />
-                          </picture>
-                        </div>
-                      </a>
-                      <a href="https://t.me/orcaeyes_bot">
-                        <p className="banner__subtext text text_size_small">
-                          Индивидуальный менеджмент вашего портфеля Orca.Eyes
-                        </p>
-                      </a>
-                    </div>
-                    <div className="banner__subscribe">
                       <a href="https://t.me/manager_travel_club">
                         <div className="image image_type_telegram">
                           <picture>

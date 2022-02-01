@@ -1,4 +1,4 @@
-@import "../../mixins/mixins.scss";
+@import '../../mixins/mixins.scss';
 
 @keyframes pulse-inner {
   0% {
@@ -107,7 +107,7 @@
   transition: opacity 1s ease-in;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     @include adaptive(width, 115, 55);
     @include adaptive(height, 115, 55);
@@ -117,7 +117,7 @@
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     @include adaptive(width, 140, 65);
     @include adaptive(height, 140, 65);
@@ -140,7 +140,7 @@
   background-color: transparent;
   @include adaptive(width, 47, 25);
   @include adaptive(height, 35, 20);
-  background-image: url("../../images/icons/ChatButton.svg");
+  background-image: url('../../images/icons/ChatButton.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
