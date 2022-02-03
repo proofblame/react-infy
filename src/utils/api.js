@@ -1,8 +1,8 @@
 // На продакшн
-const baseURL = 'https://server.infy-corp.com/react-api';
+// const baseURL = 'https://server.infy-corp.com/react-api';
 
 // На тестовый сервер
-// const baseURL = 'http://api.infy-corp.com/react-api';
+const baseURL = 'http://api.infy-corp.com/react-api';
 
 // Возвращаем объект ответа
 const getResponseData = (res) => {
@@ -215,6 +215,18 @@ const sendAnswers = async (jwt, lessonNumber, list) => {
   return getResponseData(res);
 }
 
+// Получить данные о тарифе
+const getMessageList = async (jwt, senderName, recipientName) => {
+  const res = await fetch(`https:/api.infy-corp.com/messages/${senderName}/${recipientName}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Bearer ${jwt}`,
+    }
+  });
+  return getResponseData(res);
+}
+
 const api = {
   register,
   login,
@@ -230,6 +242,7 @@ const api = {
   payTarif,
   getLessionsInfo,
   sendAnswers,
-  delegateInfy
+  delegateInfy,
+  getMessageList,
 }
 export default api

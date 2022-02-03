@@ -32,6 +32,7 @@ import RoadMap from '../RoadMap/RoadMap';
 import AboutMore from '../AboutMore/AboutMore'
 import Moder from '../Moder/Moder';
 import Chat from "../Chat/Chat";
+var stompClient = null;
 
 const App = () => {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ const App = () => {
   const [theme, themeToggler] = useDarkMode();
   const [check, setCheck] = useState(false);
   const [loggedIn, setLoggedIn] = useState(pathname);
+  const [loadingData, setLoadingData] = useState(false)
   const [modalActive, setModalActive] = useState({
     preloader: false,
   });
@@ -49,15 +51,81 @@ const App = () => {
   const [page, setPage] = useState(0);
   const [tarif, setTarif] = useState(null);
   const [isPaid, setIsPaid] = useState(false)
-
-
-
-
   const [chatIsOpened, setChatIsOpened] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   const themeMode = theme === "light" ? "app" : "dark app";
 
+
+  const connect = () => {
+    if (loadingData) {
+      const Stomp = require("stompjs");
+      var SockJS = require("sockjs-client");
+      SockJS = new SockJS("http://api.infy-corp.com/ws");
+      stompClient = Stomp.over(SockJS);
+      stompClient.connect({}, onConnected, onError);
+    }
+    return
+  }
+
+
+  const onConnected = () => {
+
+    console.log("connected");
+    console.log(currentUser);
+    stompClient.subscribe(
+      "/user/" + currentUser.nickname + "/queue/messages",
+      onMessageReceived
+    );
+  }
+
+  const onError = (err) => {
+    console.log(err);
+  };
+
+
+  const onMessageReceived = (msg) => {
+    const notification = JSON.parse(msg.body);
+    const active = JSON.parse(sessionStorage.getItem("recoil-persist"))
+      .chatActiveContact;
+
+    if (active.id === notification.senderId) {
+
+    } else {
+
+    }
+
+  };
+
+  const sendMessage = (msg) => {
+    if (msg.trim() !== "") {
+      const message = {
+        senderName: currentUser.nickname,
+        recipientName: 'tuk',
+        content: msg,
+        timestamp: Date.now(),
+      };
+      stompClient.send("/app/chat", {}, JSON.stringify(message));
+
+      const newMessages = [...messages];
+      newMessages.push(message);
+      setMessages(newMessages);
+    }
+  };
+  function disconnect() {
+    if (stompClient !== null) {
+      stompClient.disconnect();
+      setMessages([])
+    }
+    setLoadingData(false);
+    console.log("Disconnected");
+  }
+
+
+
+
   useEffect(() => {
+
     const refTok = localStorage.getItem("refresh_token");
     if (refTok) {
       localStorage.removeItem("refresh_token");
@@ -69,6 +137,10 @@ const App = () => {
   useEffect(() => {
     theme === "light" ? setCheck(false) : setCheck(true);
   }, [theme]);
+
+  useEffect(() => {
+  }, [currentUser]);
+
 
   function toggleChatOpened() {
     setChatIsOpened(!chatIsOpened);
@@ -82,6 +154,7 @@ const App = () => {
     if (refToken) {
       await getData();
       setLoggedIn(true);
+
     } else {
       setLoggedIn(false);
     }
@@ -121,7 +194,7 @@ const App = () => {
           api.getWalletInfo(jwt),
           api.getTeamInfo(jwt),
           api.getTransactionsInfo(jwt, page, 8),
-          api.getTarif(jwt)
+          api.getTarif(jwt),
         ]);
         setCurrentUser(user);
         setCurentWallet(wallet);
@@ -130,6 +203,7 @@ const App = () => {
         setPageCount(transactions.pageCount);
         setTarif(tarif);
         setIsPaid(tarif.isPaid)
+        setLoadingData(true)
       } catch (err) {
         console.error(err);
         setLoggedIn(false);
@@ -165,23 +239,41 @@ const App = () => {
     setCurrentUser({});
     setCurentWallet({});
     setCurentTeam({});
+    setMessages([])
     localStorage.removeItem("jwt");
     localStorage.removeItem("rt");
     localStorage.removeItem("expires");
   }
 
+  useEffect(() => {
+
+    connect()
+    // TODO !сделать запрос на получение сообщений.
+    // TODO логика отображения сообщений
+    // TODO список обращений
+    // TODO прикрутить на интерфейс
+    // TODO пагинация, прочитано/не прочитано
+    // TODO фильтрация
+    // TODO
+    // TODO
+    // TODO
+    // api.getMessageList(jwt,)
+  }, [loadingData])
   // TODO: сделать через один защищенный компонент
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Scrolltotop />
       <div className={themeMode}>
+
         <Header
           themeToggler={themeToggler}
           check={check}
           onSignOut={handleSignout}
+        // connect={connect}
         />
 
         <div className="content">
+
           <Scrolltotop />
           {/* {chatIsOpened ? (
             ""
@@ -293,7 +385,13 @@ const App = () => {
               <Registration loggedIn={loggedIn} onRegister={handleRegister} />
             </Route>
             <Route path="/moder">
-              <Moder />
+              {currentUser !== null && (
+                <Moder currentUser={currentUser}
+                  disconnect={disconnect}
+                  sendMessage={sendMessage}
+                />
+
+              )}
             </Route>
             <Route component={Error} path="*" />
           </Switch>

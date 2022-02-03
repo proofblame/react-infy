@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import './Moder.scss'
 import constants from './constants.js'
 import complaints from './complaints'
@@ -6,14 +6,17 @@ import complaints from './complaints'
 import ChatWindow from './ChatWindow/ChatWindow'
 import Table from './Table/Table'
 
-const Moder = () => {
 
+var stompClient = null;
+const Moder = ({ currentUser, disconnect, sendMessage }) => {
 
-
+  const [text, setText] = useState("");
   const { title, img } = constants;
   const [stateWindow, setStateWindow] = useState(true)
   const [complaintsList, setComplaintsList] = useState([])
   const [currentComplaint, setCurrentComplaint] = useState(null)
+  const [messages, setMessages] = useState([]);
+
 
 
   useEffect(() => {
@@ -36,6 +39,11 @@ const Moder = () => {
     history.push(e.target)
     // TODO: доделать.
   }
+
+
+
+
+
 
 
   return (
@@ -64,7 +72,27 @@ const Moder = () => {
               </li>
             </ul>
           </aside>
+          <button onClick={() => {
+            disconnect()
+          }}>disconnect</button>
+          <button onClick={() => {
+            sendMessage(text);
+            setText("");
+          }}>SEND MESSAGE</button>
+          <input
+            name="user_input"
+            size="large"
+            placeholder="Write your message..."
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                sendMessage(text);
 
+                setText("");
+              }
+            }}
+          />
           <Table
             onOpen={handleOpenPopup}
             complaintsList={complaintsList}

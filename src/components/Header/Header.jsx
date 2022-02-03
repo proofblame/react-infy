@@ -6,12 +6,15 @@ import "./HeaderDark.css";
 import Logo from "../Logo/Logo";
 import Switcher from "../Switcher/Switcher";
 
-function Header({ themeToggler, check, onSignOut }) {
+function Header({ themeToggler, check, onSignOut, connect }) {
   const { pathname } = useLocation();
   return (
     <>
       {pathname !== "/moder" ? (
         <header className="header">
+          <button onClick={() => {
+            // connect()
+          }}>connect</button>
           <div className="container">
             <div className="header__body">
               <div className="wrapper header__logo_mobile">
