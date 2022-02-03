@@ -292,9 +292,9 @@ const App = () => {
             <Route path="/registration">
               <Registration loggedIn={loggedIn} onRegister={handleRegister} />
             </Route>
-            {/* <Route path="/moder">
+            <Route path="/moder">
               <Moder />
-            </Route> */}
+            </Route>
             <Route component={Error} path="*" />
           </Switch>
 
